@@ -1,47 +1,47 @@
-import React, { Fragment } from "react";
-import { Text, View, StyleSheet } from "@react-pdf/renderer";
+import React, { Fragment } from 'react';
+import { Text, View, StyleSheet } from '@react-pdf/renderer';
 
-const borderColor = "#90e5fc";
+const borderColor = '#90e5fc';
 const styles = StyleSheet.create({
   row: {
-    flexDirection: "row",
-    borderBottomColor: "#bff0fd",
+    flexDirection: 'row',
+    borderBottomColor: '#bff0fd',
     borderBottomWidth: 1,
-    alignItems: "center",
+    alignItems: 'center',
     height: 24,
-    fontStyle: "bold"
+    fontStyle: 'bold',
   },
   description: {
-    width: "60%",
-    textAlign: "left",
+    width: '60%',
+    textAlign: 'left',
     borderRightColor: borderColor,
     borderRightWidth: 1,
-    paddingLeft: 8
+    paddingLeft: 8,
   },
   qty: {
-    width: "10%",
+    width: '10%',
     borderRightColor: borderColor,
     borderRightWidth: 1,
-    textAlign: "right",
-    paddingRight: 8
+    textAlign: 'right',
+    paddingRight: 8,
   },
   rate: {
-    width: "15%",
+    width: '15%',
     borderRightColor: borderColor,
     borderRightWidth: 1,
-    textAlign: "right",
-    paddingRight: 8
+    textAlign: 'right',
+    paddingRight: 8,
   },
   amount: {
-    width: "15%",
-    textAlign: "right",
-    paddingRight: 8
-  }
+    width: '15%',
+    textAlign: 'right',
+    paddingRight: 8,
+  },
 });
 
 const InvoiceTableRow = ({ items }) => {
   console.log({ items });
-  const rows = items.map(item => (
+  const rows = items.map((item) => (
     <View style={styles.row} key={item.sno.toString()}>
       <Text style={styles.description}>{item.desc}</Text>
       <Text style={styles.qty}>{item.qty}</Text>

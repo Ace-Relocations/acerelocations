@@ -1,10 +1,10 @@
-import { createStore, applyMiddleware, compose } from "redux";
-import { createBrowserHistory } from "history";
-import { routerMiddleware } from "connected-react-router";
-import createSagaMiddleware from "redux-saga";
+import { createStore, applyMiddleware, compose } from 'redux';
+import { createBrowserHistory } from 'history';
+import { routerMiddleware } from 'connected-react-router';
+import createSagaMiddleware from 'redux-saga';
 
-import rootSaga from "../sagas/index";
-import reducers from "../reducers/index";
+import rootSaga from '../sagas/index';
+import reducers from '../reducers/index';
 
 const history = createBrowserHistory();
 const routeMiddleware = routerMiddleware(history);
@@ -17,15 +17,15 @@ export default function configureStore(initialState) {
   const store = createStore(
     reducers(history),
     initialState,
-    composeEnhancers(applyMiddleware(...middlewares))
+    composeEnhancers(applyMiddleware(...middlewares)),
   );
 
   sagaMiddleware.run(rootSaga);
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers
-    module.hot.accept("../reducers/index", () => {
-      const nextRootReducer = require("../reducers/index");
+    module.hot.accept('../reducers/index', () => {
+      const nextRootReducer = require('../reducers/index');
       store.replaceReducer(nextRootReducer);
     });
   }

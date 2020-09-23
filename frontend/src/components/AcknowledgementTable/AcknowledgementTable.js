@@ -1,37 +1,37 @@
-import React from "react";
-import { Text, View } from "@react-pdf/renderer";
+import React from 'react';
+import { Text, View } from '@react-pdf/renderer';
 
 const AcknowledgementTable = ({ fullName, number }) => {
   return (
     <View
       style={{
         border: 1,
-        width: "100%",
+        width: '100%',
         fontSize: 7,
-        color: "red",
-        marginTop: "10px"
+        color: 'red',
+        marginTop: '10px',
       }}
     >
       <Text style={{ fontSize: 11, borderBottom: 1 }}>ACKNOWLEDGEMENT</Text>
-      <Text style={{ borderBottom: 1, height: "15px" }}>
+      <Text style={{ borderBottom: 1, height: '15px' }}>
         Recieved all the goods in good condition
       </Text>
       <View
         style={{
-          width: "100%",
-          flexDirection: "row",
+          width: '100%',
+          flexDirection: 'row',
           borderBottom: 1,
-          height: "12px"
+          height: '12px',
         }}
       >
-        <View style={{ width: "20%" }}>
+        <View style={{ width: '20%' }}>
           <Text>Name: </Text>
         </View>
         <View
           style={{
-            width: "80%",
-            alignItems: "flex-start",
-            color: "black"
+            width: '80%',
+            alignItems: 'flex-start',
+            color: 'black',
           }}
         >
           <Text>{fullName}</Text>
@@ -39,20 +39,20 @@ const AcknowledgementTable = ({ fullName, number }) => {
       </View>
       <View
         style={{
-          width: "100%",
-          flexDirection: "row",
+          width: '100%',
+          flexDirection: 'row',
           borderBottom: 1,
-          height: "12px"
+          height: '12px',
         }}
       >
-        <View style={{ width: "20%" }}>
+        <View style={{ width: '20%' }}>
           <Text>No. :</Text>
         </View>
         <View
           style={{
-            width: "80%",
-            alignItems: "flex-start",
-            color: "black"
+            width: '80%',
+            alignItems: 'flex-start',
+            color: 'black',
           }}
         >
           <Text>{number}</Text>
@@ -60,20 +60,20 @@ const AcknowledgementTable = ({ fullName, number }) => {
       </View>
       <View
         style={{
-          width: "100%",
-          flexDirection: "row",
+          width: '100%',
+          flexDirection: 'row',
           borderBottom: 1,
-          height: "12px"
+          height: '12px',
         }}
       >
-        <View style={{ width: "20%" }}>
+        <View style={{ width: '20%' }}>
           <Text>Sign.</Text>
         </View>
         <View
           style={{
-            width: "80%",
-            alignItems: "flex-start",
-            color: "black"
+            width: '80%',
+            alignItems: 'flex-start',
+            color: 'black',
           }}
         >
           <Text>S.R.P.</Text>

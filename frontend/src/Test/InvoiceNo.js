@@ -1,23 +1,23 @@
-import React, { Fragment } from "react";
-import { Text, View, StyleSheet } from "@react-pdf/renderer";
+import React, { Fragment } from 'react';
+import { Text, View, StyleSheet } from '@react-pdf/renderer';
 
 const styles = StyleSheet.create({
   invoiceNoContainer: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginTop: 36,
-    justifyContent: "flex-end"
+    justifyContent: 'flex-end',
   },
   invoiceDateContainer: {
-    flexDirection: "row",
-    justifyContent: "flex-end"
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
   },
   invoiceDate: {
     fontSize: 12,
-    fontStyle: "bold"
+    fontStyle: 'bold',
   },
   label: {
-    width: 60
-  }
+    width: 60,
+  },
 });
 
 const InvoiceNo = ({ invoice }) => (
