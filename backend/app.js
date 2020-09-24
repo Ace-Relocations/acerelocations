@@ -1,12 +1,18 @@
 const Express = require('express');
 const bodyParser = require('body-parser');
-var wallet = require('./routes/wallet.routes');
+const cors = require("cors");
+const path = require("path");
+const dbConfig = require("./config/db.config")
 const app = Express();
-var web3 = require('./web3');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
 
+const db = require("./models");
+const Role = db.role;
+
+var corsOptions = {
+  origin: "http://localhost:8081"
+};
+
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
 
@@ -16,7 +22,6 @@ var indexRouter = require('./routes/index');
 app.use(Express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/wallet', wallet);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -24,15 +29,65 @@ app.use((req, res, next) => {
   });
   
   // error handler
-  app.use((err, req, res, next) => {
-    // set locals, only providing error in development
-    res.locals.message = err.message;
-    res.locals.error = req.app.get('env') === 'development' ? err : {};
-  
-    // render the error page
-    // logger.info(err)
-    res.status(err.status || 500);
-    res.json({ error: err });
+app.use((err, req, res, next) => {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  // render the error page
+  // logger.info(err)
+  res.status(err.status || 500);
+  res.json({ error: err });
+});
+
+
+db.mongoose
+  .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+  .then(() => {
+    console.log("Successfully connect to MongoDB.");
+    initial();
+  })
+  .catch(err => {
+    console.error("Connection error", err);
+    process.exit();
   });
+
+  function initial() {
+    Role.estimatedDocumentCount((err, count) => {
+      if (!err && count === 0) {
+        new Role({
+          name: "user"
+        }).save(err => {
+          if (err) {
+            console.log("error", err);
+          }
   
-  module.exports = app;
+          console.log("added 'user' to roles collection");
+        });
+        new Role({
+          name: "moderator"
+        }).save(err => {
+          if (err) {
+            console.log("error", err);
+          }
+  
+          console.log("added 'moderator' to roles collection");
+        });
+  
+        new Role({
+          name: "admin"
+        }).save(err => {
+          if (err) {
+            console.log("error", err);
+          }
+  
+          console.log("added 'admin' to roles collection");
+        });
+      }
+    });
+  }
+
+module.exports = app;
