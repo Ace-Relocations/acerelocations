@@ -7,6 +7,7 @@ import invoice from './data/invoice';
 import './App.css';
 import CustomerInfoForm from './components/CustomerInfoForm/CustomerInfoForm';
 import Header from './components/Header/Header';
+import CustomerFeedbackForm from './components/CustomerFeedbackForm/CustomerFeedbackForm';
 
 const styles = StyleSheet.create({
   page: {
@@ -32,6 +33,7 @@ function App() {
         <Document>
           <Page size='A4' style={styles.page}>
             <Header />
+            <CustomerFeedbackForm />
           </Page>
         </Document>
       </PDFViewer>
