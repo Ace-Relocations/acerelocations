@@ -1,19 +1,12 @@
 import React from 'react';
 import { Page, Document, Image, StyleSheet, Text, View } from '@react-pdf/renderer';
 
-import logo from '../logo.png';
-import Boxwith4Line from '../components/BoxWith4Line/BoxWith4Line';
-import BoxWith4LineKeys from '../components/BoxWith4LineKeys/BoxWith4LineKeys';
-import CustomerPackageDesTable from '../components/CustomerPackageDesTable/CustomerPackageDesTable';
-import ConsignmentBox from '../components/ConsignmentBox/ConsignmentBox';
-import AcknowledgementTable from '../components/AcknowledgementTable/AcknowledgementTable';
-import AffliationBox from '../components/AffliationBox/AffliationBox';
-
 import InvoiceTitle from './InvoiceTitle';
 import BillTo from './BillTo';
 import InvoiceNo from './InvoiceNo';
 import InvoiceItemsTable from './InvoiceItemsTable';
 import InvoiceThankYouMsg from './InvoiceThankYouMsg';
+import CustomerCopy from '../components/CustomerCopy/CustomerCopy';
 
 const styles = StyleSheet.create({
   page: {
@@ -124,91 +117,22 @@ const address = [
 ];
 
 const Invoice = ({ invoice }) => {
-  console.log(invoice);
   const { firstName, lastName } = invoice;
-  console.log(firstName);
   return (
     <Document>
       <Page size='A4' style={styles.page} orientation='landscape'>
-        <View>
-          <View style={styles.container} wrap={false}>
-            <Image style={styles.logo} src={logo} />
-            <View wrap={false} style={styles.width90}>
-              <Text style={styles.headerText}>We Make Moving Easy</Text>
-              <Text style={styles.headerSubText}>
-                6TH LANE,2ND CROSS BHAGYANAGAR, KALYANDURGAM ROAD,ANANTAPUR, ANDHRA PRADESH-515001
-              </Text>
-              <Text style={styles.headerSubText}>
-                E: shaivpidadi@gmail.com W: www.shaivpidadi.com
-              </Text>
-            </View>
-          </View>
-          <View
-            style={{
-              height: '500px',
-              flexDirection: 'row',
-              flexGrow: 1,
-            }}
-          >
-            <View
-              style={{
-                height: '400px',
-                width: '70%',
-              }}
-            >
-              <View
-                style={{
-                  // border: 1,
-                  width: '100%',
-                  flexDirection: 'row',
-                  marginBottom: '10px',
-                }}
-              >
-                <View style={{ width: '70%' }}>
-                  <Boxwith4Line
-                    title='Cognisor'
-                    address={address}
-                    fullName={`${firstName} ${lastName}`}
-                  />
-                </View>
-                <View style={{ width: '30%', border: '1 1 1 0' }}>
-                  <BoxWith4LineKeys gsnNo='2313' date='12-10-3123' from='Shaishav' to='KnowOne' />
-                </View>
-              </View>
-              <View style={{ marginBottom: '10px' }}>
-                <Boxwith4Line title='Consignee' address={address} fullName='Mr. MILAN SOLANKI' />
-              </View>
-
-              <CustomerPackageDesTable
-                description='This is very looooooooooooooooooooooooooooong Description'
-                noOfPkg={10}
-              />
-
-              <View>
-                <Text style={{ color: 'red', fontSize: 7, marginLeft: 2 }}>
-                  Note : Corrugated boxes, PVC boxes, Fiber drums & Moving blankets are property of
-                  ACE Relocations
-                </Text>
-              </View>
-            </View>
-            <View
-              style={{
-                height: '400px',
-                width: '30%',
-                alignItems: 'center',
-                padding: 3,
-              }}
-            >
-              <Text style={styles.title}> CUSTOMER COPY</Text>
-              <ConsignmentBox />
-              <AcknowledgementTable fullName='Shaishav Pidadi' number='12' />
-              <AffliationBox />
-              <View style={{ marginTop: 5 }}>
-                <Text style={{ color: 'red', fontSize: 8 }}>Subject to Ahmedabad jurisdiction</Text>
-              </View>
-            </View>
-          </View>
-        </View>
+        <CustomerCopy
+          firstName={firstName}
+          lastName={lastName}
+          title='CUSTOMER COPY'
+          address={address}
+        />
+        <CustomerCopy
+          firstName={firstName}
+          lastName={lastName}
+          title='TRUCK COPY'
+          address={address}
+        />
       </Page>
     </Document>
   );
