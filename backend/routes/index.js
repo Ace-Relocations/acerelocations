@@ -2,11 +2,11 @@ const express = require('express');
 
 const router = express.Router();
 
-const wallet = require('./wallet.routes');
-const token = require('./token.routes');
+const auth = require('./auth.routes');
+const test = require('./user.routes')
 
-router.use('/wallet', wallet);
-router.use('/token', token);
+router.use('/api/auth', auth);
+router.use('/api/test', test)
 
 
 module.exports = router;
