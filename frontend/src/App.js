@@ -29,7 +29,6 @@ function App() {
         <Route path='/' exact render={() => <Redirect to='/customer' />} />
       </Switch> */}
       <PDFViewer width='1000' height='1000' className='app'>
-        {/* <Invoice invoice={invoice} /> */}
         <Document>
           <Page size='A4' style={styles.page}>
             <Header />

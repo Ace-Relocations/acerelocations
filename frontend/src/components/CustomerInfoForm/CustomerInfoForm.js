@@ -19,7 +19,7 @@ const CustomerInfoForm = () => {
 
   const formRef = useRef(null);
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     const { name, value } = event.target;
     updateCustomerDetails({ ...customerDetails, [name]: value });
     updateLoginErrorMsg('');
@@ -39,7 +39,7 @@ const CustomerInfoForm = () => {
         <ValidatorForm
           ref={formRef}
           onSubmit={() => submit()}
-          onError={errors => console.log(errors)}
+          onError={(errors) => console.log(errors)}
         >
           <FormControl margin='normal' required fullWidth>
             <TextValidator

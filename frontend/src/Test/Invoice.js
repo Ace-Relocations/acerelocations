@@ -7,6 +7,8 @@ import InvoiceNo from './InvoiceNo';
 import InvoiceItemsTable from './InvoiceItemsTable';
 import InvoiceThankYouMsg from './InvoiceThankYouMsg';
 import CustomerCopy from '../components/CustomerCopy/CustomerCopy';
+import CustomerFeedbackForm from '../components/CustomerFeedbackForm/CustomerFeedbackForm';
+import Header from '../components/Header/Header';
 
 const styles = StyleSheet.create({
   page: {
@@ -127,12 +129,18 @@ const Invoice = ({ invoice }) => {
           title='CUSTOMER COPY'
           address={address}
         />
+      </Page>
+      <Page size='A4' style={styles.page}>
         <CustomerCopy
           firstName={firstName}
           lastName={lastName}
           title='TRUCK COPY'
           address={address}
         />
+      </Page>
+      <Page size='A4' style={styles.page}>
+        <Header />
+        <CustomerFeedbackForm />
       </Page>
     </Document>
   );
