@@ -133,9 +133,9 @@ const CustomerFeedbackForm = () => {
         </View>
       </View>
 
-      <>
+      <View>
         <FooterBorder />
-      </>
+      </View>
     </View>
   );
 };
