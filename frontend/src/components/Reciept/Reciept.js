@@ -270,6 +270,16 @@ const Reciept = () => {
           </View>
         </View>
       </View>
+
+      <View
+        style={{
+          height: 30,
+          backgroundColor: 'grey',
+          marginTop: 30,
+          marginHorizontal: -20,
+          marginBottom: -20,
+        }}
+      />
     </View>
   );
 };
