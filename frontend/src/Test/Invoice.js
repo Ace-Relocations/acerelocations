@@ -11,6 +11,7 @@ import CustomerFeedbackForm from '../components/CustomerFeedbackForm/CustomerFee
 import Header from '../components/Header/Header';
 import HeaderWithAddress from '../components/HeaderWithAddress/HeaderWithAddress';
 import Reciept from '../components/Reciept/Reciept';
+import LuggageList from '../components/LuggageList/LuggageList';
 
 const styles = StyleSheet.create({
   page: {
@@ -154,6 +155,9 @@ const Invoice = ({ invoice }) => {
             <Reciept />
           </View>
         </View>
+      </Page>
+      <Page size='A4' style={styles.page}>
+        <LuggageList />
       </Page>
     </Document>
   );
