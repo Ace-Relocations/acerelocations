@@ -8,6 +8,7 @@ import './App.css';
 import CustomerInfoForm from './components/CustomerInfoForm/CustomerInfoForm';
 import Header from './components/Header/Header';
 import CustomerFeedbackForm from './components/CustomerFeedbackForm/CustomerFeedbackForm';
+import LuggageList from './components/LuggageList/LuggageList';
 
 const styles = StyleSheet.create({
   page: {
@@ -31,8 +32,8 @@ function App() {
       <PDFViewer width='1000' height='1000' className='app'>
         <Document>
           <Page size='A4' style={styles.page}>
-            <Header />
-            <CustomerFeedbackForm />
+            {/* <Header /> */}
+            <LuggageList />
           </Page>
         </Document>
       </PDFViewer>
