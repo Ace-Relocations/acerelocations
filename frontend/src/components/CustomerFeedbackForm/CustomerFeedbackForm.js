@@ -87,11 +87,11 @@ const FeedbackHeader = () => (
     </Text>
   </>
 );
-const CustomerFeedbackForm = () => {
+const CustomerFeedbackForm = ({ title }) => {
   return (
     <View>
       <View style={{ textAlign: 'center', marginTop: 10 }}>
-        <Text style={styles.title}>CUSTOMER FEEDBACK FORM AT DESTINATION</Text>
+        <Text style={styles.title}>CUSTOMER FEEDBACK FORM AT {title}</Text>
       </View>
 
       <View style={{ fontSize: 8, marginTop: 10 }}>

@@ -9,6 +9,8 @@ import InvoiceThankYouMsg from './InvoiceThankYouMsg';
 import CustomerCopy from '../components/CustomerCopy/CustomerCopy';
 import CustomerFeedbackForm from '../components/CustomerFeedbackForm/CustomerFeedbackForm';
 import Header from '../components/Header/Header';
+import HeaderWithAddress from '../components/HeaderWithAddress/HeaderWithAddress';
+import Reciept from '../components/Reciept/Reciept';
 
 const styles = StyleSheet.create({
   page: {
@@ -33,7 +35,6 @@ const styles = StyleSheet.create({
   logo: {
     width: 74,
     height: 66,
-    // let: 0
   },
   logo1: {
     width: 74,
@@ -140,7 +141,19 @@ const Invoice = ({ invoice }) => {
       </Page>
       <Page size='A4' style={styles.page}>
         <Header />
-        <CustomerFeedbackForm />
+        <CustomerFeedbackForm title='DESTINATION' />
+      </Page>
+      <Page size='A4' style={styles.page}>
+        <Header />
+        <CustomerFeedbackForm title='ORIGIN' />
+      </Page>
+      <Page size='A4' style={styles.page} orientation='landscape'>
+        <View style={{ border: 1, margin: 50, padding: 10 }}>
+          <HeaderWithAddress />
+          <View style={{ marginTop: 20, padding: 10 }}>
+            <Reciept />
+          </View>
+        </View>
       </Page>
     </Document>
   );
