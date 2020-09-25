@@ -1,5 +1,9 @@
 import React from 'react';
 import { Image, Text, View, StyleSheet } from '@react-pdf/renderer';
+import CustomerInfoBox from '../CustomerInfoBox/CustomerInfoBox';
+import RatingsForm from '../RatingsForm/RatingsForm';
+import CustomerCommnetsBox from '../CustomerCommnetsBox/CustomerCommnetsBox';
+import FooterBorder from '../FooterBorder/FooterBorder';
 
 const styles = StyleSheet.create({
   container: {
@@ -72,271 +76,38 @@ const styles = StyleSheet.create({
   },
 });
 
+const FeedbackHeader = () => (
+  <>
+    <Text>Dear valued Customer,</Text>
+    <Text style={{ marginTop: 10 }}>
+      Thank you for choosing Ace Relocations, it is our great pleasure to provide you the best
+      quality of service at all times. Your assistance in completing this form is greatly
+      appreciated. Your honest feedback will help us to serve you better and enable us to work on
+      improving our service standards. Thankyou.
+    </Text>
+  </>
+);
 const CustomerFeedbackForm = () => {
   return (
     <View>
       <View style={{ textAlign: 'center', marginTop: 10 }}>
         <Text style={styles.title}>CUSTOMER FEEDBACK FORM AT DESTINATION</Text>
       </View>
+
       <View style={{ fontSize: 8, marginTop: 10 }}>
-        <Text>Dear valued Customer,</Text>
-        <Text style={{ marginTop: 10 }}>
-          Thank you for choosing Ace Relocations, it is our great pleasure to provide you the best
-          quality of service at all times. Your assistance in completing this form is greatly
-          appreciated. Your honest feedback will help us to serve you better and enable us to work
-          on improving our service standards. Thankyou.
-        </Text>
+        <FeedbackHeader />
       </View>
+
       <View style={{ marginTop: 10, border: '1 1 0 1' }}>
-        <View style={styles.row}>
-          <Text style={styles.rowHeading}>Customer Name: </Text>
-          <Text>asdf</Text>
-        </View>
-        <View style={styles.row}>
-          <Text style={styles.rowHeading}>Address: </Text>
-          <Text>asdf</Text>
-        </View>
-        <View style={styles.row}>
-          <View style={styles.subRow}>
-            <Text style={styles.rowHeading}>Contact No: </Text>
-            <Text style={styles.rowSubHeading}>asdf</Text>
-          </View>
-          <View style={styles.subRow}>
-            <Text style={styles.rowHeading}>Birth Date: </Text>
-            <Text style={styles.rowSubHeading}>asdf</Text>
-          </View>
-          <View style={styles.subRow}>
-            <Text style={styles.rowHeading}>Anniversary: </Text>
-            <Text style={styles.rowSubHeading}>asdf</Text>
-          </View>
-        </View>
-        <View style={styles.row}>
-          <View style={styles.subRow}>
-            <Text style={styles.rowHeading}>Job No: </Text>
-            <Text style={styles.rowSubHeading}>asdf</Text>
-          </View>
-          <View style={styles.subRow}>
-            <Text style={styles.rowHeading}>GCNNo.: </Text>
-            <Text style={styles.rowSubHeading}>asdf</Text>
-          </View>
-        </View>
-        <View style={styles.row}>
-          <View style={styles.subRow}>
-            <Text style={styles.rowHeading}>Destination: </Text>
-            <Text style={styles.rowSubHeading}>asdf</Text>
-          </View>
-          <View style={styles.subRow}>
-            <Text style={styles.rowHeading}>E-mail: </Text>
-            <Text style={styles.rowSubHeading}>asdf</Text>
-          </View>
-        </View>
+        <CustomerInfoBox />
       </View>
 
-      <View style={{ marginTop: 10, fontSize: 8 }}>
-        <View style={styles.rowWithoutBorder}>
-          <View style={{ width: '60%' }} />
-          <View
-            style={{
-              width: '40%',
-              flexDirection: 'row',
-            }}
-          >
-            <View style={styles.checkboxContainer}>
-              <Text>Excellent</Text>
-            </View>
-            <View style={styles.checkboxContainer}>
-              <Text>Good</Text>
-            </View>
-            <View style={styles.checkboxContainer}>
-              <Text>Fair</Text>
-            </View>
-            <View style={styles.checkboxContainer}>
-              <Text>Poor</Text>
-            </View>
-          </View>
-        </View>
-
-        <View style={styles.rowWithoutBorder}>
-          <View style={{ width: '60%', flexDirection: 'row' }}>
-            <Text style={{ marginRight: 10 }}>1.</Text>
-            <Text>Crew's Punctuality</Text>
-          </View>
-          <View style={{ width: '40%', flexDirection: 'row' }}>
-            <View style={styles.checkboxContainer}>
-              <View style={styles.checkbox} />
-            </View>
-            <View style={styles.checkboxContainer}>
-              <View style={styles.checkbox} />
-            </View>
-            <View style={styles.checkboxContainer}>
-              <View style={styles.checkbox} />
-            </View>
-            <View style={styles.checkboxContainer}>
-              <View style={styles.checkbox} />
-            </View>
-          </View>
-        </View>
-
-        <View style={styles.rowWithoutBorder}>
-          <View style={{ width: '60%', flexDirection: 'row' }}>
-            <Text style={{ marginRight: 10 }}>1.</Text>
-            <Text>Crew's Punctuality</Text>
-          </View>
-          <View style={{ width: '40%', flexDirection: 'row' }}>
-            <View style={styles.checkboxContainer}>
-              <View style={styles.checkbox} />
-            </View>
-            <View style={styles.checkboxContainer}>
-              <View style={styles.checkbox} />
-            </View>
-            <View style={styles.checkboxContainer}>
-              <View style={styles.checkbox} />
-            </View>
-            <View style={styles.checkboxContainer}>
-              <View style={styles.checkbox} />
-            </View>
-          </View>
-        </View>
-
-        <View style={styles.rowWithoutBorder}>
-          <View style={{ width: '60%', flexDirection: 'row' }}>
-            <Text style={{ marginRight: 10 }}>1.</Text>
-            <Text>Crew's Punctuality</Text>
-          </View>
-          <View style={{ width: '40%', flexDirection: 'row' }}>
-            <View style={styles.checkboxContainer}>
-              <View style={styles.checkbox} />
-            </View>
-            <View style={styles.checkboxContainer}>
-              <View style={styles.checkbox} />
-            </View>
-            <View style={styles.checkboxContainer}>
-              <View style={styles.checkbox} />
-            </View>
-            <View style={styles.checkboxContainer}>
-              <View style={styles.checkbox} />
-            </View>
-          </View>
-        </View>
-
-        <View style={styles.rowWithoutBorder}>
-          <View style={{ width: '60%', flexDirection: 'row' }}>
-            <Text style={{ marginRight: 10 }}>1.</Text>
-            <Text>Crew's Punctuality</Text>
-          </View>
-          <View style={{ width: '40%', flexDirection: 'row' }}>
-            <View style={styles.checkboxContainer}>
-              <View style={styles.checkbox} />
-            </View>
-            <View style={styles.checkboxContainer}>
-              <View style={styles.checkbox} />
-            </View>
-            <View style={styles.checkboxContainer}>
-              <View style={styles.checkbox} />
-            </View>
-            <View style={styles.checkboxContainer}>
-              <View style={styles.checkbox} />
-            </View>
-          </View>
-        </View>
-
-        <View style={styles.rowWithoutBorder}>
-          <View style={{ width: '60%', flexDirection: 'row' }}>
-            <Text style={{ marginRight: 10 }}>1.</Text>
-            <Text>Crew's Punctuality</Text>
-          </View>
-          <View style={{ width: '40%', flexDirection: 'row' }}>
-            <View style={styles.checkboxContainer}>
-              <View style={styles.checkbox} />
-            </View>
-            <View style={styles.checkboxContainer}>
-              <View style={styles.checkbox} />
-            </View>
-            <View style={styles.checkboxContainer}>
-              <View style={styles.checkbox} />
-            </View>
-            <View style={styles.checkboxContainer}>
-              <View style={styles.checkbox} />
-            </View>
-          </View>
-        </View>
-
-        <View style={styles.rowWithoutBorder}>
-          <View style={{ width: '60%', flexDirection: 'row' }}>
-            <Text style={{ marginRight: 10 }}>1.</Text>
-            <Text>Crew's Punctuality</Text>
-          </View>
-          <View style={{ width: '40%', flexDirection: 'row' }}>
-            <View style={styles.checkboxContainer}>
-              <View style={styles.checkbox} />
-            </View>
-            <View style={styles.checkboxContainer}>
-              <View style={styles.checkbox} />
-            </View>
-            <View style={styles.checkboxContainer}>
-              <View style={styles.checkbox} />
-            </View>
-            <View style={styles.checkboxContainer}>
-              <View style={styles.checkbox} />
-            </View>
-          </View>
-        </View>
+      <View>
+        <RatingsForm />
       </View>
 
       <View style={{ fontSize: 8 }}>
-        <View style={styles.rowWithoutBorder}>
-          <View style={{ width: '60%', flexDirection: 'row' }}>
-            <Text>Would you recommended Ace Relocations to your friend.</Text>
-          </View>
-          <View style={{ width: '40%', flexDirection: 'row' }}>
-            <View style={styles.checkboxContainer}>
-              <Text style={{ marginVertical: 'auto' }}>Yes</Text>
-            </View>
-            <View style={styles.checkboxContainer}>
-              <View style={styles.checkbox} />
-            </View>
-            <View style={styles.checkboxContainer}>
-              <Text style={{ marginVertical: 'auto' }}>No</Text>
-            </View>
-            <View style={styles.checkboxContainer}>
-              <View style={styles.checkbox} />
-            </View>
-          </View>
-        </View>
-      </View>
-
-      <View style={{ fontSize: 8 }}>
-        <View style={styles.rowWithoutBorder}>
-          <View style={{ width: '60%', flexDirection: 'row' }}>
-            <Text>May we publish your opinion ?</Text>
-          </View>
-          <View style={{ width: '40%', flexDirection: 'row' }}>
-            <View style={styles.checkboxContainer}>
-              <Text style={{ marginVertical: 'auto' }}>Yes</Text>
-            </View>
-            <View style={styles.checkboxContainer}>
-              <View style={styles.checkbox} />
-            </View>
-            <View style={styles.checkboxContainer}>
-              <Text style={{ marginVertical: 'auto' }}>No</Text>
-            </View>
-            <View style={styles.checkboxContainer}>
-              <View style={styles.checkbox} />
-            </View>
-          </View>
-        </View>
-      </View>
-
-      <View style={{ fontSize: 8 }}>
-        <View style={styles.rowWithoutBorder}>
-          <View>
-            <Text>We will appreciate your valuable comments</Text>
-          </View>
-        </View>
-        <View style={{ borderBottom: 1, marginTop: 20 }} />
-        <View style={{ borderBottom: 1, marginTop: 20 }} />
-        <View style={{ borderBottom: 1, marginTop: 20 }} />
-        <View style={{ borderBottom: 1, marginTop: 20 }} />
+        <CustomerCommnetsBox />
       </View>
 
       <View style={{ fontSize: 8, marginTop: 10, flexDirection: 'row' }}>
@@ -362,10 +133,9 @@ const CustomerFeedbackForm = () => {
         </View>
       </View>
 
-      <View style={styles.footer}>
-        <View style={{ border: 1, marginTop: 30 }} />
-        <View style={{ border: '1 solid red', marginTop: '2px' }} />
-      </View>
+      <>
+        <FooterBorder />
+      </>
     </View>
   );
 };
