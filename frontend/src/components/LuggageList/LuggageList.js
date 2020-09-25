@@ -1,6 +1,7 @@
 import React from 'react';
-import { Image, Text, View, StyleSheet } from '@react-pdf/renderer';
+import { Text, View, StyleSheet } from '@react-pdf/renderer';
 import TableWithOnlyRows from '../TableWithOnlyRows/TableWithOnlyRows';
+import LuggageListTable from '../LuggageListTable/LuggageListTable';
 
 const styles = StyleSheet.create({
   container: {
@@ -51,6 +52,7 @@ const LuggageList = () => {
             <Text>To:</Text>
           </View>
         </View>
+
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: '0 10' }}>
           <View style={{ border: 1, width: '45%' }}>
             <TableWithOnlyRows />
@@ -58,6 +60,10 @@ const LuggageList = () => {
           <View style={{ border: 1, width: '45%' }}>
             <TableWithOnlyRows />
           </View>
+        </View>
+
+        <View style={{ marginTop: 10 }}>
+          <LuggageListTable />
         </View>
       </View>
     </View>
