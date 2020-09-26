@@ -12,6 +12,7 @@ import Header from '../components/Header/Header';
 import HeaderWithAddress from '../components/HeaderWithAddress/HeaderWithAddress';
 import Reciept from '../components/Reciept/Reciept';
 import LuggageList from '../components/LuggageList/LuggageList';
+import InvoiceTable from '../components/InvoiceTable/InvoiceTable';
 
 const styles = StyleSheet.create({
   page: {
@@ -158,6 +159,12 @@ const Invoice = ({ invoice }) => {
       </Page>
       <Page size='A4' style={styles.page}>
         <LuggageList />
+      </Page>
+      <Page size='A4' style={styles.page}>
+        <View>
+          <Header />
+          <InvoiceTable />
+        </View>
       </Page>
     </Document>
   );

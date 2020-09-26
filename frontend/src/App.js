@@ -12,6 +12,8 @@ import LuggageList from './components/LuggageList/LuggageList';
 import HeaderWithAddress from './components/HeaderWithAddress/HeaderWithAddress';
 import Reciept from './components/Reciept/Reciept';
 import InvoiceTable from './components/InvoiceTable/InvoiceTable';
+import FooterWithImage from './components/FooterWithImage/FooterWithImage';
+import TransitPlanFormBox from './components/TransitPlanFormBox/TransitPlanFormBox';
 
 const styles = StyleSheet.create({
   page: {
@@ -37,7 +39,8 @@ function App() {
           <Page size='A4' style={styles.page}>
             <View>
               <Header />
-              <InvoiceTable />
+              {/* <FooterWithImage /> */}
+              <TransitPlanFormBox />
             </View>
           </Page>
         </Document>
