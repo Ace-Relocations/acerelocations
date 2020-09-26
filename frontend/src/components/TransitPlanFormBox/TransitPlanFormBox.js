@@ -196,6 +196,141 @@ const TransitPlanFormBox = () => {
               </Text>
             </View>
           </View>
+
+          <View style={{ flexDirection: 'row', fontSize: 7, lineHeight: 1.2, padding: '10 5 0 5' }}>
+            <Text>Terms & Conditions:</Text>
+          </View>
+
+          <View style={{ flexDirection: 'row', fontSize: 7, lineHeight: 1.2, padding: '5 5 0 5' }}>
+            <View style={{ width: '5%' }}>
+              <Text>1.</Text>
+            </View>
+            <View style={{ width: '95%' }}>
+              <Text>
+                Claim if any has to be immediately reported in writing after unpacking the
+                consignment on the Good Consignment Note
+              </Text>
+            </View>
+          </View>
+
+          <View style={{ flexDirection: 'row', fontSize: 7, lineHeight: 1.2, padding: '5 5 0 5' }}>
+            <View style={{ width: '5%' }}>
+              <Text>2.</Text>
+            </View>
+            <View style={{ width: '95%' }}>
+              <Text>
+                ln case of all items especially electrical & eiectronics, we are not liable for any
+                internal malfunctioning or damages unless there is relative and visible external
+                damage which is not mentioned in the packing/inventory list.
+              </Text>
+            </View>
+          </View>
+
+          <View style={{ flexDirection: 'row', fontSize: 7, lineHeight: 1.2, padding: '5 5 0 5' }}>
+            <View style={{ width: '5%' }}>
+              <Text>3.</Text>
+            </View>
+            <View style={{ width: '95%' }}>
+              <Text>
+                ln case of furniture items we are not liable for scratches, polish worn out unless
+                is relative visible damage to its outer packing and is said furniture
+              </Text>
+            </View>
+          </View>
+
+          <View style={{ flexDirection: 'row', fontSize: 7, lineHeight: 1.2, padding: '5 5 0 5' }}>
+            <View style={{ width: '5%' }}>
+              <Text>4.</Text>
+            </View>
+            <View style={{ width: '95%' }}>
+              <Text>
+                Claim for the entire set is not covered incase a single item(s) have been
+                lostldmamaged. Such claim will be covered for an additional premium of 2% on
+                confirmation by Ace Relocation in writing.
+              </Text>
+            </View>
+          </View>
+
+          <View style={{ flexDirection: 'row', fontSize: 7, lineHeight: 1.2, padding: '5 5 0 5' }}>
+            <View style={{ width: '5%' }}>
+              <Text>5.</Text>
+            </View>
+            <View style={{ width: '95%' }}>
+              <Text>
+                lt also does not cover loss/damage of the goods packed by owner/conignor and / or
+                jewellery/cash, deeds, traveller's cheque plants & pots, items made up of mud, clay
+                and natural stone such as marble etc, gas cylinders, alcoholic beverages, contraband
+                or other like items packed.
+              </Text>
+            </View>
+          </View>
+        </View>
+
+        <View>
+          <View style={{ flexDirection: 'row', border: 1, height: 30, fontSize: 8 }}>
+            <View style={{ width: '50%', flexDirection: 'row' }}>
+              <View style={{ width: '30%', paddingTop: 5 }}>
+                <Text style={{ margin: 'auto' }}>Option Selected</Text>
+              </View>
+              <View style={{ width: '15%', borderRight: 1, borderLeft: 1, paddingTop: 5 }}>
+                <Text style={{ margin: 'auto' }}> Two </Text>
+              </View>
+              <View style={{ width: '65%', paddingTop: 5, textAlign: 'left', fontSize: 7 }}>
+                <Text style={{ marginVertical: 'auto', fontSize: 7, marginLeft: 3 }}>
+                  If opted for option "One" No
+                </Text>
+                <Text style={{ marginVertical: 'auto', fontSize: 7, marginLeft: 3 }}>
+                  valuation to be mentioned below
+                </Text>
+              </View>
+            </View>
+            <View style={{ width: '50%', flexDirection: 'row' }}>
+              <View style={{ borderLeft: 1, padding: 5 }}>
+                <Text style={{ marginVertical: 'auto' }}>
+                  I/we confirm & agree the above terms & conditions
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+
+        <View style={{ fontSize: 7, flexDirection: 'row' }}>
+          <View style={{ width: '50%', padding: 5, borderRight: 1 }}>
+            <Text> Total valuation of consignment as per packing/ inventory list </Text>
+            <View style={{ flexDirection: 'row', lineHeight: 2 }}>
+              <View style={{ width: '20%' }}>
+                <Text>In Figure:</Text>
+              </View>
+              <View style={{ width: '80%' }}>
+                <View style={{ borderBottom: 1 }}>
+                  <Text> Rs.2,1.,6,400/- </Text>
+                </View>
+              </View>
+            </View>
+            <View style={{ flexDirection: 'row', lineHeight: 2, marginTop: 5 }}>
+              <View style={{ width: '20%' }}>
+                <Text>In Words:</Text>
+              </View>
+              <View style={{ width: '80%' }}>
+                <View style={{ borderBottom: 1 }}>
+                  <Text> Two lakh Sixteen Thousand Four Hundred Only. </Text>
+                </View>
+              </View>
+            </View>
+          </View>
+
+          <View style={{ width: '50%', flexDirection: 'row' }}>
+            <View style={{ width: '40%', borderRight: 1 }}>
+              <Text style={{ marginVertical: 'auto', borderBottom: 1 }}>Consignor's Signature</Text>
+              <Text style={{ marginVertical: 'auto', lineHeight: 1 }}>
+                Authorised Signatory of Ace Relocations
+              </Text>
+            </View>
+            <View style={{ width: '60%' }}>
+              <Text style={{ marginVertical: 'auto', borderBottom: 1 }}> </Text>
+              <Text style={{ marginVertical: 'auto' }}> </Text>
+            </View>
+          </View>
         </View>
       </View>
     </View>

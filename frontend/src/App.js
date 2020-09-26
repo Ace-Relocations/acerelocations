@@ -39,8 +39,10 @@ function App() {
           <Page size='A4' style={styles.page}>
             <View>
               <Header />
-              {/* <FooterWithImage /> */}
               <TransitPlanFormBox />
+              <View style={{ border: 1 }} />
+              <View style={{ border: '1 solid red', marginTop: '2px' }} />
+              <FooterWithImage />
             </View>
           </Page>
         </Document>
