@@ -11,6 +11,7 @@ import CustomerFeedbackForm from './components/CustomerFeedbackForm/CustomerFeed
 import LuggageList from './components/LuggageList/LuggageList';
 import HeaderWithAddress from './components/HeaderWithAddress/HeaderWithAddress';
 import Reciept from './components/Reciept/Reciept';
+import InvoiceTable from './components/InvoiceTable/InvoiceTable';
 
 const styles = StyleSheet.create({
   page: {
@@ -33,12 +34,10 @@ function App() {
       </Switch> */}
       <PDFViewer width='1000' height='1000' className='app'>
         <Document>
-          <Page size='A4' style={styles.page} orientation='landscape'>
-            <View style={{ border: 1, margin: 50, padding: 10 }}>
-              <HeaderWithAddress />
-              <View style={{ marginTop: 20, padding: 10 }}>
-                <Reciept />
-              </View>
+          <Page size='A4' style={styles.page}>
+            <View>
+              <Header />
+              <InvoiceTable />
             </View>
           </Page>
         </Document>
