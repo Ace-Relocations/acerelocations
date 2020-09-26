@@ -30,11 +30,11 @@ const styles = StyleSheet.create({
 function App() {
   return (
     <Fragment>
-      {/* <Switch>
+      <Switch>
         <Route path='/customer' component={CustomerInfoForm} />
         <Route path='/' exact render={() => <Redirect to='/customer' />} />
-      </Switch> */}
-      <PDFViewer width='1000' height='1000' className='app'>
+      </Switch>
+      {/* <PDFViewer width='1000' height='1000' className='app'>
         <Document>
           <Page size='A4' style={styles.page}>
             <View>
@@ -46,7 +46,7 @@ function App() {
             </View>
           </Page>
         </Document>
-      </PDFViewer>
+      </PDFViewer> */}
     </Fragment>
   );
 }

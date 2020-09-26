@@ -64,7 +64,6 @@ const CustomerCopy = ({ firstName, lastName, title, address }) => {
       </View>
       <View
         style={{
-          height: '500px',
           flexDirection: 'row',
           flexGrow: 1,
         }}
