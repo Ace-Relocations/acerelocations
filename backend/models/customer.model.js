@@ -39,6 +39,7 @@ var Customer = mongoose.model(
     dpincode: String,
     insuranceP: Number,
     insuranceA: Number,
+    insuranceAInText: String,
     type: String,
     createdBy: String,
     status: String,

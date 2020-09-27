@@ -1,5 +1,8 @@
 const service = require("../services/job.service")
 const db = require("../models");
+const numberToText = require('number-to-text');
+require('number-to-text/converters/en-us');
+
 const Customer = db.customer;
 const User = db.user;
 const Counter = db.counter;
@@ -38,6 +41,7 @@ createJob: async (req, res) => {
         obj.status = status;
         obj.insuranceP = insuranceP; 
         obj.insuranceA = insuranceA;
+        obj.insuranceAInText = numberToText.convertToText(insuranceA);
         obj.createdBy = createdBy; 
         obj.date = date;
 
