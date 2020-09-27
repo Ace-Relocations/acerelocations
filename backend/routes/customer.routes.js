@@ -1,5 +1,5 @@
 const { authJwt } = require("../middlewares");
-const controller = require("../controllers/user.controller");
+const controller = require("../controllers/customer.controller");
 const express = require('express');
 const router = express.Router();
 
@@ -19,5 +19,10 @@ const router = express.Router();
   //   [authJwt.verifyToken, authJwt.isAdmin],
   //   controller.adminBoard
   // );
+
+  router.post("/create", [authJwt.verifyToken], controller.createCustomer);
+  router.get("/view", [authJwt.verifyToken], controller.viewCustomer);
+  router.post("/update", [authJwt.verifyToken, authJwt.isAdmin], controller.updateCustomer);
+  router.post("/delete", [authJwt.verifyToken, authJwt.isAdmin], controller.deleteCustomer);
 
   module.exports = router;
