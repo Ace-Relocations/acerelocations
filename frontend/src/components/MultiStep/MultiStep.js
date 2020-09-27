@@ -9,6 +9,9 @@ import Check from '@material-ui/icons/Check';
 import StepConnector from '@material-ui/core/StepConnector';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import CustomerInfoForm from '../CustomerInfoForm/CustomerInfoForm';
+import InvoiceDetails from '../InvoiceDetails/InvoiceDetails';
+import AdditionalDetails from '../AdditionalDetails/AdditionalDetails';
 
 const QontoConnector = withStyles({
   alternativeLabel: {
@@ -86,18 +89,6 @@ const useStyles = makeStyles((theme) => ({
 
 const getSteps = () => {
   return ['Customer Info', 'Invoice Details', 'Other details'];
-};
-
-const InvoiceDetails = () => {
-  return <h1>invoiceDetails</h1>;
-};
-
-const CustomerInfoForm = () => {
-  return <h1>CustomerInfoForm</h1>;
-};
-
-const AdditionalDetails = () => {
-  return <h1>AdditionalDetails</h1>;
 };
 
 const getStepContent = (step) => {
