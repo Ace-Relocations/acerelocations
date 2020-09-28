@@ -106,7 +106,7 @@ const getStepContent = (step) => {
 
 const MultiStep = () => {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(1);
+  const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
 
   const handleNext = () => {
@@ -142,7 +142,9 @@ const MultiStep = () => {
           </div>
         ) : (
           <div>
-            <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              {getStepContent(activeStep)}
+            </div>
             <div
               style={{
                 bottom: '50px',

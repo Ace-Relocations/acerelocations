@@ -95,11 +95,11 @@ const CustomerInfoForm = () => {
           </Button>
         </ValidatorForm>
       </Paper>
-      {isFormValid && (
+      {/* {isFormValid && (
         <PDFDownloadLink document={<Invoice invoice={customerDetails} />} fileName='invoice.pdf'>
           {({ blob, url, loading, error }) => (loading ? 'Loading document...' : 'Download now!')}
         </PDFDownloadLink>
-      )}
+      )} */}
     </>
   );
 };
