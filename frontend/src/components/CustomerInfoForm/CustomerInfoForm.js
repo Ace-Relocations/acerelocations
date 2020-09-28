@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { Button, FormControl, Paper, Typography } from '@material-ui/core';
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
 import { PDFDownloadLink } from '@react-pdf/renderer';
@@ -6,7 +6,7 @@ import { PDFDownloadLink } from '@react-pdf/renderer';
 import './CustomerInfoForm.css';
 import Invoice from '../../Test/Invoice';
 
-const CustomerInfoForm = () => {
+const CustomerInfoForm = ({ customerData, setCustomerData, setIsDisabledNextStep }) => {
   const [loginErrorMsg, updateLoginErrorMsg] = useState('');
   const [isFormValid, updateIsFormValid] = useState(false);
   const [customerDetails, updateCustomerDetails] = useState({
@@ -27,8 +27,16 @@ const CustomerInfoForm = () => {
 
   const submit = useCallback(() => {
     console.log({ customerDetails });
+    setCustomerData(customerDetails);
     updateIsFormValid(true);
   });
+
+  useEffect(() => {
+    console.log('called');
+    if (isFormValid) {
+      setIsDisabledNextStep(false);
+    }
+  }, [isFormValid, customerData, setCustomerData]);
 
   return (
     <>

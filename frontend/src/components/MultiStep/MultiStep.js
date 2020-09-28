@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
@@ -91,10 +91,11 @@ const getSteps = () => {
   return ['Customer Info', 'Invoice Details', 'Other details'];
 };
 
-const getStepContent = (step) => {
-  switch (step) {
+const getStepContent = (stepProps) => {
+  const { activeStep } = stepProps;
+  switch (activeStep) {
     case 0:
-      return <CustomerInfoForm />;
+      return <CustomerInfoForm {...stepProps} />;
     case 1:
       return <InvoiceDetails />;
     case 2:
@@ -106,8 +107,35 @@ const getStepContent = (step) => {
 
 const MultiStep = () => {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = useState(0);
+  const [customerData, setCustomerData] = useState({});
+  const [isDisabledNextStep, setIsDisabledNextStep] = useState(true);
+  const [isDisabledPreviousStep, setIsDisabledPreviousStep] = useState(true);
+
   const steps = getSteps();
+
+  // populate stepProps later when binding data in next task
+  const stepProps = {
+    // currentStep,
+    // currentSubStep,
+    // addSubStep,
+    // goToNextStep,
+    // goToSubStep,
+    // isLastSubStep,
+    isDisabledNextStep,
+    setIsDisabledNextStep,
+    isDisabledPreviousStep,
+    setIsDisabledPreviousStep,
+
+    activeStep,
+
+    customerData,
+    setCustomerData,
+  };
+
+  useEffect(() => {
+    console.log({ stepProps });
+  }, [stepProps, isDisabledNextStep]);
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -143,7 +171,7 @@ const MultiStep = () => {
         ) : (
           <div>
             <div style={{ display: 'flex', justifyContent: 'center' }}>
-              {getStepContent(activeStep)}
+              {getStepContent(stepProps)}
             </div>
             <div
               style={{
@@ -157,6 +185,7 @@ const MultiStep = () => {
                 Back
               </Button>
               <Button
+                disabled={isDisabledNextStep}
                 variant='contained'
                 color='primary'
                 onClick={handleNext}
