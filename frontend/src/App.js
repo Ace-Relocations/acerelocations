@@ -32,7 +32,8 @@ function App() {
   return (
     <Fragment>
       <Switch>
-        <Route path='/customer' component={MultiStep} />
+        {/* <Route path='/customer' component={MultiStep} /> */}
+        <Route path='/customer' component={CustomerInfoForm} />
         <Route path='/' exact render={() => <Redirect to='/customer' />} />
       </Switch>
       {/* <PDFViewer width='1000' height='1000' className='app'>
