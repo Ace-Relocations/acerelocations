@@ -1,5 +1,6 @@
 const db = require("../models");
 const Counter = db.counter;
+const Customer = db.customer;
 
 module.exports = {
 
@@ -39,6 +40,25 @@ module.exports = {
             return defautV;
         } catch (err) {
             return err;    
+        }
+    },
+
+    getAll: async (limit, skip) => {
+        try {
+            return Customer.find({})  // You may want to add a query
+                           .skip(skip) // Always apply 'skip' before 'limit'
+                           .limit(limit) // This is your 'page size'
+
+        } catch {
+            return err;    
+        }
+    },
+
+    filterJob: async () => {
+        try {
+
+        } catch {
+            return err;
         }
     },
 }

@@ -12,12 +12,16 @@ module.exports = {
 createJob: async (req, res) => {
     try {
         const {
-            consignor, consignee, contact, email, oaddress1, oaddress2, ocity, ostate, opincode, daddress1, daddress2, dcity, dstate, dpincode, type, status, insuranceP, insuranceA, date
+            consignor, consignee, contact, email, oaddress1, oaddress2, ocity, ostate, opincode, daddress1, daddress2, dcity, dstate, dpincode, car, type, status, insuranceP, insuranceA, date
             } = req.body;
         // const defaultV = await service.setGcnno(491);
         const gcnno = await service.incrementGcnno();
-     
-
+        
+        let gcnnoC = 0;
+        if(car == true){
+            console.log("Hi")
+            gcnnoC = await service.incrementGcnno();
+        }
         const user = await User.findById(req.userId)
         const createdBy = user.email;
 
@@ -39,6 +43,8 @@ createJob: async (req, res) => {
         obj.dpincode = dpincode; 
         obj.type = type;
         obj.status = status;
+        obj.car = car;
+        obj.carGcnno = gcnnoC;
         obj.insuranceP = insuranceP; 
         obj.insuranceA = insuranceA;
         obj.insuranceAInText = numberToText.convertToText(insuranceA);
@@ -75,6 +81,65 @@ viewJob: async (req, res) => {
     } catch (err) {
         res.status(500).send({ message: err });
         return;    
+    }
+},
+
+viewAllJob: async (req, res) => {
+    try {
+        const limit = parseInt(req.query.limit); // Make sure to parse the limit to number
+        const skip = parseInt(req.query.skip);// Make sure to parse the skip to number
+
+        const jobs = await service.getAll(limit, skip);
+
+        return res.status(200).json(jobs);
+    } catch (err) {
+        res.status(500).send({ message: err });
+        return; 
+    }
+},
+
+filterJob: async (req, res) => {
+    try {
+        var queryCond = {}
+        if(req.query.consignor){
+            queryCond.consignor=req.query.consignor;
+         }
+         if(req.query.consignee){
+            queryCond.consignee=req.query.consignee;
+         }
+         if(req.query.contact){
+            queryCond.contact=req.query.contact;
+         }
+         if(req.query.email){
+            queryCond.email=req.query.email;
+         }
+         if(req.query.ocity){
+            queryCond.ocity=req.query.ocity;
+         }
+         if(req.query.dcity){
+            queryCond.dcity=req.query.dcity;
+         }
+         if(req.query.type){
+            queryCond.type=req.query.type;
+         }
+         if(req.query.status){
+            queryCond.status=req.query.status;
+         }
+         if(req.query.createdBy){
+            queryCond.createdBy=req.query.createdBy;
+         }
+
+        const jobs = await Customer.find(queryCond);
+        if (!jobs) {
+            res.status(500).send({ message: "No jobs with the given filters found" });
+            return;
+            }
+        console.log(jobs);
+        res.send(jobs);
+
+    } catch (err) {
+        res.status(500).send({ message: err });
+        return; 
     }
 },
 
@@ -145,6 +210,9 @@ deleteJob: async (req, res) => {
         let current = await Counter.findById("entityId");
         if ((current.seq - 1) == user.gcnno ) {
             let number = await service.decrementGcnno(user.gcnno);
+            if (user.car == true){
+                let number1 = await service.decrementGcnno(user.gcnno);
+            }
             let deleteV = await Customer.deleteOne({ gcnno: req.query.gcnno});
             return res.send({ message: "Customer was deleted successfully!" });     
         } else {
