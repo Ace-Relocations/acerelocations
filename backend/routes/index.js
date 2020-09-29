@@ -3,10 +3,12 @@ const express = require('express');
 const router = express.Router();
 
 const auth = require('./auth.routes');
-const test = require('./user.routes')
+const customer = require('./customer.routes');
+const job = require('./job.routes')
 
 router.use('/api/auth', auth);
-router.use('/api/test', test)
+router.use('/api/customer', customer);
+router.use('/api/job', job);
 
 
 module.exports = router;
