@@ -1,12 +1,7 @@
 import React from 'react';
 
 import './CustomerInfoForm.css';
-import CustomButton from '../CustomButton/CustomButton';
 
-const CustomerInfoForm = () => (
-  <div>
-    <CustomButton />
-  </div>
-);
+const CustomerInfoForm = () => <div> CustomerInfoForm</div>;
 
 export default CustomerInfoForm;

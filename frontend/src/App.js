@@ -15,6 +15,7 @@ import Reciept from './components/Reciept/Reciept';
 import InvoiceTable from './components/InvoiceTable/InvoiceTable';
 import FooterWithImage from './components/FooterWithImage/FooterWithImage';
 import TransitPlanFormBox from './components/TransitPlanFormBox/TransitPlanFormBox';
+import Login from './components/Login/Login';
 
 const styles = StyleSheet.create({
   page: {
@@ -34,7 +35,8 @@ function App() {
       <Switch>
         {/* <Route path='/customer' component={MultiStep} /> */}
         <Route path='/customer' component={CustomerInfoForm} />
-        <Route path='/' exact render={() => <Redirect to='/customer' />} />
+        <Route path='/login' component={Login} />
+        <Route path='/' exact render={() => <Redirect to='/login' />} />
       </Switch>
       {/* <PDFViewer width='1000' height='1000' className='app'>
         <Document>
