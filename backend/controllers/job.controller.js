@@ -19,7 +19,6 @@ createJob: async (req, res) => {
         
         let gcnnoC = 0;
         if(car == true){
-            console.log("Hi")
             gcnnoC = await service.incrementGcnno();
         }
         const user = await User.findById(req.userId)
@@ -60,7 +59,7 @@ createJob: async (req, res) => {
             res.status(500).send({ message: err });
             return;
             }  
-            res.send({ message: "Customer was registered successfully!" });
+            res.status(200).send({ message: "Customer was registered successfully!", data: obj });
         });
         
     } catch (err) {
@@ -134,8 +133,7 @@ filterJob: async (req, res) => {
             res.status(500).send({ message: "No jobs with the given filters found" });
             return;
             }
-        console.log(jobs);
-        res.send(jobs);
+        res.status(200).send({ message: "Job with the following filters found", data: jobs });
 
     } catch (err) {
         res.status(500).send({ message: err });
@@ -189,7 +187,7 @@ updateJob: async (req, res) => {
                 res.status(500).send({ message: "Job not updated" });
                 return;
                 }  
-                return res.send({ message: "Customer was updated successfully!" });
+                return res.status(200).send({ message: "Customer was updated successfully!", data: obj });
             });
         })  
         
@@ -208,13 +206,13 @@ deleteJob: async (req, res) => {
                 }
 
         let current = await Counter.findById("entityId");
-        if ((current.seq - 1) == user.gcnno ) {
+        if ((current.seq - 1) == user.gcnno || (user.car == true && (current.seq - 2) == user.gcnno)) {
             let number = await service.decrementGcnno(user.gcnno);
             if (user.car == true){
                 let number1 = await service.decrementGcnno(user.gcnno);
             }
             let deleteV = await Customer.deleteOne({ gcnno: req.query.gcnno});
-            return res.send({ message: "Customer was deleted successfully!" });     
+            return res.status(200).send({ message: "Customer was deleted successfully!", data: user.gcnno });     
         } else {
             let obj = new Customer();
             obj.status = "Canceled";
@@ -225,7 +223,7 @@ deleteJob: async (req, res) => {
                 res.status(500).send({ message: "Job status not updated" });
                 return;
                 }  
-                return res.send({ message: "Customer status was updated successfully!" });
+                return res.status(200).send({ message: "Customer job status was updated to cancelled!", data: obj });
         }           
     } catch (err) {
         res.status(500).send({ message: err });
