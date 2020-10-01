@@ -55,7 +55,7 @@ const Sidebar = ({ props }) => {
         }}
         anchor='left'
       >
-        <div className={classes.toolbar} />
+        <div className={classes.toolbar}>LOGO</div>
         <Divider />
         <List>
           <ListItem button key='Create Job' onClick={() => history.push('/home')}>
