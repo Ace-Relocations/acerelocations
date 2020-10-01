@@ -3,6 +3,7 @@ import { Switch, Route, Redirect, Link } from 'react-router-dom';
 import { PDFViewer, Page, StyleSheet, Document, View } from '@react-pdf/renderer';
 import Invoice from './Test/Invoice';
 import invoice from './data/invoice';
+import MultiStep from './components/MultiStep/MultiStep';
 
 import './App.css';
 import CustomerInfoForm from './components/CustomerInfoForm/CustomerInfoForm';
@@ -14,6 +15,8 @@ import Reciept from './components/Reciept/Reciept';
 import InvoiceTable from './components/InvoiceTable/InvoiceTable';
 import FooterWithImage from './components/FooterWithImage/FooterWithImage';
 import TransitPlanFormBox from './components/TransitPlanFormBox/TransitPlanFormBox';
+import Login from './components/Login/Login';
+import Signup from './components/Signup/Signup';
 
 const styles = StyleSheet.create({
   page: {
@@ -31,8 +34,11 @@ function App() {
   return (
     <Fragment>
       <Switch>
+        {/* <Route path='/customer' component={MultiStep} /> */}
         <Route path='/customer' component={CustomerInfoForm} />
-        <Route path='/' exact render={() => <Redirect to='/customer' />} />
+        <Route path='/login' component={Login} />
+        <Route path='/signup' component={Signup} />
+        <Route path='/' exact render={() => <Redirect to='/login' />} />
       </Switch>
       {/* <PDFViewer width='1000' height='1000' className='app'>
         <Document>
