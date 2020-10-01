@@ -13,7 +13,7 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         authUser: action.payload,
         logout: false,
-        email: '',
+        username: '',
         password: '',
       };
 

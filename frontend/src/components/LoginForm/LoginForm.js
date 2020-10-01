@@ -67,7 +67,7 @@ const LoginForm = () => {
   const [showPassword, updateShowPassword] = useState(false);
 
   const dispatch = useDispatch();
-  const authUser = useSelector((state) => state.authUser);
+  const authUser = useSelector((state) => state.auth);
 
   const { handleSubmit, control, errors, getValues, watch } = useForm({
     mode: 'all',
@@ -77,14 +77,12 @@ const LoginForm = () => {
   //   updateShowPassword(!showPassword);
   // };
 
-  // useEffect(() => {}, []);
-
   const submit = (data) => {
     console.log({ data });
     dispatch(loginRequest(data));
   };
 
-  watch(['email', 'password']);
+  watch(['username', 'password']);
   const values = getValues();
 
   return (
@@ -100,15 +98,16 @@ const LoginForm = () => {
             as={TextField}
             control={control}
             id='outlined-basic'
-            label='Email'
+            label='Username'
             variant='outlined'
             width={300}
             rules={{ required: true }}
             className={classes.formControl}
-            name='email'
-            value={values.email}
-            error={errors.email}
-            helperText={errors.email && 'email required'}
+            name='username'
+            value={values.username}
+            error={errors.username}
+            defaultValue=''
+            helperText={errors.username && 'username required'}
           />
         </div>
         <div>
@@ -125,6 +124,8 @@ const LoginForm = () => {
             value={values.password}
             error={errors.password}
             helperText={errors.password && 'password required'}
+            type='password'
+            defaultValue=''
           />
           {/* <FormHelperText id='forget-password-text' className={classes.formHelper} error='true'>
             Forget password

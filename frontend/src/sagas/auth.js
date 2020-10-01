@@ -1,28 +1,28 @@
-import { takeEvery, put } from 'redux-saga/effects';
+import { all, takeEvery, put } from 'redux-saga/effects';
 import * as actionTypes from '../constants/actionTypes';
 import * as authAction from '../actions';
 
 import axios from '../services';
+import toaster from '../utils/toaster';
 
-function* loginRequest(action) {
+function* loginRequest({ payload }) {
   try {
-    delete axios.defaults.headers.common['Authorization'];
-    let response = yield axios.post('/login', action.payload);
+    const { username, password } = payload;
+    // delete axios.defaults.headers.common['Authorization'];
+    let response = yield axios.post('/auth/signin', { username, password });
 
     if (response.status === 200) {
-      if (response.message === 'user successfully login') {
-        yield put(authAction.loginRequestSuccess(response.data.userToken));
-        localStorage.setItem('userData', JSON.stringify(response.data));
-        localStorage.setItem('userToken', response.data.accessToken);
-      } else {
-        console.log('error');
-      }
+      yield put(authAction.loginRequestSuccess(response.data.userToken));
+      localStorage.setItem('userData', JSON.stringify(response.data));
+      localStorage.setItem('userToken', response.data.accessToken);
+    } else if (response.status === 404) {
+      toaster(response.message);
     }
   } catch (error) {
-    console.log('error');
+    toaster('User Not Found');
   }
 }
 
 export default function* rootsaga() {
-  yield takeEvery(actionTypes.LOGIN_REQUEST, loginRequest);
+  yield all([yield takeEvery(actionTypes.LOGIN_REQUEST, loginRequest)]);
 }

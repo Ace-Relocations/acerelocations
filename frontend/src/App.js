@@ -4,6 +4,7 @@ import { PDFViewer, Page, StyleSheet, Document, View } from '@react-pdf/renderer
 import Invoice from './Test/Invoice';
 import invoice from './data/invoice';
 import MultiStep from './components/MultiStep/MultiStep';
+import { ToastContainer, toast } from 'react-toastify';
 
 import './App.css';
 import CustomerInfoForm from './components/CustomerInfoForm/CustomerInfoForm';
@@ -17,6 +18,9 @@ import FooterWithImage from './components/FooterWithImage/FooterWithImage';
 import TransitPlanFormBox from './components/TransitPlanFormBox/TransitPlanFormBox';
 import Login from './components/Login/Login';
 import Signup from './components/Signup/Signup';
+import 'react-toastify/dist/ReactToastify.css';
+
+toast.configure();
 
 const styles = StyleSheet.create({
   page: {
@@ -53,6 +57,10 @@ function App() {
           </Page>
         </Document>
       </PDFViewer> */}
+      {/* Toaster Container  */}
+      <div style={{ position: 'fixed', top: '92px', right: '92px', zIndex: '3' }}>
+        <ToastContainer containerId='appLayoutToaster' />
+      </div>
     </Fragment>
   );
 }
