@@ -47,13 +47,16 @@ function App() {
     <Fragment>
       <Sidebar />
       <Switch>
-        <Route path='/customer' component={CustomerInfoForm} />
         <Route path='/login' component={Login} />
-        <Route path='/' component={HomePage} />
-        {/* <Route path='/' exact render={() => <Redirect to='/login' />} /> */}
 
-        {/* Hiding Registration temporary */}
-        {/* <Route path='/signup' component={Signup} /> */}
+        <div style={{ marginLeft: '250px' }}>
+          <Route path='/customer' component={CustomerInfoForm} />
+          <Route path='/' component={HomePage} exact />
+          {/* <Route path='/' exact render={() => <Redirect to='/login' />} /> */}
+
+          {/* Hiding Registration temporary */}
+          {/* <Route path='/signup' component={Signup} /> */}
+        </div>
       </Switch>
 
       {/* Toaster Container  */}
