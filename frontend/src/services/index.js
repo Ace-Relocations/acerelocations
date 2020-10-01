@@ -1,0 +1,13 @@
+import axios from 'axios';
+const baseURL = 'localhost:3000/api/v1/';
+
+const user = axios.create({
+  baseURL: baseURL,
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization:
+      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYWRtaW4iLCJuZXR3b3JrIjoiYWtjZXNzLW5ldHdvcmsiLCJpYXQiOjE2MDAyNTMzMjMsImV4cCI6MTYwMDI2MDUyM30.UjtOb6-4dlEvKaQWvOmI8ts_4z58nVt0ulMRJvKsM_M',
+  },
+});
+
+export default user;
