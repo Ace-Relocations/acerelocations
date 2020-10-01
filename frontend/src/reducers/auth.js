@@ -18,6 +18,6 @@ export default (state = INITIAL_STATE, action) => {
       };
 
     default:
-      break;
+      return state;
   }
 };

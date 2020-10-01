@@ -1,4 +1,4 @@
-import { all, takeEvery, call, put } from 'redux-saga/effects';
+import { takeEvery, put } from 'redux-saga/effects';
 import * as actionTypes from '../constants/actionTypes';
 import * as authAction from '../actions';
 
@@ -9,29 +9,17 @@ function* loginRequest(action) {
     delete axios.defaults.headers.common['Authorization'];
     let response = yield axios.post('/login', action.payload);
 
-    if (response.status == 200) {
-      if (response.data.message == 'user successfully login') {
+    if (response.status === 200) {
+      if (response.message === 'user successfully login') {
         yield put(authAction.loginRequestSuccess(response.data.userToken));
         localStorage.setItem('userData', JSON.stringify(response.data));
-        localStorage.setItem('userToken', response.data.userToken);
+        localStorage.setItem('userToken', response.data.accessToken);
       } else {
-        yield put(
-          authAction.modalOpen({
-            modalType: 'error',
-            modalMessage: response.data.message,
-            redirectURL: '',
-          }),
-        );
+        console.log('error');
       }
     }
   } catch (error) {
-    yield put(
-      authAction.modalOpen({
-        modalType: 'error',
-        modalMessage: error.response.data.message,
-        redirectURL: '',
-      }),
-    );
+    console.log('error');
   }
 }
 

@@ -1,16 +1,11 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import Visibility from '@material-ui/icons/Visibility';
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import IconButton from '@material-ui/core/IconButton';
-import FormControl from '@material-ui/core/FormControl';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import InputLabel from '@material-ui/core/InputLabel';
 import Button from '@material-ui/core/Button';
 import { useForm, Controller } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { loginRequest } from '../../actions';
 
 const useStyles = makeStyles((theme) => ({
   introBox: {
@@ -71,26 +66,22 @@ const LoginForm = () => {
   const classes = useStyles();
   const [showPassword, updateShowPassword] = useState(false);
 
-  const {
-    register,
-    handleSubmit,
-    control,
-    errors,
-    reset,
-    setValue,
-    getValues,
-    watch,
-    trigger,
-  } = useForm({
+  const dispatch = useDispatch();
+  const authUser = useSelector((state) => state.authUser);
+
+  const { handleSubmit, control, errors, getValues, watch } = useForm({
     mode: 'all',
   });
 
-  const handleClickShowPassword = () => {
-    updateShowPassword(!showPassword);
-  };
+  // const handleClickShowPassword = () => {
+  //   updateShowPassword(!showPassword);
+  // };
+
+  // useEffect(() => {}, []);
 
   const submit = (data) => {
     console.log({ data });
+    dispatch(loginRequest(data));
   };
 
   watch(['email', 'password']);
