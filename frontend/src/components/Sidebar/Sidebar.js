@@ -58,14 +58,14 @@ const Sidebar = ({ props }) => {
         <div className={classes.toolbar}>LOGO</div>
         <Divider />
         <List>
-          <ListItem button key='Create Job' onClick={() => history.push('/home')}>
+          <ListItem button key='Create Job' onClick={() => history.push('/create-job')}>
             <ListItemIcon>
               <InboxIcon />
             </ListItemIcon>
             <ListItemText primary='Create Job' />
           </ListItem>
 
-          <ListItem button key='View Job' onClick={() => history.push('/')}>
+          <ListItem button key='View Job' onClick={() => history.push('/view-job')}>
             <ListItemIcon>
               <MailIcon />
             </ListItemIcon>

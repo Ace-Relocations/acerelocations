@@ -11,6 +11,8 @@ import Signup from './components/Signup/Signup';
 import 'react-toastify/dist/ReactToastify.css';
 import HomePage from './components/HomePage/HomePage';
 import Sidebar from './components/Sidebar/Sidebar';
+import CreateJobPage from './components/CreateJobPage/CreateJobPage';
+import ViewJobPage from './components/ViewJobPage/ViewJobPage';
 
 toast.configure();
 
@@ -52,6 +54,9 @@ function App() {
         <div style={{ marginLeft: '250px' }}>
           <Route path='/customer' component={CustomerInfoForm} />
           <Route path='/' component={HomePage} exact />
+          <Route path='/create-job' component={CreateJobPage} exact />
+          <Route path='/view-job' component={ViewJobPage} exact />
+
           {/* <Route path='/' exact render={() => <Redirect to='/login' />} /> */}
 
           {/* Hiding Registration temporary */}
