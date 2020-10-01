@@ -71,6 +71,13 @@ const Sidebar = ({ props }) => {
             </ListItemIcon>
             <ListItemText primary='View Job' />
           </ListItem>
+
+          <ListItem button key='All Job' onClick={() => history.push('/jobs')}>
+            <ListItemIcon>
+              <MailIcon />
+            </ListItemIcon>
+            <ListItemText primary='All Job' />
+          </ListItem>
         </List>
         <Divider />
       </Drawer>
