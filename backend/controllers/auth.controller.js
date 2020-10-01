@@ -40,7 +40,7 @@ exports.signup = (req, res) => {
               return;
             }
 
-            res.send({ message: "User was registered successfully!" });
+            res.status(200).send({ message: "User was registered successfully!", data: user });
           });
         }
       );
@@ -58,7 +58,7 @@ exports.signup = (req, res) => {
             return;
           }
 
-          res.send({ message: "User was registered successfully!" });
+          res.status(200).send({ message: "User was registered successfully!", data: user });
         });
       });
     }

@@ -48,12 +48,13 @@ var Customer = mongoose.model(
     date: String,
     createdAt: { type: Date, default: Date.now() },
     updatedAt: { type: Date, default: Date.now() },
-    // invoice : [new Schema({
-    //     expense: {type: String},
-    //     amount : {type: Number}
-    // }, {strict: false})
-    // ]   
-  }, {strict: false} )
+    invoice: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Invoice"
+      }
+    ]   
+  })
 );
 
 
