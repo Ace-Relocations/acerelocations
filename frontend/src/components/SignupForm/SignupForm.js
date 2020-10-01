@@ -83,7 +83,7 @@ const SignupForm = () => {
     console.log({ data });
   };
 
-  watch(['firstName', 'lastName', 'age', 'birthdate', 'mobile', 'email', 'password']);
+  watch(['firstName', 'lastName', 'username', 'mobile', 'email', 'password']);
   const values = getValues();
 
   return (
@@ -107,6 +107,7 @@ const SignupForm = () => {
             name='firstName'
             value={values.firstName}
             error={errors.firstName}
+            defaultValue=''
             helperText={errors.firstName && 'firstName required'}
           />
         </div>
@@ -123,7 +124,25 @@ const SignupForm = () => {
             name='lastName'
             value={values.lastName}
             error={errors.lastName}
+            defaultValue=''
             helperText={errors.lastName && 'lastName required'}
+          />
+        </div>
+        <div>
+          <Controller
+            as={TextField}
+            control={control}
+            id='outlined-basic'
+            label='UserName'
+            variant='outlined'
+            width={300}
+            rules={{ required: true }}
+            className={classes.formControl}
+            name='userName'
+            value={values.userName}
+            error={errors.userName}
+            defaultValue=''
+            helperText={errors.userName && 'userName required'}
           />
         </div>
         <div>
@@ -139,6 +158,7 @@ const SignupForm = () => {
             name='email'
             value={values.email}
             error={errors.email}
+            defaultValue=''
             helperText={errors.email && 'email required'}
           />
         </div>
@@ -155,6 +175,7 @@ const SignupForm = () => {
             name='password'
             value={values.password}
             error={errors.password}
+            defaultValue=''
             helperText={errors.password && 'password required'}
           />
         </div>
@@ -172,6 +193,7 @@ const SignupForm = () => {
             type='number'
             value={values.mobile}
             error={errors.mobile}
+            defaultValue=''
             helperText={errors.mobile && 'mobile required'}
           />
         </div>
