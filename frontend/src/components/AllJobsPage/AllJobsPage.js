@@ -1,10 +1,13 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
+import CssBaseline from '@material-ui/core/CssBaseline';
+
 import Grid from '@material-ui/core/Grid/index';
 import Typography from '@material-ui/core/Typography';
 
 import AllJobsTable from '../AllJobsTable/AllJobsTable';
+import makeData from './makeData';
 
 const useStyles = makeStyles((theme) => ({
   introBox: {
@@ -29,8 +32,51 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(5),
   },
 }));
+
 const AllJobsPage = () => {
   const classes = useStyles();
+
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: 'Name',
+        columns: [
+          {
+            Header: 'First Name',
+            accessor: 'firstName',
+          },
+          {
+            Header: 'Last Name',
+            accessor: 'lastName',
+          },
+        ],
+      },
+      {
+        Header: 'Info',
+        columns: [
+          {
+            Header: 'Age',
+            accessor: 'age',
+          },
+          {
+            Header: 'Visits',
+            accessor: 'visits',
+          },
+          {
+            Header: 'Status',
+            accessor: 'status',
+          },
+          {
+            Header: 'Profile Progress',
+            accessor: 'progress',
+          },
+        ],
+      },
+    ],
+    [],
+  );
+
+  const data = React.useMemo(() => makeData(20), []);
 
   return (
     <Grid container>
@@ -49,7 +95,9 @@ const AllJobsPage = () => {
       </Grid>
       <Grid item lg={12} container className={classes.gridItem}>
         <Box component='div'>
-          <AllJobsTable />
+          <CssBaseline />
+
+          <AllJobsTable columns={columns} data={data} />
         </Box>
       </Grid>
     </Grid>
