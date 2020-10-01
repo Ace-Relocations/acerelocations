@@ -1,14 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import Visibility from '@material-ui/icons/Visibility';
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import IconButton from '@material-ui/core/IconButton';
-import FormControl from '@material-ui/core/FormControl';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import InputLabel from '@material-ui/core/InputLabel';
 import Button from '@material-ui/core/Button';
 import { useForm, Controller } from 'react-hook-form';
 
@@ -83,7 +75,7 @@ const SignupForm = () => {
     console.log({ data });
   };
 
-  watch(['firstName', 'lastName', 'username', 'mobile', 'email', 'password']);
+  watch(['firstName', 'lastName', 'username', 'email', 'password']);
   const values = getValues();
 
   return (
@@ -179,24 +171,7 @@ const SignupForm = () => {
             helperText={errors.password && 'password required'}
           />
         </div>
-        <div>
-          <Controller
-            as={TextField}
-            control={control}
-            id='outlined-basic'
-            label='mobile'
-            variant='outlined'
-            width={300}
-            rules={{ required: true }}
-            className={classes.formControl}
-            name='mobile'
-            type='number'
-            value={values.mobile}
-            error={errors.mobile}
-            defaultValue=''
-            helperText={errors.mobile && 'mobile required'}
-          />
-        </div>
+
         <div className={classes.actionCont}>
           <Button className={classes.actionBtn} fullWidth type='submit'>
             Sign up

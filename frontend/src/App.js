@@ -38,25 +38,14 @@ function App() {
   return (
     <Fragment>
       <Switch>
-        {/* <Route path='/customer' component={MultiStep} /> */}
         <Route path='/customer' component={CustomerInfoForm} />
         <Route path='/login' component={Login} />
-        <Route path='/signup' component={Signup} />
         <Route path='/' exact render={() => <Redirect to='/login' />} />
+
+        {/* Hiding Registration temporary */}
+        {/* <Route path='/signup' component={Signup} /> */}
       </Switch>
-      {/* <PDFViewer width='1000' height='1000' className='app'>
-        <Document>
-          <Page size='A4' style={styles.page}>
-            <View>
-              <Header />
-              <TransitPlanFormBox />
-              <View style={{ border: 1 }} />
-              <View style={{ border: '1 solid red', marginTop: '2px' }} />
-              <FooterWithImage />
-            </View>
-          </Page>
-        </Document>
-      </PDFViewer> */}
+
       {/* Toaster Container  */}
       <div style={{ position: 'fixed', top: '92px', right: '92px', zIndex: '3' }}>
         <ToastContainer containerId='appLayoutToaster' />
