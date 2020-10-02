@@ -70,13 +70,13 @@ createJob: async (req, res) => {
 
 viewJob: async (req, res) => {
     try {
-        Customer.findOne({ gcnno: req.query.gcnno }, (err, user) => {
-            if (!user) {
+        let viewData = await service.viewJob(req.query.gcnno);
+
+        if (!viewData) {
             res.status(500).send({ message: "User with the following gcnnno not found" });
             return;
             }
-            return res.status(200).send(user);
-        })
+            return res.status(200).send(viewData);
     } catch (err) {
         res.status(500).send({ message: err });
         return;    
