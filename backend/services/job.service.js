@@ -4,6 +4,20 @@ const Customer = db.customer;
 
 module.exports = {
 
+    viewJob: async (gcnno) => {
+        try {
+            
+            let user = await Customer.findOne({ gcnno: gcnno })
+            if (!user) {
+            return user;
+            }
+            return user;
+        } catch (err) {
+            res.status(500).send({ message: err });
+            return;    
+        }
+    },
+
     incrementGcnno: async () => {
         try {
            let gcnno = await Counter.findByIdAndUpdate({_id: 'entityId'}, {$inc: { seq: 1} });
