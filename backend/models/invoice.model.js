@@ -1,10 +1,12 @@
 const mongoose = require("mongoose");
+//const Any = new Schema({ any: Schema.Types.Mixed });
+const Schema = require('mongoose').Schema;
 
 const Invoice = mongoose.model(
   "Invoice",
   new mongoose.Schema({
-    detail: [Schema.Types.Mixed],
-    expense: [Schema.Types.Mixed]
+    gcnno: Number,
+    invoiceDetails: Object
   })
 );
 
