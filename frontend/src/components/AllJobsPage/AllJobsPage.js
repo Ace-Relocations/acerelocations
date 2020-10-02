@@ -76,7 +76,7 @@ const AllJobsPage = () => {
     [],
   );
 
-  const data = React.useMemo(() => makeData(20), []);
+  const data = React.useMemo(() => makeData(40), []);
 
   return (
     <Grid container>
