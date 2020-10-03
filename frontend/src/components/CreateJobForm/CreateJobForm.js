@@ -5,8 +5,8 @@ import Grid from '@material-ui/core/Grid/index';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { useForm, Controller } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
+import Checkbox from '@material-ui/core/Checkbox';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -100,9 +100,9 @@ const CreateJobForm = ({
   },
 }) => {
   const classes = useStyles();
-  const getDefaultValue = (isEditing, value) => (isEditing ? value : '');
+  const getDefaultValue = (isEditing, value) => (isEditing ? (!value ? value : '') : '');
 
-  const { handleSubmit, control, errors, getValues, watch } = useForm({
+  const { handleSubmit, control, errors, getValues, watch, reset } = useForm({
     mode: 'onChange',
     defaultValues: {
       cnsFirstName: getDefaultValue(isEditing, consignor),
@@ -124,6 +124,7 @@ const CreateJobForm = ({
       insuranceA: getDefaultValue(isEditing, insuranceA),
       type: getDefaultValue(isEditing, type),
       date: getDefaultValue(isEditing, date),
+      car: isEditing ? car : true,
     },
   });
 
@@ -133,10 +134,32 @@ const CreateJobForm = ({
       onUpdateJob(data);
     } else {
       onCreateJob(data);
+      // reset({
+      //   cnsFirstName: getDefaultValue(isEditing, consignor),
+      //   cneFirstName: getDefaultValue(isEditing, consignee),
+      //   cneMobile: getDefaultValue(isEditing, contact),
+      //   cneEmail: getDefaultValue(isEditing, email),
+      //   originAddress1: getDefaultValue(isEditing, oaddress1),
+      //   originAddress2: getDefaultValue(isEditing, oaddress2),
+      //   originCity: getDefaultValue(isEditing, ocity),
+      //   ooriginState: getDefaultValue(isEditing, ostate),
+      //   originPincode: getDefaultValue(isEditing, opincode),
+      //   destinationAddress1: getDefaultValue(isEditing, daddress1),
+      //   destinationAddress2: getDefaultValue(isEditing, daddress2),
+      //   destinationCity: getDefaultValue(isEditing, dcity),
+      //   destinationState: getDefaultValue(isEditing, dstate),
+      //   destinationPincode: getDefaultValue(isEditing, dpincode),
+      //   status: getDefaultValue(isEditing, status),
+      //   insuranceP: getDefaultValue(isEditing, insuranceP),
+      //   insuranceA: getDefaultValue(isEditing, insuranceA),
+      //   type: getDefaultValue(isEditing, type),
+      //   date: getDefaultValue(isEditing, date),
+      //   car: isEditing ? car : false,
+      // });
     }
   };
 
-  watch(['username', 'password']);
+  watch(['username', 'password', 'car']);
   const values = getValues();
 
   return (
@@ -173,6 +196,7 @@ const CreateJobForm = ({
                     value={values.cnsFirstName}
                     error={errors.cnsFirstName}
                     helperText={errors.cnsFirstName && 'FirstName is required'}
+                    required
                   />
                 </Box>
 
@@ -189,6 +213,7 @@ const CreateJobForm = ({
                   value={values.cnsLastName}
                   error={errors.cnsLastName}
                   helperText={errors.cnsLastName && 'LastName is required'}
+                  required
                 />
               </Grid>
               {/* </fieldset> */}
@@ -216,6 +241,7 @@ const CreateJobForm = ({
                       value={values.cneFirstName}
                       error={errors.cneFirstName}
                       helperText={errors.cneFirstName && 'FirstName is required'}
+                      required
                     />
                   </Box>
 
@@ -232,6 +258,7 @@ const CreateJobForm = ({
                     value={values.cneLastName}
                     error={errors.cneLastName}
                     helperText={errors.cneLastName && 'LastName is required'}
+                    required
                   />
                 </Grid>
 
@@ -250,6 +277,7 @@ const CreateJobForm = ({
                       value={values.cneMobile}
                       error={errors.cneMobile}
                       helperText={errors.cneMobile && 'Contact number is required'}
+                      required
                     />
                   </Box>
 
@@ -266,6 +294,7 @@ const CreateJobForm = ({
                     value={values.cneEmail}
                     error={errors.cneEmail}
                     helperText={errors.cneEmail && 'Email is required'}
+                    required
                   />
                 </Grid>
               </Grid>
@@ -293,6 +322,7 @@ const CreateJobForm = ({
                       value={values.originAddress1}
                       error={errors.originAddress1}
                       helperText={errors.originAddress1 && 'Address is required'}
+                      required
                     />
                   </Box>
 
@@ -328,6 +358,7 @@ const CreateJobForm = ({
                       value={values.originCity}
                       error={errors.originCity}
                       helperText={errors.originCity && 'City is required'}
+                      required
                     />
                   </Box>
 
@@ -344,6 +375,7 @@ const CreateJobForm = ({
                     value={values.originState}
                     error={errors.originState}
                     helperText={errors.originState && 'State is required'}
+                    required
                   />
                 </Grid>
                 <Grid item lg={12} container className={classes.gridItem}>
@@ -361,6 +393,7 @@ const CreateJobForm = ({
                       value={values.originCountry}
                       error={errors.originCountry}
                       helperText={errors.originCountry && 'Country is required'}
+                      required
                     />
                   </Box>
 
@@ -377,6 +410,7 @@ const CreateJobForm = ({
                     value={values.originPincode}
                     error={errors.originPincode}
                     helperText={errors.originPincode && 'Pincode is required'}
+                    required
                   />
                 </Grid>
               </Grid>
@@ -406,6 +440,7 @@ const CreateJobForm = ({
                       value={values.destinationAddress1}
                       error={errors.destinationAddress1}
                       helperText={errors.destinationAddress1 && 'Address is required'}
+                      required
                     />
                   </Box>
 
@@ -420,9 +455,7 @@ const CreateJobForm = ({
                     className={classes.formControl}
                     name='destinationAddress2'
                     value={values.destinationAddress2}
-                    // error={errors.destinationAddress2}
-
-                    // helperText={errors.destinationAddress2 && 'Address is required'}
+                    required
                   />
                 </Grid>
 
@@ -441,6 +474,7 @@ const CreateJobForm = ({
                       value={values.destinationCity}
                       error={errors.destinationCity}
                       helperText={errors.destinationCity && 'City is required'}
+                      required
                     />
                   </Box>
 
@@ -457,6 +491,7 @@ const CreateJobForm = ({
                     value={values.destinationState}
                     error={errors.destinationState}
                     helperText={errors.destinationState && 'State is required'}
+                    required
                   />
                 </Grid>
                 <Grid item lg={12} container className={classes.gridItem}>
@@ -474,6 +509,7 @@ const CreateJobForm = ({
                       value={values.destinationCountry}
                       error={errors.destinationCountry}
                       helperText={errors.destinationCountry && 'Country is required'}
+                      required
                     />
                   </Box>
 
@@ -490,6 +526,7 @@ const CreateJobForm = ({
                     value={values.destinationPincode}
                     error={errors.destinationPincode}
                     helperText={errors.destinationPincode && 'Pincode is required'}
+                    required
                   />
                 </Grid>
               </Grid>
@@ -518,6 +555,7 @@ const CreateJobForm = ({
                       value={values.status}
                       error={errors.status}
                       helperText={errors.status && 'Status is required'}
+                      required
                     />
                   </Box>
 
@@ -534,6 +572,7 @@ const CreateJobForm = ({
                     value={values.insuranceP}
                     error={errors.insuranceP}
                     helperText={errors.insuranceP && 'Insurance is required'}
+                    required
                   />
                 </Grid>
 
@@ -552,6 +591,7 @@ const CreateJobForm = ({
                       value={values.insuranceA}
                       error={errors.insuranceA}
                       helperText={errors.insuranceA && 'Insurance is required'}
+                      required
                     />
                   </Box>
 
@@ -568,6 +608,7 @@ const CreateJobForm = ({
                     value={values.type}
                     error={errors.type}
                     helperText={errors.type && 'Type is required'}
+                    required
                   />
                 </Grid>
                 <Grid item lg={12} container className={classes.gridItem}>
@@ -585,7 +626,20 @@ const CreateJobForm = ({
                       value={values.date}
                       error={errors.date}
                       helperText={errors.date && 'Date is required'}
+                      required
                     />
+                  </Box>
+                  <Box width='100%'>
+                    {/* <section>
+                      <Controller
+                        as={Checkbox}
+                        type='checkbox'
+                        name='car'
+                        control={control}
+                        // value={values.car}
+                      />
+                      <label>Tick this, if you want to add car</label>
+                    </section> */}
                   </Box>
                 </Grid>
               </Grid>
