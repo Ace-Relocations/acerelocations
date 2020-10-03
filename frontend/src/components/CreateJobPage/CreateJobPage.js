@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import CreateJobForm from '../CreateJobForm/CreateJobForm';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { jobRequest, getJobRequest } from '../../actions';
+import { jobRequest, getJobRequest, updateJobRequest } from '../../actions';
 
 const useStyles = makeStyles((theme) => ({
   introBox: {
@@ -59,11 +59,9 @@ const CreateJobPage = () => {
   };
 
   const onUpdateJob = (data) => {
-    console.log(data);
-    dispatch(jobRequest(data));
+    dispatch(updateJobRequest(data, jobId));
   };
 
-  console.log({ job });
   return (
     <Grid container>
       <Grid item lg={12} container className={classes.gridItem}>
@@ -82,7 +80,12 @@ const CreateJobPage = () => {
       <Grid item lg={12} container className={classes.gridItem}>
         {/* <Grid item lg={6} container className={classes.gridItem}> */}
         <Box component='div'>
-          <CreateJobForm onCreateJob={onCreateJob} isEditing={isEditing} job={job} />
+          <CreateJobForm
+            onCreateJob={onCreateJob}
+            onUpdateJob={onUpdateJob}
+            isEditing={isEditing}
+            job={job}
+          />
         </Box>
         {/* </Grid> */}
       </Grid>

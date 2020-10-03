@@ -108,9 +108,31 @@ function* getJobRequest(payload) {
   }
 }
 
+function* updateJobRequest(payload) {
+  try {
+    console.log(payload);
+    const { gcnNo } = payload;
+    let response = yield axios.post(`/job/update?gcnno=${gcnNo}`, payload.payload);
+
+    if (response.status === 200) {
+      yield put(jobAction.updateJobRequestSuccess(response.data));
+      toaster(response.message);
+    } else {
+      toaster(response.message, { type: 'error' });
+    }
+  } catch (error) {
+    console.log(error);
+    if (error == 'Error: Request failed with status code 401') {
+      yield put(push('/login'));
+      // yield put(actions.userSignOutSuccess());
+      yield localStorage.clear();
+      toaster(error.message, { type: 'error' });
+    }
+  }
+}
+
 function* deleteJobRequest(payload) {
   try {
-    console.log({ payload });
     const { gcnNo } = payload;
     let response = yield axios.post(`/job/delete?gcnno=${gcnNo}`);
 
@@ -136,6 +158,7 @@ export default function* rootsaga() {
     yield takeEvery(actionTypes.CREATE_JOB_REQUEST, createJobRequest),
     yield takeEvery(actionTypes.GET_JOB_REQUEST, getJobRequest),
     yield takeEvery(actionTypes.GET_ALL_JOB_REQUEST, allJobRequest),
+    yield takeEvery(actionTypes.UPDATE_JOB_REQUEST, updateJobRequest),
     yield takeEvery(actionTypes.DELETE_JOB_REQUEST, deleteJobRequest),
   ]);
 }

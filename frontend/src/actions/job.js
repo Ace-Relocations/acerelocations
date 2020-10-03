@@ -7,6 +7,8 @@ import {
   DELETE_JOB_REQUEST_SUCCESS,
   GET_JOB_REQUEST,
   GET_JOB_REQUEST_SUCCESS,
+  UPDATE_JOB_REQUEST,
+  UPDATE_JOB_REQUEST_SUCCESS,
 } from '../constants/actionTypes';
 
 export const jobRequest = (payload) => ({
@@ -45,5 +47,16 @@ export const getJobRequest = (payload) => ({
 
 export const getJobRequestSuccess = (payload) => ({
   type: GET_JOB_REQUEST_SUCCESS,
+  payload,
+});
+
+export const updateJobRequest = (payload, gcnNo) => ({
+  type: UPDATE_JOB_REQUEST,
+  gcnNo,
+  payload,
+});
+
+export const updateJobRequestSuccess = (payload) => ({
+  type: UPDATE_JOB_REQUEST_SUCCESS,
   payload,
 });
