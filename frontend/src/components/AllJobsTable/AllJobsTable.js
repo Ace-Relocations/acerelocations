@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -24,11 +24,14 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { PDFDownloadLink } from '@react-pdf/renderer';
+import Invoice from '../../Test/Invoice';
 
 import {
   Visibility as VisibilityIcon,
   Edit as EditIcon,
   Delete as DeleteIcon,
+  CloudDownload as CloudDownloadIcon,
 } from '@material-ui/icons';
 
 const options = ['ongoing', 'completed'];
@@ -140,7 +143,11 @@ const AllJobsTable = ({ data, onDeleteJob, match }) => {
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   const [openStatus, setOpenStatus] = useState(false);
+  const [openDownload, setOpenDownload] = useState(false);
+
   const [valueStatus, setValueStatus] = useState('household');
+
+  const { job } = useSelector((state) => state.Job);
 
   const handleClickListItem = () => {
     setOpenStatus(true);
@@ -161,6 +168,14 @@ const AllJobsTable = ({ data, onDeleteJob, match }) => {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleCloseDownload = () => {
+    setOpenDownload(false);
+  };
+
+  const handleOpenDownload = (gcnNo) => {
+    setOpenDownload(true);
   };
 
   const handleRequestSort = (event, property) => {
@@ -184,6 +199,10 @@ const AllJobsTable = ({ data, onDeleteJob, match }) => {
     setOpen(false);
   };
 
+  const downloadInvoice = (gcnno) => {
+    console.log(gcnno);
+  };
+
   const headCells = [
     { id: 'gcnno', numeric: false, label: 'GCN No.' },
     { id: 'consignor', numeric: false, label: 'Consignor' },
@@ -196,6 +215,7 @@ const AllJobsTable = ({ data, onDeleteJob, match }) => {
     { id: 'view', numeric: false, label: 'View' },
     { id: 'update', numeric: false, label: 'Update' },
     { id: 'delete', numeric: false, label: 'Delete' },
+    { id: 'download', numeric: false, label: 'Download' },
   ];
 
   const createSortHandler = (property) => (event) => {
@@ -280,6 +300,13 @@ const AllJobsTable = ({ data, onDeleteJob, match }) => {
                     </SvgIcon>
                   </IconButton>
                 </StyledTableCell>
+                <StyledTableCell align='center'>
+                  <IconButton aria-label='download' onClick={() => handleOpenDownload(row.gcnno)}>
+                    <SvgIcon>
+                      <CloudDownloadIcon />
+                    </SvgIcon>
+                  </IconButton>
+                </StyledTableCell>
               </StyledTableRow>
             ))}
           </TableBody>
@@ -327,6 +354,29 @@ const AllJobsTable = ({ data, onDeleteJob, match }) => {
         onClose={handleCloseStatus}
         value={valueStatus}
       />
+
+      <Dialog
+        fullScreen={fullScreen}
+        open={openDownload}
+        onClose={handleCloseDownload}
+        aria-labelledby='responsive-dialog-title'
+      >
+        <DialogTitle id='responsive-dialog-title'>
+          {'Are you sure, you want to detete this job?'}
+        </DialogTitle>
+        <DialogContent>
+          <PDFDownloadLink document={<Invoice invoice={job} />} fileName='invoice.pdf'>
+            {({ blob, url, loading, error }) =>
+              loading ? 'Loading document...' : <Button>Download Now</Button>
+            }
+          </PDFDownloadLink>{' '}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDownload} color='primary' autoFocus>
+            cancle
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 };
