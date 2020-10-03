@@ -92,6 +92,7 @@ const AllJobsTable = ({ columns, data }) => {
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
   const headCells = [
+    { id: 'gcnno', numeric: false, label: 'GCN No.' },
     { id: 'consignor', numeric: false, label: 'Consignor' },
     { id: 'consignee', numeric: false, label: 'Consignee' },
     { id: 'contact', numeric: false, label: 'Contact' },
@@ -150,7 +151,8 @@ const AllJobsTable = ({ columns, data }) => {
           </TableHead>
           <TableBody>
             {data.map((row) => (
-              <StyledTableRow key={row.email}>
+              <StyledTableRow key={row.id}>
+                <StyledTableCell align='center'>{row.gcnno}</StyledTableCell>
                 <StyledTableCell align='center'>{row.consignor}</StyledTableCell>
                 <StyledTableCell align='center'>{row.consignee}</StyledTableCell>
                 <StyledTableCell align='center'>{row.contact}</StyledTableCell>
@@ -202,7 +204,7 @@ const AllJobsTable = ({ columns, data }) => {
       <TablePagination
         rowsPerPageOptions={[5, 10, 25]}
         component='div'
-        count={rows.length}
+        count={data.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onChangePage={handleChangePage}
