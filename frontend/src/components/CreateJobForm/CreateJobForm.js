@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CreateJobForm = () => {
+const CreateJobForm = ({ onCreateJob }) => {
   const classes = useStyles();
 
   const dispatch = useDispatch();
@@ -84,7 +84,7 @@ const CreateJobForm = () => {
 
   const submit = (data) => {
     console.log({ data });
-    // dispatch(loginRequest(data));
+    onCreateJob(data);
   };
 
   watch(['username', 'password']);

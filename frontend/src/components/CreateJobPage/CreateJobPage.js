@@ -5,6 +5,9 @@ import Grid from '@material-ui/core/Grid/index';
 import Typography from '@material-ui/core/Typography';
 
 import CreateJobForm from '../CreateJobForm/CreateJobForm';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { jobRequest } from '../../actions';
 
 const useStyles = makeStyles((theme) => ({
   introBox: {
@@ -32,6 +35,14 @@ const useStyles = makeStyles((theme) => ({
 const CreateJobPage = () => {
   const classes = useStyles();
 
+  const dispatch = useDispatch();
+  // const authUser = useSelector((state) => state.auth);
+
+  const onCreateJob = (data) => {
+    console.log(data);
+    dispatch(jobRequest(data));
+  };
+
   return (
     <Grid container>
       <Grid item lg={12} container className={classes.gridItem}>
@@ -50,7 +61,7 @@ const CreateJobPage = () => {
       <Grid item lg={12} container className={classes.gridItem}>
         {/* <Grid item lg={6} container className={classes.gridItem}> */}
         <Box component='div'>
-          <CreateJobForm />
+          <CreateJobForm onCreateJob={onCreateJob} />
         </Box>
         {/* </Grid> */}
       </Grid>

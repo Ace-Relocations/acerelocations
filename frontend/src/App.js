@@ -24,7 +24,7 @@ function App() {
 
   (function () {
     const authorizationToken = localStorage.getItem('userToken');
-    const token = 'Bearer ' + authorizationToken;
+    const token = authorizationToken; //temp
     console.log({ token });
     if (token) {
       axios.defaults.headers.common['Authorization'] = token;
@@ -36,7 +36,6 @@ function App() {
   const dispatch = useDispatch();
   const authUser = useSelector((state) => state.Auth.authUser);
 
-  console.log({ authUser });
   if (
     location.pathname != '/login' &&
     (authUser == null || authUser == undefined || authUser == 'undefined')
@@ -48,7 +47,7 @@ function App() {
 
   return (
     <Fragment>
-      <Sidebar />
+      {authUser && <Sidebar />}
       <Switch>
         <Route path='/login' component={Login} />
 
