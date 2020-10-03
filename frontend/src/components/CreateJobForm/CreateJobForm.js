@@ -100,7 +100,7 @@ const CreateJobForm = ({
   },
 }) => {
   const classes = useStyles();
-  const getDefaultValue = (isEditing, value) => (isEditing ? (!value ? value : '') : '');
+  const getDefaultValue = (isEditing, value) => (isEditing ? value : '');
 
   const { handleSubmit, control, errors, getValues, watch, reset } = useForm({
     mode: 'onChange',
@@ -127,7 +127,6 @@ const CreateJobForm = ({
       car: isEditing ? car : true,
     },
   });
-
   const submit = (data) => {
     console.log({ data });
     if (isEditing) {

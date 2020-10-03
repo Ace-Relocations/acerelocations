@@ -38,19 +38,17 @@ const CreateJobPage = () => {
   const dispatch = useDispatch();
   const { jobId } = useParams();
 
+  const { job } = useSelector((state) => state.Job);
+
   const isEditing = !!jobId;
 
   console.log({ isEditing });
-
-  const { job } = useSelector((state) => state.Job);
 
   useEffect(() => {
     if (isEditing) {
       dispatch(getJobRequest(jobId));
     }
   }, [isEditing]);
-
-  console.log({ jobId });
 
   const onCreateJob = (data) => {
     console.log(data);
