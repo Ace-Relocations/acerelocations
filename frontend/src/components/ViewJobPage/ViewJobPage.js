@@ -2,9 +2,10 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
-
+import { useDispatch, useSelector } from 'react-redux';
 import Grid from '@material-ui/core/Grid/index';
 import Typography from '@material-ui/core/Typography';
+import ViewJob from '../ViewJob/ViewJob';
 
 const useStyles = makeStyles((theme) => ({
   introBox: {
@@ -33,6 +34,7 @@ const useStyles = makeStyles((theme) => ({
 const ViewJobPage = () => {
   const classes = useStyles();
   const { jobId } = useParams();
+  const { job } = useSelector((state) => state.Job);
 
   return (
     <Grid container>
@@ -48,6 +50,9 @@ const ViewJobPage = () => {
                 className={classes.secondaryText}
               ></Typography>
             </Typography>
+            <Box>
+              <ViewJob invoice={job} />
+            </Box>
           </div>
         </Box>
       </Grid>
