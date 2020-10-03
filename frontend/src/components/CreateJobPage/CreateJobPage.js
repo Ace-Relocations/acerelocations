@@ -61,7 +61,7 @@ const CreateJobPage = () => {
       <Grid item lg={12} container className={classes.gridItem}>
         {/* <Grid item lg={6} container className={classes.gridItem}> */}
         <Box component='div'>
-          <CreateJobForm onCreateJob={onCreateJob} />
+          <CreateJobForm onCreateJob={onCreateJob} isEditing={!jobId} />
         </Box>
         {/* </Grid> */}
       </Grid>

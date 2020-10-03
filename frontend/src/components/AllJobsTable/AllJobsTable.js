@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -40,27 +41,6 @@ function createData(consignor, consignee, contact, email, status, type, date) {
   return { consignor, consignee, contact, email, status, type, date };
 }
 
-const rows = [
-  createData(
-    'Shaishav',
-    'Dishant',
-    '8154040074',
-    'shaivpidadi@gmail.com',
-    'ongoing',
-    'Household',
-    '13/12/17',
-  ),
-  createData(
-    'A',
-    'Dishant',
-    '8154040074',
-    'shaivpidasdi@gmail.com',
-    'ongoing',
-    'Household',
-    '13/12/17',
-  ),
-];
-
 const useStyles = makeStyles({
   table: {
     minWidth: 700,
@@ -69,10 +49,12 @@ const useStyles = makeStyles({
 
 const AllJobsTable = ({ columns, data }) => {
   const classes = useStyles();
-  const [order, setOrder] = React.useState('desc');
-  const [orderBy, setOrderBy] = React.useState();
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const history = useHistory();
+
+  const [order, setOrder] = useState('desc');
+  const [orderBy, setOrderBy] = useState();
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -89,7 +71,7 @@ const AllJobsTable = ({ columns, data }) => {
     setPage(0);
   };
 
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+  // const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
   const headCells = [
     { id: 'gcnno', numeric: false, label: 'GCN No.' },
@@ -164,7 +146,7 @@ const AllJobsTable = ({ columns, data }) => {
                   <IconButton
                     aria-label='view'
                     onClick={() => {
-                      alert(row.email);
+                      history.push(`view-job/${row.gcnno}`);
                     }}
                   >
                     <SvgIcon>
@@ -176,7 +158,7 @@ const AllJobsTable = ({ columns, data }) => {
                   <IconButton
                     aria-label='edit'
                     onClick={() => {
-                      alert(`Editing ${row.email}`);
+                      history.push(`edit-job/${row.gcnno}`);
                     }}
                   >
                     <SvgIcon>
@@ -188,7 +170,7 @@ const AllJobsTable = ({ columns, data }) => {
                   <IconButton
                     aria-label='delete'
                     onClick={() => {
-                      alert(`Deleting ${row.email}`);
+                      alert(`Deleting ${row.gcnno}`);
                     }}
                   >
                     <SvgIcon>

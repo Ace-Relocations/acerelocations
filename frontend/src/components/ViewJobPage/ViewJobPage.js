@@ -40,7 +40,7 @@ const ViewJobPage = () => {
         <Box className={classes.introBox}>
           <div>
             <Typography variant='h3' component='h1' className={classes.primaryText}>
-              Jobs #{jobId}
+              Job #{jobId}
               <Typography variant='h3' className={classes.primaryText}></Typography>
               <Typography
                 variant='h6'
