@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { useDispatch, useSelector } from 'react-redux';
 import Box from '@material-ui/core/Box';
 import CssBaseline from '@material-ui/core/CssBaseline';
-
 import Grid from '@material-ui/core/Grid/index';
 import Typography from '@material-ui/core/Typography';
 
 import AllJobsTable from '../AllJobsTable/AllJobsTable';
 import makeData from './makeData';
+import { allJobRequest } from '../../actions';
 
 const useStyles = makeStyles((theme) => ({
   introBox: {
@@ -36,47 +37,14 @@ const useStyles = makeStyles((theme) => ({
 const AllJobsPage = () => {
   const classes = useStyles();
 
-  const columns = React.useMemo(
-    () => [
-      {
-        Header: 'Name',
-        columns: [
-          {
-            Header: 'First Name',
-            accessor: 'firstName',
-          },
-          {
-            Header: 'Last Name',
-            accessor: 'lastName',
-          },
-        ],
-      },
-      {
-        Header: 'Info',
-        columns: [
-          {
-            Header: 'Age',
-            accessor: 'age',
-          },
-          {
-            Header: 'Visits',
-            accessor: 'visits',
-          },
-          {
-            Header: 'Status',
-            accessor: 'status',
-          },
-          {
-            Header: 'Profile Progress',
-            accessor: 'progress',
-          },
-        ],
-      },
-    ],
-    [],
-  );
+  const dispatch = useDispatch();
+  const { allJobs } = useSelector((state) => state.Job);
 
   const data = React.useMemo(() => makeData(40), []);
+
+  useEffect(() => {
+    dispatch(allJobRequest());
+  });
 
   return (
     <Grid container>
@@ -97,7 +65,7 @@ const AllJobsPage = () => {
         <Box component='div'>
           <CssBaseline />
 
-          <AllJobsTable columns={columns} data={data} />
+          <AllJobsTable data={allJobs} />
         </Box>
       </Grid>
     </Grid>

@@ -27,9 +27,9 @@ function App() {
     const token = authorizationToken; //temp
     console.log({ token });
     if (token) {
-      axios.defaults.headers.common['Authorization'] = token;
+      axios.defaults.headers.common['x-access-token'] = token;
     } else {
-      axios.defaults.headers.common.Authorization = null;
+      axios.defaults.headers.common['x-access-token'] = null;
     }
   })();
 

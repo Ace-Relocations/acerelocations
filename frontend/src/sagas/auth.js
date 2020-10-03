@@ -1,4 +1,5 @@
 import { all, takeEvery, put } from 'redux-saga/effects';
+import { push } from 'react-router-redux';
 
 import * as actionTypes from '../constants/actionTypes';
 import * as authAction from '../actions';
@@ -14,9 +15,10 @@ function* loginRequest({ payload }) {
 
     if (response.status === 200) {
       yield put(authAction.loginRequestSuccess(response.data.userToken));
+      yield put(push('/'));
       localStorage.setItem('userData', JSON.stringify(response.data));
       localStorage.setItem('userToken', response.data.accessToken);
-    } else if (response.status === 404) {
+    } else {
       toaster(response.message);
     }
   } catch (error) {

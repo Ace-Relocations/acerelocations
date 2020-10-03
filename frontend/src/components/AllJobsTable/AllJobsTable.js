@@ -59,10 +59,6 @@ const rows = [
     'Household',
     '13/12/17',
   ),
-  // createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  // createData('Eclair', 262, 16.0, 24, 6.0),
-  // createData('Cupcake', 305, 3.7, 67, 4.3),
-  // createData('Gingerbread', 356, 16.0, 49, 3.9),
 ];
 
 const useStyles = makeStyles({
@@ -74,7 +70,7 @@ const useStyles = makeStyles({
 const AllJobsTable = ({ columns, data }) => {
   const classes = useStyles();
   const [order, setOrder] = React.useState('desc');
-  const [orderBy, setOrderBy] = React.useState('date');
+  const [orderBy, setOrderBy] = React.useState();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
@@ -153,16 +149,16 @@ const AllJobsTable = ({ columns, data }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
+            {data.map((row) => (
               <StyledTableRow key={row.email}>
-                <StyledTableCell align='right'>{row.consignor}</StyledTableCell>
-                <StyledTableCell align='right'>{row.consignee}</StyledTableCell>
-                <StyledTableCell align='right'>{row.contact}</StyledTableCell>
-                <StyledTableCell align='right'>{row.email}</StyledTableCell>
-                <StyledTableCell align='right'>{row.status}</StyledTableCell>
-                <StyledTableCell align='right'>{row.type}</StyledTableCell>
-                <StyledTableCell align='right'>{row.date}</StyledTableCell>
-                <StyledTableCell align='right'>
+                <StyledTableCell align='center'>{row.consignor}</StyledTableCell>
+                <StyledTableCell align='center'>{row.consignee}</StyledTableCell>
+                <StyledTableCell align='center'>{row.contact}</StyledTableCell>
+                <StyledTableCell align='center'>{row.email}</StyledTableCell>
+                <StyledTableCell align='center'>{row.status}</StyledTableCell>
+                <StyledTableCell align='center'>{row.type}</StyledTableCell>
+                <StyledTableCell align='center'>{row.date}</StyledTableCell>
+                <StyledTableCell align='center'>
                   <IconButton
                     aria-label='view'
                     onClick={() => {
@@ -174,7 +170,7 @@ const AllJobsTable = ({ columns, data }) => {
                     </SvgIcon>
                   </IconButton>
                 </StyledTableCell>
-                <StyledTableCell align='right'>
+                <StyledTableCell align='center'>
                   <IconButton
                     aria-label='edit'
                     onClick={() => {
@@ -186,7 +182,7 @@ const AllJobsTable = ({ columns, data }) => {
                     </SvgIcon>
                   </IconButton>
                 </StyledTableCell>
-                <StyledTableCell align='right'>
+                <StyledTableCell align='center'>
                   <IconButton
                     aria-label='delete'
                     onClick={() => {
