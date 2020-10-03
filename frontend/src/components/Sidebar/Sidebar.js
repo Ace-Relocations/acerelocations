@@ -13,12 +13,26 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import Avatar from '@material-ui/core/Avatar';
+
+import logo from '../../logo.png';
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+  },
+  small: {
+    width: theme.spacing(3),
+    height: theme.spacing(3),
+  },
+  large: {
+    width: theme.spacing(7),
+    height: theme.spacing(7),
   },
   appBar: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -55,7 +69,9 @@ const Sidebar = ({ props }) => {
         }}
         anchor='left'
       >
-        <div className={classes.toolbar}>LOGO</div>
+        <div style={{ textAlign: 'center' }}>
+          <img src={logo} alt='ACE RELOCATION' width='110px' />
+        </div>
         <Divider />
         <List>
           <ListItem button key='Create Job' onClick={() => history.push('/create-job')}>
@@ -65,12 +81,12 @@ const Sidebar = ({ props }) => {
             <ListItemText primary='Create Job' />
           </ListItem>
 
-          <ListItem button key='View Job' onClick={() => history.push('/view-job')}>
+          {/* <ListItem button key='View Job' onClick={() => history.push('/view-job')}>
             <ListItemIcon>
               <MailIcon />
             </ListItemIcon>
             <ListItemText primary='View Job' />
-          </ListItem>
+          </ListItem> */}
 
           <ListItem button key='All Job' onClick={() => history.push('/jobs')}>
             <ListItemIcon>
