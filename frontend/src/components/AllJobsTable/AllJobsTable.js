@@ -58,7 +58,7 @@ const useStyles = makeStyles({
   },
 });
 
-const AllJobsTable = ({ data, onDeleteJob }) => {
+const AllJobsTable = ({ data, onDeleteJob, match }) => {
   const classes = useStyles();
   const history = useHistory();
 
@@ -176,7 +176,7 @@ const AllJobsTable = ({ data, onDeleteJob }) => {
                   <IconButton
                     aria-label='edit'
                     onClick={() => {
-                      history.push(`edit-job/${row.gcnno}`);
+                      history.push(`${match.path}/edit/${row.gcnno}`);
                     }}
                   >
                     <SvgIcon>

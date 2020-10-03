@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AllJobsPage = () => {
+const AllJobsPage = ({ match }) => {
   const classes = useStyles();
 
   const dispatch = useDispatch();
@@ -72,7 +72,7 @@ const AllJobsPage = () => {
         <Box component='div'>
           <CssBaseline />
 
-          <AllJobsTable data={data} onDeleteJob={(gcnNo) => onDeleteJob(gcnNo)} />
+          <AllJobsTable data={data} onDeleteJob={(gcnNo) => onDeleteJob(gcnNo)} match={match} />
         </Box>
       </Grid>
     </Grid>

@@ -58,6 +58,7 @@ function App() {
           <Route path='/edit-job/:jobId' component={CreateJobPage} />
           <Route path='/view-job/:jobId' component={ViewJobPage} />
           <Route path='/jobs' component={AllJobsPage} exact />
+          <Route path='/jobs/edit/:jobId' component={CreateJobPage} />
           {/* <Route path='/view-job' exact render={() => <Redirect to='/' />} /> */}
 
           {/* <Route path='/' exact render={() => <Redirect to='/login' />} /> */}

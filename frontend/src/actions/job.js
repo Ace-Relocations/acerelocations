@@ -5,6 +5,8 @@ import {
   GET_ALL_JOB_REQUEST,
   DELETE_JOB_REQUEST,
   DELETE_JOB_REQUEST_SUCCESS,
+  GET_JOB_REQUEST,
+  GET_JOB_REQUEST_SUCCESS,
 } from '../constants/actionTypes';
 
 export const jobRequest = (payload) => ({
@@ -33,5 +35,15 @@ export const deleteJobRequest = (payload) => ({
 
 export const deleJobRequestSuccess = (payload) => ({
   type: DELETE_JOB_REQUEST_SUCCESS,
+  payload,
+});
+
+export const getJobRequest = (payload) => ({
+  type: GET_JOB_REQUEST,
+  gcnNo: payload,
+});
+
+export const getJobRequestSuccess = (payload) => ({
+  type: GET_JOB_REQUEST_SUCCESS,
   payload,
 });

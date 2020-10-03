@@ -34,6 +34,7 @@ function* createJobRequest({ payload }) {
       consignor,
       consignee,
       email,
+      contact,
       oaddress1,
       oaddress2,
       ocity,
@@ -84,6 +85,29 @@ function* allJobRequest() {
   }
 }
 
+function* getJobRequest(payload) {
+  try {
+    const { gcnNo } = payload;
+
+    let response = yield axios.get(`/job/view?gcnno=${gcnNo}`);
+
+    if (response.status === 200) {
+      yield put(jobAction.getJobRequestSuccess(response.data));
+      toaster(response.message);
+    } else {
+      toaster(response.message, { type: 'error' });
+    }
+  } catch (error) {
+    console.log(error);
+    if (error == 'Error: Request failed with status code 401') {
+      yield put(push('/login'));
+      // yield put(actions.userSignOutSuccess());
+      yield localStorage.clear();
+      toaster(error.message, { type: 'error' });
+    }
+  }
+}
+
 function* deleteJobRequest(payload) {
   try {
     console.log({ payload });
@@ -110,6 +134,7 @@ function* deleteJobRequest(payload) {
 export default function* rootsaga() {
   yield all([
     yield takeEvery(actionTypes.CREATE_JOB_REQUEST, createJobRequest),
+    yield takeEvery(actionTypes.GET_JOB_REQUEST, getJobRequest),
     yield takeEvery(actionTypes.GET_ALL_JOB_REQUEST, allJobRequest),
     yield takeEvery(actionTypes.DELETE_JOB_REQUEST, deleteJobRequest),
   ]);

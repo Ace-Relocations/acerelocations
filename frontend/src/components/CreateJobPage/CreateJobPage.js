@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid/index';
@@ -7,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import CreateJobForm from '../CreateJobForm/CreateJobForm';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { jobRequest } from '../../actions';
+import { jobRequest, getJobRequest } from '../../actions';
 
 const useStyles = makeStyles((theme) => ({
   introBox: {
@@ -35,23 +36,44 @@ const useStyles = makeStyles((theme) => ({
 const CreateJobPage = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  // const authUser = useSelector((state) => state.auth);
+  const { jobId } = useParams();
+
+  const isEditing = !!jobId;
+
+  console.log({ isEditing });
+
+  const { job } = useSelector((state) => state.Job);
+
+  useEffect(() => {
+    if (isEditing) {
+      dispatch(getJobRequest(jobId));
+    }
+  }, [isEditing]);
+
+  console.log({ jobId });
 
   const onCreateJob = (data) => {
+    console.log(data);
+
+    dispatch(jobRequest(data));
+  };
+
+  const onUpdateJob = (data) => {
     console.log(data);
     dispatch(jobRequest(data));
   };
 
+  console.log({ job });
   return (
     <Grid container>
       <Grid item lg={12} container className={classes.gridItem}>
         <Box className={classes.introBox}>
           <div>
             <Typography variant='h3' component='h1' className={classes.primaryText}>
-              Create Job
+              {isEditing ? 'Update Job' : 'Create Job'}
               <Typography variant='h3' className={classes.primaryText}></Typography>
               <Typography variant='h6' component='span' className={classes.secondaryText}>
-                Fill this form to create Job
+                Fill this form to {isEditing ? 'update' : 'create'} Job
               </Typography>
             </Typography>
           </div>
@@ -60,7 +82,7 @@ const CreateJobPage = () => {
       <Grid item lg={12} container className={classes.gridItem}>
         {/* <Grid item lg={6} container className={classes.gridItem}> */}
         <Box component='div'>
-          <CreateJobForm onCreateJob={onCreateJob} />
+          <CreateJobForm onCreateJob={onCreateJob} isEditing={isEditing} job={job} />
         </Box>
         {/* </Grid> */}
       </Grid>
