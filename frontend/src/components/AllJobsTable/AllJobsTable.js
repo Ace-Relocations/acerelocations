@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
+import { useDispatch } from 'react-redux';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -12,6 +13,16 @@ import IconButton from '@material-ui/core/IconButton';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useTheme } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+
+import { deleteJobRequest } from '../../actions';
 
 import {
   Visibility as VisibilityIcon,
@@ -47,7 +58,7 @@ const useStyles = makeStyles({
   },
 });
 
-const AllJobsTable = ({ columns, data }) => {
+const AllJobsTable = ({ data, onDeleteJob }) => {
   const classes = useStyles();
   const history = useHistory();
 
@@ -55,6 +66,19 @@ const AllJobsTable = ({ columns, data }) => {
   const [orderBy, setOrderBy] = useState();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [selectedGcnNo, updateSelectedGcnNo] = useState();
+  const [open, setOpen] = React.useState(false);
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+
+  const handleClickOpen = (gsnNo) => {
+    updateSelectedGcnNo(gsnNo);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -71,7 +95,11 @@ const AllJobsTable = ({ columns, data }) => {
     setPage(0);
   };
 
-  // const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+  const handleDeleteClick = () => {
+    console.log('selectedGcnNo', selectedGcnNo);
+    onDeleteJob(selectedGcnNo);
+    setOpen(false);
+  };
 
   const headCells = [
     { id: 'gcnno', numeric: false, label: 'GCN No.' },
@@ -98,16 +126,6 @@ const AllJobsTable = ({ columns, data }) => {
         <Table className={classes.table} aria-label='customized table'>
           <TableHead>
             <TableRow>
-              {/* <StyledTableCell align='right'>Consignor</StyledTableCell>
-              <StyledTableCell align='right'>Consignee</StyledTableCell>
-              <StyledTableCell align='right'>Contact</StyledTableCell>
-              <StyledTableCell align='right'>Email</StyledTableCell>
-              <StyledTableCell align='right'>Status</StyledTableCell>
-              <StyledTableCell align='right'>Type</StyledTableCell>
-              <StyledTableCell align='right'>Date</StyledTableCell>
-              <StyledTableCell align='right'>View</StyledTableCell>
-              <StyledTableCell align='right'>Update</StyledTableCell>
-              <StyledTableCell align='right'>Delete</StyledTableCell> */}
               {headCells.map((headCell) => (
                 <StyledTableCell
                   key={headCell.id}
@@ -167,12 +185,7 @@ const AllJobsTable = ({ columns, data }) => {
                   </IconButton>
                 </StyledTableCell>
                 <StyledTableCell align='center'>
-                  <IconButton
-                    aria-label='delete'
-                    onClick={() => {
-                      alert(`Deleting ${row.gcnno}`);
-                    }}
-                  >
+                  <IconButton aria-label='delete' onClick={() => handleClickOpen(row.gcnno)}>
                     <SvgIcon>
                       <DeleteIcon />
                     </SvgIcon>
@@ -192,6 +205,28 @@ const AllJobsTable = ({ columns, data }) => {
         onChangePage={handleChangePage}
         onChangeRowsPerPage={handleChangeRowsPerPage}
       />
+
+      <Dialog
+        fullScreen={fullScreen}
+        open={open}
+        onClose={handleClose}
+        aria-labelledby='responsive-dialog-title'
+      >
+        <DialogTitle id='responsive-dialog-title'>
+          {'Are you sure, you want to detete this job?'}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>This will delete job permanently</DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button autoFocus onClick={handleDeleteClick} color='primary'>
+            yes
+          </Button>
+          <Button onClick={handleClose} color='primary' autoFocus>
+            cancle
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 };

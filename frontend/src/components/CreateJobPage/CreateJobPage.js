@@ -34,7 +34,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 const CreateJobPage = () => {
   const classes = useStyles();
-
   const dispatch = useDispatch();
   // const authUser = useSelector((state) => state.auth);
 
@@ -61,7 +60,7 @@ const CreateJobPage = () => {
       <Grid item lg={12} container className={classes.gridItem}>
         {/* <Grid item lg={6} container className={classes.gridItem}> */}
         <Box component='div'>
-          <CreateJobForm onCreateJob={onCreateJob} isEditing={!jobId} />
+          <CreateJobForm onCreateJob={onCreateJob} />
         </Box>
         {/* </Grid> */}
       </Grid>
