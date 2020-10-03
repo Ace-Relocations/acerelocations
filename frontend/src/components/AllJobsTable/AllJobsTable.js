@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import { useDispatch } from 'react-redux';
@@ -18,17 +18,20 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import Radio from '@material-ui/core/Radio';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-
-import { deleteJobRequest } from '../../actions';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 import {
   Visibility as VisibilityIcon,
   Edit as EditIcon,
   Delete as DeleteIcon,
 } from '@material-ui/icons';
+
+const options = ['ongoing', 'completed'];
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -58,6 +61,71 @@ const useStyles = makeStyles({
   },
 });
 
+function ConfirmationDialogRaw(props) {
+  const { onClose, value: valueProp, open, ...other } = props;
+  const [value, setValue] = React.useState(valueProp);
+  const radioGroupRef = React.useRef(null);
+
+  React.useEffect(() => {
+    if (!open) {
+      setValue(valueProp);
+    }
+  }, [valueProp, open]);
+
+  const handleEntering = () => {
+    if (radioGroupRef.current != null) {
+      radioGroupRef.current.focus();
+    }
+  };
+
+  const handleCancel = () => {
+    onClose();
+  };
+
+  const handleOk = () => {
+    onClose(value);
+  };
+
+  const handleChange = (event) => {
+    setValue(event.target.value);
+  };
+
+  return (
+    <Dialog
+      disableBackdropClick
+      disableEscapeKeyDown
+      maxWidth='md'
+      onEntering={handleEntering}
+      aria-labelledby='confirmation-dialog-title'
+      open={open}
+      {...other}
+    >
+      <DialogTitle id='confirmation-dialog-title'>Change Status</DialogTitle>
+      <DialogContent dividers>
+        <RadioGroup
+          ref={radioGroupRef}
+          aria-label='ringtone'
+          name='ringtone'
+          value={value}
+          onChange={handleChange}
+        >
+          {options.map((option) => (
+            <FormControlLabel value={option} key={option} control={<Radio />} label={option} />
+          ))}
+        </RadioGroup>
+      </DialogContent>
+      <DialogActions>
+        <Button autoFocus onClick={handleCancel} color='primary'>
+          Cancel
+        </Button>
+        <Button onClick={handleOk} color='primary'>
+          Ok
+        </Button>
+      </DialogActions>
+    </Dialog>
+  );
+}
+
 const AllJobsTable = ({ data, onDeleteJob, match }) => {
   const classes = useStyles();
   const history = useHistory();
@@ -67,9 +135,24 @@ const AllJobsTable = ({ data, onDeleteJob, match }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [selectedGcnNo, updateSelectedGcnNo] = useState();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+
+  const [openStatus, setOpenStatus] = useState(false);
+  const [valueStatus, setValueStatus] = useState('household');
+
+  const handleClickListItem = () => {
+    setOpenStatus(true);
+  };
+
+  const handleCloseStatus = (newValue) => {
+    setOpenStatus(false);
+
+    if (newValue) {
+      setValueStatus(newValue);
+    }
+  };
 
   const handleClickOpen = (gsnNo) => {
     updateSelectedGcnNo(gsnNo);
@@ -157,7 +240,13 @@ const AllJobsTable = ({ data, onDeleteJob, match }) => {
                 <StyledTableCell align='center'>{row.consignee}</StyledTableCell>
                 <StyledTableCell align='center'>{row.contact}</StyledTableCell>
                 <StyledTableCell align='center'>{row.email}</StyledTableCell>
-                <StyledTableCell align='center'>{row.status}</StyledTableCell>
+                <StyledTableCell
+                  align='center'
+                  onClick={handleClickListItem}
+                  style={{ cursor: 'pointer' }}
+                >
+                  {row.status}
+                </StyledTableCell>
                 <StyledTableCell align='center'>{row.type}</StyledTableCell>
                 <StyledTableCell align='center'>{row.date}</StyledTableCell>
                 <StyledTableCell align='center'>
@@ -227,6 +316,17 @@ const AllJobsTable = ({ data, onDeleteJob, match }) => {
           </Button>
         </DialogActions>
       </Dialog>
+
+      <ConfirmationDialogRaw
+        classes={{
+          paper: classes.paper,
+        }}
+        id='ringtone-menu'
+        keepMounted
+        open={openStatus}
+        onClose={handleCloseStatus}
+        value={valueStatus}
+      />
     </>
   );
 };
