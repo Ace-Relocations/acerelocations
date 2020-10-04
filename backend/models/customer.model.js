@@ -53,6 +53,12 @@ var Customer = mongoose.model(
         type: mongoose.Schema.Types.ObjectId,
         ref: "Invoice"
       }
+    ],
+    expense: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Expense"
+      }
     ]   
   })
 );

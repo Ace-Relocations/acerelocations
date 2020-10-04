@@ -13,7 +13,11 @@ module.exports = {
             const {
                 gcnno, invoice
                 } = req.body;
-            let createData = await invoiceService.createInvoice(gcnno, invoice);
+            if(invoice == false) {
+                res.status(500).send({ message: "The value passed is null" });
+            }
+            let total = await invoiceService.getTotal(invoice);
+            let createData = await invoiceService.createInvoice(gcnno, invoice, total);
             if (createData == false) {
             res.status(500).send({ message: "failed to register invoice", data: createData });
             return;
@@ -28,7 +32,7 @@ module.exports = {
                 res.status(500).send({ message: "Invoice not linked to Job" });
                 return;
                 }  
-                return res.status(200).send({ message: "Invoice was linked to the jobsuccessfully!", data: jobById });
+                return res.status(200).send({ message: "Invoice was linked to the job successfully!", data: jobById });
             });
         } catch (err) {
             res.status(500).send({ message: "Failed to register Invoice", data: err });
