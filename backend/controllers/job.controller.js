@@ -2,6 +2,7 @@ const service = require("../services/job.service")
 const db = require("../models");
 const numberToText = require('number-to-text');
 require('number-to-text/converters/en-us');
+const auth = require("../middlewares/auth.jwt")
 
 const Customer = db.customer;
 const User = db.user;
@@ -87,7 +88,7 @@ viewAllJob: async (req, res) => {
     try {
         const limit = parseInt(req.query.limit); // Make sure to parse the limit to number
         const skip = parseInt(req.query.skip);// Make sure to parse the skip to number
-
+        console.log(auth.isAdmin);
         const jobs = await service.getAll(limit, skip);
 
         return res.status(200).json(jobs);
