@@ -8,6 +8,8 @@ import toaster from '../utils/toaster';
 
 function* createJobRequest({ payload }) {
   try {
+    yield put(jobAction.showLoader());
+
     const {
       cnsFirstName: consignor,
       cneFirstName: consignee,
@@ -53,6 +55,8 @@ function* createJobRequest({ payload }) {
       date,
     });
 
+    yield put(jobAction.hideLoader());
+
     if (response.status === 200) {
       yield put(jobAction.jobRequestSuccess(response.data));
       toaster(response.message);
@@ -60,6 +64,7 @@ function* createJobRequest({ payload }) {
       toaster(response.message);
     }
   } catch (error) {
+    yield put(jobAction.hideLoader());
     toaster(error.message);
   }
 }

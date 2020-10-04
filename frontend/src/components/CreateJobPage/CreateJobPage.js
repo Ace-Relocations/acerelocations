@@ -4,11 +4,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid/index';
 import Typography from '@material-ui/core/Typography';
-
 import CreateJobForm from '../CreateJobForm/CreateJobForm';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { jobRequest, getJobRequest, updateJobRequest } from '../../actions';
+import Loader from '../Loader/Loader';
 
 const useStyles = makeStyles((theme) => ({
   introBox: {
@@ -39,6 +39,8 @@ const CreateJobPage = () => {
   const { jobId } = useParams();
 
   const { job } = useSelector((state) => state.Job);
+  const { loader } = useSelector((state) => state.Loader);
+  console.log({ loader });
 
   const isEditing = !!jobId;
 
@@ -78,12 +80,16 @@ const CreateJobPage = () => {
       <Grid item lg={12} container className={classes.gridItem}>
         {/* <Grid item lg={6} container className={classes.gridItem}> */}
         <Box component='div'>
-          <CreateJobForm
-            onCreateJob={onCreateJob}
-            onUpdateJob={onUpdateJob}
-            isEditing={isEditing}
-            job={job}
-          />
+          {loader ? (
+            <Loader />
+          ) : (
+            <CreateJobForm
+              onCreateJob={onCreateJob}
+              onUpdateJob={onUpdateJob}
+              isEditing={isEditing}
+              job={job}
+            />
+          )}
         </Box>
         {/* </Grid> */}
       </Grid>
