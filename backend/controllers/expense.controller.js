@@ -3,8 +3,7 @@ const jobService = require("../services/job.service")
 const db = require("../models");
 
 const Customer = db.customer;
-const User = db.user;
-const Expense = db.expense;
+
 
 module.exports = {
  

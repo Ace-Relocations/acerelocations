@@ -218,7 +218,7 @@ deleteJob: async (req, res) => {
             let obj = new Customer();
             obj.status = "Canceled";
 
-           const user = await Customer.updateOne({ gcnno: req.query.gcnno}, { status: 'canceled '});
+           const user = await Customer.updateOne({ gcnno: req.query.gcnno}, { status: 'canceled'});
 
                 if (!user) {
                 res.status(500).send({ message: "Job status not updated" });

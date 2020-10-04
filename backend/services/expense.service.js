@@ -1,4 +1,5 @@
 const db = require("../models");
+
 const Customer = db.customer;
 const Expense = db.expense;
 const User = db.user;
