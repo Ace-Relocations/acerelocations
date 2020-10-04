@@ -5,8 +5,8 @@ import Grid from '@material-ui/core/Grid/index';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { useForm, Controller } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
+import Checkbox from '@material-ui/core/Checkbox';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -72,22 +72,93 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CreateJobForm = ({ onCreateJob }) => {
+const CreateJobForm = ({
+  onCreateJob,
+  onUpdateJob,
+  isEditing,
+  job: {
+    consignor,
+    consignee,
+    email,
+    contact,
+    oaddress1,
+    oaddress2,
+    ocity,
+    ostate,
+    opincode,
+    daddress1,
+    daddress2,
+    dcity,
+    dstate,
+    dpincode,
+    status,
+    car,
+    insuranceP,
+    insuranceA,
+    type,
+    date,
+  },
+}) => {
   const classes = useStyles();
+  const getDefaultValue = (isEditing, value) => (isEditing ? value : '');
 
-  const dispatch = useDispatch();
-  //   const authUser = useSelector((state) => state.auth);
-
-  const { handleSubmit, control, errors, getValues, watch } = useForm({
+  const { handleSubmit, control, errors, getValues, watch, reset } = useForm({
     mode: 'onChange',
+    defaultValues: {
+      cnsFirstName: getDefaultValue(isEditing, consignor),
+      cneFirstName: getDefaultValue(isEditing, consignee),
+      cneMobile: getDefaultValue(isEditing, contact),
+      cneEmail: getDefaultValue(isEditing, email),
+      originAddress1: getDefaultValue(isEditing, oaddress1),
+      originAddress2: getDefaultValue(isEditing, oaddress2),
+      originCity: getDefaultValue(isEditing, ocity),
+      ooriginState: getDefaultValue(isEditing, ostate),
+      originPincode: getDefaultValue(isEditing, opincode),
+      destinationAddress1: getDefaultValue(isEditing, daddress1),
+      destinationAddress2: getDefaultValue(isEditing, daddress2),
+      destinationCity: getDefaultValue(isEditing, dcity),
+      destinationState: getDefaultValue(isEditing, dstate),
+      destinationPincode: getDefaultValue(isEditing, dpincode),
+      status: getDefaultValue(isEditing, status),
+      insuranceP: getDefaultValue(isEditing, insuranceP),
+      insuranceA: getDefaultValue(isEditing, insuranceA),
+      type: getDefaultValue(isEditing, type),
+      date: getDefaultValue(isEditing, date),
+      car: isEditing ? car : true,
+    },
   });
-
   const submit = (data) => {
     console.log({ data });
-    onCreateJob(data);
+    if (isEditing) {
+      onUpdateJob(data);
+    } else {
+      onCreateJob(data);
+      // reset({
+      //   cnsFirstName: getDefaultValue(isEditing, consignor),
+      //   cneFirstName: getDefaultValue(isEditing, consignee),
+      //   cneMobile: getDefaultValue(isEditing, contact),
+      //   cneEmail: getDefaultValue(isEditing, email),
+      //   originAddress1: getDefaultValue(isEditing, oaddress1),
+      //   originAddress2: getDefaultValue(isEditing, oaddress2),
+      //   originCity: getDefaultValue(isEditing, ocity),
+      //   ooriginState: getDefaultValue(isEditing, ostate),
+      //   originPincode: getDefaultValue(isEditing, opincode),
+      //   destinationAddress1: getDefaultValue(isEditing, daddress1),
+      //   destinationAddress2: getDefaultValue(isEditing, daddress2),
+      //   destinationCity: getDefaultValue(isEditing, dcity),
+      //   destinationState: getDefaultValue(isEditing, dstate),
+      //   destinationPincode: getDefaultValue(isEditing, dpincode),
+      //   status: getDefaultValue(isEditing, status),
+      //   insuranceP: getDefaultValue(isEditing, insuranceP),
+      //   insuranceA: getDefaultValue(isEditing, insuranceA),
+      //   type: getDefaultValue(isEditing, type),
+      //   date: getDefaultValue(isEditing, date),
+      //   car: isEditing ? car : false,
+      // });
+    }
   };
 
-  watch(['username', 'password']);
+  watch(['username', 'password', 'car']);
   const values = getValues();
 
   return (
@@ -123,8 +194,8 @@ const CreateJobForm = ({ onCreateJob }) => {
                     name='cnsFirstName'
                     value={values.cnsFirstName}
                     error={errors.cnsFirstName}
-                    defaultValue=''
                     helperText={errors.cnsFirstName && 'FirstName is required'}
+                    required
                   />
                 </Box>
 
@@ -140,8 +211,8 @@ const CreateJobForm = ({ onCreateJob }) => {
                   name='cnsLastName'
                   value={values.cnsLastName}
                   error={errors.cnsLastName}
-                  defaultValue=''
                   helperText={errors.cnsLastName && 'LastName is required'}
+                  required
                 />
               </Grid>
               {/* </fieldset> */}
@@ -168,8 +239,8 @@ const CreateJobForm = ({ onCreateJob }) => {
                       name='cneFirstName'
                       value={values.cneFirstName}
                       error={errors.cneFirstName}
-                      defaultValue=''
                       helperText={errors.cneFirstName && 'FirstName is required'}
+                      required
                     />
                   </Box>
 
@@ -185,8 +256,8 @@ const CreateJobForm = ({ onCreateJob }) => {
                     name='cneLastName'
                     value={values.cneLastName}
                     error={errors.cneLastName}
-                    defaultValue=''
                     helperText={errors.cneLastName && 'LastName is required'}
+                    required
                   />
                 </Grid>
 
@@ -204,8 +275,8 @@ const CreateJobForm = ({ onCreateJob }) => {
                       name='cneMobile'
                       value={values.cneMobile}
                       error={errors.cneMobile}
-                      defaultValue=''
                       helperText={errors.cneMobile && 'Contact number is required'}
+                      required
                     />
                   </Box>
 
@@ -221,8 +292,8 @@ const CreateJobForm = ({ onCreateJob }) => {
                     name='cneEmail'
                     value={values.cneEmail}
                     error={errors.cneEmail}
-                    defaultValue=''
                     helperText={errors.cneEmail && 'Email is required'}
+                    required
                   />
                 </Grid>
               </Grid>
@@ -249,8 +320,8 @@ const CreateJobForm = ({ onCreateJob }) => {
                       name='originAddress1'
                       value={values.originAddress1}
                       error={errors.originAddress1}
-                      defaultValue=''
                       helperText={errors.originAddress1 && 'Address is required'}
+                      required
                     />
                   </Box>
 
@@ -266,7 +337,7 @@ const CreateJobForm = ({ onCreateJob }) => {
                     name='originAddress2'
                     value={values.originAddress2}
                     // error={errors.originAddress2}
-                    defaultValue=''
+
                     // helperText={errors.originAddress2 && 'Address is required'}
                   />
                 </Grid>
@@ -285,8 +356,8 @@ const CreateJobForm = ({ onCreateJob }) => {
                       name='originCity'
                       value={values.originCity}
                       error={errors.originCity}
-                      defaultValue=''
                       helperText={errors.originCity && 'City is required'}
+                      required
                     />
                   </Box>
 
@@ -303,7 +374,7 @@ const CreateJobForm = ({ onCreateJob }) => {
                     value={values.originState}
                     error={errors.originState}
                     helperText={errors.originState && 'State is required'}
-                    defaultValue=''
+                    required
                   />
                 </Grid>
                 <Grid item lg={12} container className={classes.gridItem}>
@@ -321,7 +392,7 @@ const CreateJobForm = ({ onCreateJob }) => {
                       value={values.originCountry}
                       error={errors.originCountry}
                       helperText={errors.originCountry && 'Country is required'}
-                      defaultValue=''
+                      required
                     />
                   </Box>
 
@@ -338,7 +409,7 @@ const CreateJobForm = ({ onCreateJob }) => {
                     value={values.originPincode}
                     error={errors.originPincode}
                     helperText={errors.originPincode && 'Pincode is required'}
-                    defaultValue=''
+                    required
                   />
                 </Grid>
               </Grid>
@@ -367,8 +438,8 @@ const CreateJobForm = ({ onCreateJob }) => {
                       name='destinationAddress1'
                       value={values.destinationAddress1}
                       error={errors.destinationAddress1}
-                      defaultValue=''
                       helperText={errors.destinationAddress1 && 'Address is required'}
+                      required
                     />
                   </Box>
 
@@ -383,9 +454,7 @@ const CreateJobForm = ({ onCreateJob }) => {
                     className={classes.formControl}
                     name='destinationAddress2'
                     value={values.destinationAddress2}
-                    // error={errors.destinationAddress2}
-                    defaultValue=''
-                    // helperText={errors.destinationAddress2 && 'Address is required'}
+                    required
                   />
                 </Grid>
 
@@ -403,8 +472,8 @@ const CreateJobForm = ({ onCreateJob }) => {
                       name='destinationCity'
                       value={values.destinationCity}
                       error={errors.destinationCity}
-                      defaultValue=''
                       helperText={errors.destinationCity && 'City is required'}
+                      required
                     />
                   </Box>
 
@@ -421,7 +490,7 @@ const CreateJobForm = ({ onCreateJob }) => {
                     value={values.destinationState}
                     error={errors.destinationState}
                     helperText={errors.destinationState && 'State is required'}
-                    defaultValue=''
+                    required
                   />
                 </Grid>
                 <Grid item lg={12} container className={classes.gridItem}>
@@ -439,7 +508,7 @@ const CreateJobForm = ({ onCreateJob }) => {
                       value={values.destinationCountry}
                       error={errors.destinationCountry}
                       helperText={errors.destinationCountry && 'Country is required'}
-                      defaultValue=''
+                      required
                     />
                   </Box>
 
@@ -456,7 +525,7 @@ const CreateJobForm = ({ onCreateJob }) => {
                     value={values.destinationPincode}
                     error={errors.destinationPincode}
                     helperText={errors.destinationPincode && 'Pincode is required'}
-                    defaultValue=''
+                    required
                   />
                 </Grid>
               </Grid>
@@ -484,8 +553,8 @@ const CreateJobForm = ({ onCreateJob }) => {
                       name='status'
                       value={values.status}
                       error={errors.status}
-                      defaultValue=''
                       helperText={errors.status && 'Status is required'}
+                      required
                     />
                   </Box>
 
@@ -501,8 +570,8 @@ const CreateJobForm = ({ onCreateJob }) => {
                     name='insuranceP'
                     value={values.insuranceP}
                     error={errors.insuranceP}
-                    defaultValue=''
                     helperText={errors.insuranceP && 'Insurance is required'}
+                    required
                   />
                 </Grid>
 
@@ -520,8 +589,8 @@ const CreateJobForm = ({ onCreateJob }) => {
                       name='insuranceA'
                       value={values.insuranceA}
                       error={errors.insuranceA}
-                      defaultValue=''
                       helperText={errors.insuranceA && 'Insurance is required'}
+                      required
                     />
                   </Box>
 
@@ -538,7 +607,7 @@ const CreateJobForm = ({ onCreateJob }) => {
                     value={values.type}
                     error={errors.type}
                     helperText={errors.type && 'Type is required'}
-                    defaultValue=''
+                    required
                   />
                 </Grid>
                 <Grid item lg={12} container className={classes.gridItem}>
@@ -556,15 +625,27 @@ const CreateJobForm = ({ onCreateJob }) => {
                       value={values.date}
                       error={errors.date}
                       helperText={errors.date && 'Date is required'}
-                      defaultValue=''
+                      required
                     />
+                  </Box>
+                  <Box width='100%'>
+                    {/* <section>
+                      <Controller
+                        as={Checkbox}
+                        type='checkbox'
+                        name='car'
+                        control={control}
+                        // value={values.car}
+                      />
+                      <label>Tick this, if you want to add car</label>
+                    </section> */}
                   </Box>
                 </Grid>
               </Grid>
 
               <div className={classes.actionCont}>
                 <Button className={classes.actionBtn} fullWidth type='submit'>
-                  Create Job
+                  {isEditing ? 'Update Job' : 'Create Job'}
                 </Button>
               </div>
             </form>

@@ -135,7 +135,7 @@ const Invoice = ({ invoice }) => {
           address={address}
         />
       </Page>
-      <Page size='A4' style={styles.page}>
+      <Page size='A4' style={styles.page} orientation='landscape'>
         <CustomerCopy
           firstName={firstName}
           lastName={lastName}
@@ -162,15 +162,15 @@ const Invoice = ({ invoice }) => {
       <Page size='A4' style={styles.page}>
         <LuggageList />
       </Page>
-      <Page size='A4' style={styles.page}>
+      {/* <Page size='A4' style={styles.page}>
         <View>
           <Header />
           <InvoiceTable />
         </View>
-      </Page>
+      </Page> */}
 
       {/* Transit Page */}
-      <Page size='A4' style={styles.page}>
+      {/* <Page size='A4' style={styles.page}>
         <View>
           <Header />
           <TransitPlanFormBox />
@@ -178,7 +178,7 @@ const Invoice = ({ invoice }) => {
           <View style={{ border: '1 solid red', marginTop: '2px' }} />
           <FooterWithImage />
         </View>
-      </Page>
+      </Page> */}
     </Document>
   );
 };

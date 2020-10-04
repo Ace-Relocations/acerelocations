@@ -8,7 +8,8 @@ import Typography from '@material-ui/core/Typography';
 
 import AllJobsTable from '../AllJobsTable/AllJobsTable';
 import makeData from './makeData';
-import { allJobRequest } from '../../actions';
+import { allJobRequest, deleteJobRequest } from '../../actions';
+import toaster from '../../utils/toaster';
 
 const useStyles = makeStyles((theme) => ({
   introBox: {
@@ -34,17 +35,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AllJobsPage = () => {
+const AllJobsPage = ({ match }) => {
   const classes = useStyles();
 
   const dispatch = useDispatch();
   const { allJobs } = useSelector((state) => state.Job);
 
-  const data = React.useMemo(() => makeData(40), []);
+  const jobIds = allJobs.map(({ id }) => id).join(',');
+
+  const data = React.useMemo(() => allJobs, [jobIds]);
+
+  const onDeleteJob = (selectedGcnNo) => {
+    dispatch(deleteJobRequest(selectedGcnNo));
+  };
 
   useEffect(() => {
     dispatch(allJobRequest());
-  });
+  }, [data]);
 
   return (
     <Grid container>
@@ -65,7 +72,7 @@ const AllJobsPage = () => {
         <Box component='div'>
           <CssBaseline />
 
-          <AllJobsTable data={allJobs} />
+          <AllJobsTable data={data} onDeleteJob={(gcnNo) => onDeleteJob(gcnNo)} match={match} />
         </Box>
       </Grid>
     </Grid>

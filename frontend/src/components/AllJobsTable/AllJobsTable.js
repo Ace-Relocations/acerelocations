@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
+import { useDispatch, useSelector } from 'react-redux';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -11,12 +13,28 @@ import IconButton from '@material-ui/core/IconButton';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import Radio from '@material-ui/core/Radio';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useTheme } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { PDFDownloadLink } from '@react-pdf/renderer';
+import Invoice from '../../Test/Invoice';
 
 import {
   Visibility as VisibilityIcon,
   Edit as EditIcon,
   Delete as DeleteIcon,
+  CloudDownload as CloudDownloadIcon,
 } from '@material-ui/icons';
+
+const options = ['ongoing', 'completed'];
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -40,39 +58,125 @@ function createData(consignor, consignee, contact, email, status, type, date) {
   return { consignor, consignee, contact, email, status, type, date };
 }
 
-const rows = [
-  createData(
-    'Shaishav',
-    'Dishant',
-    '8154040074',
-    'shaivpidadi@gmail.com',
-    'ongoing',
-    'Household',
-    '13/12/17',
-  ),
-  createData(
-    'A',
-    'Dishant',
-    '8154040074',
-    'shaivpidasdi@gmail.com',
-    'ongoing',
-    'Household',
-    '13/12/17',
-  ),
-];
-
 const useStyles = makeStyles({
   table: {
     minWidth: 700,
   },
 });
 
-const AllJobsTable = ({ columns, data }) => {
+function ConfirmationDialogRaw(props) {
+  const { onClose, value: valueProp, open, ...other } = props;
+  const [value, setValue] = React.useState(valueProp);
+  const radioGroupRef = React.useRef(null);
+
+  React.useEffect(() => {
+    if (!open) {
+      setValue(valueProp);
+    }
+  }, [valueProp, open]);
+
+  const handleEntering = () => {
+    if (radioGroupRef.current != null) {
+      radioGroupRef.current.focus();
+    }
+  };
+
+  const handleCancel = () => {
+    onClose();
+  };
+
+  const handleOk = () => {
+    onClose(value);
+  };
+
+  const handleChange = (event) => {
+    setValue(event.target.value);
+  };
+
+  return (
+    <Dialog
+      disableBackdropClick
+      disableEscapeKeyDown
+      maxWidth='md'
+      onEntering={handleEntering}
+      aria-labelledby='confirmation-dialog-title'
+      open={open}
+      {...other}
+    >
+      <DialogTitle id='confirmation-dialog-title'>Change Status</DialogTitle>
+      <DialogContent dividers>
+        <RadioGroup
+          ref={radioGroupRef}
+          aria-label='ringtone'
+          name='ringtone'
+          value={value}
+          onChange={handleChange}
+        >
+          {options.map((option) => (
+            <FormControlLabel value={option} key={option} control={<Radio />} label={option} />
+          ))}
+        </RadioGroup>
+      </DialogContent>
+      <DialogActions>
+        <Button autoFocus onClick={handleCancel} color='primary'>
+          Cancel
+        </Button>
+        <Button onClick={handleOk} color='primary'>
+          Ok
+        </Button>
+      </DialogActions>
+    </Dialog>
+  );
+}
+
+const AllJobsTable = ({ data, onDeleteJob, match }) => {
   const classes = useStyles();
-  const [order, setOrder] = React.useState('desc');
-  const [orderBy, setOrderBy] = React.useState();
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const history = useHistory();
+
+  const [order, setOrder] = useState('desc');
+  const [orderBy, setOrderBy] = useState();
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [selectedGcnNo, updateSelectedGcnNo] = useState();
+  const [open, setOpen] = useState(false);
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+
+  const [openStatus, setOpenStatus] = useState(false);
+  const [openDownload, setOpenDownload] = useState(false);
+
+  const [valueStatus, setValueStatus] = useState('household');
+
+  const { job } = useSelector((state) => state.Job);
+
+  const handleClickListItem = () => {
+    setOpenStatus(true);
+  };
+
+  const handleCloseStatus = (newValue) => {
+    setOpenStatus(false);
+
+    if (newValue) {
+      setValueStatus(newValue);
+    }
+  };
+
+  const handleClickOpen = (gsnNo) => {
+    updateSelectedGcnNo(gsnNo);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleCloseDownload = () => {
+    setOpenDownload(false);
+  };
+
+  const handleOpenDownload = (gcnNo) => {
+    setOpenDownload(true);
+  };
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -89,9 +193,18 @@ const AllJobsTable = ({ columns, data }) => {
     setPage(0);
   };
 
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+  const handleDeleteClick = () => {
+    console.log('selectedGcnNo', selectedGcnNo);
+    onDeleteJob(selectedGcnNo);
+    setOpen(false);
+  };
+
+  const downloadInvoice = (gcnno) => {
+    console.log(gcnno);
+  };
 
   const headCells = [
+    { id: 'gcnno', numeric: false, label: 'GCN No.' },
     { id: 'consignor', numeric: false, label: 'Consignor' },
     { id: 'consignee', numeric: false, label: 'Consignee' },
     { id: 'contact', numeric: false, label: 'Contact' },
@@ -102,6 +215,7 @@ const AllJobsTable = ({ columns, data }) => {
     { id: 'view', numeric: false, label: 'View' },
     { id: 'update', numeric: false, label: 'Update' },
     { id: 'delete', numeric: false, label: 'Delete' },
+    { id: 'download', numeric: false, label: 'Download' },
   ];
 
   const createSortHandler = (property) => (event) => {
@@ -115,16 +229,6 @@ const AllJobsTable = ({ columns, data }) => {
         <Table className={classes.table} aria-label='customized table'>
           <TableHead>
             <TableRow>
-              {/* <StyledTableCell align='right'>Consignor</StyledTableCell>
-              <StyledTableCell align='right'>Consignee</StyledTableCell>
-              <StyledTableCell align='right'>Contact</StyledTableCell>
-              <StyledTableCell align='right'>Email</StyledTableCell>
-              <StyledTableCell align='right'>Status</StyledTableCell>
-              <StyledTableCell align='right'>Type</StyledTableCell>
-              <StyledTableCell align='right'>Date</StyledTableCell>
-              <StyledTableCell align='right'>View</StyledTableCell>
-              <StyledTableCell align='right'>Update</StyledTableCell>
-              <StyledTableCell align='right'>Delete</StyledTableCell> */}
               {headCells.map((headCell) => (
                 <StyledTableCell
                   key={headCell.id}
@@ -150,19 +254,26 @@ const AllJobsTable = ({ columns, data }) => {
           </TableHead>
           <TableBody>
             {data.map((row) => (
-              <StyledTableRow key={row.email}>
+              <StyledTableRow key={row.id}>
+                <StyledTableCell align='center'>{row.gcnno}</StyledTableCell>
                 <StyledTableCell align='center'>{row.consignor}</StyledTableCell>
                 <StyledTableCell align='center'>{row.consignee}</StyledTableCell>
                 <StyledTableCell align='center'>{row.contact}</StyledTableCell>
                 <StyledTableCell align='center'>{row.email}</StyledTableCell>
-                <StyledTableCell align='center'>{row.status}</StyledTableCell>
+                <StyledTableCell
+                  align='center'
+                  onClick={handleClickListItem}
+                  style={{ cursor: 'pointer' }}
+                >
+                  {row.status}
+                </StyledTableCell>
                 <StyledTableCell align='center'>{row.type}</StyledTableCell>
                 <StyledTableCell align='center'>{row.date}</StyledTableCell>
                 <StyledTableCell align='center'>
                   <IconButton
                     aria-label='view'
                     onClick={() => {
-                      alert(row.email);
+                      history.push(`view-job/${row.gcnno}`);
                     }}
                   >
                     <SvgIcon>
@@ -174,7 +285,7 @@ const AllJobsTable = ({ columns, data }) => {
                   <IconButton
                     aria-label='edit'
                     onClick={() => {
-                      alert(`Editing ${row.email}`);
+                      history.push(`${match.path}/edit/${row.gcnno}`);
                     }}
                   >
                     <SvgIcon>
@@ -183,14 +294,16 @@ const AllJobsTable = ({ columns, data }) => {
                   </IconButton>
                 </StyledTableCell>
                 <StyledTableCell align='center'>
-                  <IconButton
-                    aria-label='delete'
-                    onClick={() => {
-                      alert(`Deleting ${row.email}`);
-                    }}
-                  >
+                  <IconButton aria-label='delete' onClick={() => handleClickOpen(row.gcnno)}>
                     <SvgIcon>
                       <DeleteIcon />
+                    </SvgIcon>
+                  </IconButton>
+                </StyledTableCell>
+                <StyledTableCell align='center'>
+                  <IconButton aria-label='download' onClick={() => handleOpenDownload(row.gcnno)}>
+                    <SvgIcon>
+                      <CloudDownloadIcon />
                     </SvgIcon>
                   </IconButton>
                 </StyledTableCell>
@@ -202,12 +315,68 @@ const AllJobsTable = ({ columns, data }) => {
       <TablePagination
         rowsPerPageOptions={[5, 10, 25]}
         component='div'
-        count={rows.length}
+        count={data.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onChangePage={handleChangePage}
         onChangeRowsPerPage={handleChangeRowsPerPage}
       />
+
+      <Dialog
+        fullScreen={fullScreen}
+        open={open}
+        onClose={handleClose}
+        aria-labelledby='responsive-dialog-title'
+      >
+        <DialogTitle id='responsive-dialog-title'>
+          {'Are you sure, you want to detete this job?'}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>This will delete job permanently</DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button autoFocus onClick={handleDeleteClick} color='primary'>
+            yes
+          </Button>
+          <Button onClick={handleClose} color='primary' autoFocus>
+            cancle
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <ConfirmationDialogRaw
+        classes={{
+          paper: classes.paper,
+        }}
+        id='ringtone-menu'
+        keepMounted
+        open={openStatus}
+        onClose={handleCloseStatus}
+        value={valueStatus}
+      />
+
+      <Dialog
+        fullScreen={fullScreen}
+        open={openDownload}
+        onClose={handleCloseDownload}
+        aria-labelledby='responsive-dialog-title'
+      >
+        <DialogTitle id='responsive-dialog-title'>
+          {'Are you sure, you want to detete this job?'}
+        </DialogTitle>
+        <DialogContent>
+          <PDFDownloadLink document={<Invoice invoice={job} />} fileName='invoice.pdf'>
+            {({ blob, url, loading, error }) =>
+              loading ? 'Loading document...' : <Button>Download Now</Button>
+            }
+          </PDFDownloadLink>{' '}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDownload} color='primary' autoFocus>
+            cancle
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 };
