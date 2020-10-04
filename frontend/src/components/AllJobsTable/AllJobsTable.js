@@ -1,7 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useHistory } from 'react-router-dom';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -138,6 +138,7 @@ const AllJobsTable = ({ data, onDeleteJob, match }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [selectedGcnNo, updateSelectedGcnNo] = useState();
+  const [selectedToDownloadGcnNo, updateSelectedToDownloadGcnNo] = useState();
   const [open, setOpen] = useState(false);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
@@ -147,7 +148,7 @@ const AllJobsTable = ({ data, onDeleteJob, match }) => {
 
   const [valueStatus, setValueStatus] = useState('household');
 
-  const { job } = useSelector((state) => state.Job);
+  const { job, allJobs } = useSelector((state) => state.Job);
 
   const handleClickListItem = () => {
     setOpenStatus(true);
@@ -175,6 +176,7 @@ const AllJobsTable = ({ data, onDeleteJob, match }) => {
   };
 
   const handleOpenDownload = (gcnNo) => {
+    updateSelectedToDownloadGcnNo(gcnNo);
     setOpenDownload(true);
   };
 
@@ -199,9 +201,11 @@ const AllJobsTable = ({ data, onDeleteJob, match }) => {
     setOpen(false);
   };
 
-  const downloadInvoice = (gcnno) => {
-    console.log(gcnno);
-  };
+  const selectedJob = useMemo(() => {
+    return allJobs.filter(({ gcnno }) => gcnno === selectedToDownloadGcnNo);
+  }, [updateSelectedToDownloadGcnNo, handleOpenDownload]);
+
+  console.log({ selectedJob });
 
   const headCells = [
     { id: 'gcnno', numeric: false, label: 'GCN No.' },
@@ -365,7 +369,7 @@ const AllJobsTable = ({ data, onDeleteJob, match }) => {
           {'Are you sure, you want to detete this job?'}
         </DialogTitle>
         <DialogContent>
-          <PDFDownloadLink document={<Invoice invoice={job} />} fileName='invoice.pdf'>
+          <PDFDownloadLink document={<Invoice invoice={selectedJob} />} fileName='invoice.pdf'>
             {({ blob, url, loading, error }) =>
               loading ? 'Loading document...' : <Button>Download Now</Button>
             }
