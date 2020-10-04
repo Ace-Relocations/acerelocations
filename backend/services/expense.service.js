@@ -1,16 +1,16 @@
 const db = require("../models");
 const Customer = db.customer;
-const Invoice = db.invoice;
+const Expense = db.expense;
 const User = db.user;
 
 
 module.exports = {
 
-    createInvoice: async (gcnno, invoice, total) => {
+    createExpense: async (gcnno, expense, total) => {
         try {
-            let obj = new Invoice();
+            let obj = new Expense();
             obj.gcnno = gcnno;
-            obj.invoiceDetails = invoice;
+            obj.expenseDetails = expense;
             obj.total = total;
 
             let createData = await obj.save();
@@ -23,11 +23,11 @@ module.exports = {
         }
     },
 
-    getTotal: async (invoice) => {
+    getTotal: async (expense) => {
         try {
             let totalA = 0;
-            for (i=0; i<invoice.length; i++) {
-                totalA = totalA + invoice[i].Amount; 
+            for (i=0; i<expense.length; i++) {
+                totalA = totalA + expense[i].Amount; 
             }
             return totalA;
         } catch (err) {

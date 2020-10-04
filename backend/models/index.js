@@ -10,6 +10,8 @@ db.role = require("./role.model");
 db.customer = require("./customer.model");
 db.counter = require("./counter.model");
 db.invoice = require("./invoice.model");
+db.expense = require("./expense.model");
+
 
 db.ROLES = ["user", "admin", "moderator"];
 

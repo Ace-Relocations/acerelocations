@@ -13,11 +13,11 @@ module.exports = {
             const {
                 gcnno, invoice
                 } = req.body;
-                console.log("invoice",!invoice)
             if(invoice == false) {
                 res.status(500).send({ message: "The value passed is null" });
             }
-            let createData = await invoiceService.createInvoice(gcnno, invoice);
+            let total = await invoiceService.getTotal(invoice);
+            let createData = await invoiceService.createInvoice(gcnno, invoice, total);
             if (createData == false) {
             res.status(500).send({ message: "failed to register invoice", data: createData });
             return;

@@ -7,7 +7,7 @@ module.exports = {
     viewJob: async (gcnno) => {
         try {
             
-            let user = await Customer.findOne({ gcnno: gcnno })
+            let user = await Customer.findOne({ gcnno: gcnno }).populate("expense").populate("invoice");
             if (!user) {
             return user;
             }

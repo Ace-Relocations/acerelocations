@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
 
-const Invoice = mongoose.model(
-  "Invoice",
+const Expense = mongoose.model(
+  "Expense",
   new mongoose.Schema({
     gcnno: Number,
-    invoiceDetails: Object,
+    expenseDetails: Object,
     total: Number
   })
 );
 
-module.exports = Invoice;
+module.exports = Expense;
