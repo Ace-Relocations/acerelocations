@@ -49,7 +49,27 @@ const styles = StyleSheet.create({
   },
 });
 
-const CustomerCopy = ({ firstName, lastName, title, address }) => {
+const CustomerCopy = ({
+  consignor,
+  consignee,
+  title,
+  originAddress,
+  destinationAddress,
+  type,
+  gcnno,
+  date,
+}) => {
+  console.log(
+    'cc',
+    consignor,
+    consignee,
+    title,
+    originAddress,
+    destinationAddress,
+    type,
+    gcnno,
+    date,
+  );
   return (
     <View>
       <View style={styles.container} wrap={false}>
@@ -84,21 +104,31 @@ const CustomerCopy = ({ firstName, lastName, title, address }) => {
             <View style={{ width: '70%' }}>
               <Boxwith4Line
                 title='Cognisor'
-                address={address}
-                fullName={`${firstName} ${lastName}`}
+                address={originAddress}
+                fullName={`${consignor?.firstName} ${consignor?.lastName}`}
               />
             </View>
             <View style={{ width: '30%', border: '1 1 1 0' }}>
-              <BoxWith4LineKeys gsnNo='2313' date='12-10-3123' from='Shaishav' to='KnowOne' />
+              <BoxWith4LineKeys
+                gsnNo={gcnno}
+                date={date}
+                from={consignor?.firstName}
+                to={consignor?.lastName}
+              />
             </View>
           </View>
           <View style={{ marginBottom: '10px' }}>
-            <Boxwith4Line title='Consignee' address={address} fullName='Mr. MILAN SOLANKI' />
+            <Boxwith4Line
+              title='Consignee'
+              address={destinationAddress}
+              fullName={`${consignee?.firstName} ${consignee?.lastName}`}
+            />
           </View>
 
           <CustomerPackageDesTable
-            description='This is very looooooooooooooooooooooooooooong Description'
-            noOfPkg={10}
+            // description='This is very looooooooooooooooooooooooooooong Description'
+            description={type}
+            noOfPkg={' '}
           />
 
           <View>
@@ -118,7 +148,10 @@ const CustomerCopy = ({ firstName, lastName, title, address }) => {
         >
           <Text style={styles.title}>{title}</Text>
           <ConsignmentBox />
-          <AcknowledgementTable fullName='Shaishav Pidadi' number='12' />
+          <AcknowledgementTable
+            fullName={`${consignee?.firstName} ${consignee?.lastName}`}
+            number='12'
+          />
           <AffliationBox />
           <View style={{ marginTop: 5 }}>
             <Text style={{ color: 'red', fontSize: 8 }}>Subject to Ahmedabad jurisdiction</Text>

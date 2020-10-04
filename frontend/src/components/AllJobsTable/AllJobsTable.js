@@ -202,7 +202,7 @@ const AllJobsTable = ({ data, onDeleteJob, match }) => {
   };
 
   const selectedJob = useMemo(() => {
-    return allJobs.filter(({ gcnno }) => gcnno === selectedToDownloadGcnNo);
+    return allJobs.find(({ gcnno }) => gcnno === selectedToDownloadGcnNo);
   }, [updateSelectedToDownloadGcnNo, handleOpenDownload]);
 
   console.log({ selectedJob });
