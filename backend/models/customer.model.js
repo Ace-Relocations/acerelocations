@@ -9,14 +9,16 @@ var Customer = mongoose.model(
         required: true,
         unique: true,
       },
-    consignor: {
+    consignorF: {
         type: String,
         required: true
       },
-    consignee: {
+    consignorL: String,
+    consigneeF: {
         type: String,
         required: true
       },
+    consigneeL: String,
     contact: Number,
     email: {
         type: mongoose.SchemaTypes.Email
