@@ -33,7 +33,7 @@ const CustomCard = ({ title, value }) => {
           {title}
         </Typography>
         <Typography variant='h3' component='h2' style={{ marginTop: '20px' }}>
-          {value}
+          {value === null ? 'N/A' : value}
         </Typography>
       </CardContent>
       {/* <CardActions>
