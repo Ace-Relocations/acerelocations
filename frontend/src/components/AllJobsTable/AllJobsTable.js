@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { useHistory } from 'react-router-dom';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -33,6 +33,7 @@ import {
   Delete as DeleteIcon,
   CloudDownload as CloudDownloadIcon,
 } from '@material-ui/icons';
+import { updateJobStatusRequest } from '../../actions';
 
 const options = ['ongoing', 'completed'];
 
@@ -64,11 +65,11 @@ const useStyles = makeStyles({
   },
 });
 
-function ConfirmationDialogRaw(props) {
-  const { onClose, value: valueProp, open, ...other } = props;
+const ConfirmationDialogRaw = (props) => {
+  const { onClose, value: valueProp, open, gcnNo, ...other } = props;
   const [value, setValue] = React.useState(valueProp);
   const radioGroupRef = React.useRef(null);
-
+  const dispatch = useDispatch();
   React.useEffect(() => {
     if (!open) {
       setValue(valueProp);
@@ -86,11 +87,13 @@ function ConfirmationDialogRaw(props) {
   };
 
   const handleOk = () => {
+    console.log('---', value, gcnNo);
+    dispatch(updateJobStatusRequest({ status: value.status, gcnNo }));
     onClose(value);
   };
 
   const handleChange = (event) => {
-    setValue(event.target.value);
+    setValue({ ...value, status: event.target.value });
   };
 
   return (
@@ -127,7 +130,7 @@ function ConfirmationDialogRaw(props) {
       </DialogActions>
     </Dialog>
   );
-}
+};
 
 const AllJobsTable = ({ data, onDeleteJob, match }) => {
   const classes = useStyles();
@@ -146,12 +149,14 @@ const AllJobsTable = ({ data, onDeleteJob, match }) => {
   const [openStatus, setOpenStatus] = useState(false);
   const [openDownload, setOpenDownload] = useState(false);
 
-  const [valueStatus, setValueStatus] = useState('household');
+  const [valueStatus, setValueStatus] = useState();
 
   const { job, allJobs } = useSelector((state) => state.Job);
 
-  const handleClickListItem = () => {
+  const handleClickListItem = (value, gcnno) => {
     setOpenStatus(true);
+    setValueStatus(value);
+    updateSelectedGcnNo(gcnno);
   };
 
   const handleCloseStatus = (newValue) => {
@@ -266,7 +271,7 @@ const AllJobsTable = ({ data, onDeleteJob, match }) => {
                 <StyledTableCell align='center'>{row.email}</StyledTableCell>
                 <StyledTableCell
                   align='center'
-                  onClick={handleClickListItem}
+                  onClick={() => handleClickListItem(row.status, row.gcnno)}
                   style={{ cursor: 'pointer' }}
                 >
                   {row.status}
@@ -357,6 +362,7 @@ const AllJobsTable = ({ data, onDeleteJob, match }) => {
         open={openStatus}
         onClose={handleCloseStatus}
         value={valueStatus}
+        gcnNo={selectedGcnNo}
       />
 
       <Dialog

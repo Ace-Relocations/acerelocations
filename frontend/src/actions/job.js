@@ -9,6 +9,8 @@ import {
   GET_JOB_REQUEST_SUCCESS,
   UPDATE_JOB_REQUEST,
   UPDATE_JOB_REQUEST_SUCCESS,
+  UPDATE_JOB_STATUS_REQUEST,
+  UPDATE_JOB_STATUS_REQUEST_SUCCESS,
 } from '../constants/actionTypes';
 
 export const jobRequest = (payload) => ({
@@ -58,5 +60,17 @@ export const updateJobRequest = (payload, gcnNo) => ({
 
 export const updateJobRequestSuccess = (payload) => ({
   type: UPDATE_JOB_REQUEST_SUCCESS,
+  payload,
+});
+
+export const updateJobStatusRequest = (payload) => {
+  console.log({ payload });
+  return {
+    type: UPDATE_JOB_STATUS_REQUEST,
+    payload,
+  };
+};
+export const updateJobStatusRequestSuccess = (payload) => ({
+  type: UPDATE_JOB_STATUS_REQUEST_SUCCESS,
   payload,
 });
