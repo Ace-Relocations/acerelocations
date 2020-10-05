@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { useHistory } from 'react-router-dom';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -33,7 +33,6 @@ import {
   Delete as DeleteIcon,
   CloudDownload as CloudDownloadIcon,
 } from '@material-ui/icons';
-import { updateJobStatusRequest } from '../../actions';
 
 const options = ['ongoing', 'completed'];
 
@@ -66,10 +65,9 @@ const useStyles = makeStyles({
 });
 
 const ConfirmationDialogRaw = (props) => {
-  const { onClose, value: valueProp, open, gcnNo, ...other } = props;
+  const { onClose, value: valueProp, open, gcnNo, onUpdateJobStatus, ...other } = props;
   const [value, setValue] = React.useState(valueProp);
   const radioGroupRef = React.useRef(null);
-  const dispatch = useDispatch();
   React.useEffect(() => {
     if (!open) {
       setValue(valueProp);
@@ -87,8 +85,7 @@ const ConfirmationDialogRaw = (props) => {
   };
 
   const handleOk = () => {
-    console.log('---', value, gcnNo);
-    dispatch(updateJobStatusRequest({ status: value.status, gcnNo }));
+    onUpdateJobStatus(value.status, gcnNo);
     onClose(value);
   };
 
@@ -132,7 +129,7 @@ const ConfirmationDialogRaw = (props) => {
   );
 };
 
-const AllJobsTable = ({ data, onDeleteJob, match }) => {
+const AllJobsTable = ({ data, onDeleteJob, onUpdateJobStatus, match }) => {
   const classes = useStyles();
   const history = useHistory();
 
@@ -201,7 +198,6 @@ const AllJobsTable = ({ data, onDeleteJob, match }) => {
   };
 
   const handleDeleteClick = () => {
-    console.log('selectedGcnNo', selectedGcnNo);
     onDeleteJob(selectedGcnNo);
     setOpen(false);
   };
@@ -209,8 +205,6 @@ const AllJobsTable = ({ data, onDeleteJob, match }) => {
   const selectedJob = useMemo(() => {
     return allJobs.find(({ gcnno }) => gcnno === selectedToDownloadGcnNo);
   }, [updateSelectedToDownloadGcnNo, handleOpenDownload]);
-
-  console.log({ selectedJob });
 
   const headCells = [
     { id: 'gcnno', numeric: false, label: 'GCN No.' },
@@ -228,7 +222,6 @@ const AllJobsTable = ({ data, onDeleteJob, match }) => {
   ];
 
   const createSortHandler = (property) => (event) => {
-    console.log({ property, event });
     handleRequestSort(event, property);
   };
 
@@ -363,6 +356,7 @@ const AllJobsTable = ({ data, onDeleteJob, match }) => {
         onClose={handleCloseStatus}
         value={valueStatus}
         gcnNo={selectedGcnNo}
+        onUpdateJobStatus={onUpdateJobStatus}
       />
 
       <Dialog

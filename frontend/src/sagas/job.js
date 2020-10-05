@@ -204,7 +204,6 @@ function* updateJobStatusRequest(payload) {
     const {
       payload: { status, gcnNo },
     } = payload;
-    console.log({ status });
     let response = yield axios.post(`/job/update?gcnno=${gcnNo}`, { status });
 
     if (response.status === 200) {
