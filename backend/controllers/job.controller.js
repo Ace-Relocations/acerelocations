@@ -13,7 +13,7 @@ module.exports = {
 createJob: async (req, res) => {
     try {
         const {
-            consignor, consignee, contact, email, oaddress1, oaddress2, ocity, ostate, opincode, daddress1, daddress2, dcity, dstate, dpincode, car, type, status, insuranceP, insuranceA, date
+            consignorF, consignorL, consigneeF, consigneeL, contact, email, oaddress1, oaddress2, ocity, ostate, opincode, daddress1, daddress2, dcity, dstate, dpincode, car, type, status, insuranceP, insuranceA, date
             } = req.body;
         // const defaultV = await service.setGcnno(491);
         const gcnno = await service.incrementGcnno();
@@ -27,8 +27,10 @@ createJob: async (req, res) => {
 
         let obj = new Customer();
         obj.gcnno = gcnno;
-        obj.consignor = consignor; 
-        obj.consignee = consignee; 
+        obj.consignorF = consignorF;
+        obj.consignorL = consignorL; 
+        obj.consigneeF = consigneeF;
+        obj.consigneeL = consigneeL; 
         obj.contact = contact; 
         obj.email = email; 
         obj.oaddress1 = oaddress1; 
@@ -101,10 +103,16 @@ viewAllJob: async (req, res) => {
 filterJob: async (req, res) => {
     try {
         var queryCond = {}
-        if(req.query.consignor){
+        if(req.query.consignorF){
             queryCond.consignor=req.query.consignor;
          }
-         if(req.query.consignee){
+         if(req.query.consigneeF){
+            queryCond.consignee=req.query.consignee;
+         }
+         if(req.query.consignorL){
+            queryCond.consignor=req.query.consignor;
+         }
+         if(req.query.consigneeL){
             queryCond.consignee=req.query.consignee;
          }
          if(req.query.contact){
@@ -145,7 +153,7 @@ filterJob: async (req, res) => {
 updateJob: async (req, res) => {
     try {
         const {
-            consignor, consignee, contact, email, oaddress1, oaddress2, ocity, ostate, opincode, daddress1, daddress2, dcity, dstate, dpincode, type, insuranceP, insuranceA, date,status   
+            consignorF, consigneeF, consignorL, consigneeL, contact, email, oaddress1, oaddress2, ocity, ostate, opincode, daddress1, daddress2, dcity, dstate, dpincode, type, insuranceP, insuranceA, date,status   
             } = req.body;
 
         Customer.findOne({ gcnno: req.query.gcnno }, async (err, user) => {
@@ -160,8 +168,10 @@ updateJob: async (req, res) => {
             let obj = new Customer();
             obj._id = user._id;
             obj.gcnno = user.gcnno;
-            obj.consignor = consignor || user.consignor; 
-            obj.consignee = consignee || user.consignee; 
+            obj.consignorF = consignorF || user.consignorF; 
+            obj.consigneeF = consigneeF || user.consigneeF;
+            obj.consignorL = consignorL || user.consignorL; 
+            obj.consigneeL = consigneeL || user.consigneeL; 
             obj.contact = contact || user.contact; 
             obj.email = email || user.email; 
             obj.oaddress1 = oaddress1 || user.oaddress1; 
