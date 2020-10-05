@@ -41,49 +41,54 @@ const styles = StyleSheet.create({
   },
 });
 
-const CustomerInfoBox = () => {
+const CustomerInfoBox = ({ customer }) => {
+  const { firstName, lastName, adderess, contact, gcnno, destination, email } = customer;
   return (
     <>
       <View style={styles.row}>
         <Text style={styles.rowHeading}>Customer Name: </Text>
-        <Text>asdf</Text>
+        <Text>{`${firstName} ${lastName}`}</Text>
       </View>
       <View style={styles.row}>
         <Text style={styles.rowHeading}>Address: </Text>
-        <Text>asdf</Text>
+        <Text>{adderess}</Text>
       </View>
       <View style={styles.row}>
         <View style={styles.subRow}>
           <Text style={styles.rowHeading}>Contact No: </Text>
-          <Text style={styles.rowSubHeading}>asdf</Text>
+          <Text style={styles.rowSubHeading}>{contact}</Text>
         </View>
         <View style={styles.subRow}>
           <Text style={styles.rowHeading}>Birth Date: </Text>
-          <Text style={styles.rowSubHeading}>asdf</Text>
+          <Text style={styles.rowSubHeading}>
+            {!!customer?.birthDate ? customer?.birthDate : ''}
+          </Text>
         </View>
         <View style={styles.subRow}>
           <Text style={styles.rowHeading}>Anniversary: </Text>
-          <Text style={styles.rowSubHeading}>asdf</Text>
+          <Text style={styles.rowSubHeading}>
+            {!!customer?.anniversary ? customer?.anniversary : ''}
+          </Text>
         </View>
       </View>
       <View style={styles.row}>
         <View style={styles.subRow}>
           <Text style={styles.rowHeading}>Job No: </Text>
-          <Text style={styles.rowSubHeading}>asdf</Text>
+          <Text style={styles.rowSubHeading}>{!!customer?.jobno ? customer?.jobno : ''}</Text>
         </View>
         <View style={styles.subRow}>
           <Text style={styles.rowHeading}>GCNNo.: </Text>
-          <Text style={styles.rowSubHeading}>asdf</Text>
+          <Text style={styles.rowSubHeading}>{gcnno}</Text>
         </View>
       </View>
       <View style={styles.row}>
         <View style={styles.subRow}>
           <Text style={styles.rowHeading}>Destination: </Text>
-          <Text style={styles.rowSubHeading}>asdf</Text>
+          <Text style={styles.rowSubHeading}>{destination}</Text>
         </View>
         <View style={styles.subRow}>
           <Text style={styles.rowHeading}>E-mail: </Text>
-          <Text style={styles.rowSubHeading}>asdf</Text>
+          <Text style={styles.rowSubHeading}>{email}</Text>
         </View>
       </View>
     </>

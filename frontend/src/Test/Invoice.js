@@ -124,32 +124,74 @@ const address = [
 ];
 
 const Invoice = ({ invoice }) => {
-  const { firstName, lastName } = invoice;
+  // const {
+  //   consignor,
+  //   consignee,
+  //   originAddress: { oaddress1, oaddress2, ocity, ostate, opincode },
+  //   destinationAddress: { daddress1, daddress2, dcity, dstate, dpincode },
+  //   status,
+  //   car,
+  //   insuranceP,
+  //   insuranceA,
+  //   type,
+  //   date,
+  //   gcnno,
+  // } = invoice;
+
+  /*  
+    {
+      consignor: {firstName, lastName},
+      consignee: {firstName, lastName},
+      originAddress: { oaddress1, oaddress2, ocity, ostate, opincode },
+      destinationAddress: { daddress1, daddress2, dcity, dstate, dpincode },
+      status,
+      car, insuranceP, insuranceA, type, date, gcnno
+    } 
+  */
+  const {
+    consignor,
+    consignee,
+    gcnno,
+    originAddress = [],
+    destinationAddress = [],
+    type,
+    date,
+  } = invoice;
+
+  const customer = {};
   return (
     <Document>
       <Page size='A4' style={styles.page} orientation='landscape'>
         <CustomerCopy
-          firstName={firstName}
-          lastName={lastName}
           title='CUSTOMER COPY'
-          address={address}
+          consignor={consignor}
+          consignee={consignee}
+          originAddress={originAddress}
+          destinationAddress={destinationAddress}
+          type={type}
+          gcnno={gcnno}
+          date={date}
         />
       </Page>
       <Page size='A4' style={styles.page} orientation='landscape'>
         <CustomerCopy
-          firstName={firstName}
-          lastName={lastName}
           title='TRUCK COPY'
-          address={address}
+          consignor={consignor}
+          consignee={consignee}
+          originAddress={originAddress}
+          destinationAddress={destinationAddress}
+          type={type}
+          gcnno={gcnno}
+          date={date}
         />
       </Page>
       <Page size='A4' style={styles.page}>
         <Header />
-        <CustomerFeedbackForm title='DESTINATION' />
+        <CustomerFeedbackForm title='DESTINATION' customer={customer} />
       </Page>
       <Page size='A4' style={styles.page}>
         <Header />
-        <CustomerFeedbackForm title='ORIGIN' />
+        <CustomerFeedbackForm title='ORIGIN' customer={customer} />
       </Page>
       <Page size='A4' style={styles.page} orientation='landscape'>
         <View style={{ border: 1, margin: 50, padding: 10 }}>
