@@ -129,7 +129,14 @@ const ConfirmationDialogRaw = (props) => {
   );
 };
 
-const AllJobsTable = ({ data, onDeleteJob, onUpdateJobStatus, match }) => {
+const AllJobsTable = ({
+  data,
+  onDeleteJob,
+  onUpdateJobStatus,
+  match,
+  onEditJobClick,
+  isLoading,
+}) => {
   const classes = useStyles();
   const history = useHistory();
 
@@ -284,12 +291,7 @@ const AllJobsTable = ({ data, onDeleteJob, onUpdateJobStatus, match }) => {
                   </IconButton>
                 </StyledTableCell>
                 <StyledTableCell align='center'>
-                  <IconButton
-                    aria-label='edit'
-                    onClick={() => {
-                      history.push(`${match.path}/edit/${row.gcnno}`);
-                    }}
-                  >
+                  <IconButton aria-label='edit' onClick={() => onEditJobClick(row.gcnno)}>
                     <SvgIcon>
                       <EditIcon />
                     </SvgIcon>

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
@@ -40,27 +40,26 @@ const CreateJobPage = () => {
 
   const { job } = useSelector((state) => state.Job);
   const { loader } = useSelector((state) => state.Loader);
-  console.log({ loader });
 
   const isEditing = !!jobId;
 
-  console.log({ isEditing });
-
-  useEffect(() => {
-    if (isEditing) {
-      dispatch(getJobRequest(jobId));
-    }
-  }, [isEditing]);
+  // useEffect(() => {
+  //   if (isEditing) {
+  //     // dispatch(getJobRequest(jobId));
+  //   }
+  // }, [isEditing]);
 
   const onCreateJob = (data) => {
-    console.log(data);
-
     dispatch(jobRequest(data));
   };
 
   const onUpdateJob = (data) => {
     dispatch(updateJobRequest(data, jobId));
   };
+
+  const jobToUpdate = useMemo(() => {
+    return job;
+  }, [loader, job]);
 
   return (
     <Grid container>
@@ -87,7 +86,7 @@ const CreateJobPage = () => {
               onCreateJob={onCreateJob}
               onUpdateJob={onUpdateJob}
               isEditing={isEditing}
-              job={job}
+              job={jobToUpdate}
             />
           )}
         </Box>

@@ -9,7 +9,12 @@ import Typography from '@material-ui/core/Typography';
 
 import AllJobsTable from '../AllJobsTable/AllJobsTable';
 import makeData from './makeData';
-import { allJobRequest, deleteJobRequest, updateJobStatusRequest } from '../../actions';
+import {
+  allJobRequest,
+  deleteJobRequest,
+  updateJobStatusRequest,
+  getJobRequest,
+} from '../../actions';
 import toaster from '../../utils/toaster';
 
 const useStyles = makeStyles((theme) => ({
@@ -42,7 +47,8 @@ const AllJobsPage = ({ match }) => {
 
   const [isChanged, updateIsChanged] = useState(true);
   const dispatch = useDispatch();
-  const { allJobs, job } = useSelector((state) => state.Job, []);
+  const { allJobs, job } = useSelector((state) => state.Job);
+  const loading = useSelector((state) => state.Loader);
 
   const jobIds = allJobs.map(({ id }) => id).join(',');
 
@@ -67,6 +73,10 @@ const AllJobsPage = ({ match }) => {
     return allJobs;
   }, [allJobs, isChanged]);
 
+  const onEditJobClick = useCallback((gcnno) => {
+    dispatch(getJobRequest(gcnno));
+    history.push(`${match.path}/edit/${gcnno}`);
+  });
   return (
     <Grid container>
       <Grid item lg={12} container className={classes.gridItem}>
@@ -91,6 +101,8 @@ const AllJobsPage = ({ match }) => {
             onDeleteJob={(gcnNo) => onDeleteJob(gcnNo)}
             match={match}
             onUpdateJobStatus={(status, gcnNo) => onUpdateJobStatus(status, gcnNo)}
+            onEditJobClick={onEditJobClick}
+            isLoading={loading}
           />
         </Box>
       </Grid>

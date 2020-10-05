@@ -93,16 +93,20 @@ function* allJobRequest() {
 function* getJobRequest(payload) {
   try {
     const { gcnNo } = payload;
+    yield put(jobAction.showLoader());
 
     let response = yield axios.get(`/job/view?gcnno=${gcnNo}`);
 
     if (response.status === 200) {
       yield put(jobAction.getJobRequestSuccess(response.data));
+      yield put(jobAction.hideLoader());
       toaster(response.message);
     } else {
+      yield put(jobAction.hideLoader());
       toaster(response.message, { type: 'error' });
     }
   } catch (error) {
+    yield put(jobAction.hideLoader());
     console.log(error);
     if (error == 'Error: Request failed with status code 401') {
       yield put(push('/login'));
@@ -180,15 +184,18 @@ function* updateJobRequest(payload) {
 function* deleteJobRequest(payload) {
   try {
     const { gcnNo } = payload;
+    yield put(jobAction.showLoader());
     let response = yield axios.post(`/job/delete?gcnno=${gcnNo}`);
-
     if (response.status === 200) {
       yield put(jobAction.deleJobRequestSuccess(response.data));
+      yield put(jobAction.hideLoader());
       toaster(response.message);
     } else {
       toaster(response.message, { type: 'error' });
+      yield put(jobAction.hideLoader());
     }
   } catch (error) {
+    yield put(jobAction.hideLoader());
     if (error == 'Error: Request failed with status code 401') {
       yield put(push('/login'));
       // yield put(actions.userSignOutSuccess());
@@ -205,15 +212,18 @@ function* updateJobStatusRequest(payload) {
       payload: { status, gcnNo },
     } = payload;
     let response = yield axios.post(`/job/update?gcnno=${gcnNo}`, { status });
-
+    yield put(jobAction.showLoader());
     if (response.status === 200) {
       yield put(jobAction.updateJobStatusRequestSuccess(response.data));
+      yield put(jobAction.hideLoader());
       toaster(response.message);
     } else {
+      yield put(jobAction.hideLoader());
       toaster(response.message, { type: 'error' });
     }
   } catch (error) {
     console.log(error);
+    yield put(jobAction.hideLoader());
     if (error == 'Error: Request failed with status code 401') {
       yield put(push('/login'));
       // yield put(actions.userSignOutSuccess());
