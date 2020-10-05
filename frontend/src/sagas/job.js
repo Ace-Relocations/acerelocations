@@ -207,7 +207,7 @@ function* updateJobStatusRequest(payload) {
     let response = yield axios.post(`/job/update?gcnno=${gcnNo}`, { status });
 
     if (response.status === 200) {
-      yield put(jobAction.updateJobRequestSuccess(response.data));
+      yield put(jobAction.updateJobStatusRequestSuccess(response.data));
       toaster(response.message);
     } else {
       toaster(response.message, { type: 'error' });

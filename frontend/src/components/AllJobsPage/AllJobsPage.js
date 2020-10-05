@@ -57,10 +57,10 @@ const AllJobsPage = ({ match }) => {
   });
 
   useEffect(() => {
-    if (isChanged) {
+    if (!isChanged) {
       dispatch(allJobRequest());
-      updateIsChanged(false);
     }
+    updateIsChanged(false);
   }, [isChanged]);
 
   const data = React.useMemo(() => {
