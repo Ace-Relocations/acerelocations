@@ -46,10 +46,6 @@ const AllJobsPage = ({ match }) => {
 
   const jobIds = allJobs.map(({ id }) => id).join(',');
 
-  const data = React.useMemo(() => {
-    return allJobs;
-  }, [allJobs, isChanged]);
-
   const onDeleteJob = useCallback((selectedGcnNo) => {
     updateIsChanged(true);
     dispatch(deleteJobRequest(selectedGcnNo));
@@ -61,9 +57,15 @@ const AllJobsPage = ({ match }) => {
   });
 
   useEffect(() => {
-    updateIsChanged(false);
-    dispatch(allJobRequest());
+    if (isChanged) {
+      dispatch(allJobRequest());
+      updateIsChanged(false);
+    }
   }, [isChanged]);
+
+  const data = React.useMemo(() => {
+    return allJobs;
+  }, [allJobs, isChanged]);
 
   return (
     <Grid container>

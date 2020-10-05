@@ -65,7 +65,7 @@ function* createJobRequest({ payload }) {
     }
   } catch (error) {
     yield put(jobAction.hideLoader());
-    toaster(error.message);
+    toaster('Error Creating Job, Please Try again', { type: 'error' });
   }
 }
 
