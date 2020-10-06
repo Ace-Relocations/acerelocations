@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet } from '@react-pdf/renderer';
+import { View, StyleSheet, Text } from '@react-pdf/renderer';
 
 const styles = StyleSheet.create({
   row: {
@@ -11,14 +11,22 @@ const styles = StyleSheet.create({
   },
 });
 
-const TableWithOnlyRows = () => {
+const TableWithOnlyRows = ({ details }) => {
   // Length Will replace with props
   return (
     <View>
-      <View style={styles.row} />
-      <View style={styles.row} />
-      <View style={styles.row} />
-      <View style={styles.row} />
+      <View style={styles.row}>
+        <Text>{details}</Text>
+      </View>
+      <View style={styles.row}>
+        <Text>asdfasd</Text>
+      </View>
+      <View style={styles.row}>
+        <Text>asdfasd</Text>
+      </View>
+      <View style={styles.row}>
+        <Text>asdfasd</Text>
+      </View>
     </View>
   );
 };

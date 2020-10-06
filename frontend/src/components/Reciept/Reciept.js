@@ -14,7 +14,18 @@ const styles = StyleSheet.create({
   },
 });
 
-const Reciept = () => {
+const Reciept = ({ reciept }) => {
+  const {
+    chequeIssuer,
+    rupeesInNumber,
+    rupeesInText,
+    chequeNo,
+    date,
+    billNo,
+    lrNo,
+    from,
+    to,
+  } = reciept;
   return (
     <View>
       <View style={{ flexDirection: 'row' }}>
@@ -47,7 +58,7 @@ const Reciept = () => {
             borderBottomColor: '#000',
           }}
         >
-          <Text>Shaishav Pidadi</Text>
+          <Text>{chequeIssuer}</Text>
         </View>
         <Text>the sum of Rupees</Text>
       </View>
@@ -72,7 +83,7 @@ const Reciept = () => {
             marginRight: 5,
           }}
         >
-          <Text></Text>
+          <Text>{rupeesInText}</Text>
         </View>
         <Text>by cash or cheque</Text>
       </View>
@@ -98,7 +109,7 @@ const Reciept = () => {
             marginRight: 5,
           }}
         >
-          <Text></Text>
+          <Text>{chequeNo}</Text>
         </View>
 
         <Text>Dated</Text>
@@ -112,7 +123,7 @@ const Reciept = () => {
             marginLeft: 5,
           }}
         >
-          <Text></Text>
+          <Text>{date}</Text>
         </View>
         <Text>towards Bill No</Text>
         <View
@@ -125,7 +136,7 @@ const Reciept = () => {
             marginLeft: 5,
           }}
         >
-          <Text></Text>
+          <Text>{billNo}</Text>
         </View>
 
         <Text>Dated</Text>
@@ -139,7 +150,7 @@ const Reciept = () => {
             marginLeft: 5,
           }}
         >
-          <Text></Text>
+          <Text>{date}</Text>
         </View>
       </View>
 
@@ -164,7 +175,7 @@ const Reciept = () => {
             marginRight: 60,
           }}
         >
-          <Text></Text>
+          <Text>{from}</Text>
         </View>
 
         <Text>To</Text>
@@ -177,7 +188,7 @@ const Reciept = () => {
             marginLeft: 15,
           }}
         >
-          <Text></Text>
+          <Text>{to}</Text>
         </View>
       </View>
 
@@ -202,7 +213,7 @@ const Reciept = () => {
             marginRight: 45,
           }}
         >
-          <Text></Text>
+          <Text>{lrNo}</Text>
         </View>
 
         <Text>Dated</Text>
@@ -215,7 +226,7 @@ const Reciept = () => {
             marginLeft: 15,
           }}
         >
-          <Text></Text>
+          <Text>{date}</Text>
         </View>
       </View>
 
@@ -241,7 +252,7 @@ const Reciept = () => {
               <Text style={{ fontSize: 12, color: '#fff', marginVertical: 'auto' }}>Rs.</Text>
             </View>
             <View style={{ width: '70%' }}>
-              <Text></Text>
+              <Text>{rupeesInNumber}</Text>
             </View>
           </View>
         </View>

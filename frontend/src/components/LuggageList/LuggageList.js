@@ -25,23 +25,86 @@ const styles = StyleSheet.create({
     height: 20,
   },
 });
-
-const LuggageListHeader = () => (
+const LuggageListHeader = ({ ocity, dcity, gcnno, date }) => (
   <View style={{ textAlign: 'center' }}>
     <Text style={styles.headerTitle}>TO THE CHECK POST AUTHORITIES</Text>
     <Text style={{ marginTop: 10, fontSize: 10, textAlign: 'justify' }}>
-      My household goods as listed belowwhich are old and used are being moved from _______________
-      to_______________ by ROAD.These are purely for domestic purpose and not for any kind of sale.
-      So please allow destination. Sent through __________________ G.C.No.__________________Dt:
-      _____________
+      My household goods as listed belowwhich are old and used are being moved from{' '}
+      <View
+        style={{
+          marginHorizontal: 10,
+          width: 500,
+          borderBottom: 1,
+          textAlign: 'center',
+          borderBottomColor: '#000',
+          marginRight: 5,
+        }}
+      >
+        <Text>{ocity}</Text>
+      </View>{' '}
+      to{' '}
+      <View
+        style={{
+          marginHorizontal: 10,
+          width: 50,
+          borderBottom: 1,
+          textAlign: 'center',
+          borderBottomColor: '#000',
+          marginRight: 5,
+        }}
+      >
+        <Text>{dcity}</Text>
+      </View>
+      by ROAD.These are purely for domestic purpose and not for any kind of sale. So please allow
+      destination. Sent through{' '}
+      <View
+        style={{
+          marginHorizontal: 10,
+          width: 70,
+          borderBottom: 1,
+          textAlign: 'center',
+          borderBottomColor: '#000',
+          marginRight: 5,
+        }}
+      >
+        <Text> ???? </Text>
+      </View>{' '}
+      G.C.No.{' '}
+      <View
+        style={{
+          marginHorizontal: 10,
+          width: 90,
+          borderBottom: 1,
+          textAlign: 'center',
+          borderBottomColor: '#000',
+          marginRight: 5,
+        }}
+      >
+        <Text>{gcnno}</Text>
+      </View>{' '}
+      Dt:{' '}
+      <View
+        style={{
+          marginHorizontal: 10,
+          width: 80,
+          borderBottom: 1,
+          textAlign: 'center',
+          borderBottomColor: '#000',
+          marginRight: 5,
+        }}
+      >
+        <Text>{date}</Text>
+      </View>
     </Text>
   </View>
 );
 
-const LuggageList = () => {
+const LuggageList = ({ luggageListDetails }) => {
+  const { ocity, dcity, gcnno, date, from, to } = luggageListDetails;
+
   return (
     <View>
-      <LuggageListHeader />
+      <LuggageListHeader ocity={ocity} dcity={dcity} gcnno={gcnno} date={date} />
 
       <View>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 10 }}>
@@ -55,10 +118,10 @@ const LuggageList = () => {
 
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: '0 10' }}>
           <View style={{ border: 1, width: '45%' }}>
-            <TableWithOnlyRows />
+            <TableWithOnlyRows details={from} />
           </View>
           <View style={{ border: 1, width: '45%' }}>
-            <TableWithOnlyRows />
+            <TableWithOnlyRows details={to} />
           </View>
         </View>
 

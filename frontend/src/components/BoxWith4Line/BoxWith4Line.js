@@ -27,7 +27,7 @@ const Boxwith4Line = ({ title, fullName, address }) => {
         <Text style={styles.title}>{title}: </Text>
         <Text style={styles.addressLine}>{fullName}</Text>
       </View>
-      {address.map(({ line }, index) => {
+      {address.map((line, index) => {
         return (
           <View style={styles.row} key={index}>
             <Text style={styles.addressLine}>{line}</Text>

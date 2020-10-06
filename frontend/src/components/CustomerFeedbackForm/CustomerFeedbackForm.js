@@ -87,7 +87,7 @@ const FeedbackHeader = () => (
     </Text>
   </>
 );
-const CustomerFeedbackForm = ({ title, customer }) => {
+const CustomerFeedbackForm = ({ title, customer, ...props }) => {
   return (
     <View>
       <View style={{ textAlign: 'center', marginTop: 10 }}>
