@@ -80,10 +80,12 @@ const CreateJobForm = ({
   onUpdateJob,
   isEditing,
   job: {
-    consignor,
-    consignee,
-    email,
+    consignorF,
+    consignorL,
+    consigneeF,
+    consigneeL,
     contact,
+    email,
     oaddress1,
     oaddress2,
     ocity,
@@ -110,20 +112,22 @@ const CreateJobForm = ({
   const { handleSubmit, control, errors, getValues, watch, reset } = useForm({
     mode: 'onChange',
     defaultValues: {
-      cnsFirstName: getDefaultValue(isEditing, consignor),
-      cneFirstName: getDefaultValue(isEditing, consignee),
-      cneMobile: getDefaultValue(isEditing, contact),
-      cneEmail: getDefaultValue(isEditing, email),
-      originAddress1: getDefaultValue(isEditing, oaddress1),
-      originAddress2: getDefaultValue(isEditing, oaddress2),
-      originCity: getDefaultValue(isEditing, ocity),
-      ooriginState: getDefaultValue(isEditing, ostate),
-      originPincode: getDefaultValue(isEditing, opincode),
-      destinationAddress1: getDefaultValue(isEditing, daddress1),
-      destinationAddress2: getDefaultValue(isEditing, daddress2),
-      destinationCity: getDefaultValue(isEditing, dcity),
-      destinationState: getDefaultValue(isEditing, dstate),
-      destinationPincode: getDefaultValue(isEditing, dpincode),
+      consignorF: getDefaultValue(isEditing, consignorF),
+      consignorL: getDefaultValue(isEditing, consignorL),
+      consigneeF: getDefaultValue(isEditing, consigneeF),
+      consigneeL: getDefaultValue(isEditing, consigneeL),
+      contact: getDefaultValue(isEditing, contact),
+      email: getDefaultValue(isEditing, email),
+      oaddress1: getDefaultValue(isEditing, oaddress1),
+      oaddress2: getDefaultValue(isEditing, oaddress2),
+      ocity: getDefaultValue(isEditing, ocity),
+      ostate: getDefaultValue(isEditing, ostate),
+      opincode: getDefaultValue(isEditing, opincode),
+      daddress1: getDefaultValue(isEditing, daddress1),
+      daddress2: getDefaultValue(isEditing, daddress2),
+      dcity: getDefaultValue(isEditing, dcity),
+      dstate: getDefaultValue(isEditing, dstate),
+      dpincode: getDefaultValue(isEditing, dpincode),
       status: getDefaultValue(isEditing, status),
       insuranceP: getDefaultValue(isEditing, insuranceP),
       insuranceA: getDefaultValue(isEditing, insuranceA),
@@ -137,10 +141,10 @@ const CreateJobForm = ({
     updateJobDetails(data);
     if (isEditing) {
       onUpdateJob(data);
-      updateIsDownloadingPDF(true);
+      // updateIsDownloadingPDF(true);
     } else {
       onCreateJob(data);
-      updateIsDownloadingPDF(true);
+      // updateIsDownloadingPDF(true);
       // reset({
       //   cnsFirstName: getDefaultValue(isEditing, consignor),
       //   cneFirstName: getDefaultValue(isEditing, consignee),
@@ -209,10 +213,10 @@ const CreateJobForm = ({
                       width={300}
                       rules={{ required: true }}
                       className={classes.formControl}
-                      name='cnsFirstName'
-                      value={values.cnsFirstName}
-                      error={errors.cnsFirstName}
-                      helperText={errors.cnsFirstName && 'FirstName is required'}
+                      name='consignorF'
+                      value={values.consignorF}
+                      error={errors.consignorF}
+                      helperText={errors.consignorF && 'FirstName is required'}
                       required
                     />
                   </Box>
@@ -226,10 +230,10 @@ const CreateJobForm = ({
                     width={300}
                     rules={{ required: true }}
                     className={classes.formControl}
-                    name='cnsLastName'
-                    value={values.cnsLastName}
-                    error={errors.cnsLastName}
-                    helperText={errors.cnsLastName && 'LastName is required'}
+                    name='consignorL'
+                    value={values.consignorL}
+                    error={errors.consignorL}
+                    helperText={errors.consignorL && 'LastName is required'}
                     required
                   />
                 </Grid>
@@ -254,10 +258,10 @@ const CreateJobForm = ({
                         width={300}
                         rules={{ required: true }}
                         className={classes.formControl}
-                        name='cneFirstName'
-                        value={values.cneFirstName}
-                        error={errors.cneFirstName}
-                        helperText={errors.cneFirstName && 'FirstName is required'}
+                        name='consigneeF'
+                        value={values.consigneeF}
+                        error={errors.consigneeF}
+                        helperText={errors.consigneeF && 'FirstName is required'}
                         required
                       />
                     </Box>
@@ -271,10 +275,10 @@ const CreateJobForm = ({
                       width={300}
                       rules={{ required: true }}
                       className={classes.formControl}
-                      name='cneLastName'
-                      value={values.cneLastName}
-                      error={errors.cneLastName}
-                      helperText={errors.cneLastName && 'LastName is required'}
+                      name='consigneeL'
+                      value={values.consigneeL}
+                      error={errors.consigneeL}
+                      helperText={errors.consigneeL && 'LastName is required'}
                       required
                     />
                   </Grid>
@@ -290,10 +294,10 @@ const CreateJobForm = ({
                         width={300}
                         rules={{ required: true }}
                         className={classes.formControl}
-                        name='cneMobile'
-                        value={values.cneMobile}
-                        error={errors.cneMobile}
-                        helperText={errors.cneMobile && 'Contact number is required'}
+                        name='contact'
+                        value={values.contact}
+                        error={errors.contact}
+                        helperText={errors.contact && 'Contact number is required'}
                         required
                       />
                     </Box>
@@ -307,10 +311,10 @@ const CreateJobForm = ({
                       width={300}
                       rules={{ required: true }}
                       className={classes.formControl}
-                      name='cneEmail'
-                      value={values.cneEmail}
-                      error={errors.cneEmail}
-                      helperText={errors.cneEmail && 'Email is required'}
+                      name='email'
+                      value={values.email}
+                      error={errors.email}
+                      helperText={errors.email && 'Email is required'}
                       required
                     />
                   </Grid>
@@ -335,10 +339,10 @@ const CreateJobForm = ({
                         width={300}
                         rules={{ required: true }}
                         className={classes.formControl}
-                        name='originAddress1'
-                        value={values.originAddress1}
-                        error={errors.originAddress1}
-                        helperText={errors.originAddress1 && 'Address is required'}
+                        name='oaddress1'
+                        value={values.oaddress1}
+                        error={errors.oaddress1}
+                        helperText={errors.oaddress1 && 'Address is required'}
                         required
                       />
                     </Box>
@@ -352,11 +356,11 @@ const CreateJobForm = ({
                       width={300}
                       rules={{}}
                       className={classes.formControl}
-                      name='originAddress2'
-                      value={values.originAddress2}
-                      // error={errors.originAddress2}
+                      name='oaddress2'
+                      value={values.oaddress2}
+                      // error={errors.oaddress2}
 
-                      // helperText={errors.originAddress2 && 'Address is required'}
+                      // helperText={errors.oaddress2 && 'Address is required'}
                     />
                   </Grid>
 
@@ -371,10 +375,10 @@ const CreateJobForm = ({
                         width={300}
                         rules={{ required: true }}
                         className={classes.formControl}
-                        name='originCity'
-                        value={values.originCity}
-                        error={errors.originCity}
-                        helperText={errors.originCity && 'City is required'}
+                        name='ocity'
+                        value={values.ocity}
+                        error={errors.ocity}
+                        helperText={errors.ocity && 'City is required'}
                         required
                       />
                     </Box>
@@ -388,15 +392,15 @@ const CreateJobForm = ({
                       width={300}
                       rules={{ required: true }}
                       className={classes.formControl}
-                      name='originState'
-                      value={values.originState}
-                      error={errors.originState}
-                      helperText={errors.originState && 'State is required'}
+                      name='ostate'
+                      value={values.ostate}
+                      error={errors.ostate}
+                      helperText={errors.ostate && 'State is required'}
                       required
                     />
                   </Grid>
                   <Grid item lg={12} container className={classes.gridItem}>
-                    <Box marginRight='10px'>
+                    {/* <Box marginRight='10px'>
                       <Controller
                         as={TextField}
                         control={control}
@@ -412,7 +416,7 @@ const CreateJobForm = ({
                         helperText={errors.originCountry && 'Country is required'}
                         required
                       />
-                    </Box>
+                    </Box> */}
 
                     <Controller
                       as={TextField}
@@ -423,10 +427,10 @@ const CreateJobForm = ({
                       width={300}
                       rules={{ required: true }}
                       className={classes.formControl}
-                      name='originPincode'
-                      value={values.originPincode}
-                      error={errors.originPincode}
-                      helperText={errors.originPincode && 'Pincode is required'}
+                      name='opincode'
+                      value={values.opincode}
+                      error={errors.opincode}
+                      helperText={errors.opincode && 'Pincode is required'}
                       required
                     />
                   </Grid>
@@ -453,10 +457,10 @@ const CreateJobForm = ({
                         width={300}
                         rules={{ required: true }}
                         className={classes.formControl}
-                        name='destinationAddress1'
-                        value={values.destinationAddress1}
-                        error={errors.destinationAddress1}
-                        helperText={errors.destinationAddress1 && 'Address is required'}
+                        name='daddress1'
+                        value={values.daddress1}
+                        error={errors.daddress1}
+                        helperText={errors.daddress1 && 'Address is required'}
                         required
                       />
                     </Box>
@@ -470,8 +474,8 @@ const CreateJobForm = ({
                       width={300}
                       rules={{}}
                       className={classes.formControl}
-                      name='destinationAddress2'
-                      value={values.destinationAddress2}
+                      name='daddress2'
+                      value={values.daddress2}
                       required
                     />
                   </Grid>
@@ -487,10 +491,10 @@ const CreateJobForm = ({
                         width={300}
                         rules={{ required: true }}
                         className={classes.formControl}
-                        name='destinationCity'
-                        value={values.destinationCity}
-                        error={errors.destinationCity}
-                        helperText={errors.destinationCity && 'City is required'}
+                        name='dcity'
+                        value={values.dcity}
+                        error={errors.dcity}
+                        helperText={errors.dcity && 'City is required'}
                         required
                       />
                     </Box>
@@ -504,16 +508,16 @@ const CreateJobForm = ({
                       width={300}
                       rules={{ required: true }}
                       className={classes.formControl}
-                      name='destinationState'
-                      value={values.destinationState}
-                      error={errors.destinationState}
-                      helperText={errors.destinationState && 'State is required'}
+                      name='dstate'
+                      value={values.dstate}
+                      error={errors.dstate}
+                      helperText={errors.dstate && 'State is required'}
                       required
                     />
                   </Grid>
                   <Grid item lg={12} container className={classes.gridItem}>
                     <Box marginRight='10px'>
-                      <Controller
+                      {/* <Controller
                         as={TextField}
                         control={control}
                         id='outlined-basic'
@@ -527,7 +531,7 @@ const CreateJobForm = ({
                         error={errors.destinationCountry}
                         helperText={errors.destinationCountry && 'Country is required'}
                         required
-                      />
+                      /> */}
                     </Box>
 
                     <Controller
@@ -539,10 +543,10 @@ const CreateJobForm = ({
                       width={300}
                       rules={{ required: true }}
                       className={classes.formControl}
-                      name='destinationPincode'
-                      value={values.destinationPincode}
-                      error={errors.destinationPincode}
-                      helperText={errors.destinationPincode && 'Pincode is required'}
+                      name='dpincode'
+                      value={values.dpincode}
+                      error={errors.dpincode}
+                      helperText={errors.dpincode && 'Pincode is required'}
                       required
                     />
                   </Grid>
