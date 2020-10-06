@@ -49,6 +49,37 @@ module.exports = {
             res.status(500).send({ message: "Failed to fetch Invoice", data: err });
             return;    
         }
+    },
+
+    updateInvoice: async (req, res) => {
+        try {
+        const {
+            gcnno, invoice
+            } = req.body;
+
+            let invoiceC = await Invoice.find({gcnno: gcnno});
+
+            let obj = new Invoice();
+            obj._id = invoiceC._id;
+            obj.gcnno = gcnno;
+            obj.invoiceDetails = invoice || invoiceC.invoiceDetails; 
+            obj.total = await invoiceService.getTotal(obj.invoiceDetails);
+            console.log(obj)
+            var newvalues = { $set: obj };
+
+            Invoice.updateOne({gcnno: obj.gcnno}, newvalues, (err, invoice) => {
+                if (err) {
+                res.status(500).send({ message: "Invoice not updated", data: err });
+                return;
+                }  
+                return res.status(200).send({ message: "Invoice was updated successfully!", data: obj });
+            });
+
+        } catch(err) {
+            console.log(err)
+            res.status(500).send({ message: "Failed to fetch Invoice", data: err });
+            return;    
+        }
     }
 
 
