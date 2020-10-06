@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from 'react-redux';
 import Box from '@material-ui/core/Box';
@@ -8,7 +9,12 @@ import Typography from '@material-ui/core/Typography';
 
 import AllJobsTable from '../AllJobsTable/AllJobsTable';
 import makeData from './makeData';
-import { allJobRequest, deleteJobRequest } from '../../actions';
+import {
+  allJobRequest,
+  deleteJobRequest,
+  updateJobStatusRequest,
+  getJobRequest,
+} from '../../actions';
 import toaster from '../../utils/toaster';
 
 const useStyles = makeStyles((theme) => ({
@@ -37,22 +43,40 @@ const useStyles = makeStyles((theme) => ({
 
 const AllJobsPage = ({ match }) => {
   const classes = useStyles();
+  const history = useHistory();
 
+  const [isChanged, updateIsChanged] = useState(true);
   const dispatch = useDispatch();
-  const { allJobs } = useSelector((state) => state.Job);
+  const { allJobs, job } = useSelector((state) => state.Job);
+  const loading = useSelector((state) => state.Loader);
 
   const jobIds = allJobs.map(({ id }) => id).join(',');
 
-  const data = React.useMemo(() => allJobs, [jobIds]);
-
-  const onDeleteJob = (selectedGcnNo) => {
+  const onDeleteJob = useCallback((selectedGcnNo) => {
+    updateIsChanged(true);
     dispatch(deleteJobRequest(selectedGcnNo));
-  };
+  });
+
+  const onUpdateJobStatus = useCallback((status, gcnNo) => {
+    updateIsChanged(true);
+    dispatch(updateJobStatusRequest({ status, gcnNo }));
+  });
 
   useEffect(() => {
-    dispatch(allJobRequest());
-  }, [data]);
+    if (!isChanged) {
+      dispatch(allJobRequest());
+    }
+    updateIsChanged(false);
+  }, [isChanged]);
 
+  const data = React.useMemo(() => {
+    return allJobs;
+  }, [allJobs, isChanged]);
+
+  const onEditJobClick = useCallback((gcnno) => {
+    dispatch(getJobRequest(gcnno));
+    history.push(`${match.path}/edit/${gcnno}`);
+  });
   return (
     <Grid container>
       <Grid item lg={12} container className={classes.gridItem}>
@@ -72,7 +96,14 @@ const AllJobsPage = ({ match }) => {
         <Box component='div'>
           <CssBaseline />
 
-          <AllJobsTable data={data} onDeleteJob={(gcnNo) => onDeleteJob(gcnNo)} match={match} />
+          <AllJobsTable
+            data={data}
+            onDeleteJob={(gcnNo) => onDeleteJob(gcnNo)}
+            match={match}
+            onUpdateJobStatus={(status, gcnNo) => onUpdateJobStatus(status, gcnNo)}
+            onEditJobClick={onEditJobClick}
+            isLoading={loading}
+          />
         </Box>
       </Grid>
     </Grid>

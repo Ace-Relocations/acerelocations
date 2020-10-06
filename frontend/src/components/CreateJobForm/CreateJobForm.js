@@ -100,6 +100,7 @@ const CreateJobForm = ({
     insuranceA,
     type,
     date,
+    gcnNo,
   },
 }) => {
   const classes = useStyles();

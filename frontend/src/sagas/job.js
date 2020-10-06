@@ -65,7 +65,7 @@ function* createJobRequest({ payload }) {
     }
   } catch (error) {
     yield put(jobAction.hideLoader());
-    toaster(error.message);
+    toaster('Error Creating Job, Please Try again', { type: 'error' });
   }
 }
 
@@ -93,16 +93,20 @@ function* allJobRequest() {
 function* getJobRequest(payload) {
   try {
     const { gcnNo } = payload;
+    yield put(jobAction.showLoader());
 
     let response = yield axios.get(`/job/view?gcnno=${gcnNo}`);
 
     if (response.status === 200) {
       yield put(jobAction.getJobRequestSuccess(response.data));
+      yield put(jobAction.hideLoader());
       toaster(response.message);
     } else {
+      yield put(jobAction.hideLoader());
       toaster(response.message, { type: 'error' });
     }
   } catch (error) {
+    yield put(jobAction.hideLoader());
     console.log(error);
     if (error == 'Error: Request failed with status code 401') {
       yield put(push('/login'));
@@ -115,9 +119,50 @@ function* getJobRequest(payload) {
 
 function* updateJobRequest(payload) {
   try {
-    console.log(payload);
-    const { gcnNo } = payload;
-    let response = yield axios.post(`/job/update?gcnno=${gcnNo}`, payload.payload);
+    const {
+      cnsFirstName: consignor,
+      cneFirstName: consignee,
+      cneMobile: contact,
+      cneEmail: email,
+      originAddress1: oaddress1,
+      originAddress2: oaddress2,
+      originCity: ocity,
+      ooriginState: ostate,
+      originPincode: opincode,
+      destinationAddress1: daddress1,
+      destinationAddress2: daddress2,
+      destinationCity: dcity,
+      destinationState: dstate,
+      destinationPincode: dpincode,
+      status,
+      car = false,
+      insuranceP,
+      insuranceA,
+      type,
+      date,
+      gcnNo,
+    } = payload;
+    let response = yield axios.post(`/job/update?gcnno=${gcnNo}`, {
+      consignor,
+      consignee,
+      email,
+      contact,
+      oaddress1,
+      oaddress2,
+      ocity,
+      ostate,
+      opincode,
+      daddress1,
+      daddress2,
+      dcity,
+      dstate,
+      dpincode,
+      status,
+      car,
+      insuranceP,
+      insuranceA,
+      type,
+    });
 
     if (response.status === 200) {
       yield put(jobAction.updateJobRequestSuccess(response.data));
@@ -139,15 +184,18 @@ function* updateJobRequest(payload) {
 function* deleteJobRequest(payload) {
   try {
     const { gcnNo } = payload;
+    yield put(jobAction.showLoader());
     let response = yield axios.post(`/job/delete?gcnno=${gcnNo}`);
-
     if (response.status === 200) {
       yield put(jobAction.deleJobRequestSuccess(response.data));
+      yield put(jobAction.hideLoader());
       toaster(response.message);
     } else {
       toaster(response.message, { type: 'error' });
+      yield put(jobAction.hideLoader());
     }
   } catch (error) {
+    yield put(jobAction.hideLoader());
     if (error == 'Error: Request failed with status code 401') {
       yield put(push('/login'));
       // yield put(actions.userSignOutSuccess());
@@ -158,6 +206,33 @@ function* deleteJobRequest(payload) {
   }
 }
 
+function* updateJobStatusRequest(payload) {
+  try {
+    const {
+      payload: { status, gcnNo },
+    } = payload;
+    let response = yield axios.post(`/job/update?gcnno=${gcnNo}`, { status });
+    yield put(jobAction.showLoader());
+    if (response.status === 200) {
+      yield put(jobAction.updateJobStatusRequestSuccess(response.data));
+      yield put(jobAction.hideLoader());
+      toaster(response.message);
+    } else {
+      yield put(jobAction.hideLoader());
+      toaster(response.message, { type: 'error' });
+    }
+  } catch (error) {
+    console.log(error);
+    yield put(jobAction.hideLoader());
+    if (error == 'Error: Request failed with status code 401') {
+      yield put(push('/login'));
+      // yield put(actions.userSignOutSuccess());
+      yield localStorage.clear();
+      toaster(error.message, { type: 'error' });
+    }
+  }
+}
+
 export default function* rootsaga() {
   yield all([
     yield takeEvery(actionTypes.CREATE_JOB_REQUEST, createJobRequest),
@@ -165,5 +240,6 @@ export default function* rootsaga() {
     yield takeEvery(actionTypes.GET_ALL_JOB_REQUEST, allJobRequest),
     yield takeEvery(actionTypes.UPDATE_JOB_REQUEST, updateJobRequest),
     yield takeEvery(actionTypes.DELETE_JOB_REQUEST, deleteJobRequest),
+    yield takeEvery(actionTypes.UPDATE_JOB_STATUS_REQUEST, updateJobStatusRequest),
   ]);
 }

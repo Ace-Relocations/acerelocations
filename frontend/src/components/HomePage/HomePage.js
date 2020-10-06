@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid/index';
 import Typography from '@material-ui/core/Typography';
+import DashboardSection from '../DashboardSection/DashboardSection';
 
 const useStyles = makeStyles((theme) => ({
   introBox: {
@@ -65,7 +66,7 @@ const HomePage = () => {
   return (
     <div>
       <Grid container>
-        <Grid item lg={6} container className={classes.gridItem}>
+        <Grid item lg={12} container className={classes.gridItem}>
           <Box className={classes.introBox}>
             <div>
               <Typography variant='h3' component='h1' className={classes.primaryText}>
@@ -75,6 +76,13 @@ const HomePage = () => {
                   Welcome back to Ace Relocation
                 </Typography>
               </Typography>
+            </div>
+          </Box>
+        </Grid>
+        <Grid item lg={12} container className={classes.gridItem}>
+          <Box className={classes.introBox}>
+            <div>
+              <DashboardSection />
             </div>
           </Box>
         </Grid>

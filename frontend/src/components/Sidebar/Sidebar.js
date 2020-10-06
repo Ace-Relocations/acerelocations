@@ -13,6 +13,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import DashboardIcon from '@material-ui/icons/Dashboard';
 import Avatar from '@material-ui/core/Avatar';
 
 import logo from '../../logo.png';
@@ -74,6 +75,13 @@ const Sidebar = ({ props }) => {
         </div>
         <Divider />
         <List>
+          <ListItem button key='Dashboard' onClick={() => history.push('/')}>
+            <ListItemIcon>
+              <DashboardIcon />
+            </ListItemIcon>
+            <ListItemText primary='Dashboard' />
+          </ListItem>
+
           <ListItem button key='Create Job' onClick={() => history.push('/create-job')}>
             <ListItemIcon>
               <InboxIcon />

@@ -64,11 +64,10 @@ const useStyles = makeStyles({
   },
 });
 
-function ConfirmationDialogRaw(props) {
-  const { onClose, value: valueProp, open, ...other } = props;
+const ConfirmationDialogRaw = (props) => {
+  const { onClose, value: valueProp, open, gcnNo, onUpdateJobStatus, ...other } = props;
   const [value, setValue] = React.useState(valueProp);
   const radioGroupRef = React.useRef(null);
-
   React.useEffect(() => {
     if (!open) {
       setValue(valueProp);
@@ -86,11 +85,12 @@ function ConfirmationDialogRaw(props) {
   };
 
   const handleOk = () => {
+    onUpdateJobStatus(value.status, gcnNo);
     onClose(value);
   };
 
   const handleChange = (event) => {
-    setValue(event.target.value);
+    setValue({ ...value, status: event.target.value });
   };
 
   return (
@@ -127,9 +127,16 @@ function ConfirmationDialogRaw(props) {
       </DialogActions>
     </Dialog>
   );
-}
+};
 
-const AllJobsTable = ({ data, onDeleteJob, match }) => {
+const AllJobsTable = ({
+  data,
+  onDeleteJob,
+  onUpdateJobStatus,
+  match,
+  onEditJobClick,
+  isLoading,
+}) => {
   const classes = useStyles();
   const history = useHistory();
 
@@ -146,12 +153,14 @@ const AllJobsTable = ({ data, onDeleteJob, match }) => {
   const [openStatus, setOpenStatus] = useState(false);
   const [openDownload, setOpenDownload] = useState(false);
 
-  const [valueStatus, setValueStatus] = useState('household');
+  const [valueStatus, setValueStatus] = useState();
 
   const { job, allJobs } = useSelector((state) => state.Job);
 
-  const handleClickListItem = () => {
+  const handleClickListItem = (value, gcnno) => {
     setOpenStatus(true);
+    setValueStatus(value);
+    updateSelectedGcnNo(gcnno);
   };
 
   const handleCloseStatus = (newValue) => {
@@ -196,7 +205,6 @@ const AllJobsTable = ({ data, onDeleteJob, match }) => {
   };
 
   const handleDeleteClick = () => {
-    console.log('selectedGcnNo', selectedGcnNo);
     onDeleteJob(selectedGcnNo);
     setOpen(false);
   };
@@ -204,8 +212,6 @@ const AllJobsTable = ({ data, onDeleteJob, match }) => {
   const selectedJob = useMemo(() => {
     return allJobs.find(({ gcnno }) => gcnno === selectedToDownloadGcnNo);
   }, [updateSelectedToDownloadGcnNo, handleOpenDownload]);
-
-  console.log({ selectedJob });
 
   const headCells = [
     { id: 'gcnno', numeric: false, label: 'GCN No.' },
@@ -223,7 +229,6 @@ const AllJobsTable = ({ data, onDeleteJob, match }) => {
   ];
 
   const createSortHandler = (property) => (event) => {
-    console.log({ property, event });
     handleRequestSort(event, property);
   };
 
@@ -266,7 +271,7 @@ const AllJobsTable = ({ data, onDeleteJob, match }) => {
                 <StyledTableCell align='center'>{row.email}</StyledTableCell>
                 <StyledTableCell
                   align='center'
-                  onClick={handleClickListItem}
+                  onClick={() => handleClickListItem(row.status, row.gcnno)}
                   style={{ cursor: 'pointer' }}
                 >
                   {row.status}
@@ -286,12 +291,7 @@ const AllJobsTable = ({ data, onDeleteJob, match }) => {
                   </IconButton>
                 </StyledTableCell>
                 <StyledTableCell align='center'>
-                  <IconButton
-                    aria-label='edit'
-                    onClick={() => {
-                      history.push(`${match.path}/edit/${row.gcnno}`);
-                    }}
-                  >
+                  <IconButton aria-label='edit' onClick={() => onEditJobClick(row.gcnno)}>
                     <SvgIcon>
                       <EditIcon />
                     </SvgIcon>
@@ -357,6 +357,8 @@ const AllJobsTable = ({ data, onDeleteJob, match }) => {
         open={openStatus}
         onClose={handleCloseStatus}
         value={valueStatus}
+        gcnNo={selectedGcnNo}
+        onUpdateJobStatus={onUpdateJobStatus}
       />
 
       <Dialog
