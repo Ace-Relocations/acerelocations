@@ -12,9 +12,10 @@ import { PDFDownloadLink } from '@react-pdf/renderer';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
+import DateFnsUtils from '@date-io/date-fns';
+import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
 
 import Invoice from '../../Test/Invoice';
-import ReactHookFormSelect from '../ReactHookFormSelect/ReactHookFormSelect';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -635,21 +636,39 @@ const CreateJobForm = ({
                     </Box>
 
                     <Box>
-                      <Controller
-                        as={TextField}
-                        control={control}
-                        id='outlined-basic'
-                        label='Date'
-                        variant='outlined'
-                        width={300}
-                        rules={{ required: true }}
-                        className={classes.formControl}
-                        name='date'
-                        value={values.date}
-                        error={errors.date}
-                        helperText={errors.date && 'Date is required'}
-                        required
-                      />
+                      <Typography lineHeight='10px'>Date</Typography>
+                      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                        <FormControl variant='outlined' className={classes.formControl}>
+                          <Controller
+                            as={
+                              <KeyboardDatePicker
+                                disableToolbar
+                                variant='inline'
+                                format='MM/dd/yyyy'
+                                margin='normal'
+                                id='date-picker-inline'
+                                value={new Date(values.date) || new Date()}
+                                KeyboardButtonProps={{
+                                  'aria-label': 'change date',
+                                }}
+                              />
+                            }
+                            control={control}
+                            id='outlined-basic'
+                            label=''
+                            // label='Date picker inline'
+                            // variant='outlined'
+                            width={300}
+                            rules={{ required: true }}
+                            className={classes.formControl}
+                            name='date'
+                            // value={values.date}
+                            error={errors.date}
+                            helperText={errors.date && 'Date is required'}
+                            required
+                          />
+                        </FormControl>
+                      </MuiPickersUtilsProvider>
                     </Box>
                   </Grid>
                 </Grid>
