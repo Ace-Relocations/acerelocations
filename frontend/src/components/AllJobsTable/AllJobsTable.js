@@ -34,6 +34,7 @@ import {
   Edit as EditIcon,
   Delete as DeleteIcon,
   CloudDownload as CloudDownloadIcon,
+  Money as MoneyIcon,
 } from '@material-ui/icons';
 
 const options = ['ongoing', 'completed'];
@@ -336,7 +337,7 @@ const AllJobsTable = ({
                 <StyledTableCell align='center'>
                   <IconButton aria-label='invoice' onClick={() => handleOpenInvoice(row.gcnno)}>
                     <SvgIcon>
-                      <EditIcon />
+                      <MoneyIcon />
                     </SvgIcon>
                   </IconButton>
                 </StyledTableCell>
