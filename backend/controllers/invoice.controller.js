@@ -1,5 +1,4 @@
 const invoiceService = require("../services/invoice.service");
-const jobService = require("../services/job.service")
 const db = require("../models");
 
 const Customer = db.customer;
@@ -57,23 +56,20 @@ module.exports = {
             gcnno, invoice
             } = req.body;
 
-            let invoiceC = await Invoice.find({gcnno: gcnno});
-
-            let obj = new Invoice();
+            let invoiceC = await Invoice.findOne({gcnno: gcnno});
+         
+            let obj = {};
             obj._id = invoiceC._id;
             obj.gcnno = gcnno;
             obj.invoiceDetails = invoice || invoiceC.invoiceDetails; 
             obj.total = await invoiceService.getTotal(obj.invoiceDetails);
-            console.log(obj)
             var newvalues = { $set: obj };
 
-            Invoice.updateOne({gcnno: obj.gcnno}, newvalues, (err, invoice) => {
-                if (err) {
-                res.status(500).send({ message: "Invoice not updated", data: err });
-                return;
+            let updateV = await Invoice.updateOne({gcnno: obj.gcnno}, newvalues)
+                if (!updateV) {
+                return res.status(500).send({ message: "Invoice not updated", data: updateV });
                 }  
                 return res.status(200).send({ message: "Invoice was updated successfully!", data: obj });
-            });
 
         } catch(err) {
             console.log(err)
