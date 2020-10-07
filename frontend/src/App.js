@@ -14,6 +14,7 @@ import Sidebar from './components/Sidebar/Sidebar';
 import CreateJobPage from './components/CreateJobPage/CreateJobPage';
 import ViewJobPage from './components/ViewJobPage/ViewJobPage';
 import AllJobsPage from './components/AllJobsPage/AllJobsPage';
+import DownloadJobPage from './components/DownloadJobPage/DownloadJobPage';
 
 toast.configure();
 
@@ -58,6 +59,8 @@ function App() {
           <Route path='/view-job/:jobId' component={ViewJobPage} />
           <Route path='/jobs' component={AllJobsPage} exact />
           <Route path='/jobs/edit/:jobId' component={CreateJobPage} />
+          <Route path='/download-job' component={DownloadJobPage} />
+
           {/* <Route path='/view-job' exact render={() => <Redirect to='/' />} /> */}
 
           {/* <Route path='/' exact render={() => <Redirect to='/login' />} /> */}

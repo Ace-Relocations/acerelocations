@@ -157,17 +157,6 @@ const Invoice = ({ invoice }) => {
     lrNo = '',
   } = invoice;
 
-  /*  
-    {
-      consignor: {firstName, lastName},
-      consignee: {firstName, lastName},
-      originAddress: { oaddress1, oaddress2, ocity, ostate, opincode },
-      destinationAddress: { daddress1, daddress2, dcity, dstate, dpincode },
-      status,
-      car, insuranceP, insuranceA, type, date, gcnno
-    } 
-  */
-
   const invoiceDetail = {
     consignor: { firstName: consignorF, lastName: consignorL },
     consignee: { firstName: consigneeF, lastName: consigneeL },

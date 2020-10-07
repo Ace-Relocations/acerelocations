@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid/index';
 import Typography from '@material-ui/core/Typography';
 import CreateJobForm from '../CreateJobForm/CreateJobForm';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import { jobRequest, getJobRequest, updateJobRequest } from '../../actions';
 import Loader from '../Loader/Loader';
@@ -37,20 +38,16 @@ const CreateJobPage = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { jobId } = useParams();
+  const history = useHistory();
 
   const { job } = useSelector((state) => state.Job);
   const { loader } = useSelector((state) => state.Loader);
 
   const isEditing = !!jobId;
 
-  // useEffect(() => {
-  //   if (isEditing) {
-  //     // dispatch(getJobRequest(jobId));
-  //   }
-  // }, [isEditing]);
-
   const onCreateJob = (data) => {
     dispatch(jobRequest(data));
+    history.push(`/download-job`);
   };
 
   const onUpdateJob = (data) => {

@@ -14,8 +14,9 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
+import { useSelector } from 'react-redux';
 
-import Invoice from '../../Test/Invoice';
+import CreateJobPDF from '../CreateJobPDF/CreateJobPDF';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -115,6 +116,11 @@ const CreateJobForm = ({
   const getDefaultValue = (isEditing, value) => (isEditing ? value : '');
   const [isDownloadingPDF, updateIsDownloadingPDF] = useState(false);
   const [jobDetails, updateJobDetails] = useState();
+  const { job } = useSelector((state) => state.Job);
+
+  // const onDownloadPDFNowClick = () => {
+  //   isDownloadingPDF(false);
+  // };
   const { handleSubmit, control, errors, getValues, watch, reset } = useForm({
     mode: 'onChange',
     defaultValues: {
@@ -143,13 +149,11 @@ const CreateJobForm = ({
     },
   });
   const submit = (data) => {
-    console.log({ data });
     updateJobDetails(data);
     if (isEditing) {
       onUpdateJob(data);
       // updateIsDownloadingPDF(true);
     } else {
-      console.log({ data });
       onCreateJob(data);
       // updateIsDownloadingPDF(true);
       // reset({
@@ -184,7 +188,7 @@ const CreateJobForm = ({
     <Grid container>
       {isDownloadingPDF ? (
         <PDFDownloadLink
-          document={<Invoice invoice={{ firstName: 'sdf', LastName: 'sdfasdf' }} />}
+          document={<CreateJobPDF invoice={{ firstName: 'sdf', LastName: 'sdfasdf' }} />}
           fileName='job.pdf'
         >
           {({ blob, url, loading, error }) =>
