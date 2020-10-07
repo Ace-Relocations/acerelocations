@@ -44,10 +44,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 const AddInvoiceDialog = ({ openInvoice, handleAddInvoice, handleCancleInvoice }) => {
-  const theme = useTheme();
   const classes = useStyles();
-
-  //   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   const [fields, setFields] = useState([{ expense: null, amount: null }]);
   const [validateExpenses, updateValidateExpenses] = useState(false);
@@ -88,7 +85,6 @@ const AddInvoiceDialog = ({ openInvoice, handleAddInvoice, handleCancleInvoice }
 
   const isValid = fields.length > 0 && validateExpenses;
 
-  console.log(validateExpenses, isValid);
   return (
     <Dialog
       fullScreen
