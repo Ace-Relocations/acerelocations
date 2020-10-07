@@ -39,7 +39,6 @@ var Customer = mongoose.model(
       },
     dstate: String,
     dpincode: String,
-    car: Boolean,
     carGcnno: Number,
     insuranceP: Number,
     insuranceA: Number,

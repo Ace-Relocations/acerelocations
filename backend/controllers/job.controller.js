@@ -13,13 +13,13 @@ module.exports = {
 createJob: async (req, res) => {
     try {
         const {
-            consignorF, consignorL, consigneeF, consigneeL, contact, email, oaddress1, oaddress2, ocity, ostate, opincode, daddress1, daddress2, dcity, dstate, dpincode, car, type, status, insuranceP, insuranceA, date
+            consignorF, consignorL, consigneeF, consigneeL, contact, email, oaddress1, oaddress2, ocity, ostate, opincode, daddress1, daddress2, dcity, dstate, dpincode, type, status, insuranceP, insuranceA, date
             } = req.body;
         // const defaultV = await service.setGcnno(491);
         const gcnno = await service.incrementGcnno();
         
         let gcnnoC = 0;
-        if(car == true){
+        if(type.toLowerCase() == "both"){
             gcnnoC = await service.incrementGcnno();
         }
         const user = await User.findById(req.userId)
@@ -45,7 +45,6 @@ createJob: async (req, res) => {
         obj.dpincode = dpincode; 
         obj.type = type;
         obj.status = status;
-        obj.car = car;
         obj.carGcnno = gcnnoC;
         obj.insuranceP = insuranceP; 
         obj.insuranceA = insuranceA;
@@ -217,9 +216,9 @@ deleteJob: async (req, res) => {
                 }
 
         let current = await Counter.findById("entityId");
-        if ((current.seq - 1) == user.gcnno || (user.car == true && (current.seq - 2) == user.gcnno)) {
+        if ((current.seq - 1) == user.gcnno || (user.type.toLowerCase() == "both" && (current.seq - 2) == user.gcnno)) {
             let number = await service.decrementGcnno(user.gcnno);
-            if (user.car == true){
+            if (user.type.toLowerCase() == "both"){
                 let number1 = await service.decrementGcnno(user.gcnno);
             }
             let deleteV = await Customer.deleteOne({ gcnno: req.query.gcnno});

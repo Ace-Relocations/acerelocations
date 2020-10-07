@@ -1,8 +1,8 @@
 const expenseService = require("../services/expense.service");
-const jobService = require("../services/job.service")
 const db = require("../models");
 
 const Customer = db.customer;
+const Expense = db.expense;
 
 
 module.exports = {
@@ -41,11 +41,38 @@ module.exports = {
 
     getExpense: async (req, res) => {
         try {
-            let expenses = await Customer.find({gcnno: req.body.gcnno}).populate("expense").populate("invoice");
+            let expenses = await Customer.find({gcnno: req.body.gcnno}).populate("expense").populate("expense");
             return res.status(200).send({ message: "Expense was fetched successfully!", data: expenses });
         } catch(err) {
             console.log(err)
             res.status(500).send({ message: "Failed to fetch Expense", data: err });
+            return;    
+        }
+    },
+
+    updateExpense: async (req, res) => {
+        try {
+        const {
+            gcnno, expense
+            } = req.body;
+
+            let expenseC = await Expense.findOne({gcnno: gcnno});
+            let obj = {};
+            obj._id = expenseC._id;
+            obj.gcnno = gcnno;
+            obj.expenseDetails = expense || expenseC.expenseDetails; 
+            obj.total = await expenseService.getTotal(obj.expenseDetails);
+            var newvalues = { $set: obj };
+
+            let updateV = await Expense.updateOne({gcnno: obj.gcnno}, newvalues)
+                if (!updateV) {
+                return res.status(500).send({ message: "expense not updated", data: updateV });
+                }  
+                return res.status(200).send({ message: "expense was updated successfully!", data: obj });
+
+        } catch(err) {
+            console.log(err)
+            res.status(500).send({ message: "Failed to fetch expense", data: err });
             return;    
         }
     }
