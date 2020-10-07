@@ -26,6 +26,7 @@ import Button from '@material-ui/core/Button';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 
+import AddInvoiceDialog from '../AddInvoiceDialog/AddInvoiceDialog';
 import Invoice from '../../Test/Invoice';
 import HorizontalLoader from '../HorizontalLoader/HorizontalLoader';
 import {
@@ -153,6 +154,7 @@ const AllJobsTable = ({
 
   const [openStatus, setOpenStatus] = useState(false);
   const [openDownload, setOpenDownload] = useState(false);
+  const [openInvoice, setOpenInvoice] = useState(false);
 
   const [valueStatus, setValueStatus] = useState();
 
@@ -210,6 +212,19 @@ const AllJobsTable = ({
     setOpen(false);
   };
 
+  const handleOpenInvoice = (gcnno) => {
+    updateSelectedGcnNo(gcnno);
+    setOpenInvoice(true);
+  };
+
+  const handleAddInvoice = () => {
+    setOpenInvoice(false);
+  };
+
+  const handleCancleInvoice = () => {
+    setOpenInvoice(false);
+  };
+
   const selectedJob = useMemo(() => {
     return allJobs.find(({ gcnno }) => gcnno === selectedToDownloadGcnNo);
   }, [updateSelectedToDownloadGcnNo, handleOpenDownload]);
@@ -227,6 +242,7 @@ const AllJobsTable = ({
     { id: 'update', numeric: false, label: 'Update' },
     { id: 'delete', numeric: false, label: 'Delete' },
     { id: 'download', numeric: false, label: 'Download' },
+    { id: 'addInvoice', numeric: false, label: 'Add Invoice' },
   ];
 
   const createSortHandler = (property) => (event) => {
@@ -314,6 +330,13 @@ const AllJobsTable = ({
                     </SvgIcon>
                   </IconButton>
                 </StyledTableCell>
+                <StyledTableCell align='center'>
+                  <IconButton aria-label='invoice' onClick={() => handleOpenInvoice(row.gcnno)}>
+                    <SvgIcon>
+                      <EditIcon />
+                    </SvgIcon>
+                  </IconButton>
+                </StyledTableCell>
               </StyledTableRow>
             ))}
           </TableBody>
@@ -386,6 +409,40 @@ const AllJobsTable = ({
           </Button>
         </DialogActions>
       </Dialog>
+
+      {/* <Dialog
+        fullScreen={fullScreen}
+        open={openInvoice}
+        onClose={handleCancleInvoice}
+        PaperComponent={PaperComponent}
+        aria-labelledby='draggable-dialog-title'
+      >
+        <DialogTitle style={{ cursor: 'move' }} id='draggable-dialog-title'>
+          Subscribe
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            To subscribe to this website, please enter your email address here. We will send updates
+            occasionally.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button autoFocus onClick={handleCancleInvoice} color='primary'>
+            Cancel
+          </Button>
+          <Button onClick={handleAddInvoice} color='primary'>
+            Subscribe
+          </Button>
+        </DialogActions>
+      </Dialog> */}
+
+      {openInvoice && (
+        <AddInvoiceDialog
+          openInvoice={openInvoice}
+          handleAddInvoice={handleAddInvoice}
+          handleCancleInvoice={handleCancleInvoice}
+        />
+      )}
     </>
   );
 };
