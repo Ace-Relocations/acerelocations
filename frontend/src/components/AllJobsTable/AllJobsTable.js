@@ -217,7 +217,8 @@ const AllJobsTable = ({
     setOpenInvoice(true);
   };
 
-  const handleAddInvoice = () => {
+  const handleAddInvoice = (data) => {
+    console.log({ data });
     setOpenInvoice(false);
   };
 
@@ -409,32 +410,6 @@ const AllJobsTable = ({
           </Button>
         </DialogActions>
       </Dialog>
-
-      {/* <Dialog
-        fullScreen={fullScreen}
-        open={openInvoice}
-        onClose={handleCancleInvoice}
-        PaperComponent={PaperComponent}
-        aria-labelledby='draggable-dialog-title'
-      >
-        <DialogTitle style={{ cursor: 'move' }} id='draggable-dialog-title'>
-          Subscribe
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            To subscribe to this website, please enter your email address here. We will send updates
-            occasionally.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button autoFocus onClick={handleCancleInvoice} color='primary'>
-            Cancel
-          </Button>
-          <Button onClick={handleAddInvoice} color='primary'>
-            Subscribe
-          </Button>
-        </DialogActions>
-      </Dialog> */}
 
       {openInvoice && (
         <AddInvoiceDialog
