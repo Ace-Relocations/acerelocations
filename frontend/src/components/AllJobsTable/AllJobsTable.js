@@ -135,6 +135,7 @@ const AllJobsTable = ({
   data,
   onDeleteJob,
   onUpdateJobStatus,
+  onAddInvoiceClick,
   match,
   onEditJobClick,
   isLoading,
@@ -219,6 +220,7 @@ const AllJobsTable = ({
 
   const handleAddInvoice = (data) => {
     console.log({ data });
+    onAddInvoiceClick(data, selectedGcnNo);
     setOpenInvoice(false);
   };
 

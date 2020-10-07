@@ -14,6 +14,7 @@ import {
   deleteJobRequest,
   updateJobStatusRequest,
   getJobRequest,
+  createInvoiceRequest,
 } from '../../actions';
 import toaster from '../../utils/toaster';
 
@@ -77,6 +78,10 @@ const AllJobsPage = ({ match }) => {
     dispatch(getJobRequest(gcnno));
     history.push(`${match.path}/edit/${gcnno}`);
   });
+
+  const onAddInvoiceClick = useCallback((data, gcnno) => {
+    dispatch(createInvoiceRequest({ invoice: data, gcnno }));
+  }, []);
   return (
     <Grid container>
       <Grid item lg={12} container className={classes.gridItem}>
@@ -103,6 +108,7 @@ const AllJobsPage = ({ match }) => {
             onUpdateJobStatus={(status, gcnNo) => onUpdateJobStatus(status, gcnNo)}
             onEditJobClick={onEditJobClick}
             isLoading={loading}
+            onAddInvoiceClick={onAddInvoiceClick}
           />
         </Box>
       </Grid>
