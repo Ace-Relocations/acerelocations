@@ -265,7 +265,9 @@ const AllJobsTable = ({
           <TableBody>
             {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
               <StyledTableRow key={row.id}>
-                <StyledTableCell align='center'>{row.gcnno}</StyledTableCell>
+                <StyledTableCell align='center' width='200px'>
+                  {row.gcnno}
+                </StyledTableCell>
                 <StyledTableCell align='center'>{row.consignor}</StyledTableCell>
                 <StyledTableCell align='center'>{row.consignee}</StyledTableCell>
                 <StyledTableCell align='center'>{row.contact}</StyledTableCell>
