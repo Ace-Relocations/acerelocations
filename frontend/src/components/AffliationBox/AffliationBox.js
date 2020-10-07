@@ -4,7 +4,7 @@ import logo from '../../logo.png';
 
 const styles = StyleSheet.create({
   logo1: {
-    width: 74,
+    width: 110,
     height: 66,
     alignItems: 'center',
     margin: '0 auto',

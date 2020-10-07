@@ -10,58 +10,17 @@ function* createJobRequest({ payload }) {
   try {
     yield put(jobAction.showLoader());
 
-    const {
-      cnsFirstName: consignor,
-      cneFirstName: consignee,
-      cneMobile: contact,
-      cneEmail: email,
-      originAddress1: oaddress1,
-      originAddress2: oaddress2,
-      originCity: ocity,
-      ooriginState: ostate,
-      originPincode: opincode,
-      destinationAddress1: daddress1,
-      destinationAddress2: daddress2,
-      destinationCity: dcity,
-      destinationState: dstate,
-      destinationPincode: dpincode,
-      status,
-      car = false,
-      insuranceP,
-      insuranceA,
-      type,
-      date,
-    } = payload;
     let response = yield axios.post('/job/create', {
-      consignor,
-      consignee,
-      email,
-      contact,
-      oaddress1,
-      oaddress2,
-      ocity,
-      ostate,
-      opincode,
-      daddress1,
-      daddress2,
-      dcity,
-      dstate,
-      dpincode,
-      status,
-      car,
-      insuranceP,
-      insuranceA,
-      type,
-      date,
+      ...payload,
     });
 
     yield put(jobAction.hideLoader());
 
     if (response.status === 200) {
       yield put(jobAction.jobRequestSuccess(response.data));
-      toaster(response.message);
+      toaster(response.data.message);
     } else {
-      toaster(response.message);
+      toaster(response.data.message);
     }
   } catch (error) {
     yield put(jobAction.hideLoader());
@@ -75,12 +34,10 @@ function* allJobRequest() {
 
     if (response.status === 200) {
       yield put(jobAction.allJobRequestSuccess(response.data));
-      toaster(response.message);
     } else {
-      toaster(response.message, { type: 'error' });
+      toaster(response.data.message, { type: 'error' });
     }
   } catch (error) {
-    console.log(error);
     if (error == 'Error: Request failed with status code 401') {
       yield put(push('/login'));
       // yield put(actions.userSignOutSuccess());
@@ -100,10 +57,10 @@ function* getJobRequest(payload) {
     if (response.status === 200) {
       yield put(jobAction.getJobRequestSuccess(response.data));
       yield put(jobAction.hideLoader());
-      toaster(response.message);
+      toaster(response.data.message);
     } else {
       yield put(jobAction.hideLoader());
-      toaster(response.message, { type: 'error' });
+      toaster(response.data.message, { type: 'error' });
     }
   } catch (error) {
     yield put(jobAction.hideLoader());
@@ -119,56 +76,15 @@ function* getJobRequest(payload) {
 
 function* updateJobRequest(payload) {
   try {
-    const {
-      cnsFirstName: consignor,
-      cneFirstName: consignee,
-      cneMobile: contact,
-      cneEmail: email,
-      originAddress1: oaddress1,
-      originAddress2: oaddress2,
-      originCity: ocity,
-      ooriginState: ostate,
-      originPincode: opincode,
-      destinationAddress1: daddress1,
-      destinationAddress2: daddress2,
-      destinationCity: dcity,
-      destinationState: dstate,
-      destinationPincode: dpincode,
-      status,
-      car = false,
-      insuranceP,
-      insuranceA,
-      type,
-      date,
-      gcnNo,
-    } = payload;
-    let response = yield axios.post(`/job/update?gcnno=${gcnNo}`, {
-      consignor,
-      consignee,
-      email,
-      contact,
-      oaddress1,
-      oaddress2,
-      ocity,
-      ostate,
-      opincode,
-      daddress1,
-      daddress2,
-      dcity,
-      dstate,
-      dpincode,
-      status,
-      car,
-      insuranceP,
-      insuranceA,
-      type,
+    let response = yield axios.post(`/job/update?gcnno=${payload.gcnno}`, {
+      ...payload.payload,
     });
 
     if (response.status === 200) {
       yield put(jobAction.updateJobRequestSuccess(response.data));
-      toaster(response.message);
+      toaster(response.data.message);
     } else {
-      toaster(response.message, { type: 'error' });
+      toaster(response.data.message, { type: 'error' });
     }
   } catch (error) {
     console.log(error);
@@ -189,9 +105,9 @@ function* deleteJobRequest(payload) {
     if (response.status === 200) {
       yield put(jobAction.deleJobRequestSuccess(response.data));
       yield put(jobAction.hideLoader());
-      toaster(response.message);
+      toaster(response.data.message);
     } else {
-      toaster(response.message, { type: 'error' });
+      toaster(response.data.message, { type: 'error' });
       yield put(jobAction.hideLoader());
     }
   } catch (error) {
@@ -216,10 +132,10 @@ function* updateJobStatusRequest(payload) {
     if (response.status === 200) {
       yield put(jobAction.updateJobStatusRequestSuccess(response.data));
       yield put(jobAction.hideLoader());
-      toaster(response.message);
+      toaster(response.data.message);
     } else {
       yield put(jobAction.hideLoader());
-      toaster(response.message, { type: 'error' });
+      toaster(response.data.message, { type: 'error' });
     }
   } catch (error) {
     console.log(error);

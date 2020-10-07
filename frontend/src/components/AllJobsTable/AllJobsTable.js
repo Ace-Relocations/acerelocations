@@ -25,8 +25,9 @@ import { useTheme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { PDFDownloadLink } from '@react-pdf/renderer';
-import Invoice from '../../Test/Invoice';
 
+import Invoice from '../../Test/Invoice';
+import HorizontalLoader from '../HorizontalLoader/HorizontalLoader';
 import {
   Visibility as VisibilityIcon,
   Edit as EditIcon,
@@ -368,14 +369,14 @@ const AllJobsTable = ({
         aria-labelledby='responsive-dialog-title'
       >
         <DialogTitle id='responsive-dialog-title'>
-          {'Are you sure, you want to detete this job?'}
+          {'Are you sure, you want to download this job?'}
         </DialogTitle>
         <DialogContent>
           <PDFDownloadLink document={<Invoice invoice={selectedJob} />} fileName='invoice.pdf'>
             {({ blob, url, loading, error }) =>
-              loading ? 'Loading document...' : <Button>Download Now</Button>
+              loading ? <HorizontalLoader /> : <Button>Download Now</Button>
             }
-          </PDFDownloadLink>{' '}
+          </PDFDownloadLink>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseDownload} color='primary' autoFocus>

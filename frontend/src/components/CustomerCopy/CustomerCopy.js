@@ -21,8 +21,8 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   logo: {
-    width: 74,
-    height: 66,
+    width: 150,
+    height: 76,
   },
   headerText: {
     width: '50%',
@@ -113,7 +113,7 @@ const CustomerCopy = ({
                 gsnNo={gcnno}
                 date={date}
                 from={consignor?.firstName}
-                to={consignor?.lastName}
+                to={consignee?.firstName}
               />
             </View>
           </View>

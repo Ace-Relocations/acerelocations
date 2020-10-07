@@ -1,0 +1,384 @@
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: #333333;
+}
+
+.report-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.garage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 50%;
+  height: 0;
+  margin: auto;
+  padding-bottom: 50%;
+  border: 2px solid #ffffff;
+}
+.truck {
+  position: inherit;
+  width: 100%;
+  height: 100%;
+  padding: 20% 0;
+  overflow: hidden;
+}
+
+.truck > .box-truck {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  -webkit-animation-name: LtR;
+  animation-name: LtR;
+  -webkit-animation-duration: 5s;
+  animation-duration: 5s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+}
+
+.truck > .box-truck .box > .box-body {
+  position: absolute;
+  left: 10%;
+  bottom: 28%;
+  width: 58%;
+  height: 45%;
+  background: #ffffff;
+  border-radius: 2% 2% 0% 0%;
+  z-index: 1;
+}
+.truck > .box-truck .box > .box-body:before {
+  content: '';
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  right: 0%;
+  bottom: 0%;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  border-radius: 2% 2% 0% 0%;
+  z-index: 2;
+}
+.box-body:after {
+  content: '';
+  width: 21%;
+  height: 36%;
+  position: absolute;
+  background: #fff;
+  right: -19%;
+}
+.truck > .box-truck .box > .box-axel {
+  position: absolute;
+  left: 10%;
+  bottom: 27%;
+  width: 80%;
+  height: 5%;
+  background: #000000;
+  border-radius: 15%;
+  box-shadow: 0px 28px 40px #000;
+  z-index: 0;
+}
+
+.box-wheel {
+  position: absolute;
+  left: 27%;
+  bottom: 15%;
+  width: 8%;
+  height: 13%;
+  background: #000000;
+  border-radius: 50%;
+  z-index: 1;
+  -webkit-animation-name: rotate;
+  animation-name: rotate;
+  -webkit-animation-duration: 0.75s;
+  animation-duration: 0.75s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+}
+.mud-flap {
+  position: absolute;
+  left: 25%;
+  bottom: 20%;
+  width: 1%;
+  height: 8%;
+  background: #000000;
+  z-index: 1;
+}
+.back-guard {
+  position: absolute;
+  left: 10%;
+  bottom: 23%;
+  width: 1%;
+  height: 5%;
+  background: #000000;
+  z-index: 1;
+}
+.back-step {
+  position: absolute;
+  left: 9%;
+  bottom: 22%;
+  width: 2%;
+  height: 1%;
+  background: #000000;
+  z-index: 1;
+}
+
+.truck .tractor > div {
+  position: absolute;
+  z-index: 1;
+}
+
+.truck .tractor-front {
+  right: 10%;
+  bottom: 30%;
+  width: 12%;
+  height: 12%;
+  background: #ffffff;
+  border-radius: 0% 10% 0% 0%;
+}
+.tractor-front:before {
+  content: '';
+  position: absolute;
+  top: -15%;
+  left: -6%;
+  width: 100%;
+  height: 30%;
+  background: #ffffff;
+  -webkit-transform: rotate(10deg);
+  transform: rotate(10deg);
+}
+.truck .tractor-bumper {
+  right: 0%;
+  bottom: 30%;
+  width: 10%;
+  height: 12%;
+  background: #ffffff;
+  border-radius: 0% 10% 0% 0%;
+}
+.truck .tractor-bumper {
+  right: 8%;
+  bottom: 23%;
+  width: 4%;
+  height: 6%;
+  background: #d0d0d0;
+  border-radius: 5% 20% 20% 10%;
+}
+
+.truck .tractor-wheel {
+  right: 12%;
+  bottom: 15%;
+  width: 8%;
+  height: 13%;
+  background: #000000;
+  border-radius: 50%;
+  z-index: 1;
+  -webkit-animation-name: rotate;
+  animation-name: rotate;
+  -webkit-animation-duration: 0.75s;
+  animation-duration: 0.75s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+}
+.truck .tractor-wheel > .hub-cap,
+.truck .box .box-wheel > .hub-cap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 50%;
+  height: 50%;
+  margin: auto;
+  background: #ebebeb;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.truck .tractor-wheel > .hub-cap > .hole,
+.truck .box .box-wheel > .hub-cap > .hole {
+  position: absolute;
+  width: 30%;
+  height: 30%;
+  margin: auto;
+  background: #000000;
+  border-radius: 50%;
+}
+
+.truck .tractor-wheel > .hub-cap > .hole1,
+.truck .box .box-wheel > .hub-cap > .hole1 {
+  top: 30%;
+  left: 5%;
+}
+.truck .tractor-wheel > .hub-cap > .hole2,
+.truck .box .box-wheel > .hub-cap > .hole2 {
+  top: 7%;
+  left: 38%;
+}
+.truck .tractor-wheel > .hub-cap > .hole3,
+.truck .box .box-wheel > .hub-cap > .hole3 {
+  top: 63%;
+  left: 26%;
+}
+.truck .tractor-wheel > .hub-cap > .hole4,
+.truck .box .box-wheel > .hub-cap > .hole4 {
+  top: 39%;
+  left: 60%;
+}
+
+.truck .tractor-door {
+  right: 21%;
+  bottom: 20%;
+  width: 10%;
+  height: 35%;
+  background: #ffffff;
+  border-radius: 0% 5% 0% 0%;
+}
+
+.truck .tractor-door > .window {
+  position: absolute;
+  top: 5%;
+  left: 0;
+  right: 0;
+  width: 70%;
+  height: 30%;
+  margin: auto;
+  background: #333;
+}
+.truck .tractor-door > .door-crease {
+  position: absolute;
+  top: 5%;
+  left: 0;
+  right: 0;
+  width: 70%;
+  height: 30%;
+  margin: auto;
+  background: #333;
+}
+.truck .tractor-door > .door-handle {
+  position: absolute;
+  top: 45%;
+  left: 15%;
+  width: 25%;
+  height: 3%;
+  background: #000000;
+}
+.truck .tractor-door > .step-holder {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 25%;
+  margin: auto;
+  background: #cccccc;
+}
+.truck .tractor-door > .step-holder > .door-gap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 20%;
+  margin: auto;
+  background: #000000;
+}
+.truck .tractor-door > .step-holder > .top-step {
+  position: absolute;
+  top: 20%;
+  left: 0;
+  right: 0;
+  width: 90%;
+  height: 15%;
+  margin: auto;
+  background: #222222;
+  box-shadow: 0 1px 5px #333333;
+}
+.truck .tractor-door > .step-holder > .bottom-step {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 90%;
+  height: 15%;
+  margin: auto;
+  background: #333333;
+  box-shadow: 0 -3px 5px #666666;
+}
+.truck .tractor-door > .step-holder > .left-edge {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 5%;
+  height: 80%;
+  margin: auto;
+  background: #ebebeb;
+  box-shadow: 1px 0px 5px #000;
+}
+.truck .tractor-door > .step-holder > .right-edge {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 5%;
+  height: 80%;
+  margin: auto;
+  background: #ebebeb;
+  box-shadow: -1px 0px 5px #000;
+}
+
+@-webkit-keyframes rotate {
+  from {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate {
+  from {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes LtR {
+  from {
+    left: -100%;
+  }
+  to {
+    left: 110%;
+  }
+}
+
+@keyframes LtR {
+  from {
+    left: -100%;
+  }
+  to {
+    left: 110%;
+  }
+}

@@ -124,19 +124,38 @@ const address = [
 ];
 
 const Invoice = ({ invoice }) => {
-  // const {
-  //   consignor,
-  //   consignee,
-  //   originAddress: { oaddress1, oaddress2, ocity, ostate, opincode },
-  //   destinationAddress: { daddress1, daddress2, dcity, dstate, dpincode },
-  //   status,
-  //   car,
-  //   insuranceP,
-  //   insuranceA,
-  //   type,
-  //   date,
-  //   gcnno,
-  // } = invoice;
+  const {
+    consignorF,
+    consignorL,
+    consigneeF,
+    consigneeL,
+    oaddress1,
+    oaddress2 = '',
+    ocity,
+    ostate,
+    opincode,
+    daddress1,
+    daddress2 = '',
+    dcity,
+    dstate,
+    dpincode,
+    status,
+    contact,
+    car,
+    email,
+    insuranceP,
+    insuranceA,
+    type,
+    date,
+    gcnno,
+
+    // will be added later
+    rupeesInNumber = '',
+    rupeesInText = '',
+    chequeNo = '',
+    billNo = '',
+    lrNo = '',
+  } = invoice;
 
   /*  
     {
@@ -148,15 +167,64 @@ const Invoice = ({ invoice }) => {
       car, insuranceP, insuranceA, type, date, gcnno
     } 
   */
-  const {
-    consignor,
-    consignee,
-    gcnno,
-    originAddress = [],
-    destinationAddress = [],
+
+  const invoiceDetail = {
+    consignor: { firstName: consignorF, lastName: consignorL },
+    consignee: { firstName: consigneeF, lastName: consigneeL },
+    contact,
+    email,
+    originAddress: [oaddress1, `${oaddress2}, ${ocity}`, `${ostate} - ${opincode}`],
+    destinationAddress: [daddress1, `${daddress2}, ${dcity}`, `${dstate} - ${dpincode}`],
+    status,
+    car,
+    insuranceP,
+    insuranceA,
     type,
     date,
-  } = invoice;
+    gcnno,
+    customer: {
+      firstName: consignorF,
+      lastName: consignorL,
+      adderess: `${oaddress1}, ${oaddress2}, ${ocity} - ${opincode}`,
+      contact,
+      gcnno,
+      birthDate: '',
+      Anniversary: '',
+      jobno: gcnno,
+      destination: dcity,
+      email,
+    },
+    reciept: {
+      chequeIssuer: `${consignorF} ${consignorL}`,
+      rupeesInNumber,
+      rupeesInText,
+      chequeNo,
+      date,
+      billNo,
+      lrNo,
+      from: `${consignorF} ${consignorL}`,
+      to: `${consigneeF} ${consigneeL}`,
+    },
+    invoice: {
+      name: 'qwer',
+      dcity: 'we',
+      invoiceNo: '124124',
+      date: '2412',
+      lrNo: '123124',
+      invoiceDetails: [],
+      total: 'qweqwr',
+      totalInWords: 'qwrqwrqwrqw',
+      paymentCity: 'q wqrqwrqw',
+    },
+    luggageListDetails: {
+      ocity,
+      dcity,
+      gcnno,
+      date,
+      from: consignorF,
+      to: consignorL,
+    },
+  };
 
   const customer = {};
   return (
@@ -164,25 +232,25 @@ const Invoice = ({ invoice }) => {
       <Page size='A4' style={styles.page} orientation='landscape'>
         <CustomerCopy
           title='CUSTOMER COPY'
-          consignor={consignor}
-          consignee={consignee}
-          originAddress={originAddress}
-          destinationAddress={destinationAddress}
-          type={type}
-          gcnno={gcnno}
-          date={date}
+          consignor={invoiceDetail?.consignor}
+          consignee={invoiceDetail?.consignee}
+          originAddress={invoiceDetail?.originAddress}
+          destinationAddress={invoiceDetail?.destinationAddress}
+          type={invoiceDetail?.type}
+          gcnno={invoiceDetail?.gcnno}
+          date={invoiceDetail?.date}
         />
       </Page>
       <Page size='A4' style={styles.page} orientation='landscape'>
         <CustomerCopy
           title='TRUCK COPY'
-          consignor={consignor}
-          consignee={consignee}
-          originAddress={originAddress}
-          destinationAddress={destinationAddress}
-          type={type}
-          gcnno={gcnno}
-          date={date}
+          consignor={invoiceDetail?.consignor}
+          consignee={invoiceDetail?.consignee}
+          originAddress={invoiceDetail?.originAddress}
+          destinationAddress={invoiceDetail?.destinationAddress}
+          type={invoiceDetail?.type}
+          gcnno={invoiceDetail?.gcnno}
+          date={invoiceDetail?.date}
         />
       </Page>
       <Page size='A4' style={styles.page}>
@@ -197,19 +265,19 @@ const Invoice = ({ invoice }) => {
         <View style={{ border: 1, margin: 50, padding: 10 }}>
           <HeaderWithAddress />
           <View style={{ marginTop: 20, padding: 10 }}>
-            <Reciept />
+            <Reciept reciept={invoiceDetail?.reciept} />
           </View>
         </View>
       </Page>
       <Page size='A4' style={styles.page}>
-        <LuggageList />
+        <LuggageList luggageListDetails={invoiceDetail?.luggageListDetails} />
       </Page>
-      {/* <Page size='A4' style={styles.page}>
+      <Page size='A4' style={styles.page}>
         <View>
           <Header />
-          <InvoiceTable />
+          <InvoiceTable invoice={invoiceDetail?.invoice} />
         </View>
-      </Page> */}
+      </Page>
 
       {/* Transit Page */}
       {/* <Page size='A4' style={styles.page}>

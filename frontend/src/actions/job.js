@@ -52,9 +52,9 @@ export const getJobRequestSuccess = (payload) => ({
   payload,
 });
 
-export const updateJobRequest = (payload, gcnNo) => ({
+export const updateJobRequest = (payload, gcnno) => ({
   type: UPDATE_JOB_REQUEST,
-  gcnNo,
+  gcnno,
   payload,
 });
 
