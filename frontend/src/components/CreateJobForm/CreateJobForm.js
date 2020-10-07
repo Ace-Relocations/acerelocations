@@ -6,10 +6,15 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { useForm, Controller } from 'react-hook-form';
 import TextField from '@material-ui/core/TextField';
-import Checkbox from '@material-ui/core/Checkbox';
+import Select from '@material-ui/core/Select';
 import Loader from '../Loader/Loader';
 import { PDFDownloadLink } from '@react-pdf/renderer';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+
 import Invoice from '../../Test/Invoice';
+import ReactHookFormSelect from '../ReactHookFormSelect/ReactHookFormSelect';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -143,6 +148,7 @@ const CreateJobForm = ({
       onUpdateJob(data);
       // updateIsDownloadingPDF(true);
     } else {
+      console.log({ data });
       onCreateJob(data);
       // updateIsDownloadingPDF(true);
       // reset({
@@ -170,7 +176,7 @@ const CreateJobForm = ({
     }
   };
 
-  watch(['username', 'password', 'car']);
+  watch(['username', 'password', 'car', 'type']);
   const values = getValues();
 
   return (
@@ -418,21 +424,24 @@ const CreateJobForm = ({
                       />
                     </Box> */}
 
-                    <Controller
-                      as={TextField}
-                      control={control}
-                      id='outlined-basic'
-                      label='Pincode'
-                      variant='outlined'
-                      width={300}
-                      rules={{ required: true }}
-                      className={classes.formControl}
-                      name='opincode'
-                      value={values.opincode}
-                      error={errors.opincode}
-                      helperText={errors.opincode && 'Pincode is required'}
-                      required
-                    />
+                    <Box>
+                      <Controller
+                        as={TextField}
+                        control={control}
+                        id='outlined-basic'
+                        label='Pincode'
+                        variant='outlined'
+                        width={300}
+                        rules={{ required: true }}
+                        className={classes.formControl}
+                        name='opincode'
+                        value={values.opincode}
+                        error={errors.opincode}
+                        helperText={errors.opincode && 'Pincode is required'}
+                        required
+                      />
+                    </Box>
+                    <Box width='100%'></Box>
                   </Grid>
                 </Grid>
 
@@ -516,7 +525,7 @@ const CreateJobForm = ({
                     />
                   </Grid>
                   <Grid item lg={12} container className={classes.gridItem}>
-                    <Box marginRight='10px'>
+                    <Box>
                       {/* <Controller
                         as={TextField}
                         control={control}
@@ -563,21 +572,30 @@ const CreateJobForm = ({
                   <legend>Other Details</legend>
                   <Grid item lg={12} container className={classes.gridItem}>
                     <Box marginRight='10px'>
-                      <Controller
-                        as={TextField}
-                        control={control}
-                        id='outlined-basic'
-                        label='Status'
-                        variant='outlined'
-                        width={300}
-                        rules={{ required: true }}
-                        className={classes.formControl}
-                        name='status'
-                        value={values.status}
-                        error={errors.status}
-                        helperText={errors.status && 'Status is required'}
-                        required
-                      />
+                      <FormControl variant='outlined' className={classes.formControl}>
+                        <InputLabel id='Type' paddingLeft='10px'>
+                          Type
+                        </InputLabel>
+                        <Controller
+                          as={
+                            <Select labelId='type' label='Type' value={values.type}>
+                              <MenuItem value='household'>Household</MenuItem>
+                              <MenuItem value='car'>Car</MenuItem>
+                              <MenuItem value='both'>Both</MenuItem>
+                            </Select>
+                          }
+                          id='type'
+                          name='type'
+                          className={classes.textField}
+                          control={control}
+                          error={!!errors.type}
+                          defaultValue='household'
+                          variant='outlined'
+                          margin='normal'
+                          helperText={errors.date && 'Date is required'}
+                          required
+                        />
+                      </FormControl>
                     </Box>
 
                     <Controller
@@ -616,24 +634,7 @@ const CreateJobForm = ({
                       />
                     </Box>
 
-                    <Controller
-                      as={TextField}
-                      control={control}
-                      id='outlined-basic'
-                      label='Type'
-                      variant='outlined'
-                      width={300}
-                      rules={{ required: true }}
-                      className={classes.formControl}
-                      name='type'
-                      value={values.type}
-                      error={errors.type}
-                      helperText={errors.type && 'Type is required'}
-                      required
-                    />
-                  </Grid>
-                  <Grid item lg={12} container className={classes.gridItem}>
-                    <Box marginRight='10px'>
+                    <Box>
                       <Controller
                         as={TextField}
                         control={control}
@@ -649,18 +650,6 @@ const CreateJobForm = ({
                         helperText={errors.date && 'Date is required'}
                         required
                       />
-                    </Box>
-                    <Box width='100%'>
-                      {/* <section>
-                      <Controller
-                        as={Checkbox}
-                        type='checkbox'
-                        name='car'
-                        control={control}
-                        // value={values.car}
-                      />
-                      <label>Tick this, if you want to add car</label>
-                    </section> */}
                     </Box>
                   </Grid>
                 </Grid>
