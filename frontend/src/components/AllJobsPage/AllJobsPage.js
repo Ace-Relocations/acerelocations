@@ -98,7 +98,7 @@ const AllJobsPage = ({ match }) => {
         </Box>
       </Grid>
       <Grid item lg={12} container className={classes.gridItem}>
-        <Box component='div'>
+        <Box component='div' style={{ minWidth: '700px' }}>
           <CssBaseline />
 
           <AllJobsTable
