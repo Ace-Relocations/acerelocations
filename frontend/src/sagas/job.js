@@ -24,6 +24,7 @@ function* createJobRequest({ payload }) {
     }
   } catch (error) {
     yield put(jobAction.hideLoader());
+    yield localStorage.clear();
     toaster('Error Creating Job, Please Try again', { type: 'error' });
   }
 }

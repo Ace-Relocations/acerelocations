@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,10 +14,12 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import Avatar from '@material-ui/core/Avatar';
 
 import logo from '../../logo.png';
+import { logoutRequest } from '../../actions';
 
 const drawerWidth = 240;
 
@@ -58,6 +61,12 @@ const useStyles = makeStyles((theme) => ({
 const Sidebar = ({ props }) => {
   const classes = useStyles();
   const history = useHistory();
+  const dispatch = useDispatch();
+
+  const onLogoutClick = () => {
+    dispatch(logoutRequest());
+    history.push('/login');
+  };
 
   return (
     <div className={classes.root}>
@@ -101,6 +110,17 @@ const Sidebar = ({ props }) => {
               <MailIcon />
             </ListItemIcon>
             <ListItemText primary='All Job' />
+          </ListItem>
+          <ListItem
+            button
+            key='logout'
+            onClick={onLogoutClick}
+            style={{ bottom: 0, position: 'fixed', width: '240px' }}
+          >
+            <ListItemIcon>
+              <ExitToAppIcon />
+            </ListItemIcon>
+            <ListItemText primary='Logout' />
           </ListItem>
         </List>
         <Divider />

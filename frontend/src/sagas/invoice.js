@@ -24,6 +24,7 @@ function* createInvoiceRequest({ payload }) {
     }
   } catch (error) {
     yield put(invoiceAction.hideLoader());
+    yield localStorage.clear();
     toaster('Error Creating Invoice failed, Please Try again', { type: 'error' });
   }
 }
