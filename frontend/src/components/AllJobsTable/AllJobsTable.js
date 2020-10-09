@@ -271,6 +271,7 @@ const AllJobsTable = ({
     handleRequestSort(event, property);
   };
 
+  const getIconColor = (added) => (added ? 'green' : 'red');
   return (
     <>
       <TableContainer component={Paper}>
@@ -353,7 +354,12 @@ const AllJobsTable = ({
                   </IconButton>
                 </StyledTableCell>
                 <StyledTableCell align='center'>
-                  <IconButton aria-label='invoice' onClick={() => handleOpenInvoice(row.gcnno)}>
+                  <IconButton
+                    aria-label='invoice'
+                    onClick={() => handleOpenInvoice(row.gcnno)}
+                    style={{ color: getIconColor(row.isInvoiceAdded) }}
+                    disabled={row.isInvoiceAdded}
+                  >
                     <SvgIcon>
                       <MoneyIcon />
                     </SvgIcon>
@@ -361,7 +367,12 @@ const AllJobsTable = ({
                 </StyledTableCell>
 
                 <StyledTableCell align='center'>
-                  <IconButton aria-label='invoice' onClick={() => handleOpenExpenses(row.gcnno)}>
+                  <IconButton
+                    aria-label='invoice'
+                    onClick={() => handleOpenExpenses(row.gcnno)}
+                    style={{ color: getIconColor(row.isExpenseAdded) }}
+                    disabled={row.isExpenseAdded}
+                  >
                     <SvgIcon>
                       <MoneyIcon />
                     </SvgIcon>
