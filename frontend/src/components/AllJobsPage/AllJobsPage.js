@@ -82,6 +82,11 @@ const AllJobsPage = ({ match }) => {
   const onAddInvoiceClick = useCallback((data, gcnno) => {
     dispatch(createInvoiceRequest({ invoice: data, gcnno }));
   }, []);
+
+  const onAddExpenseClick = useCallback((data, gcnno) => {
+    dispatch(createInvoiceRequest({ invoice: data, gcnno }));
+  });
+
   return (
     <Grid container>
       <Grid item lg={12} container className={classes.gridItem}>
@@ -109,6 +114,7 @@ const AllJobsPage = ({ match }) => {
             onEditJobClick={onEditJobClick}
             isLoading={loading}
             onAddInvoiceClick={onAddInvoiceClick}
+            onAddExpenseClick={onAddExpenseClick}
           />
         </Box>
       </Grid>

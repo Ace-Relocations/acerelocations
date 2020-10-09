@@ -36,6 +36,7 @@ import {
   CloudDownload as CloudDownloadIcon,
   Money as MoneyIcon,
 } from '@material-ui/icons';
+import AddExpenseDialog from '../AddExpenseDialog/AddExpenseDialog';
 
 const options = ['ongoing', 'completed'];
 
@@ -140,6 +141,7 @@ const AllJobsTable = ({
   match,
   onEditJobClick,
   isLoading,
+  onAddExpenseClick,
 }) => {
   const classes = useStyles();
   const history = useHistory();
@@ -157,6 +159,7 @@ const AllJobsTable = ({
   const [openStatus, setOpenStatus] = useState(false);
   const [openDownload, setOpenDownload] = useState(false);
   const [openInvoice, setOpenInvoice] = useState(false);
+  const [openExpense, setOpenExpense] = useState(false);
 
   const [valueStatus, setValueStatus] = useState();
 
@@ -229,6 +232,20 @@ const AllJobsTable = ({
     setOpenInvoice(false);
   };
 
+  const handleOpenExpenses = (gcnno) => {
+    updateSelectedGcnNo(gcnno);
+    setOpenExpense(true);
+  };
+
+  const handleAddExpenses = (data) => {
+    onAddExpenseClick(data, selectedGcnNo);
+    setOpenExpense(false);
+  };
+
+  const handleCancleExpenses = () => {
+    setOpenExpense(false);
+  };
+
   const selectedJob = useMemo(() => {
     return allJobs.find(({ gcnno }) => gcnno === selectedToDownloadGcnNo);
   }, [updateSelectedToDownloadGcnNo, handleOpenDownload]);
@@ -247,6 +264,7 @@ const AllJobsTable = ({
     { id: 'delete', numeric: false, label: 'Delete' },
     { id: 'download', numeric: false, label: 'Download' },
     { id: 'addInvoice', numeric: false, label: 'Add Invoice' },
+    { id: 'addExpense', numeric: false, label: 'Add Expense' },
   ];
 
   const createSortHandler = (property) => (event) => {
@@ -341,6 +359,14 @@ const AllJobsTable = ({
                     </SvgIcon>
                   </IconButton>
                 </StyledTableCell>
+
+                <StyledTableCell align='center'>
+                  <IconButton aria-label='invoice' onClick={() => handleOpenExpenses(row.gcnno)}>
+                    <SvgIcon>
+                      <MoneyIcon />
+                    </SvgIcon>
+                  </IconButton>
+                </StyledTableCell>
               </StyledTableRow>
             ))}
           </TableBody>
@@ -419,6 +445,14 @@ const AllJobsTable = ({
           openInvoice={openInvoice}
           handleAddInvoice={handleAddInvoice}
           handleCancleInvoice={handleCancleInvoice}
+        />
+      )}
+
+      {openExpense && (
+        <AddExpenseDialog
+          openExpense={openExpense}
+          handleAddExpenses={handleAddExpenses}
+          handleCancleExpenses={handleCancleExpenses}
         />
       )}
     </>
