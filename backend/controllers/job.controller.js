@@ -89,7 +89,6 @@ viewAllJob: async (req, res) => {
     try {
         const limit = parseInt(req.query.limit); // Make sure to parse the limit to number
         const skip = parseInt(req.query.skip);// Make sure to parse the skip to number
-        console.log(auth.isAdmin);
         const jobs = await service.getAll(limit, skip);
 
         return res.status(200).json(jobs);
