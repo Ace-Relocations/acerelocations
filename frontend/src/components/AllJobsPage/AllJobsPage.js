@@ -15,6 +15,7 @@ import {
   updateJobStatusRequest,
   getJobRequest,
   createInvoiceRequest,
+  createExpensesRequest,
 } from '../../actions';
 import toaster from '../../utils/toaster';
 
@@ -84,7 +85,7 @@ const AllJobsPage = ({ match }) => {
   }, []);
 
   const onAddExpenseClick = useCallback((data, gcnno) => {
-    dispatch(createInvoiceRequest({ invoice: data, gcnno }));
+    dispatch(createExpensesRequest({ invoice: data, gcnno }));
   });
 
   return (

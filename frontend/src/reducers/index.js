@@ -6,6 +6,8 @@ import Job from './job';
 import Loader from './loader';
 import Dashboard from './dashboard';
 import Invoice from './invoice';
+import Expenses from './expenses';
+
 export default (history) =>
   combineReducers({
     router: connectRouter(history),
@@ -14,4 +16,5 @@ export default (history) =>
     Loader,
     Dashboard,
     Invoice,
+    Expenses,
   });
