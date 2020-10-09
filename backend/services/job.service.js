@@ -46,8 +46,8 @@ module.exports = {
         try {
             let obj = new Counter();
             obj.seq = defaultGcnno;
-            var newvalues = { $set: obj };
-            let defautV = Counter.updateOne({ _id: "entityId"}, newvalues);
+            obj._id = "entityId";
+            let defautV = obj.save();
             if (!defautV){
                 return "error";
             }

@@ -1,4 +1,4 @@
-const invoiceService = require("../services/invoice.service");
+const service = require("../services/invoice.service");
 const db = require("../models");
 
 const Customer = db.customer;
@@ -15,8 +15,12 @@ module.exports = {
             if(invoice == false) {
                 res.status(500).send({ message: "The value passed is null" });
             }
-            let total = await invoiceService.getTotal(invoice);
-            let createData = await invoiceService.createInvoice(gcnno, invoice, total);
+            //const defaultV = await service.setBillno(491);
+            const billno = await service.incrementBillno();
+            console.log(billno)
+
+            let total = await service.getTotal(invoice);
+            let createData = await service.createInvoice(gcnno, billno, invoice, total);
             if (createData == false) {
             res.status(500).send({ message: "failed to register invoice", data: createData });
             return;
@@ -24,6 +28,7 @@ module.exports = {
             
             let jobById = {};
             jobById.invoice = createData;
+            jobById.isInvoiceAdded = true;
             var newvalues = { $set: jobById };
             Customer.updateOne({ gcnno: gcnno}, newvalues, (err, user) => {
                 if (err) {
@@ -55,14 +60,31 @@ module.exports = {
         const {
             gcnno, invoice
             } = req.body;
-
             let invoiceC = await Invoice.findOne({gcnno: gcnno});
+
+            if(invoice == false) {
+                let deleteV = await Invoice.deleteOne({ gcnno: gcnno});
+                if (!deleteV){
+                    res.status(500).send({ message: "Failed to delete Invoice" });
+                }
+                let number = await service.decrementBillno();
+
+                let jobById = {};
+                jobById.isInvoiceAdded = false;
+                var newvalues = { $set: jobById };
+                let customerU = await Customer.updateOne({ gcnno: gcnno}, newvalues,);
+                if (!customerU){
+                    res.status(500).send({ message: "The value passed is null but failed to change the status" });
+                }
+                res.status(500).send({ message: "The value passed is null hence the invoice is deleted" });
+            }
          
             let obj = {};
             obj._id = invoiceC._id;
             obj.gcnno = gcnno;
+            obj.billno = invoiceC.billno;
             obj.invoiceDetails = invoice || invoiceC.invoiceDetails; 
-            obj.total = await invoiceService.getTotal(obj.invoiceDetails);
+            obj.total = await service.getTotal(obj.invoiceDetails);
             var newvalues = { $set: obj };
 
             let updateV = await Invoice.updateOne({gcnno: obj.gcnno}, newvalues)

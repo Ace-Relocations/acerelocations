@@ -24,6 +24,7 @@ module.exports = {
             
             let jobById = {};
             jobById.expense = createData;
+            jobById.isExpenseAdded = true;
             var newvalues = { $set: jobById };
             Customer.updateOne({ gcnno: gcnno}, newvalues, (err, user) => {
                 if (err) {

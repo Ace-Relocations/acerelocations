@@ -47,6 +47,14 @@ var Customer = mongoose.model(
     createdBy: String,
     status: String,
     date: String,
+    isInvoiceAdded: {
+      type: Boolean,
+      default: false
+    },
+    isExpenseAdded: {
+      type: Boolean,
+      default: false
+    },
     createdAt: { type: Date, default: Date.now() },
     updatedAt: { type: Date, default: Date.now() },
     invoice: [

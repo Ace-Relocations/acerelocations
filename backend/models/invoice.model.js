@@ -8,6 +8,11 @@ const Invoice = mongoose.model(
       required: true,
       unique: true,
     },
+    billno:{
+      type: Number,
+      required: true,
+      unique: true,
+    },
     invoiceDetails: Object,
     total: Number
   })
