@@ -22,8 +22,9 @@ function* dashboardStatsRequest() {
     }
   } catch (error) {
     yield put(authAction.hideLoader());
-    yield localStorage.clear();
-    toaster('User Not Found');
+    // yield localStorage.clear();
+    // toaster('Signing out ...');
+    // yield put(authAction.logoutRequestSuccess(true));
   }
 }
 

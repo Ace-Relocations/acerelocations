@@ -17,6 +17,14 @@ export default (state = INITIAL_STATE, action) => {
         password: '',
       };
 
+    case actions.LOGOUT_REQUEST_SUCCESS:
+      return {
+        authUser: null,
+        logout: true,
+        username: '',
+        password: '',
+      };
+
     default:
       return state;
   }

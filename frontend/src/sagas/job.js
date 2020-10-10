@@ -25,7 +25,8 @@ function* createJobRequest({ payload }) {
   } catch (error) {
     yield put(jobAction.hideLoader());
     yield localStorage.clear();
-    toaster('Error Creating Job, Please Try again', { type: 'error' });
+    toaster('Signing out ...', { type: 'error' });
+    yield put(jobAction.logoutRequestSuccess(true));
   }
 }
 
@@ -41,9 +42,9 @@ function* allJobRequest() {
   } catch (error) {
     if (error == 'Error: Request failed with status code 401') {
       yield put(push('/login'));
-      // yield put(actions.userSignOutSuccess());
       yield localStorage.clear();
-      toaster(error.message, { type: 'error' });
+      toaster('Signing out ...', { type: 'error' });
+      yield put(jobAction.logoutRequestSuccess(true));
     }
   }
 }
@@ -67,10 +68,9 @@ function* getJobRequest(payload) {
     yield put(jobAction.hideLoader());
     console.log(error);
     if (error == 'Error: Request failed with status code 401') {
-      yield put(push('/login'));
-      // yield put(actions.userSignOutSuccess());
       yield localStorage.clear();
-      toaster(error.message, { type: 'error' });
+      toaster('Signing out ...', { type: 'error' });
+      yield put(jobAction.logoutRequestSuccess(true));
     }
   }
 }
@@ -88,12 +88,10 @@ function* updateJobRequest(payload) {
       toaster(response.data.message, { type: 'error' });
     }
   } catch (error) {
-    console.log(error);
     if (error == 'Error: Request failed with status code 401') {
-      yield put(push('/login'));
-      // yield put(actions.userSignOutSuccess());
       yield localStorage.clear();
-      toaster(error.message, { type: 'error' });
+      toaster('Signing out ...', { type: 'error' });
+      yield put(jobAction.logoutRequestSuccess(true));
     }
   }
 }
@@ -114,10 +112,9 @@ function* deleteJobRequest(payload) {
   } catch (error) {
     yield put(jobAction.hideLoader());
     if (error == 'Error: Request failed with status code 401') {
-      yield put(push('/login'));
-      // yield put(actions.userSignOutSuccess());
       yield localStorage.clear();
-      toaster(error, { type: 'error' });
+      toaster('Signing out ...', { type: 'error' });
+      yield put(jobAction.logoutRequestSuccess(true));
     }
     toaster(error, { type: 'error' });
   }
@@ -142,10 +139,9 @@ function* updateJobStatusRequest(payload) {
     console.log(error);
     yield put(jobAction.hideLoader());
     if (error == 'Error: Request failed with status code 401') {
-      yield put(push('/login'));
-      // yield put(actions.userSignOutSuccess());
       yield localStorage.clear();
-      toaster(error.message, { type: 'error' });
+      toaster('Signing out ...', { type: 'error' });
+      yield put(jobAction.logoutRequestSuccess(true));
     }
   }
 }

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -64,21 +65,31 @@ const useStyles = makeStyles((theme) => ({
 
 const LoginForm = () => {
   const classes = useStyles();
+  const history = useHistory();
   const [showPassword, updateShowPassword] = useState(false);
+  const [showCustomLoader, updateShowCustomLoader] = useState(false);
 
   const dispatch = useDispatch();
-  const authUser = useSelector((state) => state.auth);
+  const { authUser, logout } = useSelector((state) => state.Auth);
 
   const { handleSubmit, control, errors, getValues, watch } = useForm({
     mode: 'all',
   });
 
-  // const handleClickShowPassword = () => {
-  //   updateShowPassword(!showPassword);
-  // };
+  // THIS IS TEMPORARY
+  useEffect(() => {
+    console.log('BEFORE', logout, authUser);
+
+    if (!logout && logout !== undefined && authUser !== undefined && authUser !== null) {
+      console.log(logout, authUser);
+      window.location.reload(false);
+      setTimeout(() => {
+        history.push('/');
+      }, 1000);
+    }
+  }, [logout, authUser]);
 
   const submit = (data) => {
-    console.log({ data });
     dispatch(loginRequest(data));
   };
 

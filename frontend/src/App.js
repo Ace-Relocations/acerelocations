@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { Switch, Route, Redirect, Link, useHistory, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
@@ -23,27 +23,32 @@ function App() {
   const location = useLocation();
   const redirect = !false;
 
-  (function () {
-    const authorizationToken = localStorage.getItem('userToken');
-    const token = authorizationToken; //temp
-    if (token) {
-      axios.defaults.headers.common['x-access-token'] = token;
-    } else {
-      axios.defaults.headers.common['x-access-token'] = null;
-    }
-  })();
+  useEffect(() => {
+    (function () {
+      const authorizationToken = localStorage.getItem('userToken');
+      const token = authorizationToken; //temp
+      if (token) {
+        axios.defaults.headers.common['x-access-token'] = token;
+      } else {
+        console.log('In Else APP');
+        axios.defaults.headers.common['x-access-token'] = null;
+      }
+    })();
+  });
 
   const dispatch = useDispatch();
-  const authUser = useSelector((state) => state.Auth.authUser);
+  const { authUser, logout } = useSelector((state) => state.Auth);
 
-  if (
-    location.pathname != '/login' &&
-    (authUser == null || authUser == undefined || authUser == 'undefined')
-  ) {
-    history.push('/login');
-  } else if (location.pathname == '/login' && authUser) {
-    history.push('/');
-  }
+  useEffect(() => {
+    if (
+      location.pathname != '/login' &&
+      (authUser === null || authUser === undefined || authUser === 'undefined')
+    ) {
+      history.push('/login');
+    } else if (location.pathname == '/login' && authUser && !logout) {
+      history.push('/');
+    }
+  }, [authUser, logout]);
 
   return (
     <Fragment>

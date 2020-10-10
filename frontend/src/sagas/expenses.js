@@ -25,7 +25,8 @@ function* createExpensesRequest({ payload }) {
   } catch (error) {
     yield put(expensesAction.hideLoader());
     yield localStorage.clear();
-    toaster('Error Creating Expenses failed, Please Try again', { type: 'error' });
+    toaster('Signing out ...', { type: 'error' });
+    yield put(expensesAction.logoutRequestSuccess(true));
   }
 }
 

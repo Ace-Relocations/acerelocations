@@ -15,39 +15,38 @@ function* loginRequest({ payload }) {
     let response = yield axios.post('/auth/signin', { username, password });
 
     if (response.status === 200) {
-      localStorage.setItem('userData', JSON.stringify(response.data));
-      localStorage.setItem('userToken', response.data.accessToken);
-      yield put(authAction.loginRequestSuccess(response.data.userToken));
-      yield put(push('/'));
+      yield localStorage.setItem('userToken', response.data.accessToken);
+      yield localStorage.setItem('userData', JSON.stringify(response.data));
+      yield put(authAction.loginRequestSuccess(response.data.accessToken));
+      // yield put(push('/'));
     } else {
       yield put(authAction.hideLoader());
       toaster(response.message);
     }
   } catch (error) {
     yield put(authAction.hideLoader());
-    toaster('User Not Found');
+    // toaster('Signing out ...');
+    // yield put(authAction.logoutRequestSuccess(true));
   }
 }
 
 function* logoutRequest() {
-  yield localStorage.clear();
-
-  // try {
-  //   let response = yield axios.post(`/logout`);
-  //   if (response.status == 200) {
-  //     yield put(authAction.logoutRequestSuccess(true));
-  //     localStorage.clear();
-  //   }
-  // } catch (error) {
-  //   if (error == 'Error: Request failed with status code 422')
-  //     yield put(authAction.logoutRequestSuccess(true));
-  //   else if (error == 'Error: Request failed with status code 401') {
-  //     yield put(authAction.logoutRequestSuccess(true));
-  //     localStorage.clear();
-  //   } else {
-  //     localStorage.clear();
-  //   }
-  // }
+  try {
+    let response = yield axios.post('/auth/logout');
+    if (response.status == 200) {
+      yield put(authAction.logoutRequestSuccess(true));
+      localStorage.clear();
+    }
+  } catch (error) {
+    if (error == 'Error: Request failed with status code 422')
+      yield put(authAction.logoutRequestSuccess(true));
+    else if (error == 'Error: Request failed with status code 401') {
+      yield put(authAction.logoutRequestSuccess(true));
+      localStorage.clear();
+    } else {
+      localStorage.clear();
+    }
+  }
 }
 
 export default function* rootsaga() {
