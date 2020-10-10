@@ -15,6 +15,7 @@ import CreateJobPage from './components/CreateJobPage/CreateJobPage';
 import ViewJobPage from './components/ViewJobPage/ViewJobPage';
 import AllJobsPage from './components/AllJobsPage/AllJobsPage';
 import DownloadJobPage from './components/DownloadJobPage/DownloadJobPage';
+import TestPDF from './components/TestPDF/TestPDF';
 
 toast.configure();
 
@@ -65,6 +66,7 @@ function App() {
           <Route path='/jobs' component={AllJobsPage} exact />
           <Route path='/jobs/edit/:jobId' component={CreateJobPage} />
           <Route path='/download-job' component={DownloadJobPage} />
+          <Route path='/test-pdf' component={TestPDF} />
 
           {/* <Route path='/view-job' exact render={() => <Redirect to='/' />} /> */}
 
