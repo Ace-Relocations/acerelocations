@@ -101,13 +101,34 @@ exports.signin = (req, res) => {
       for (let i = 0; i < user.roles.length; i++) {
         authorities.push("ROLE_" + user.roles[i].name.toUpperCase());
       }
-
-      res.status(200).send({
-        id: user._id,
-        username: user.username,
-        email: user.email,
-        roles: authorities,
-        accessToken: token
-      });
+      let obj = {};
+      obj.token = token;
+      var newvalues = { $set: obj };
+      User.updateOne({ _id: user._id }, newvalues, (err, user) => {
+        if (err) {
+        res.status(500).send({ message: "Job not updated" });
+        return;
+        }  
+    });   
+    return res.status(200).send({
+      id: user._id,
+      username: user.username,
+      email: user.email,
+      roles: authorities,
+      accessToken: token
+    });
     });
 };
+
+exports.logout = (req, res) => {
+  try {
+    User.updateOne({_id: req.userId}, {$unset: {token: 1}}, (err, user)=> {
+      if (err) {
+        res.status(500).send({ message: "Unable to Delete token" });
+      }
+      res.status(200).send({ message: "Logout Successfull" });
+    })
+  } catch (err) {
+    res.status(500).send({ message: "Unable to Logout" });
+  }
+}

@@ -5,19 +5,27 @@ const User = db.user;
 const Role = db.role;
 
 verifyToken = (req, res, next) => {
-  let token = req.headers["x-access-token"];
-
-  if (!token) {
+  try {
+  let tokens = req.headers["x-access-token"];
+  if (!tokens) {
     return res.status(403).send({ message: "No token provided!" });
   }
 
-  jwt.verify(token, config.secret, (err, decoded) => {
+  jwt.verify(tokens, config.secret, (err, decoded) => {
+    User.findOne({_id: decoded.id , token: tokens}, (err, user) => {
+      if (!user) {
+        return res.status(401).send({ message: "Unauthorized!" });
+      }
+      req.userId = decoded.id;
+      next();
+    })
     if (err) {
       return res.status(401).send({ message: "Unauthorized!" });
     }
-    req.userId = decoded.id;
-    next();
   });
+} catch (err) {
+  return res.status(401).send({ message: "Unauthorized!", data: err });
+}
 };
 
 isAdmin = (req, res, next) => {
