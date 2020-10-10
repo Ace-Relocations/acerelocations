@@ -131,7 +131,7 @@ const CreateCarPDF = ({ invoice }) => {
     type,
     date,
     gcnno,
-
+    carGcnno,
     // will be added later
     rupeesInNumber = '',
     rupeesInText = '',
@@ -154,6 +154,7 @@ const CreateCarPDF = ({ invoice }) => {
     type,
     date,
     gcnno,
+    carGcnno,
     customer: {
       firstName: consignorF,
       lastName: consignorL,

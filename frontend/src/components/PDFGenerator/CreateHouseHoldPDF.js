@@ -131,6 +131,7 @@ const CreateHouseHoldPDF = ({ invoice }) => {
     type,
     date,
     gcnno,
+    // carGcnno,
 
     // will be added later
     rupeesInNumber = '',
@@ -154,6 +155,7 @@ const CreateHouseHoldPDF = ({ invoice }) => {
     type,
     date,
     gcnno,
+    // carGcnno,
     customer: {
       firstName: consignorF,
       lastName: consignorL,
