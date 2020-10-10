@@ -13,16 +13,12 @@ const DownloadJobPage = () => {
   const { loader } = useSelector((state) => state.Loader);
   const { job } = useSelector((state) => state.Job);
 
-  //   // Just to make sure we get latest data
-  //   useEffect(() => {
-  //     dispatch(getJobRequest(jobId));
-  //   }, [jobId]);
-
   const jobDetails = useMemo(() => job, [job]);
 
+  console.log({ jobDetails });
   return (
     <>
-      {loader ? (
+      {loader && !!!jobDetails ? (
         <Loader />
       ) : (
         <PDFDownloadLink document={<CreateJobPDF invoice={jobDetails} />} fileName={`job.pdf`}>

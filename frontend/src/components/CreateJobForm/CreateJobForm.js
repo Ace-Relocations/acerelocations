@@ -584,7 +584,9 @@ const CreateJobForm = ({
                         <Controller
                           as={
                             <Select labelId='type' label='Type' value={values.type}>
-                              <MenuItem value='household'>Household</MenuItem>
+                              <MenuItem value='household' selected>
+                                Household
+                              </MenuItem>
                               <MenuItem value='car'>Car</MenuItem>
                               <MenuItem value='both'>Both</MenuItem>
                             </Select>

@@ -17,7 +17,7 @@ function* createJobRequest({ payload }) {
     yield put(jobAction.hideLoader());
 
     if (response.status === 200) {
-      yield put(jobAction.jobRequestSuccess(response.data));
+      yield put(jobAction.jobRequestSuccess(response.data.data));
       toaster(response.data.message);
     } else {
       toaster(response.data.message);
