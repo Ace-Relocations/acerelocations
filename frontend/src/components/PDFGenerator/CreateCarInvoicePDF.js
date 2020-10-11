@@ -7,6 +7,7 @@ import LuggageList from '../LuggageList/LuggageList';
 import TransitPlanFormBox from '../TransitPlanFormBox/TransitPlanFormBox';
 import FooterWithImage from '../FooterWithImage/FooterWithImage';
 import InvoiceTable from '../InvoiceTable/InvoiceTable';
+import TellySheet from '../TellySheet/TellySheet';
 
 const styles = StyleSheet.create({
   page: {
@@ -179,6 +180,16 @@ const CreateCarInvoicePDF = ({ invoice }) => {
       from: consignorF,
       to: consignorL,
     },
+    tellyData: {
+      fullName: `${consignorF} ${consignorL}`,
+      location: 'Ahm',
+      mode: 'Road',
+      gcnno: 'M010',
+      jobno: 'bonnsi',
+      origin: 'Ahme',
+      date: '11/11/11',
+      destination: '112324',
+    },
   };
   return (
     <Document>
@@ -238,6 +249,8 @@ const CreateCarInvoicePDF = ({ invoice }) => {
           <FooterWithImage />
         </View>
       </Page>
+
+      <TellySheet tellyData={invoiceDetail?.tellyData} />
     </Document>
   );
 };

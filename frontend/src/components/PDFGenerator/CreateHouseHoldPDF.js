@@ -4,6 +4,7 @@ import CustomerCopy from '../CustomerCopy/CustomerCopy';
 import CustomerFeedbackForm from '../CustomerFeedbackForm/CustomerFeedbackForm';
 import Header from '../Header/Header';
 import LuggageList from '../LuggageList/LuggageList';
+import TellySheet from '../TellySheet/TellySheet';
 
 const styles = StyleSheet.create({
   page: {
@@ -176,6 +177,16 @@ const CreateHouseHoldPDF = ({ invoice }) => {
       from: consignorF,
       to: consignorL,
     },
+    tellyData: {
+      fullName: `${consignorF} ${consignorL}`,
+      location: 'Ahm',
+      mode: 'Road',
+      gcnno: 'M010',
+      jobno: 'bonnsi',
+      origin: 'Ahme',
+      date: '11/11/11',
+      destination: '112324',
+    },
   };
   return (
     <Document>
@@ -218,6 +229,8 @@ const CreateHouseHoldPDF = ({ invoice }) => {
       <Page size='A4' style={styles.page}>
         <LuggageList luggageListDetails={invoiceDetail?.luggageListDetails} />
       </Page>
+
+      <TellySheet tellyData={invoiceDetail?.tellyData} />
     </Document>
   );
 };
