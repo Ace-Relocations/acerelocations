@@ -12,6 +12,9 @@ verifyToken = (req, res, next) => {
   }
 
   jwt.verify(tokens, config.secret, (err, decoded) => {
+    if (!decoded) {
+      return res.status(401).send({ message: "Unauthorized!" });
+    }
     User.findOne({_id: decoded.id , token: tokens}, (err, user) => {
       if (!user) {
         return res.status(401).send({ message: "Unauthorized!" });
@@ -19,9 +22,6 @@ verifyToken = (req, res, next) => {
       req.userId = decoded.id;
       next();
     })
-    if (err) {
-      return res.status(401).send({ message: "Unauthorized!" });
-    }
   });
 } catch (err) {
   return res.status(401).send({ message: "Unauthorized!", data: err });

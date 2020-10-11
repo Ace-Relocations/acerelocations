@@ -17,10 +17,15 @@ module.exports = {
             }
             //const defaultV = await service.setBillno(491);
             const billno = await service.incrementBillno();
-            console.log(billno)
 
-            let total = await service.getTotal(invoice);
-            let createData = await service.createInvoice(gcnno, billno, invoice, total);
+            let newInvoice = invoice.filter(function(obj){
+                if(obj.isChecked === true){
+                    return true;
+                }
+                return false;
+            });
+            let total = await service.getTotal(newInvoice);
+            let createData = await service.createInvoice(gcnno, billno, newInvoice, total);
             if (createData == false) {
             res.status(500).send({ message: "failed to register invoice", data: createData });
             return;
@@ -32,8 +37,7 @@ module.exports = {
             var newvalues = { $set: jobById };
             Customer.updateOne({ gcnno: gcnno}, newvalues, (err, user) => {
                 if (err) {
-                    console.log(err)
-                res.status(500).send({ message: "Invoice not linked to Job" });
+                res.status(500).send({ message: "Invoice not linked to Job, duplicate value" });
                 return;
                 }  
                 return res.status(200).send({ message: "Invoice was linked to the job successfully!", data: jobById });
