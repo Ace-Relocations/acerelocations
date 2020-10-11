@@ -2,6 +2,7 @@ import React from 'react';
 import { Page, Document, Image, StyleSheet, Text, View } from '@react-pdf/renderer';
 import Header from '../Header/Header';
 import FooterWithImage from '../FooterWithImage/FooterWithImage';
+import TellySheetTable from '../TellySheetTable/TellySheetTable';
 
 const styles = StyleSheet.create({
   page: {
@@ -203,6 +204,9 @@ const TellySheet = () => {
             </View>
           </View>
 
+          <View style={{ marginTop: '10px' }}>
+            <TellySheetTable />
+          </View>
           <View
             style={{
               flexDirection: 'row',
@@ -291,7 +295,7 @@ const TellySheet = () => {
               border: 1,
               marginTop: '10px',
               width: '100%',
-              height: '120px',
+              height: 80,
             }}
           >
             <Text style={{ textAlign: 'left', padding: '5px' }}>Customer: </Text>
@@ -303,7 +307,7 @@ const TellySheet = () => {
               borderLeft: 1,
               borderBottom: 1,
               fontSize: 9,
-              height: 60,
+              height: 50,
             }}
           >
             <View style={{ width: '50%', borderRight: 1 }}>
