@@ -175,16 +175,38 @@ const CreateCarPDF = ({ invoice }) => {
       date,
       from: consignorF,
       to: consignorL,
+      originAddress: {
+        adderessLine1: oaddress1,
+        adderessLine2: oaddress2 || `${oaddress2}, ${ocity}`,
+        adderessLine3: `${ocity} - ${opincode}`,
+      },
+
+      destinationAddress: {
+        adderessLine1: daddress1,
+        adderessLine2: daddress2 || `${daddress2}, ${dcity}`,
+        adderessLine3: `${dcity} - ${dpincode}`,
+      },
     },
     tellyData: {
       fullName: `${consignorF} ${consignorL}`,
-      location: 'Ahm',
+      location: ocity,
       mode: 'Road',
-      gcnno: 'M010',
-      jobno: 'bonnsi',
-      origin: 'Ahme',
-      date: '11/11/11',
-      destination: '112324',
+      gcnno,
+      jobno: '??',
+      origin: ocity,
+      date,
+      destination: dcity,
+      originAddress: {
+        adderessLine1: oaddress1,
+        adderessLine2: oaddress2 || `${oaddress2}, ${ocity}`,
+        adderessLine3: `${ocity} - ${opincode}`,
+      },
+
+      destinationAddress: {
+        adderessLine1: daddress1,
+        adderessLine2: daddress2 || `${daddress2}, ${dcity}`,
+        adderessLine3: `${dcity} - ${dpincode}`,
+      },
     },
   };
   return (

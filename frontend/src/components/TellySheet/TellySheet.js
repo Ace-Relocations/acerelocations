@@ -40,7 +40,7 @@ const invoice = {
   destination: '112324',
 };
 
-const TellySheet = (tellyData) => {
+const TellySheet = ({ tellyData }) => {
   return (
     <Page size='A4' style={styles.page}>
       <Header />
@@ -64,7 +64,7 @@ const TellySheet = (tellyData) => {
           </View>
           <View style={{ borderRight: 1, width: '30.44%' }}>
             <Text style={{ textAlign: 'center', marginVertical: 'auto' }}>
-              {tellyData?.fullName}
+              {tellyData.fullName}
             </Text>
           </View>
           <View style={{ borderRight: 1, width: '13%' }}>

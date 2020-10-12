@@ -100,7 +100,18 @@ const LuggageListHeader = ({ ocity, dcity, gcnno, date }) => (
 );
 
 const LuggageList = ({ luggageListDetails }) => {
-  const { ocity, dcity, gcnno, date, from, to } = luggageListDetails;
+  const {
+    ocity,
+    dcity,
+    gcnno,
+    date,
+    from,
+    to,
+    originAddress,
+    destinationAddress,
+  } = luggageListDetails;
+
+  console.log({ originAddress, destinationAddress });
 
   return (
     <View>
@@ -118,10 +129,10 @@ const LuggageList = ({ luggageListDetails }) => {
 
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: '0 10' }}>
           <View style={{ border: 1, width: '45%' }}>
-            <TableWithOnlyRows details={from} />
+            <TableWithOnlyRows details={from} address={destinationAddress} />
           </View>
           <View style={{ border: 1, width: '45%' }}>
-            <TableWithOnlyRows details={to} />
+            <TableWithOnlyRows details={to} address={originAddress} />
           </View>
         </View>
 

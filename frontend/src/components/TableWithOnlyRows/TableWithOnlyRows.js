@@ -11,7 +11,8 @@ const styles = StyleSheet.create({
   },
 });
 
-const TableWithOnlyRows = ({ details }) => {
+const TableWithOnlyRows = ({ details, address }) => {
+  console.log({ address });
   // Length Will replace with props
   return (
     <View>
@@ -19,13 +20,13 @@ const TableWithOnlyRows = ({ details }) => {
         <Text>{details}</Text>
       </View>
       <View style={styles.row}>
-        <Text>asdfasd</Text>
+        <Text>{address.addressLine1}</Text>
       </View>
       <View style={styles.row}>
-        <Text>asdfasd</Text>
+        <Text>{address.addressLine2}</Text>
       </View>
       <View style={styles.row}>
-        <Text>asdfasd</Text>
+        <Text>{address.addressLine3}</Text>
       </View>
     </View>
   );

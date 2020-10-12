@@ -40,16 +40,16 @@ function App() {
   const dispatch = useDispatch();
   const { authUser, logout } = useSelector((state) => state.Auth);
 
-  // useEffect(() => {
-  //   if (
-  //     location.pathname != '/login' &&
-  //     (authUser === null || authUser === undefined || authUser === 'undefined')
-  //   ) {
-  //     history.push('/login');
-  //   } else if (location.pathname == '/login' && authUser && !logout) {
-  //     history.push('/');
-  //   }
-  // }, [authUser, logout]);
+  useEffect(() => {
+    if (
+      location.pathname != '/login' &&
+      (authUser === null || authUser === undefined || authUser === 'undefined')
+    ) {
+      history.push('/login');
+    } else if (location.pathname == '/login' && authUser && !logout) {
+      history.push('/');
+    }
+  }, [authUser, logout]);
 
   return (
     <Fragment>

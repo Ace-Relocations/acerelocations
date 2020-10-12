@@ -182,13 +182,13 @@ const CreateBothInvoicePDF = ({ invoice }) => {
     },
     tellyData: {
       fullName: `${consignorF} ${consignorL}`,
-      location: 'Ahm',
+      location: ocity,
       mode: 'Road',
-      gcnno: 'M010',
-      jobno: 'bonnsi',
-      origin: 'Ahme',
-      date: '11/11/11',
-      destination: '112324',
+      gcnno,
+      jobno: '??',
+      origin: ocity,
+      date,
+      destination: dcity,
     },
   };
   return (
