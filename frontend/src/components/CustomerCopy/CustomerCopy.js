@@ -39,6 +39,13 @@ const styles = StyleSheet.create({
     color: 'red',
     textAlign: 'center',
   },
+  headerSubText2: {
+    marginTop: '10px',
+    fontSize: 10,
+    alignItems: 'flex-end',
+    width: '60%',
+    color: 'red',
+  },
   width90: {
     width: '90%',
     alignItems: 'flex-end',
@@ -77,8 +84,9 @@ const CustomerCopy = ({
         <View wrap={false} style={styles.width90}>
           <Text style={styles.headerText}>We Make Moving Easy</Text>
           <Text style={styles.headerSubText}>
-            6TH LANE,2ND CROSS BHAGYANAGAR, KALYANDURGAM ROAD,ANANTAPUR, ANDHRA PRADESH-515001
+            310, Arista, Sindhubhavan Road, Opp. HOF Showroom, Off.
           </Text>
+          <Text>S.G.Highway, Ahmedabad-380054. M. 9825219378</Text>
           <Text style={styles.headerSubText}>E: shaivpidadi@gmail.com W: www.shaivpidadi.com</Text>
         </View>
       </View>
