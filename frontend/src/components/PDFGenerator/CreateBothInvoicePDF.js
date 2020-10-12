@@ -190,6 +190,13 @@ const CreateBothInvoicePDF = ({ invoice }) => {
       date,
       destination: dcity,
     },
+    transitData: {
+      fullName: `${consignorF} ${consignorL}`,
+      gcnno,
+      date,
+      moneyInNumber: '2,00,000',
+      moneyInText: 'Two Lakh Rupees Only',
+    },
   };
   return (
     <Document>
@@ -268,7 +275,7 @@ const CreateBothInvoicePDF = ({ invoice }) => {
       <Page size='A4' style={styles.page}>
         <View>
           <Header />
-          <TransitPlanFormBox />
+          <TransitPlanFormBox transitData={invoiceDetail?.transitData} />
           <View style={{ border: 1 }} />
           <View style={{ border: '1 solid red', marginTop: '2px' }} />
           <FooterWithImage />

@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const TransitPlanFormBox = () => {
+const TransitPlanFormBox = ({ transitData }) => {
   return (
     <View style={{ border: 1, margin: '10 30', lineHeight: 2 }}>
       <View style={{ borderBottom: 1, marginVertical: 'auto', paddingTop: 6 }}>
@@ -35,7 +35,7 @@ const TransitPlanFormBox = () => {
               <Text style={styles.centerRow}>Consignor</Text>
             </View>
             <View style={{ border: 1, width: '70%' }}>
-              <Text style={styles.centerRow}>Mr. AMOL GULIGRI</Text>
+              <Text style={styles.centerRow}>{transitData?.fullName}</Text>
             </View>
           </View>
 
@@ -44,7 +44,7 @@ const TransitPlanFormBox = () => {
               <Text style={styles.centerRow}>GCN No</Text>
             </View>
             <View style={{ border: 1, width: '60%' }}>
-              <Text style={styles.centerRow}>4208</Text>
+              <Text style={styles.centerRow}>{transitData?.gcnno}</Text>
             </View>
           </View>
 
@@ -53,7 +53,7 @@ const TransitPlanFormBox = () => {
               <Text style={styles.centerRow}>Dated</Text>
             </View>
             <View style={{ border: 1, width: '60%' }}>
-              <Text style={styles.centerRow}>02-07-20</Text>
+              <Text style={styles.centerRow}>{transitData?.date}</Text>
             </View>
           </View>
         </View>
@@ -303,7 +303,7 @@ const TransitPlanFormBox = () => {
               </View>
               <View style={{ width: '80%' }}>
                 <View style={{ borderBottom: 1 }}>
-                  <Text> Rs.2,1.,6,400/- </Text>
+                  <Text> Rs. {transitData?.moneyInNumber} /- </Text>
                 </View>
               </View>
             </View>
@@ -313,7 +313,7 @@ const TransitPlanFormBox = () => {
               </View>
               <View style={{ width: '80%' }}>
                 <View style={{ borderBottom: 1 }}>
-                  <Text> Two lakh Sixteen Thousand Four Hundred Only. </Text>
+                  <Text> {transitData?.moneyInText} </Text>
                 </View>
               </View>
             </View>

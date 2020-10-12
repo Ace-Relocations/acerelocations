@@ -265,7 +265,7 @@ const CreateCarInvoicePDF = ({ invoice }) => {
       <Page size='A4' style={styles.page}>
         <View>
           <Header />
-          <TransitPlanFormBox />
+          <TransitPlanFormBox transitData={invoiceDetail?.transitData} />
           <View style={{ border: 1 }} />
           <View style={{ border: '1 solid red', marginTop: '2px' }} />
           <FooterWithImage />
