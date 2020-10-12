@@ -40,8 +40,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   headerSubText2: {
-    marginTop: '10px',
     fontSize: 10,
+    marginTop: '0px',
     alignItems: 'flex-end',
     width: '60%',
     color: 'red',
@@ -86,7 +86,7 @@ const CustomerCopy = ({
           <Text style={styles.headerSubText}>
             310, Arista, Sindhubhavan Road, Opp. HOF Showroom, Off.
           </Text>
-          <Text>S.G.Highway, Ahmedabad-380054. M. 9825219378</Text>
+          <Text style={styles.headerSubText2}>S.G.Highway, Ahmedabad-380054. M. 9825219378</Text>
           <Text style={styles.headerSubText}>E: shaivpidadi@gmail.com W: www.shaivpidadi.com</Text>
         </View>
       </View>
