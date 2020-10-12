@@ -307,8 +307,8 @@ const AllJobsTable = ({
                 <StyledTableCell align='center' width='200px'>
                   {row.gcnno}
                 </StyledTableCell>
-                <StyledTableCell align='center'>{row.consignor}</StyledTableCell>
-                <StyledTableCell align='center'>{row.consignee}</StyledTableCell>
+                <StyledTableCell align='center'>{row.consignorF}</StyledTableCell>
+                <StyledTableCell align='center'>{row.consigneeF}</StyledTableCell>
                 <StyledTableCell align='center'>{row.contact}</StyledTableCell>
                 <StyledTableCell align='center'>{row.email}</StyledTableCell>
                 <StyledTableCell
