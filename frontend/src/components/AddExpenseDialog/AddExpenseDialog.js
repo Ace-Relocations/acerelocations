@@ -46,7 +46,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 const AddExpenseDialog = ({ openExpense, handleAddExpenses, handleCancleExpenses }) => {
   const classes = useStyles();
 
-  const [fields, setFields] = useState([{ expense: null, amount: null }]);
+  const [fields, setFields] = useState([{ expense: null, amount: null, settled: null }]);
   const [validateExpenses, updateValidateExpenses] = useState(false);
   const handleChange = (i, event) => {
     const values = [...fields];
@@ -57,6 +57,12 @@ const AddExpenseDialog = ({ openExpense, handleAddExpenses, handleCancleExpenses
   const handleChangeAmount = (i, event) => {
     const values = [...fields];
     values[i].amount = event.target.value;
+    setFields(values);
+  };
+
+  const handleChangeSettled = (i, event) => {
+    const values = [...fields];
+    values[i].settled = event.target.value;
     setFields(values);
   };
 
@@ -73,12 +79,15 @@ const AddExpenseDialog = ({ openExpense, handleAddExpenses, handleCancleExpenses
   };
 
   useEffect(() => {
-    const isValid = !Object.values(fields).some(({ expense, amount }) => {
+    const isValid = !Object.values(fields).some(({ expense, amount, settled }) => {
       if (fields.length < 1) {
         return false;
       }
 
-      return !((expense !== null && amount !== null) || (expense === '' && amount === 0));
+      return !(
+        (expense !== null && amount !== null && settled !== null) ||
+        (expense === '' && amount === 0 && settled === 0)
+      );
     });
     updateValidateExpenses(isValid);
   }, [fields]);
@@ -125,8 +134,8 @@ const AddExpenseDialog = ({ openExpense, handleAddExpenses, handleCancleExpenses
           {fields.map((field, idx) => {
             return (
               <div key={`${field}-${idx}`} style={{ marginBottom: '10px' }}>
-                <Grid container lg={7}>
-                  <Grid item lg={5} container className={classes.gridItem}>
+                <Grid container lg={12}>
+                  <Grid item xs container className={classes.gridItem}>
                     <Box marginRight='10px'>
                       <TextField
                         type='text'
@@ -140,7 +149,7 @@ const AddExpenseDialog = ({ openExpense, handleAddExpenses, handleCancleExpenses
                       />
                     </Box>
                   </Grid>
-                  <Grid item lg={5} container className={classes.gridItem}>
+                  <Grid item xs container className={classes.gridItem}>
                     <Box>
                       <TextField
                         type='number'
@@ -154,7 +163,23 @@ const AddExpenseDialog = ({ openExpense, handleAddExpenses, handleCancleExpenses
                       />
                     </Box>
                   </Grid>
-                  <Grid item lg={2} container className={classes.gridItem}>
+
+                  <Grid item xs container className={classes.gridItem}>
+                    <Box>
+                      <TextField
+                        type='number'
+                        placeholder='Enter Settled Amount'
+                        label='Settled'
+                        variant='outlined'
+                        name='settled'
+                        value={field.settled || ''}
+                        onChange={(e) => handleChangeSettled(idx, e)}
+                        required
+                      />
+                    </Box>
+                  </Grid>
+
+                  <Grid item xs={2} container className={classes.gridItem}>
                     <Button type='button' onClick={() => handleRemove(idx)}>
                       REMOVE
                     </Button>

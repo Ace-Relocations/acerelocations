@@ -154,6 +154,7 @@ const CreateJobForm = ({
       onUpdateJob(data);
       // updateIsDownloadingPDF(true);
     } else {
+      console.log({ data });
       onCreateJob(data);
       // updateIsDownloadingPDF(true);
       // reset({
@@ -653,7 +654,7 @@ const CreateJobForm = ({
                                 format='MM/dd/yyyy'
                                 margin='normal'
                                 id='date-picker-inline'
-                                value={new Date(values.date) || new Date()}
+                                value={values.date}
                                 KeyboardButtonProps={{
                                   'aria-label': 'change date',
                                 }}
