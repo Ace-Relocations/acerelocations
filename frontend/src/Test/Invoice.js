@@ -284,34 +284,36 @@ const Invoice = ({ invoice }) => {
         <Header />
         <CustomerFeedbackForm title='ORIGIN' customer={customer} />
       </Page>
-      <Page size='A4' style={styles.page} orientation='landscape'>
-        <View style={{ border: 1, margin: 50, padding: 10 }}>
-          <HeaderWithAddress />
-          <View style={{ marginTop: 20, padding: 10 }}>
-            <Reciept reciept={invoiceDetail?.reciept} />
-          </View>
-        </View>
-      </Page>
       <Page size='A4' style={styles.page}>
         <LuggageList luggageListDetails={invoiceDetail?.luggageListDetails} />
       </Page>
-      <Page size='A4' style={styles.page}>
-        <View>
-          <Header />
-          <InvoiceTable invoice={invoiceDetail?.invoice} />
-        </View>
-      </Page>
-
-      {/* Transit Page */}
-      <Page size='A4' style={styles.page}>
-        <View>
-          <Header />
-          <TransitPlanFormBox transitData={invoiceDetail?.transitData} />
-          <View style={{ border: 1 }} />
-          <View style={{ border: '1 solid red', marginTop: '2px' }} />
-          <FooterWithImage />
-        </View>
-      </Page>
+      {isInvoiceAdded && (
+        <>
+          <Page size='A4' style={styles.page} orientation='landscape'>
+            <View style={{ border: 1, margin: 50, padding: 10 }}>
+              <HeaderWithAddress />
+              <View style={{ marginTop: 20, padding: 10 }}>
+                <Reciept reciept={invoiceDetail?.reciept} />
+              </View>
+            </View>
+          </Page>
+          <Page size='A4' style={styles.page}>
+            <View>
+              <Header />
+              <InvoiceTable invoice={invoiceDetail?.invoice} />
+            </View>
+          </Page>
+          <Page size='A4' style={styles.page}>
+            <View>
+              <Header />
+              <TransitPlanFormBox transitData={invoiceDetail?.transitData} />
+              <View style={{ border: 1 }} />
+              <View style={{ border: '1 solid red', marginTop: '2px' }} />
+              <FooterWithImage />
+            </View>
+          </Page>
+        </>
+      )}
     </Document>
   );
 };
