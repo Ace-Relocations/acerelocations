@@ -434,9 +434,7 @@ const AllJobsTable = ({
         onClose={handleCloseDownload}
         aria-labelledby='responsive-dialog-title'
       >
-        <DialogTitle id='responsive-dialog-title'>
-          {'Are you sure, you want to download this job?'}
-        </DialogTitle>
+        <DialogTitle id='responsive-dialog-title'>{'Converting to PDF'}</DialogTitle>
         <DialogContent>
           <PDFDownloadLink document={<Invoice invoice={selectedJob} />} fileName='invoice.pdf'>
             {({ blob, url, loading, error }) =>

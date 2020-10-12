@@ -148,6 +148,8 @@ const Invoice = ({ invoice }) => {
     type,
     date,
     gcnno,
+    isInvoiceAdded,
+    isExpenseAdded,
 
     // will be added later
     rupeesInNumber = '',
@@ -195,15 +197,15 @@ const Invoice = ({ invoice }) => {
       to: `${consigneeF} ${consigneeL}`,
     },
     invoice: {
-      name: 'qwer',
-      dcity: 'we',
+      name: `${consignorF} ${consignorL}`,
+      dcity,
       invoiceNo: '124124',
-      date: '2412',
+      date,
       lrNo: '123124',
       invoiceDetails: [],
       total: 'qweqwr',
       totalInWords: 'qwrqwrqwrqw',
-      paymentCity: 'q wqrqwrqw',
+      paymentCity: 'PaymentCity',
     },
     luggageListDetails: {
       ocity,
@@ -212,6 +214,38 @@ const Invoice = ({ invoice }) => {
       date,
       from: consignorF,
       to: consignorL,
+      originAddress: {
+        adderessLine1: oaddress1,
+        adderessLine2: oaddress2 || `${oaddress2}, ${ocity}`,
+        adderessLine3: `${ocity} - ${opincode}`,
+      },
+
+      destinationAddress: {
+        adderessLine1: daddress1,
+        adderessLine2: daddress2 || `${daddress2}, ${dcity}`,
+        adderessLine3: `${dcity} - ${dpincode}`,
+      },
+    },
+    tellyData: {
+      fullName: `${consignorF} ${consignorL}`,
+      location: ocity,
+      mode: 'Road',
+      gcnno,
+      jobno: '??',
+      origin: ocity,
+      date,
+      destination: dcity,
+      originAddress: {
+        adderessLine1: oaddress1,
+        adderessLine2: oaddress2 || `${oaddress2}, ${ocity}`,
+        adderessLine3: `${ocity} - ${opincode}`,
+      },
+
+      destinationAddress: {
+        adderessLine1: daddress1,
+        adderessLine2: daddress2 || `${daddress2}, ${dcity}`,
+        adderessLine3: `${dcity} - ${dpincode}`,
+      },
     },
   };
 
@@ -269,7 +303,7 @@ const Invoice = ({ invoice }) => {
       </Page>
 
       {/* Transit Page */}
-      {/* <Page size='A4' style={styles.page}>
+      <Page size='A4' style={styles.page}>
         <View>
           <Header />
           <TransitPlanFormBox transitData={invoiceDetail?.transitData} />
@@ -277,7 +311,7 @@ const Invoice = ({ invoice }) => {
           <View style={{ border: '1 solid red', marginTop: '2px' }} />
           <FooterWithImage />
         </View>
-      </Page> */}
+      </Page>
     </Document>
   );
 };
