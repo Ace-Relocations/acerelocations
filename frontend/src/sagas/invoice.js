@@ -24,9 +24,9 @@ function* createInvoiceRequest({ payload }) {
     }
   } catch (error) {
     yield put(invoiceAction.hideLoader());
-    yield localStorage.clear();
-    toaster('Signing out ...', { type: 'error' });
-    yield put(invoiceAction.logoutRequestSuccess(true));
+    // yield localStorage.clear();
+    toaster(error, { type: 'error' });
+    // yield put(invoiceAction.logoutRequestSuccess(true));
   }
 }
 

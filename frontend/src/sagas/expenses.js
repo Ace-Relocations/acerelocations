@@ -24,9 +24,9 @@ function* createExpensesRequest({ payload }) {
     }
   } catch (error) {
     yield put(expensesAction.hideLoader());
-    yield localStorage.clear();
-    toaster('Signing out ...', { type: 'error' });
-    yield put(expensesAction.logoutRequestSuccess(true));
+    // yield localStorage.clear();
+    toaster(error, { type: 'error' });
+    // yield put(expensesAction.logoutRequestSuccess(true));
   }
 }
 

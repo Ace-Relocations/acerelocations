@@ -24,9 +24,9 @@ function* createJobRequest({ payload }) {
     }
   } catch (error) {
     yield put(jobAction.hideLoader());
-    yield localStorage.clear();
-    toaster('Signing out ...', { type: 'error' });
-    yield put(jobAction.logoutRequestSuccess(true));
+    // yield localStorage.clear();
+    toaster(error, { type: 'error' });
+    // yield put(jobAction.logoutRequestSuccess(true));
   }
 }
 
@@ -42,9 +42,9 @@ function* allJobRequest() {
   } catch (error) {
     if (error == 'Error: Request failed with status code 401') {
       yield put(push('/login'));
-      yield localStorage.clear();
-      toaster('Signing out ...', { type: 'error' });
-      yield put(jobAction.logoutRequestSuccess(true));
+      // yield localStorage.clear();
+      toaster(error, { type: 'error' });
+      // yield put(jobAction.logoutRequestSuccess(true));
     }
   }
 }
@@ -66,7 +66,6 @@ function* getJobRequest(payload) {
     }
   } catch (error) {
     yield put(jobAction.hideLoader());
-    console.log(error);
     if (error == 'Error: Request failed with status code 401') {
       yield localStorage.clear();
       toaster('Signing out ...', { type: 'error' });
