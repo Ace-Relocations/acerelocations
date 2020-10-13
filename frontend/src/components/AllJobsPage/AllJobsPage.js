@@ -18,6 +18,7 @@ import {
   createExpensesRequest,
 } from '../../actions';
 import toaster from '../../utils/toaster';
+import AllJobsTableV3 from '../AllJobsTable/AllJobsTable_V3';
 
 const useStyles = makeStyles((theme) => ({
   introBox: {
@@ -107,7 +108,7 @@ const AllJobsPage = ({ match }) => {
         <Box component='div' style={{ minWidth: '700px' }}>
           <CssBaseline />
 
-          <AllJobsTable
+          {/* <AllJobsTable
             data={data}
             onDeleteJob={(gcnNo) => onDeleteJob(gcnNo)}
             match={match}
@@ -116,7 +117,9 @@ const AllJobsPage = ({ match }) => {
             isLoading={loading}
             onAddInvoiceClick={onAddInvoiceClick}
             onAddExpenseClick={onAddExpenseClick}
-          />
+          /> */}
+
+          <AllJobsTableV3 />
         </Box>
       </Grid>
     </Grid>
