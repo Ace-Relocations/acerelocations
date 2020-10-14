@@ -143,7 +143,7 @@ const CreateJobForm = ({
       status: getDefaultValue(isEditing, status),
       insuranceP: getDefaultValue(isEditing, insuranceP),
       insuranceA: getDefaultValue(isEditing, insuranceA),
-      type: getDefaultValue(isEditing, type),
+      type: isEditing ? type : 'household',
       date: getDefaultValue(isEditing, date),
       car: isEditing ? car : true,
     },
