@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { PDFDownloadLink } from '@react-pdf/renderer';
@@ -14,7 +14,7 @@ import CreateBothPDF from '../PDFGenerator/CreateBothPDF';
 
 const DownloadJobPage = () => {
   //   const { jobId } = useParams();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const { loader } = useSelector((state) => state.Loader);
   const { job } = useSelector((state) => state.Job);
 
@@ -74,6 +74,7 @@ const DownloadJobPage = () => {
         <Loader />
       ) : (
         getDocument(jobDetails?.type)
+
         // <PDFDownloadLink document={getDocument(jobDetails?.type)} fileName={`job.pdf`}>
         //   {({ blob, url, loading, error }) =>
         //     loading ? <Loader /> : <Button>Download Now</Button>
