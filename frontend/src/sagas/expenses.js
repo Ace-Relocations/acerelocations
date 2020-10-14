@@ -30,6 +30,33 @@ function* createExpensesRequest({ payload }) {
   }
 }
 
+function* updateExpensesRequest({ payload }) {
+  try {
+    yield put(expensesAction.showLoader());
+
+    let response = yield axios.post('/expense/update', {
+      ...payload,
+    });
+
+    yield put(expensesAction.hideLoader());
+
+    if (response.status === 200) {
+      yield put(expensesAction.updateExpensesRequestSuccess(response.data));
+      toaster(response.data.message);
+    } else {
+      toaster(response.data.message);
+    }
+  } catch (error) {
+    yield put(expensesAction.hideLoader());
+    // yield localStorage.clear();
+    toaster(error, { type: 'error' });
+    // yield put(expensesAction.logoutRequestSuccess(true));
+  }
+}
+
 export default function* rootsaga() {
-  yield all([yield takeEvery(actionTypes.CREATE_EXPENSES_REQUEST, createExpensesRequest)]);
+  yield all([
+    yield takeEvery(actionTypes.CREATE_EXPENSES_REQUEST, createExpensesRequest),
+    yield takeEvery(actionTypes.UPDATE_EXPENSES_REQUEST, updateExpensesRequest),
+  ]);
 }

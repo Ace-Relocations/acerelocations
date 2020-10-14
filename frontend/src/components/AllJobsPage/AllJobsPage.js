@@ -82,14 +82,22 @@ const AllJobsPage = ({ match }) => {
     history.push(`${match.path}/edit/${gcnno}`);
   });
 
-  const onAddInvoiceClick = useCallback((data, gcnno) => {
+  const onAddInvoiceClick = useCallback((data, gcnno, shouldUpdate) => {
     updateIsChanged(true);
-    dispatch(createInvoiceRequest({ invoice: data, gcnno }));
+    if (shouldUpdate) {
+      dispatch(createInvoiceRequest({ invoice: data, gcnno }));
+    } else {
+      dispatch(createInvoiceRequest({ invoice: data, gcnno }));
+    }
   }, []);
 
-  const onAddExpenseClick = useCallback((data, gcnno) => {
+  const onAddExpenseClick = useCallback((data, gcnno, shouldUpdate) => {
     updateIsChanged(true);
-    dispatch(createExpensesRequest({ invoice: data, gcnno }));
+    if (shouldUpdate) {
+      dispatch(createExpensesRequest({ invoice: data, gcnno }));
+    } else {
+      dispatch(createExpensesRequest({ invoice: data, gcnno }));
+    }
   });
 
   return (

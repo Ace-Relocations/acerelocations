@@ -160,6 +160,8 @@ const AllJobsTable = ({
   const [openDownload, setOpenDownload] = useState(false);
   const [openInvoice, setOpenInvoice] = useState(false);
   const [openExpense, setOpenExpense] = useState(false);
+  const [selectedInvoiceStatus, updateSelectedInvoiceStatus] = useState();
+  const [selectedExpenseStatus, updateSelectedExpenseStatus] = useState();
 
   const [valueStatus, setValueStatus] = useState();
 
@@ -217,14 +219,15 @@ const AllJobsTable = ({
     setOpen(false);
   };
 
-  const handleOpenInvoice = (gcnno) => {
+  const handleOpenInvoice = (gcnno, isAdded) => {
     updateSelectedGcnNo(gcnno);
+    updateSelectedInvoiceStatus(isAdded);
     setOpenInvoice(true);
   };
 
   const handleAddInvoice = (data) => {
     console.log({ data });
-    onAddInvoiceClick(data, selectedGcnNo);
+    onAddInvoiceClick(data, selectedGcnNo, selectedInvoiceStatus);
     setOpenInvoice(false);
   };
 
@@ -232,13 +235,14 @@ const AllJobsTable = ({
     setOpenInvoice(false);
   };
 
-  const handleOpenExpenses = (gcnno) => {
+  const handleOpenExpenses = (gcnno, isAdded) => {
     updateSelectedGcnNo(gcnno);
+    updateSelectedExpenseStatus(isAdded);
     setOpenExpense(true);
   };
 
   const handleAddExpenses = (data) => {
-    onAddExpenseClick(data, selectedGcnNo);
+    onAddExpenseClick(data, selectedGcnNo, selectedExpenseStatus);
     setOpenExpense(false);
   };
 
@@ -385,9 +389,9 @@ const AllJobsTable = ({
                   <StyledTableCell align='center'>
                     <IconButton
                       aria-label='invoice'
-                      onClick={() => handleOpenInvoice(row.gcnno)}
+                      onClick={() => handleOpenInvoice(row.gcnno, row.isInvoiceAdded)}
                       style={{ color: getIconColor(row.isInvoiceAdded) }}
-                      disabled={row.isInvoiceAdded}
+                      // disabled={row.isInvoiceAdded}
                     >
                       <SvgIcon>
                         <MoneyIcon />
@@ -398,9 +402,9 @@ const AllJobsTable = ({
                   <StyledTableCell align='center'>
                     <IconButton
                       aria-label='invoice'
-                      onClick={() => handleOpenExpenses(row.gcnno)}
+                      onClick={() => handleOpenExpenses(row.gcnno, row.isExpenseAdded)}
                       style={{ color: getIconColor(row.isExpenseAdded) }}
-                      disabled={row.isExpenseAdded}
+                      // disabled={row.isExpenseAdded}
                     >
                       <SvgIcon>
                         <MoneyIcon />
