@@ -108,18 +108,7 @@ const AllJobsPage = ({ match }) => {
         <Box component='div' style={{ minWidth: '700px' }}>
           <CssBaseline />
 
-          {/* <AllJobsTable
-            data={data}
-            onDeleteJob={(gcnNo) => onDeleteJob(gcnNo)}
-            match={match}
-            onUpdateJobStatus={(status, gcnNo) => onUpdateJobStatus(status, gcnNo)}
-            onEditJobClick={onEditJobClick}
-            isLoading={loading}
-            onAddInvoiceClick={onAddInvoiceClick}
-            onAddExpenseClick={onAddExpenseClick}
-          /> */}
-
-          <AllJobsTableV3
+          <AllJobsTable
             data={data}
             onDeleteJob={(gcnNo) => onDeleteJob(gcnNo)}
             match={match}
@@ -129,6 +118,17 @@ const AllJobsPage = ({ match }) => {
             onAddInvoiceClick={onAddInvoiceClick}
             onAddExpenseClick={onAddExpenseClick}
           />
+
+          {/* <AllJobsTableV3
+            data={data}
+            onDeleteJob={(gcnNo) => onDeleteJob(gcnNo)}
+            match={match}
+            onUpdateJobStatus={(status, gcnNo) => onUpdateJobStatus(status, gcnNo)}
+            onEditJobClick={onEditJobClick}
+            isLoading={loading}
+            onAddInvoiceClick={onAddInvoiceClick}
+            onAddExpenseClick={onAddExpenseClick}
+          /> */}
         </Box>
       </Grid>
     </Grid>

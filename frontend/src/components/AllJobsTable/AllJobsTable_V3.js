@@ -271,6 +271,9 @@ const AllJobsTableV3 = ({
             onClick: (event, rowData) => handleOpenExpenses(rowData.gcnno),
           },
         ]}
+        options={{
+          actionsColumnIndex: -1,
+        }}
       />
 
       <Dialog
