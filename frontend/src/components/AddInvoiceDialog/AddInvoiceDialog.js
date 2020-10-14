@@ -75,14 +75,7 @@ const AddInvoiceDialog = ({ openInvoice, handleAddInvoice, handleCancleInvoice }
       isChecked: false,
     },
   ]);
-  const [state, setState] = useState({
-    gilad: true,
-    jason: false,
-    antoine: false,
-  });
-  const { gilad, jason, antoine } = state;
 
-  console.log({ fields });
   const [validateExpenses, updateValidateExpenses] = useState(false);
 
   const handleChange = (i, event) => {
