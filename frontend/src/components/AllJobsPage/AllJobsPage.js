@@ -77,15 +77,18 @@ const AllJobsPage = ({ match }) => {
   }, [allJobs, isChanged]);
 
   const onEditJobClick = useCallback((gcnno) => {
+    updateIsChanged(true);
     dispatch(getJobRequest(gcnno));
     history.push(`${match.path}/edit/${gcnno}`);
   });
 
   const onAddInvoiceClick = useCallback((data, gcnno) => {
+    updateIsChanged(true);
     dispatch(createInvoiceRequest({ invoice: data, gcnno }));
   }, []);
 
   const onAddExpenseClick = useCallback((data, gcnno) => {
+    updateIsChanged(true);
     dispatch(createExpensesRequest({ invoice: data, gcnno }));
   });
 
