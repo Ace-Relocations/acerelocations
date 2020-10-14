@@ -119,7 +119,16 @@ const AllJobsPage = ({ match }) => {
             onAddExpenseClick={onAddExpenseClick}
           /> */}
 
-          <AllJobsTableV3 />
+          <AllJobsTableV3
+            data={data}
+            onDeleteJob={(gcnNo) => onDeleteJob(gcnNo)}
+            match={match}
+            onUpdateJobStatus={(status, gcnNo) => onUpdateJobStatus(status, gcnNo)}
+            onEditJobClick={onEditJobClick}
+            isLoading={loading}
+            onAddInvoiceClick={onAddInvoiceClick}
+            onAddExpenseClick={onAddExpenseClick}
+          />
         </Box>
       </Grid>
     </Grid>
