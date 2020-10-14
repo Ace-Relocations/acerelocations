@@ -178,15 +178,15 @@ const CreateHouseHoldPDF = ({ invoice }) => {
       from: consignorF,
       to: consignorL,
       originAddress: {
-        adderessLine1: oaddress1,
-        adderessLine2: oaddress2 || `${oaddress2}, ${ocity}`,
-        adderessLine3: `${ocity} - ${opincode}`,
+        addressLine1: oaddress1,
+        addressLine2: oaddress2 || `${oaddress2}, ${ocity}`,
+        addressLine3: `${ocity} - ${opincode}`,
       },
 
       destinationAddress: {
-        adderessLine1: daddress1,
-        adderessLine2: daddress2 || `${daddress2}, ${dcity}`,
-        adderessLine3: `${dcity} - ${dpincode}`,
+        addressLine1: daddress1,
+        addressLine2: daddress2 || `${daddress2}, ${dcity}`,
+        addressLine3: `${dcity} - ${dpincode}`,
       },
     },
     tellyData: {
@@ -199,15 +199,15 @@ const CreateHouseHoldPDF = ({ invoice }) => {
       date,
       destination: dcity,
       originAddress: {
-        adderessLine1: oaddress1,
-        adderessLine2: oaddress2 || `${oaddress2}, ${ocity}`,
-        adderessLine3: `${ocity} - ${opincode}`,
+        addressLine1: oaddress1,
+        addressLine2: oaddress2 || `${oaddress2}, ${ocity}`,
+        addressLine3: `${ocity} - ${opincode}`,
       },
 
       destinationAddress: {
-        adderessLine1: daddress1,
-        adderessLine2: daddress2 || `${daddress2}, ${dcity}`,
-        adderessLine3: `${dcity} - ${dpincode}`,
+        addressLine1: daddress1,
+        addressLine2: daddress2 || `${daddress2}, ${dcity}`,
+        addressLine3: `${dcity} - ${dpincode}`,
       },
     },
   };
