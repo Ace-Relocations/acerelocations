@@ -78,14 +78,11 @@ const LoginForm = () => {
 
   // THIS IS TEMPORARY
   useEffect(() => {
-    console.log('BEFORE', logout, authUser);
-
     if (!logout && logout !== undefined && authUser !== undefined && authUser !== null) {
-      console.log(logout, authUser);
       window.location.reload(false);
-      setTimeout(() => {
-        history.push('/');
-      }, 1000);
+      // setTimeout(() => {
+      //   history.push('/');
+      // }, 1000);
     }
   }, [logout, authUser]);
 

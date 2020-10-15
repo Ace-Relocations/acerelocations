@@ -18,6 +18,7 @@ import {
   createExpensesRequest,
 } from '../../actions';
 import toaster from '../../utils/toaster';
+import AllJobsTableV3 from '../AllJobsTable/AllJobsTable_V3';
 
 const useStyles = makeStyles((theme) => ({
   introBox: {
@@ -76,16 +77,27 @@ const AllJobsPage = ({ match }) => {
   }, [allJobs, isChanged]);
 
   const onEditJobClick = useCallback((gcnno) => {
+    updateIsChanged(true);
     dispatch(getJobRequest(gcnno));
     history.push(`${match.path}/edit/${gcnno}`);
   });
 
-  const onAddInvoiceClick = useCallback((data, gcnno) => {
-    dispatch(createInvoiceRequest({ invoice: data, gcnno }));
+  const onAddInvoiceClick = useCallback((data, gcnno, shouldUpdate) => {
+    updateIsChanged(true);
+    if (shouldUpdate) {
+      dispatch(createInvoiceRequest({ invoice: data, gcnno }));
+    } else {
+      dispatch(createInvoiceRequest({ invoice: data, gcnno }));
+    }
   }, []);
 
-  const onAddExpenseClick = useCallback((data, gcnno) => {
-    dispatch(createExpensesRequest({ invoice: data, gcnno }));
+  const onAddExpenseClick = useCallback((data, gcnno, shouldUpdate) => {
+    updateIsChanged(true);
+    if (shouldUpdate) {
+      dispatch(createExpensesRequest({ invoice: data, gcnno }));
+    } else {
+      dispatch(createExpensesRequest({ invoice: data, gcnno }));
+    }
   });
 
   return (
@@ -117,6 +129,17 @@ const AllJobsPage = ({ match }) => {
             onAddInvoiceClick={onAddInvoiceClick}
             onAddExpenseClick={onAddExpenseClick}
           />
+
+          {/* <AllJobsTableV3
+            data={data}
+            onDeleteJob={(gcnNo) => onDeleteJob(gcnNo)}
+            match={match}
+            onUpdateJobStatus={(status, gcnNo) => onUpdateJobStatus(status, gcnNo)}
+            onEditJobClick={onEditJobClick}
+            isLoading={loading}
+            onAddInvoiceClick={onAddInvoiceClick}
+            onAddExpenseClick={onAddExpenseClick}
+          /> */}
         </Box>
       </Grid>
     </Grid>

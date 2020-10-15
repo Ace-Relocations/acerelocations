@@ -14,6 +14,7 @@
     "axios": "^0.20.0",
     "connected-react-router": "^6.8.0",
     "date-fns": "^2.16.1",
+    "material-table": "^1.69.1",
     "namor": "^2.0.2",
     "prettier": "^2.1.2",
     "react": "^16.13.1",

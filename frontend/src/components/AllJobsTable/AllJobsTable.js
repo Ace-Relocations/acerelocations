@@ -160,6 +160,8 @@ const AllJobsTable = ({
   const [openDownload, setOpenDownload] = useState(false);
   const [openInvoice, setOpenInvoice] = useState(false);
   const [openExpense, setOpenExpense] = useState(false);
+  const [selectedInvoiceStatus, updateSelectedInvoiceStatus] = useState();
+  const [selectedExpenseStatus, updateSelectedExpenseStatus] = useState();
 
   const [valueStatus, setValueStatus] = useState();
 
@@ -217,14 +219,15 @@ const AllJobsTable = ({
     setOpen(false);
   };
 
-  const handleOpenInvoice = (gcnno) => {
+  const handleOpenInvoice = (gcnno, isAdded) => {
     updateSelectedGcnNo(gcnno);
+    updateSelectedInvoiceStatus(isAdded);
     setOpenInvoice(true);
   };
 
   const handleAddInvoice = (data) => {
     console.log({ data });
-    onAddInvoiceClick(data, selectedGcnNo);
+    onAddInvoiceClick(data, selectedGcnNo, selectedInvoiceStatus);
     setOpenInvoice(false);
   };
 
@@ -232,13 +235,14 @@ const AllJobsTable = ({
     setOpenInvoice(false);
   };
 
-  const handleOpenExpenses = (gcnno) => {
+  const handleOpenExpenses = (gcnno, isAdded) => {
     updateSelectedGcnNo(gcnno);
+    updateSelectedExpenseStatus(isAdded);
     setOpenExpense(true);
   };
 
   const handleAddExpenses = (data) => {
-    onAddExpenseClick(data, selectedGcnNo);
+    onAddExpenseClick(data, selectedGcnNo, selectedExpenseStatus);
     setOpenExpense(false);
   };
 
@@ -271,6 +275,32 @@ const AllJobsTable = ({
     handleRequestSort(event, property);
   };
 
+  function descendingComparator(a, b, orderBy) {
+    if (b[orderBy] < a[orderBy]) {
+      return -1;
+    }
+    if (b[orderBy] > a[orderBy]) {
+      return 1;
+    }
+    return 0;
+  }
+
+  function getComparator(order, orderBy) {
+    return order === 'desc'
+      ? (a, b) => descendingComparator(a, b, orderBy)
+      : (a, b) => -descendingComparator(a, b, orderBy);
+  }
+
+  function stableSort(array, comparator) {
+    const stabilizedThis = array.map((el, index) => [el, index]);
+    stabilizedThis.sort((a, b) => {
+      const order = comparator(a[0], b[0]);
+      if (order !== 0) return order;
+      return a[1] - b[1];
+    });
+    return stabilizedThis.map((el) => el[0]);
+  }
+
   const getIconColor = (added) => (added ? 'green' : 'red');
   return (
     <>
@@ -289,11 +319,12 @@ const AllJobsTable = ({
                     active={orderBy === headCell.id}
                     direction={orderBy === headCell.id ? order : 'asc'}
                     onClick={createSortHandler(headCell.id)}
+                    style={{ color: 'white' }}
                   >
                     {headCell.label}
                     {orderBy === headCell.id ? (
-                      <span className={classes.visuallyHidden}>
-                        {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+                      <span className={classes.visuallyHidden} style={{ color: 'black' }}>
+                        {order === 'desc' ? 'd' : 'a'}
                       </span>
                     ) : null}
                   </TableSortLabel>
@@ -302,84 +333,86 @@ const AllJobsTable = ({
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
-              <StyledTableRow key={row.id}>
-                <StyledTableCell align='center' width='200px'>
-                  {row.gcnno}
-                </StyledTableCell>
-                <StyledTableCell align='center'>{row.consignorF}</StyledTableCell>
-                <StyledTableCell align='center'>{row.consigneeF}</StyledTableCell>
-                <StyledTableCell align='center'>{row.contact}</StyledTableCell>
-                <StyledTableCell align='center'>{row.email}</StyledTableCell>
-                <StyledTableCell
-                  align='center'
-                  onClick={() => handleClickListItem(row.status, row.gcnno)}
-                  style={{ cursor: 'pointer' }}
-                >
-                  {row.status}
-                </StyledTableCell>
-                <StyledTableCell align='center'>{row.type}</StyledTableCell>
-                <StyledTableCell align='center'>{row.date}</StyledTableCell>
-                <StyledTableCell align='center'>
-                  <IconButton
-                    aria-label='view'
-                    onClick={() => {
-                      history.push(`view-job/${row.gcnno}`);
-                    }}
+            {stableSort(data, getComparator(order, orderBy))
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((row) => (
+                <StyledTableRow key={row.id}>
+                  <StyledTableCell align='center' width='200px'>
+                    {row.gcnno}
+                  </StyledTableCell>
+                  <StyledTableCell align='center'>{row.consignorF}</StyledTableCell>
+                  <StyledTableCell align='center'>{row.consigneeF}</StyledTableCell>
+                  <StyledTableCell align='center'>{row.contact}</StyledTableCell>
+                  <StyledTableCell align='center'>{row.email}</StyledTableCell>
+                  <StyledTableCell
+                    align='center'
+                    onClick={() => handleClickListItem(row.status, row.gcnno)}
+                    style={{ cursor: 'pointer' }}
                   >
-                    <SvgIcon>
-                      <VisibilityIcon />
-                    </SvgIcon>
-                  </IconButton>
-                </StyledTableCell>
-                <StyledTableCell align='center'>
-                  <IconButton aria-label='edit' onClick={() => onEditJobClick(row.gcnno)}>
-                    <SvgIcon>
-                      <EditIcon />
-                    </SvgIcon>
-                  </IconButton>
-                </StyledTableCell>
-                <StyledTableCell align='center'>
-                  <IconButton aria-label='delete' onClick={() => handleClickOpen(row.gcnno)}>
-                    <SvgIcon>
-                      <DeleteIcon />
-                    </SvgIcon>
-                  </IconButton>
-                </StyledTableCell>
-                <StyledTableCell align='center'>
-                  <IconButton aria-label='download' onClick={() => handleOpenDownload(row.gcnno)}>
-                    <SvgIcon>
-                      <CloudDownloadIcon />
-                    </SvgIcon>
-                  </IconButton>
-                </StyledTableCell>
-                <StyledTableCell align='center'>
-                  <IconButton
-                    aria-label='invoice'
-                    onClick={() => handleOpenInvoice(row.gcnno)}
-                    style={{ color: getIconColor(row.isInvoiceAdded) }}
-                    disabled={row.isInvoiceAdded}
-                  >
-                    <SvgIcon>
-                      <MoneyIcon />
-                    </SvgIcon>
-                  </IconButton>
-                </StyledTableCell>
+                    {row.status}
+                  </StyledTableCell>
+                  <StyledTableCell align='center'>{row.type}</StyledTableCell>
+                  <StyledTableCell align='center'>{row.date}</StyledTableCell>
+                  <StyledTableCell align='center'>
+                    <IconButton
+                      aria-label='view'
+                      onClick={() => {
+                        history.push(`view-job/${row.gcnno}`);
+                      }}
+                    >
+                      <SvgIcon>
+                        <VisibilityIcon />
+                      </SvgIcon>
+                    </IconButton>
+                  </StyledTableCell>
+                  <StyledTableCell align='center'>
+                    <IconButton aria-label='edit' onClick={() => onEditJobClick(row.gcnno)}>
+                      <SvgIcon>
+                        <EditIcon />
+                      </SvgIcon>
+                    </IconButton>
+                  </StyledTableCell>
+                  <StyledTableCell align='center'>
+                    <IconButton aria-label='delete' onClick={() => handleClickOpen(row.gcnno)}>
+                      <SvgIcon>
+                        <DeleteIcon />
+                      </SvgIcon>
+                    </IconButton>
+                  </StyledTableCell>
+                  <StyledTableCell align='center'>
+                    <IconButton aria-label='download' onClick={() => handleOpenDownload(row.gcnno)}>
+                      <SvgIcon>
+                        <CloudDownloadIcon />
+                      </SvgIcon>
+                    </IconButton>
+                  </StyledTableCell>
+                  <StyledTableCell align='center'>
+                    <IconButton
+                      aria-label='invoice'
+                      onClick={() => handleOpenInvoice(row.gcnno, row.isInvoiceAdded)}
+                      style={{ color: getIconColor(row.isInvoiceAdded) }}
+                      // disabled={row.isInvoiceAdded}
+                    >
+                      <SvgIcon>
+                        <MoneyIcon />
+                      </SvgIcon>
+                    </IconButton>
+                  </StyledTableCell>
 
-                <StyledTableCell align='center'>
-                  <IconButton
-                    aria-label='invoice'
-                    onClick={() => handleOpenExpenses(row.gcnno)}
-                    style={{ color: getIconColor(row.isExpenseAdded) }}
-                    disabled={row.isExpenseAdded}
-                  >
-                    <SvgIcon>
-                      <MoneyIcon />
-                    </SvgIcon>
-                  </IconButton>
-                </StyledTableCell>
-              </StyledTableRow>
-            ))}
+                  <StyledTableCell align='center'>
+                    <IconButton
+                      aria-label='invoice'
+                      onClick={() => handleOpenExpenses(row.gcnno, row.isExpenseAdded)}
+                      style={{ color: getIconColor(row.isExpenseAdded) }}
+                      // disabled={row.isExpenseAdded}
+                    >
+                      <SvgIcon>
+                        <MoneyIcon />
+                      </SvgIcon>
+                    </IconButton>
+                  </StyledTableCell>
+                </StyledTableRow>
+              ))}
           </TableBody>
         </Table>
       </TableContainer>
