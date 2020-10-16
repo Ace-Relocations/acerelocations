@@ -50,8 +50,11 @@ module.exports = {
 
     getInvoice: async (req, res) => {
         try {
-            let invoices = await Customer.find({gcnno: req.body.gcnno}).populate("invoice");
-            return res.status(200).send({ message: "Invoice was fetched successfully!", data: invoices });
+            let findInvoice = await service.getInvoice(req.query.gcnno);
+            if(!findInvoice){
+                return res.status(500).send({ message: "Invoice failed to fetch, does not exist!", data: findInvoice });
+            }
+            return res.status(200).send({ message: "Invoice was fetched successfully!", data: findInvoice });
         } catch(err) {
             console.log(err)
             res.status(500).send({ message: "Failed to fetch Invoice", data: err });
@@ -66,7 +69,7 @@ module.exports = {
             } = req.body;
             let invoiceC = await Invoice.findOne({gcnno: gcnno});
 
-            if(invoice == false) {
+            if(invoice == false || invoice == "" || invoice == null) {
                 let deleteV = await Invoice.deleteOne({ gcnno: gcnno});
                 if (!deleteV){
                     res.status(500).send({ message: "Failed to delete Invoice" });

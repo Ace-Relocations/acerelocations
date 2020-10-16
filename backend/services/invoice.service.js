@@ -1,7 +1,7 @@
 const db = require("../models");
 const Customer = db.customer;
 const Invoice = db.invoice;
-const User = db.user;
+const invoice = db.invoice;
 const BillCounter = db.billCounter;
 
 module.exports = {
@@ -74,5 +74,29 @@ module.exports = {
             return err;    
         }
     },
+
+    deleteByGcnno: async (gcnNo) => {
+        try {
+            let deleted = await Invoice.deleteOne({gcnno: gcnNo});
+            if (!deleted){
+                return deleted;
+            }
+            return deleted;
+        } catch (err) {
+            return err;    
+        }
+    },
+
+    getInvoice: async (gcnNo) => {
+        try {
+            let invoice = await Invoice.findOne({gcnno: gcnNo});
+            if (!invoice) {
+                return invoice;
+                }
+                return invoice;
+        } catch (err) {
+            return err;    
+        }
+    }
 
 }

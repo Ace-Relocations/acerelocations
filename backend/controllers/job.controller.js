@@ -3,6 +3,9 @@ const db = require("../models");
 const numberToText = require('number-to-text');
 require('number-to-text/converters/en-us');
 const auth = require("../middlewares/auth.jwt")
+const moment = require('moment');
+const invoiceService = require("../services/invoice.service");
+const expenseService = require("../services/expense.service")
 
 const Customer = db.customer;
 const User = db.user;
@@ -50,7 +53,7 @@ createJob: async (req, res) => {
         obj.insuranceA = insuranceA;
         obj.insuranceAInText = numberToText.convertToText(insuranceA);
         obj.createdBy = createdBy; 
-        obj.date = date;
+        obj.date = moment(date).format('DD/MM/YYYY');
 
         obj.save(err => {
             if (err) {
@@ -73,7 +76,6 @@ createJob: async (req, res) => {
 viewJob: async (req, res) => {
     try {
         let viewData = await service.viewJob(req.query.gcnno);
-
         if (!viewData) {
             res.status(500).send({ message: "User with the following gcnnno not found" });
             return;
@@ -210,17 +212,33 @@ deleteJob: async (req, res) => {
     try {
         const user = await Customer.findOne({ gcnno: req.query.gcnno})
             if (!user) {
-                res.status(500).send({ message: "User with the following gcnnno cannot be deleted" });
+                res.status(500).send({ message: "User with the following gcnno does not exist" });
                 return;
                 }
 
         let current = await Counter.findById("entityId");
         if ((current.seq - 1) == user.gcnno || (user.type.toLowerCase() == "both" && (current.seq - 2) == user.gcnno)) {
             let number = await service.decrementGcnno(user.gcnno);
+
             if (user.type.toLowerCase() == "both"){
                 let number1 = await service.decrementGcnno(user.gcnno);
             }
             let deleteV = await Customer.deleteOne({ gcnno: req.query.gcnno});
+            if(!deleteV){
+                return res.status(500).send({ message: "Failed to delete Customer", data: deleteV });
+            }
+            if(user.isInvoiceAdded){
+                    let deleteI = await invoiceService.deleteByGcnno(req.query.gcnno);
+                    if(!deleteI){
+                        return res.status(500).send({ message: "Failed to delete Invoice", data: deleteI });
+                    }
+            }
+            if(user.isExpenseAdded){
+                let deleteE = await expenseService.deleteByGcnno(req.query.gcnno);
+                if(!deleteE){
+                    return res.status(500).send({ message: "Failed to delete Invoice", data: deleteE });
+                }
+           }
             return res.status(200).send({ message: "Customer was deleted successfully!", data: user.gcnno });     
         } else {
             let obj = new Customer();

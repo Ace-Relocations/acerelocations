@@ -1,4 +1,4 @@
-const expenseService = require("../services/expense.service");
+const service = require("../services/expense.service");
 const db = require("../models");
 
 const Customer = db.customer;
@@ -15,8 +15,8 @@ module.exports = {
             if(expense == false) {
                 res.status(500).send({ message: "The value passed is null" });
             }
-            let total = await expenseService.getTotal(expense);
-            let createData = await expenseService.createExpense(gcnno, expense, total);
+            let total = await service.getTotal(expense);
+            let createData = await service.createExpense(gcnno, expense, total);
             if (createData == false) {
             res.status(500).send({ message: "failed to register expense", data: createData });
             return;
@@ -42,7 +42,11 @@ module.exports = {
 
     getExpense: async (req, res) => {
         try {
-            let expenses = await Customer.find({gcnno: req.body.gcnno}).populate("expense").populate("expense");
+            //let expenses = await Customer.find({gcnno: req.body.gcnno}).populate("expense").populate("expense");
+            let findExpense = await service.getExpense(req.query.gcnno);
+            if(!findExpense){
+                return res.status(500).send({ message: "Invoice failed to fetch, does not exist!", data: findExpense });
+            }
             return res.status(200).send({ message: "Expense was fetched successfully!", data: expenses });
         } catch(err) {
             console.log(err)
@@ -62,7 +66,7 @@ module.exports = {
             obj._id = expenseC._id;
             obj.gcnno = gcnno;
             obj.expenseDetails = expense || expenseC.expenseDetails; 
-            obj.total = await expenseService.getTotal(obj.expenseDetails);
+            obj.total = await service.getTotal(obj.expenseDetails);
             var newvalues = { $set: obj };
 
             let updateV = await Expense.updateOne({gcnno: obj.gcnno}, newvalues)

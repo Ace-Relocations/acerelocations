@@ -34,6 +34,30 @@ module.exports = {
         } catch (err) {
             return err;
         }
+    },
+
+    deleteByGcnno: async (gcnNo) => {
+        try {
+            let deleted = await Expense.deleteOne({gcnno: gcnNo});
+            if (!deleted){
+                return deleted;
+            }
+            return deleted;
+        } catch (err) {
+            return err;    
+        }
+    },
+
+    getExpense: async (gcnNo) => {
+        try {
+            let expense = await Expense.findOne({gcnno: gcnNo});
+            if (!expense) {
+                return expense;
+                }
+                return expense;
+        } catch (err) {
+            return err;    
+        }
     }
 
 }
