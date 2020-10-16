@@ -487,6 +487,8 @@ const AllJobsTable = ({
           openInvoice={openInvoice}
           handleAddInvoice={handleAddInvoice}
           handleCancleInvoice={handleCancleInvoice}
+          isEditing={selectedInvoiceStatus}
+          gcnNo={selectedGcnNo}
         />
       )}
 
@@ -495,6 +497,7 @@ const AllJobsTable = ({
           openExpense={openExpense}
           handleAddExpenses={handleAddExpenses}
           handleCancleExpenses={handleCancleExpenses}
+          isEditing={selectedExpenseStatus}
         />
       )}
     </>

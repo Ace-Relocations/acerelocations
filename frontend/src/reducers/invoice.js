@@ -11,6 +11,18 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         invoice: action.payload,
       };
+
+    case actions.UPDATE_INVOICE_REQUEST:
+      return {
+        ...state,
+        invoice: action.payload,
+      };
+
+    case actions.GET_INVOICE_REQUEST:
+      return {
+        ...state,
+        invoice: action.payload,
+      };
     default:
       return state;
   }

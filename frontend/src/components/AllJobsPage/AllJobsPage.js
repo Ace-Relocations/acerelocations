@@ -16,6 +16,8 @@ import {
   getJobRequest,
   createInvoiceRequest,
   createExpensesRequest,
+  updateExpensesRequest,
+  updateInvoiceRequest,
 } from '../../actions';
 import toaster from '../../utils/toaster';
 import AllJobsTableV3 from '../AllJobsTable/AllJobsTable_V3';
@@ -85,7 +87,7 @@ const AllJobsPage = ({ match }) => {
   const onAddInvoiceClick = useCallback((data, gcnno, shouldUpdate) => {
     updateIsChanged(true);
     if (shouldUpdate) {
-      dispatch(createInvoiceRequest({ invoice: data, gcnno }));
+      dispatch(updateInvoiceRequest({ invoice: data, gcnno }));
     } else {
       dispatch(createInvoiceRequest({ invoice: data, gcnno }));
     }
@@ -94,7 +96,7 @@ const AllJobsPage = ({ match }) => {
   const onAddExpenseClick = useCallback((data, gcnno, shouldUpdate) => {
     updateIsChanged(true);
     if (shouldUpdate) {
-      dispatch(createExpensesRequest({ invoice: data, gcnno }));
+      dispatch(updateExpensesRequest({ invoice: data, gcnno }));
     } else {
       dispatch(createExpensesRequest({ invoice: data, gcnno }));
     }

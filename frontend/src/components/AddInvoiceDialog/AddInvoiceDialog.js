@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -25,6 +26,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
+import { getInvoiceRequest } from '../../actions';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -48,8 +50,19 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction='up' ref={ref} {...props} />;
 });
 
-const AddInvoiceDialog = ({ openInvoice, handleAddInvoice, handleCancleInvoice }) => {
+const AddInvoiceDialog = ({
+  openInvoice,
+  handleAddInvoice,
+  handleCancleInvoice,
+  isEditing,
+  gcnNo,
+}) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const invoice = useSelector((state) => state.Invoice);
+
+  console.log({ invoice });
+  console.log({ gcnNo });
 
   const [fields, setFields] = useState([
     {
@@ -76,6 +89,21 @@ const AddInvoiceDialog = ({ openInvoice, handleAddInvoice, handleCancleInvoice }
     },
   ]);
 
+  useEffect(() => {
+    if (isEditing) {
+      dispatch(getInvoiceRequest({ gcnno: gcnNo }));
+      // const invoiceDetails = fields.filter((o1) =>
+      //   invoiceData.some((o2) => o1.expense === o2.expense),
+      // );
+      // console.log({ invoiceDetails });
+    }
+  }, [gcnNo]);
+
+  // const invoceData = useMemo(() => {
+  //   return allJobs.filter(({ id }) => id === gcnNo);
+  // }, [gcnNo]);
+
+  // console.log({ invoceData });
   const [validateExpenses, updateValidateExpenses] = useState(false);
 
   const handleChange = (i, event) => {
