@@ -1,7 +1,7 @@
 import React, { useMemo, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { PDFDownloadLink } from '@react-pdf/renderer';
+import { PDFDownloadLink, pdf } from '@react-pdf/renderer';
 import Button from '@material-ui/core/Button';
 
 import Loader from '../Loader/Loader';
@@ -11,6 +11,8 @@ import { getJobRequest } from '../../actions';
 import CreateCarPDF from '../PDFGenerator/CreateCarPDF';
 import CreateHouseHoldPDF from '../PDFGenerator/CreateHouseHoldPDF';
 import CreateBothPDF from '../PDFGenerator/CreateBothPDF';
+// import generatePDFDocument from '../PDFGenerator/generatePDFDocument';
+import { saveAs } from 'file-saver';
 
 const DownloadJobPage = () => {
   //   const { jobId } = useParams();
@@ -20,10 +22,7 @@ const DownloadJobPage = () => {
 
   const jobDetails = useMemo(() => job, [job]);
 
-  console.log({ jobDetails });
-
   const getDocument = (type) => {
-    console.log({ type });
     if (type === 'car') {
       // return <CreateCarPDF invoice={jobDetails} />;
       return (
@@ -68,12 +67,23 @@ const DownloadJobPage = () => {
       );
     }
   };
+
+  const generatePDFDocument = async (data) => {
+    console.log(data, Object.keys(jobDetails).length);
+    if (Object.keys(jobDetails).length) {
+      const blobPdf = await pdf(<CreateJobPDF invoice={data} />).toBlob();
+      saveAs(blobPdf, 'document.pdf');
+    }
+  };
+
   return (
     <>
-      {loader && !!!jobDetails ? (
+      {loader && Object.keys(jobDetails).length === 0 && !jobDetails?.type ? (
         <Loader />
       ) : (
-        getDocument(jobDetails?.type)
+        // getDocument(jobDetails?.type)
+
+        <Button onClick={() => generatePDFDocument(jobDetails)}>Download Now</Button>
 
         // <PDFDownloadLink document={getDocument(jobDetails?.type)} fileName={`job.pdf`}>
         //   {({ blob, url, loading, error }) =>

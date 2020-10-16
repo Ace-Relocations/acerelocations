@@ -66,17 +66,6 @@ const CustomerCopy = ({
   gcnno,
   date,
 }) => {
-  console.log(
-    'cc',
-    consignor,
-    consignee,
-    title,
-    originAddress,
-    destinationAddress,
-    type,
-    gcnno,
-    date,
-  );
   return (
     <View>
       <View style={styles.container} wrap={false}>

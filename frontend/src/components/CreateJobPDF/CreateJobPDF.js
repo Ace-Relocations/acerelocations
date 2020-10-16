@@ -4,6 +4,12 @@ import CustomerCopy from '../CustomerCopy/CustomerCopy';
 import CustomerFeedbackForm from '../CustomerFeedbackForm/CustomerFeedbackForm';
 import Header from '../Header/Header';
 import LuggageList from '../LuggageList/LuggageList';
+import TellySheet from '../TellySheet/TellySheet';
+import InvoiceTable from '../InvoiceTable/InvoiceTable';
+import TransitPlanFormBox from '../TransitPlanFormBox/TransitPlanFormBox';
+import Reciept from '../Reciept/Reciept';
+import FooterWithImage from '../FooterWithImage/FooterWithImage';
+import HeaderWithAddress from '../HeaderWithAddress/HeaderWithAddress';
 
 const styles = StyleSheet.create({
   page: {
@@ -131,6 +137,8 @@ const CreateJobPDF = ({ invoice }) => {
     type,
     date,
     gcnno,
+    isInvoiceAdded,
+    isExpenseAdded,
 
     // will be added later
     rupeesInNumber = '',
@@ -154,6 +162,7 @@ const CreateJobPDF = ({ invoice }) => {
     type,
     date,
     gcnno,
+    // carGcnno,
     customer: {
       firstName: consignorF,
       lastName: consignorL,
@@ -173,17 +182,49 @@ const CreateJobPDF = ({ invoice }) => {
       date,
       from: consignorF,
       to: consignorL,
+      originAddress: {
+        addressLine1: oaddress1,
+        addressLine2: oaddress2 || `${oaddress2}, ${ocity}`,
+        addressLine3: `${ocity} - ${opincode}`,
+      },
+
+      destinationAddress: {
+        addressLine1: daddress1,
+        addressLine2: daddress2 || `${daddress2}, ${dcity}`,
+        addressLine3: `${dcity} - ${dpincode}`,
+      },
+    },
+    tellyData: {
+      fullName: `${consignorF} ${consignorL}`,
+      location: ocity,
+      mode: 'Road',
+      gcnno,
+      jobno: '??',
+      origin: ocity,
+      date,
+      destination: dcity,
+      originAddress: {
+        addressLine1: oaddress1,
+        addressLine2: oaddress2 || `${oaddress2}, ${ocity}`,
+        addressLine3: `${ocity} - ${opincode}`,
+      },
+
+      destinationAddress: {
+        addressLine1: daddress1,
+        addressLine2: daddress2 || `${daddress2}, ${dcity}`,
+        addressLine3: `${dcity} - ${dpincode}`,
+      },
     },
   };
-  console.log({ invoiceDetail });
 
-  const getDocument = (type) => {
-    const isCar = type === 'car';
-    const isHouseHold = type === 'household';
-    const isBoth = type === 'both';
+  const isCar = type === 'car';
+  const isHouseHold = type === 'household';
+  const isBoth = type === 'both';
 
-    if (isHouseHold) {
-      return (
+  return (
+    <Document>
+      {/* household CustomerCopy */}
+      {(isHouseHold || isBoth) && (
         <>
           <Page size='A4' style={styles.page} orientation='landscape'>
             <CustomerCopy
@@ -209,27 +250,11 @@ const CreateJobPDF = ({ invoice }) => {
               date={invoiceDetail?.date}
             />
           </Page>
-          {/* CustomerFeedbackForm */}
-
-          <Page size='A4' style={styles.page}>
-            <Header />
-            <CustomerFeedbackForm title='DESTINATION' customer={invoiceDetail?.customer} />
-          </Page>
-          <Page size='A4' style={styles.page}>
-            <Header />
-            <CustomerFeedbackForm title='ORIGIN' customer={invoiceDetail?.customer} />
-          </Page>
-
-          {/* LuggageList */}
-          <Page size='A4' style={styles.page}>
-            <LuggageList luggageListDetails={invoiceDetail?.luggageListDetails} />
-          </Page>
         </>
-      );
-    }
+      )}
 
-    if (isCar) {
-      return (
+      {/* Car CustomerCopy */}
+      {(isCar || isBoth) && (
         <>
           <Page size='A4' style={styles.page} orientation='landscape'>
             <CustomerCopy
@@ -255,96 +280,60 @@ const CreateJobPDF = ({ invoice }) => {
               date={invoiceDetail?.date}
             />
           </Page>
-          {/* CustomerFeedbackForm */}
-
-          <Page size='A4' style={styles.page}>
-            <Header />
-            <CustomerFeedbackForm title='DESTINATION' customer={invoiceDetail?.customer} />
-          </Page>
-          <Page size='A4' style={styles.page}>
-            <Header />
-            <CustomerFeedbackForm title='ORIGIN' customer={invoiceDetail?.customer} />
-          </Page>
-
-          {/* LuggageList */}
-          <Page size='A4' style={styles.page}>
-            <LuggageList luggageListDetails={invoiceDetail?.luggageListDetails} />
-          </Page>
         </>
-      );
-    }
+      )}
 
-    if (isBoth) {
-      return (
+      {/* CustomerFeedbackForm */}
+      <Page size='A4' style={styles.page}>
+        <Header />
+        <CustomerFeedbackForm title='DESTINATION' customer={invoiceDetail?.customer} />
+      </Page>
+
+      <Page size='A4' style={styles.page}>
+        <Header />
+        <CustomerFeedbackForm title='ORIGIN' customer={invoiceDetail?.customer} />
+      </Page>
+
+      {/* LuggageList */}
+      <Page size='A4' style={styles.page}>
+        <LuggageList luggageListDetails={invoiceDetail?.luggageListDetails} />
+      </Page>
+
+      {/* TellySheet */}
+      <TellySheet tellyData={invoiceDetail?.tellyData} />
+
+      {/* Invoice */}
+      {isInvoiceAdded && (
         <>
-          <Page size='A4' style={styles.page} orientation='landscape'>
-            <CustomerCopy
-              title='CUSTOMER COPY'
-              consignor={invoiceDetail?.consignor}
-              consignee={invoiceDetail?.consignee}
-              originAddress={invoiceDetail?.originAddress}
-              destinationAddress={invoiceDetail?.destinationAddress}
-              type={invoiceDetail?.type}
-              gcnno={invoiceDetail?.gcnno}
-              date={invoiceDetail?.date}
-            />
+          <Page size='A4' style={styles.page}>
+            <View>
+              <Header />
+              <InvoiceTable invoice={invoiceDetail?.invoice} />
+            </View>
           </Page>
-          <Page size='A4' style={styles.page} orientation='landscape'>
-            <CustomerCopy
-              title='TRUCK COPY'
-              consignor={invoiceDetail?.consignor}
-              consignee={invoiceDetail?.consignee}
-              originAddress={invoiceDetail?.originAddress}
-              destinationAddress={invoiceDetail?.destinationAddress}
-              type={invoiceDetail?.type}
-              gcnno={invoiceDetail?.gcnno}
-              date={invoiceDetail?.date}
-            />
-          </Page>
-          <Page size='A4' style={styles.page} orientation='landscape'>
-            <CustomerCopy
-              title='CUSTOMER COPY'
-              consignor={invoiceDetail?.consignor}
-              consignee={invoiceDetail?.consignee}
-              originAddress={invoiceDetail?.originAddress}
-              destinationAddress={invoiceDetail?.destinationAddress}
-              type={invoiceDetail?.type}
-              gcnno={invoiceDetail?.carGcnno}
-              date={invoiceDetail?.date}
-            />
-          </Page>
-          <Page size='A4' style={styles.page} orientation='landscape'>
-            <CustomerCopy
-              title='TRUCK COPY'
-              consignor={invoiceDetail?.consignor}
-              consignee={invoiceDetail?.consignee}
-              originAddress={invoiceDetail?.originAddress}
-              destinationAddress={invoiceDetail?.destinationAddress}
-              type={invoiceDetail?.type}
-              gcnno={invoiceDetail?.carGcnno}
-              date={invoiceDetail?.date}
-            />
-          </Page>
-          {/* CustomerFeedbackForm */}
 
           <Page size='A4' style={styles.page}>
-            <Header />
-            <CustomerFeedbackForm title='DESTINATION' customer={invoiceDetail?.customer} />
-          </Page>
-          <Page size='A4' style={styles.page}>
-            <Header />
-            <CustomerFeedbackForm title='ORIGIN' customer={invoiceDetail?.customer} />
+            <View>
+              <Header />
+              <TransitPlanFormBox transitData={invoiceDetail?.transitData} />
+              <View style={{ border: 1 }} />
+              <View style={{ border: '1 solid red', marginTop: '2px' }} />
+              <FooterWithImage />
+            </View>
           </Page>
 
-          {/* LuggageList */}
-          <Page size='A4' style={styles.page}>
-            <LuggageList luggageListDetails={invoiceDetail?.luggageListDetails} />
+          <Page size='A4' style={styles.page} orientation='landscape'>
+            <View style={{ border: 1, margin: 50, padding: 10 }}>
+              <HeaderWithAddress />
+              <View style={{ marginTop: 20, padding: 10 }}>
+                <Reciept reciept={invoiceDetail?.reciept} />
+              </View>
+            </View>
           </Page>
         </>
-      );
-    }
-  };
-  return <Document>{getDocument(type)}</Document>;
+      )}
+    </Document>
+  );
 };
 
 export default CreateJobPDF;

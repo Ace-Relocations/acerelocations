@@ -63,7 +63,6 @@ function* getInvoiceRequest({ payload }) {
     });
 
     yield put(invoiceAction.hideLoader());
-    console.log({ response });
     if (response.status === 200) {
       yield put(invoiceAction.getInvoiceRequestSuccess(response.data));
       toaster(response.data.message);

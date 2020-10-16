@@ -226,7 +226,6 @@ const AllJobsTable = ({
   };
 
   const handleAddInvoice = (data) => {
-    console.log({ data });
     onAddInvoiceClick(data, selectedGcnNo, selectedInvoiceStatus);
     setOpenInvoice(false);
   };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Page, Document, Image, StyleSheet, Text, View } from '@react-pdf/renderer';
 import CustomerCopy from '../CustomerCopy/CustomerCopy';
 import CustomerFeedbackForm from '../CustomerFeedbackForm/CustomerFeedbackForm';
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const CreateHouseHoldPDF = ({ invoice }) => {
+const CreateHouseHoldPDF = React.memo(({ invoice }) => {
   const {
     consignorF,
     consignorL,
@@ -210,6 +210,10 @@ const CreateHouseHoldPDF = ({ invoice }) => {
       },
     },
   };
+
+  useEffect(() => {
+    console.log('rendering', invoice);
+  });
   return (
     <Document>
       <Page size='A4' style={styles.page} orientation='landscape'>
@@ -255,6 +259,6 @@ const CreateHouseHoldPDF = ({ invoice }) => {
       <TellySheet tellyData={invoiceDetail?.tellyData} />
     </Document>
   );
-};
+});
 
 export default CreateHouseHoldPDF;

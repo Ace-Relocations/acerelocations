@@ -38,7 +38,6 @@ const useStyles = makeStyles((theme) => ({
 const CustomButton = ({ minWidth }) => {
   const classes = useStyles();
 
-  console.log({ minWidth });
   return (
     <Button className={classes.actionBtn} style={{ minWidth: minWidth }}>
       Sign up

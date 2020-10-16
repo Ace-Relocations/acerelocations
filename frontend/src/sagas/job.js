@@ -135,7 +135,6 @@ function* updateJobStatusRequest(payload) {
       toaster(response.data.message, { type: 'error' });
     }
   } catch (error) {
-    console.log(error);
     yield put(jobAction.hideLoader());
     if (error == 'Error: Request failed with status code 401') {
       yield localStorage.clear();

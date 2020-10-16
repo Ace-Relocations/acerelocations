@@ -31,7 +31,6 @@ function App() {
       if (token) {
         axios.defaults.headers.common['x-access-token'] = token;
       } else {
-        console.log('In Else APP');
         axios.defaults.headers.common['x-access-token'] = null;
       }
     })();

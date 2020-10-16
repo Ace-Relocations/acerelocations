@@ -61,9 +61,6 @@ const AddInvoiceDialog = ({
   const dispatch = useDispatch();
   const invoice = useSelector((state) => state.Invoice);
 
-  console.log({ invoice });
-  console.log({ gcnNo });
-
   const [fields, setFields] = useState([
     {
       expense:
@@ -103,7 +100,6 @@ const AddInvoiceDialog = ({
   //   return allJobs.filter(({ id }) => id === gcnNo);
   // }, [gcnNo]);
 
-  // console.log({ invoceData });
   const [validateExpenses, updateValidateExpenses] = useState(false);
 
   const handleChange = (i, event) => {

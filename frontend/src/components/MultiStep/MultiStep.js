@@ -133,9 +133,7 @@ const MultiStep = () => {
     setCustomerData,
   };
 
-  useEffect(() => {
-    console.log({ stepProps });
-  }, [stepProps, isDisabledNextStep]);
+  useEffect(() => {}, [stepProps, isDisabledNextStep]);
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);

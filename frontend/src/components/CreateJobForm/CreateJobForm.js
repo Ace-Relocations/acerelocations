@@ -154,7 +154,6 @@ const CreateJobForm = ({
       onUpdateJob(data);
       // updateIsDownloadingPDF(true);
     } else {
-      console.log({ data });
       onCreateJob(data);
       // updateIsDownloadingPDF(true);
       // reset({

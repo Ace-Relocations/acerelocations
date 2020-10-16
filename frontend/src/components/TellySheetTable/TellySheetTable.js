@@ -16,7 +16,7 @@ const getRows = (start, next) => {
   const rows = [];
   for (var i = start; i <= next; i++) {
     rows.push(
-      <View style={{ width: '5%', borderRight: 1 }}>
+      <View style={{ width: '5%', borderRight: 1 }} key={i}>
         <Text style={{ textAlign: 'center', marginVertical: 'auto' }}>{i}</Text>
       </View>,
     );

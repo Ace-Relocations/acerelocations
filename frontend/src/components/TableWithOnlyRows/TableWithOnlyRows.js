@@ -12,7 +12,6 @@ const styles = StyleSheet.create({
 });
 
 const TableWithOnlyRows = ({ details, address }) => {
-  console.log({ address });
   // Length Will replace with props
   return (
     <View>

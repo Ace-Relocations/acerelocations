@@ -40,7 +40,6 @@ const styles = StyleSheet.create({
 });
 
 const InvoiceTableRow = ({ items }) => {
-  console.log({ items });
   const rows = items.map((item) => (
     <View style={styles.row} key={item.sno.toString()}>
       <Text style={styles.description}>{item.desc}</Text>
