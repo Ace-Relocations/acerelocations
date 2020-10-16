@@ -50,7 +50,7 @@ module.exports = {
 
     getInvoice: async (req, res) => {
         try {
-            let findInvoice = await service.getInvoice(req.body.gcnno);
+            let findInvoice = await service.getInvoice(req.query.gcnno);
             if(!findInvoice){
                 return res.status(500).send({ message: "Invoice failed to fetch, does not exist!", data: findInvoice });
             }

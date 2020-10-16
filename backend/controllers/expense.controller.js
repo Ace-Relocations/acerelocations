@@ -43,7 +43,7 @@ module.exports = {
     getExpense: async (req, res) => {
         try {
             //let expenses = await Customer.find({gcnno: req.body.gcnno}).populate("expense").populate("expense");
-            let findExpense = await service.getExpense(req.body.gcnno);
+            let findExpense = await service.getExpense(req.query.gcnno);
             if(!findExpense){
                 return res.status(500).send({ message: "Invoice failed to fetch, does not exist!", data: findExpense });
             }
