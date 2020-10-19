@@ -49,7 +49,7 @@ const AddExpenseDialog = ({ openExpense, handleAddExpenses, handleCancleExpenses
 
   const [fields, setFields] = useState([{ details: null, amount: null, settled: null }]);
 
-  const { expense } = useSelector((state) => state.Expense) || [];
+  const { expenses } = useSelector((state) => state.Expenses) || [];
 
   const [validateExpenses, updateValidateExpenses] = useState(false);
   const handleChange = (i, event) => {
@@ -97,12 +97,14 @@ const AddExpenseDialog = ({ openExpense, handleAddExpenses, handleCancleExpenses
   }, [fields]);
 
 
-  // const expenseData = useMemo(() => {
-  //   if (isEditing && !!expenseDetails) {
-  //     setFields(expenseDetails);    
-  //   } 
-  // // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [isEditing, expenseDetails]);
+  useEffect(() => {
+    if (isEditing && !!expenses?.expenseDetails) {
+      console.log('in')
+      setFields(expenses?.expenseDetails);    
+    } 
+  }, [isEditing, expenses])
+
+  console.log({ expenses})
 
   const isValid = fields.length > 0 && validateExpenses;
 

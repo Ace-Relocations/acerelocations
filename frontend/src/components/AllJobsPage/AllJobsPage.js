@@ -100,7 +100,7 @@ const AllJobsPage = ({ match }) => {
     } else {
       dispatch(createExpensesRequest({ expense: data, gcnno }));
     }
-  });
+  }, [dispatch]);
 
   return (
     <Grid container>

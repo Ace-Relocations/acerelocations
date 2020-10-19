@@ -41,7 +41,7 @@ function* updateExpensesRequest({ payload }) {
     yield put(expensesAction.hideLoader());
 
     if (response.status === 200) {
-      yield put(expensesAction.updateExpensesRequestSuccess(response.data));
+      yield put(expensesAction.updateExpensesRequestSuccess(response.data.data));
       toaster(response.data.message);
     } else {
       toaster(response.data.message);
@@ -61,8 +61,8 @@ function* getExpensesRequest(payload ) {
     
     let response = yield axios.get(`/expense/view?gcnno=${gcnNo}`);
 
-    if (response.status === 200) {
-      yield put(expensesAction.getExpensesRequestSuccess(response.data));
+    if (!!response) {
+      yield put(expensesAction.getExpensesRequestSuccess(response.data.data));
       yield put(expensesAction.hideLoader());
     } else {
       yield put(expensesAction.hideLoader());
