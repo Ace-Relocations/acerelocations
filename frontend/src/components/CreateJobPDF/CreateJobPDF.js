@@ -131,6 +131,7 @@ const CreateJobPDF = ({ invoice }) => {
     status,
     contact,
     car,
+    carGcnno='',
     email,
     insuranceP,
     insuranceA,
@@ -149,7 +150,7 @@ const CreateJobPDF = ({ invoice }) => {
     lrNo = '',
   } = invoice;
   console.log({ invoiceData })
-  const invoiceDetail = {
+  let invoiceDetail = {
     consignor: { firstName: consignorF, lastName: consignorL },
     consignee: { firstName: consigneeF, lastName: consigneeL },
     contact,
@@ -163,6 +164,7 @@ const CreateJobPDF = ({ invoice }) => {
     type,
     date,
     gcnno,
+    carGcnno,
     phone: contact,
     // carGcnno,
     customer: {
@@ -217,7 +219,15 @@ const CreateJobPDF = ({ invoice }) => {
         addressLine3: `${dcity} - ${dpincode}`,
       },
     },
-    reciept: {
+    transitData: {
+      fullName: `${consignorF} ${consignorL}`,
+      gcnno,
+      date
+    }
+  };
+
+  if (isInvoiceAdded) {
+    invoiceDetail = { ...invoiceDetail, reciept: {
       chequeIssuer: `${consignorF} ${consignorL}`,
       rupeesInNumber,
       rupeesInText,
@@ -233,19 +243,13 @@ const CreateJobPDF = ({ invoice }) => {
       dcity,
       invoiceNo: '',
       date,
-      lrNo: invoiceData.billno,
-      invoiceDetails : invoiceData?.invoiceDetails,
+      lrNo: invoiceData[0].billno,
+      invoiceDetails : invoiceData[0]?.invoiceDetails,
       total: '',
       totalInWords: '',
       paymentCity: dcity,
-    },
-    transitData: {
-      fullName: `${consignorF} ${consignorL}`,
-      gcnNo: gcnno,
-      date
-    }
-  };
-
+    },}
+  }
   const isCar = type === 'car';
   const isHouseHold = type === 'household';
   const isBoth = type === 'both';
