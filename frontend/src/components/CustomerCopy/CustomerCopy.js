@@ -74,9 +74,9 @@ const CustomerCopy = ({
         <View wrap={false} style={styles.width90}>
           <Text style={styles.headerText}>We Make Moving Easy</Text>
           <Text style={styles.headerSubText}>
-            310, Arista, Sindhubhavan Road, Opp. HOF Showroom, Off.
+            310, Arista, Sindhubhavan Road, Opp. HOF Showroom, 
           </Text>
-          <Text style={styles.headerSubText2}>S.G.Highway, Ahmedabad-380054. M. 9825219378</Text>
+          <Text style={styles.headerSubText2}>Off. S.G.Highway, Ahmedabad-380054. M. 9825219378</Text>
           <Text style={styles.headerSubText}>E: shaivpidadi@gmail.com W: www.shaivpidadi.com</Text>
         </View>
       </View>
