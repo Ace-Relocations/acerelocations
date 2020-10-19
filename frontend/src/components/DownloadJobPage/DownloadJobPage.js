@@ -13,6 +13,7 @@ import CreateHouseHoldPDF from '../PDFGenerator/CreateHouseHoldPDF';
 import CreateBothPDF from '../PDFGenerator/CreateBothPDF';
 // import generatePDFDocument from '../PDFGenerator/generatePDFDocument';
 import { saveAs } from 'file-saver';
+import TruckLoader from '../TruckLoader/TruckLoader';
 
 const DownloadJobPage = () => {
   //   const { jobId } = useParams();
@@ -71,11 +72,18 @@ const DownloadJobPage = () => {
   const generatePDFDocument = async (data) => {
     console.log(data, Object.keys(jobDetails).length);
     if (Object.keys(jobDetails).length) {
+      setLoading(true);
       const blobPdf = await pdf(<CreateJobPDF invoice={data} />).toBlob();
       saveAs(blobPdf, 'document.pdf');
+      setTimeout(() => {
+        setLoading(false);
+      }, 2000);
     }
   };
 
+  if (loading) {
+    return <TruckLoader />
+  }
   return (
     <>
       {loader && Object.keys(jobDetails).length === 0 && !jobDetails?.type ? (
