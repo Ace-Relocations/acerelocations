@@ -47,7 +47,7 @@ module.exports = {
             if(!findExpense){
                 return res.status(500).send({ message: "Invoice failed to fetch, does not exist!", data: findExpense });
             }
-            return res.status(200).send({ message: "Expense was fetched successfully!", data: expenses });
+            return res.status(200).send({ message: "Expense was fetched successfully!", data: findExpense });
         } catch(err) {
             console.log(err)
             res.status(500).send({ message: "Failed to fetch Expense", data: err });
