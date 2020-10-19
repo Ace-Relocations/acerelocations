@@ -47,14 +47,14 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 const AddExpenseDialog = ({ openExpense, handleAddExpenses, handleCancleExpenses, isEditing }) => {
   const classes = useStyles();
 
-  const [fields, setFields] = useState([{ expense: null, amount: null, settled: null }]);
+  const [fields, setFields] = useState([{ details: null, amount: null, settled: null }]);
 
   const { expense } = useSelector((state) => state.Expense) || [];
 
   const [validateExpenses, updateValidateExpenses] = useState(false);
   const handleChange = (i, event) => {
     const values = [...fields];
-    values[i].expense = event.target.value;
+    values[i].details = event.target.value;
     setFields(values);
   };
 
@@ -72,7 +72,7 @@ const AddExpenseDialog = ({ openExpense, handleAddExpenses, handleCancleExpenses
 
   const handleAdd = () => {
     const values = [...fields];
-    values.push({ expense: null, amount: null });
+    values.push({ details: null, amount: null });
     setFields(values);
   };
 
@@ -83,14 +83,14 @@ const AddExpenseDialog = ({ openExpense, handleAddExpenses, handleCancleExpenses
   };
 
   useEffect(() => {
-    const isValid = !Object.values(fields).some(({ expense, amount, settled }) => {
+    const isValid = !Object.values(fields).some(({ details, amount, settled }) => {
       if (fields.length < 1) {
         return false;
       }
 
       return !(
-        (expense !== null && amount !== null && settled !== null) ||
-        (expense === '' && amount === 0 && settled === 0)
+        (details !== null && amount !== null && settled !== null) ||
+        (details === '' && amount === 0 && settled === 0)
       );
     });
     updateValidateExpenses(isValid);
@@ -155,7 +155,7 @@ const AddExpenseDialog = ({ openExpense, handleAddExpenses, handleCancleExpenses
                         label='Expense'
                         variant='outlined'
                         name='expense'
-                        value={field.expense || ''}
+                        value={field.details || ''}
                         onChange={(e) => handleChange(idx, e)}
                         required
                       />

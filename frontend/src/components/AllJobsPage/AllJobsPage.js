@@ -72,11 +72,11 @@ const AllJobsPage = ({ match }) => {
       dispatch(allJobRequest());
     }
     updateIsChanged(false);
-  }, [isChanged]);
+  }, [dispatch, isChanged]);
 
   const data = React.useMemo(() => {
     return allJobs;
-  }, [allJobs, isChanged]);
+  }, [allJobs]);
 
   const onEditJobClick = useCallback((gcnno) => {
     updateIsChanged(true);
@@ -91,14 +91,14 @@ const AllJobsPage = ({ match }) => {
     } else {
       dispatch(createInvoiceRequest({ invoice: data, gcnno }));
     }
-  }, []);
+  }, [dispatch]);
 
   const onAddExpenseClick = useCallback((data, gcnno, shouldUpdate) => {
     updateIsChanged(true);
     if (shouldUpdate) {
-      dispatch(updateExpensesRequest({ invoice: data, gcnno }));
+      dispatch(updateExpensesRequest({ expense: data, gcnno }));
     } else {
-      dispatch(createExpensesRequest({ invoice: data, gcnno }));
+      dispatch(createExpensesRequest({ expense: data, gcnno }));
     }
   });
 
