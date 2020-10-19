@@ -111,8 +111,6 @@ const LuggageList = ({ luggageListDetails }) => {
     destinationAddress,
   } = luggageListDetails;
 
-  console.log({ originAddress, destinationAddress });
-
   return (
     <View>
       <LuggageListHeader ocity={ocity} dcity={dcity} gcnno={gcnno} date={date} />

@@ -61,7 +61,9 @@ module.exports = {
         try {
             return Customer.find({})  // You may want to add a query
                            .skip(skip) // Always apply 'skip' before 'limit'
-                           .limit(limit) // This is your 'page size'
+                           .limit(limit)
+                           .populate("expense")
+                           .populate("invoice"); // This is your 'page size'
 
         } catch {
             return err;    

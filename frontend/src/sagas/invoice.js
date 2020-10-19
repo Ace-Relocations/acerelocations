@@ -6,6 +6,29 @@ import * as invoiceAction from '../actions';
 import axios from '../services';
 import toaster from '../utils/toaster';
 
+function* getInvoiceRequest(payload) {
+  try {
+    const { gcnNo } = payload;
+    yield put(invoiceAction.showLoader());
+
+    let response = yield axios.get(`/invoice/view?gcnno=${gcnNo}`);
+
+    yield put(invoiceAction.hideLoader());
+    console.log({ response });
+    if (!!response) {
+      yield put(invoiceAction.getInvoiceRequestSuccess(response.data.data));
+      toaster(response.data.message);
+    } else {
+      toaster(response.data.message);
+    }
+  } catch (error) {
+    yield put(invoiceAction.hideLoader());
+    // yield localStorage.clear();
+    toaster(error, { type: 'error' });
+    // yield put(invoiceAction.logoutRequestSuccess(true));
+  }
+}
+
 function* createInvoiceRequest({ payload }) {
   try {
     yield put(invoiceAction.showLoader());
@@ -56,6 +79,7 @@ function* updateInvoiceRequest({ payload }) {
 
 export default function* rootsaga() {
   yield all([
+    yield takeEvery(actionTypes.GET_INVOICE_REQUEST, getInvoiceRequest),
     yield takeEvery(actionTypes.CREATE_INVOICE_REQUEST, createInvoiceRequest),
     yield takeEvery(actionTypes.UPDATE_INVOICE_REQUEST, updateInvoiceRequest),
   ]);

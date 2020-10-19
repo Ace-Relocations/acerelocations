@@ -202,7 +202,6 @@ const AllJobsTableV3 = ({
   };
 
   const handleAddInvoice = (data) => {
-    console.log({ data });
     onAddInvoiceClick(data, selectedGcnNo);
     setOpenInvoice(false);
   };

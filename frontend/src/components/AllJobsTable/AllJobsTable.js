@@ -1,7 +1,7 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -37,6 +37,7 @@ import {
   Money as MoneyIcon,
 } from '@material-ui/icons';
 import AddExpenseDialog from '../AddExpenseDialog/AddExpenseDialog';
+import { getExpensesRequest, getInvoiceRequest } from '../../actions';
 
 const options = ['ongoing', 'completed'];
 
@@ -145,6 +146,7 @@ const AllJobsTable = ({
 }) => {
   const classes = useStyles();
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const [order, setOrder] = useState('desc');
   const [orderBy, setOrderBy] = useState();
@@ -226,7 +228,6 @@ const AllJobsTable = ({
   };
 
   const handleAddInvoice = (data) => {
-    console.log({ data });
     onAddInvoiceClick(data, selectedGcnNo, selectedInvoiceStatus);
     setOpenInvoice(false);
   };
@@ -252,7 +253,7 @@ const AllJobsTable = ({
 
   const selectedJob = useMemo(() => {
     return allJobs.find(({ gcnno }) => gcnno === selectedToDownloadGcnNo);
-  }, [updateSelectedToDownloadGcnNo, handleOpenDownload]);
+  }, [allJobs, selectedToDownloadGcnNo]);
 
   const headCells = [
     { id: 'gcnno', numeric: false, label: 'GCN No.' },
@@ -302,6 +303,23 @@ const AllJobsTable = ({
   }
 
   const getIconColor = (added) => (added ? 'green' : 'red');
+
+  useEffect(() => {
+    console.log({ selectedInvoiceStatus });
+    if (selectedInvoiceStatus) {
+      console.log('selectedInvoiceStatus in');
+      dispatch(getInvoiceRequest({ selectedGcnNo }));
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [openInvoice, selectedGcnNo]);
+
+  useEffect(() => {
+    if (selectedExpenseStatus) {
+      dispatch(getExpensesRequest({ selectedGcnNo }));
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [openExpense, selectedGcnNo]);
+
   return (
     <>
       <TableContainer component={Paper}>
@@ -487,6 +505,8 @@ const AllJobsTable = ({
           openInvoice={openInvoice}
           handleAddInvoice={handleAddInvoice}
           handleCancleInvoice={handleCancleInvoice}
+          isEditing={selectedInvoiceStatus}
+          gcnNo={selectedGcnNo}
         />
       )}
 
@@ -495,6 +515,7 @@ const AllJobsTable = ({
           openExpense={openExpense}
           handleAddExpenses={handleAddExpenses}
           handleCancleExpenses={handleCancleExpenses}
+          isEditing={selectedExpenseStatus}
         />
       )}
     </>

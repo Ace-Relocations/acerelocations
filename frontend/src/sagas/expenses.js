@@ -54,9 +54,32 @@ function* updateExpensesRequest({ payload }) {
   }
 }
 
+function* getExpensesRequest(payload ) {
+  try {
+    const { gcnNo } = payload;
+    yield put(expensesAction.showLoader());
+    
+    let response = yield axios.get(`/expense/view?gcnno=${gcnNo}`);
+
+    if (response.status === 200) {
+      yield put(expensesAction.getExpensesRequestSuccess(response.data));
+      yield put(expensesAction.hideLoader());
+    } else {
+      yield put(expensesAction.hideLoader());
+      toaster(response.data.message);
+    }
+  } catch (error) {
+    yield put(expensesAction.hideLoader());
+    // yield localStorage.clear();
+    toaster(error, { type: 'error' });
+    // yield put(expensesAction.logoutRequestSuccess(true));
+  }
+}
+
 export default function* rootsaga() {
   yield all([
     yield takeEvery(actionTypes.CREATE_EXPENSES_REQUEST, createExpensesRequest),
     yield takeEvery(actionTypes.UPDATE_EXPENSES_REQUEST, updateExpensesRequest),
+    yield takeEvery(actionTypes.GET_EXPENSES_REQUEST, getExpensesRequest),
   ]);
 }

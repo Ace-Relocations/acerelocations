@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -25,6 +26,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
+import { getInvoiceRequest } from '../../actions';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -48,8 +50,17 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction='up' ref={ref} {...props} />;
 });
 
-const AddInvoiceDialog = ({ openInvoice, handleAddInvoice, handleCancleInvoice }) => {
+const AddInvoiceDialog = ({
+  openInvoice,
+  handleAddInvoice,
+  handleCancleInvoice,
+  isEditing,
+  gcnNo,
+}) => {
   const classes = useStyles();
+  const {
+    invoice: { invoiceDetails },
+  } = useSelector((state) => state.Invoice);
 
   const [fields, setFields] = useState([
     {
@@ -75,14 +86,39 @@ const AddInvoiceDialog = ({ openInvoice, handleAddInvoice, handleCancleInvoice }
       isChecked: false,
     },
   ]);
-  const [state, setState] = useState({
-    gilad: true,
-    jason: false,
-    antoine: false,
-  });
-  const { gilad, jason, antoine } = state;
 
-  console.log({ fields });
+  const invoiceData = useMemo(() => {
+    if (isEditing && !!invoiceDetails) {
+      const invoice = fields.map((invoice) => {
+        const isInvoicePresent = invoiceDetails.filter((item) => invoice.expense === item.expense);
+        if (isInvoicePresent.length > 0) {
+          // setFields({ ...invoice, ...isInvoicePresent });    
+          invoice.amount=isInvoicePresent[0].amount;
+          invoice.isChecked=isInvoicePresent[0].isChecked;     
+          // return invoice;
+        }
+        return invoice;
+      }) || [];
+      setFields(invoice);    
+    } 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isEditing, invoiceDetails]);
+
+
+
+  // const see = fields.map(function (x) {
+  //   var result = invoiceDetails?.filter((a1) => a1.id == x.id);
+  //   if (result.length > 0) {
+  //     x.name = result[0].name;
+  //   }
+  //   return x;
+  // });
+
+  // console.log({ see });
+  // const invoceData = useMemo(() => {
+  //   return allJobs.filter(({ id }) => id === gcnNo);
+  // }, [gcnNo]);
+
   const [validateExpenses, updateValidateExpenses] = useState(false);
 
   const handleChange = (i, event) => {
@@ -119,7 +155,7 @@ const AddInvoiceDialog = ({ openInvoice, handleAddInvoice, handleCancleInvoice }
       if (fields.length < 1) {
         return false;
       }
-      return (isChecked == true && amount > 0) || (isChecked === false && amount === 0);
+      return (isChecked && amount > 0) || (isChecked === false && amount === 0);
     });
     updateValidateExpenses(isValid);
   }, [fields]);

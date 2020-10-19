@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -20,6 +20,7 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid/index';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -43,10 +44,13 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction='up' ref={ref} {...props} />;
 });
 
-const AddExpenseDialog = ({ openExpense, handleAddExpenses, handleCancleExpenses }) => {
+const AddExpenseDialog = ({ openExpense, handleAddExpenses, handleCancleExpenses, isEditing }) => {
   const classes = useStyles();
 
   const [fields, setFields] = useState([{ expense: null, amount: null, settled: null }]);
+
+  const { expense } = useSelector((state) => state.Expense) || [];
+
   const [validateExpenses, updateValidateExpenses] = useState(false);
   const handleChange = (i, event) => {
     const values = [...fields];
@@ -91,6 +95,14 @@ const AddExpenseDialog = ({ openExpense, handleAddExpenses, handleCancleExpenses
     });
     updateValidateExpenses(isValid);
   }, [fields]);
+
+
+  // const expenseData = useMemo(() => {
+  //   if (isEditing && !!expenseDetails) {
+  //     setFields(expenseDetails);    
+  //   } 
+  // // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [isEditing, expenseDetails]);
 
   const isValid = fields.length > 0 && validateExpenses;
 
