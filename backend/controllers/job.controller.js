@@ -27,9 +27,10 @@ createJob: async (req, res) => {
         }
         const user = await User.findById(req.userId)
         const createdBy = user.email;
-
+        const year = moment(Date.now()).format('YYYY');
         let obj = new Customer();
-        obj.gcnno = gcnno;
+        obj.gcnno = "Y"+year+"N"+gcnno;
+        console.log(obj.gcnno)
         obj.consignorF = consignorF;
         obj.consignorL = consignorL; 
         obj.consigneeF = consigneeF;
@@ -48,7 +49,7 @@ createJob: async (req, res) => {
         obj.dpincode = dpincode; 
         obj.type = type;
         obj.status = status;
-        obj.carGcnno = gcnnoC;
+        obj.carGcnno = "Y"+year+"N"+gcnnoC;
         obj.insuranceP = insuranceP; 
         obj.insuranceA = insuranceA;
         obj.insuranceAInText = numberToText.convertToText(insuranceA);

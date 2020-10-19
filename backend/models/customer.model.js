@@ -5,7 +5,7 @@ var Customer = mongoose.model(
   "Customer",
   new mongoose.Schema({
     gcnno: {
-        type: Number,
+        type: String,
         required: true,
         unique: true,
       },
@@ -39,7 +39,7 @@ var Customer = mongoose.model(
       },
     dstate: String,
     dpincode: String,
-    carGcnno: Number,
+    carGcnno: String,
     insuranceP: Number,
     insuranceA: Number,
     insuranceAInText: String,
