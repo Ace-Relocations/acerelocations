@@ -29,7 +29,7 @@ export const updateExpensesRequestSuccess = (payload) => ({
 
 export const getExpensesRequest = (payload) => ({
   type: GET_EXPENSES_REQUEST,
-  payload,
+  gcnNo: payload.selectedGcnNo,
 });
 
 export const getExpensesRequestSuccess = (payload) => ({

@@ -315,6 +315,7 @@ const AllJobsTable = ({
   }, [openInvoice, selectedGcnNo]);
 
   useEffect(() => {
+    console.log({ selectedGcnNo })
     if (selectedExpenseStatus) {
       dispatch(getExpensesRequest({ selectedGcnNo }));
     }
