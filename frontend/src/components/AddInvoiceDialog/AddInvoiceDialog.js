@@ -58,7 +58,6 @@ const AddInvoiceDialog = ({
   gcnNo,
 }) => {
   const classes = useStyles();
-  const dispatch = useDispatch();
   const invoice = useSelector((state) => state.Invoice);
 
   const [fields, setFields] = useState([

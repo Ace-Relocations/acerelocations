@@ -14,9 +14,9 @@ function* getInvoiceRequest(payload) {
     let response = yield axios.get(`/invoice/view?gcnno=${gcnNo}`);
 
     yield put(invoiceAction.hideLoader());
-    if (response.status === 200) {
-      console.log(response.data);
-      yield put(invoiceAction.getInvoiceRequestSuccess(response.data));
+    console.log({ response });
+    if (!!response) {
+      yield put(invoiceAction.getInvoiceRequestSuccess(response.data.data));
       toaster(response.data.message);
     } else {
       toaster(response.data.message);
