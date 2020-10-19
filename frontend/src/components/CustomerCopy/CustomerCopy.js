@@ -65,6 +65,7 @@ const CustomerCopy = ({
   type,
   gcnno,
   date,
+  phone
 }) => {
   return (
     <View>
@@ -147,7 +148,7 @@ const CustomerCopy = ({
           <ConsignmentBox />
           <AcknowledgementTable
             fullName={`${consignee?.firstName} ${consignee?.lastName}`}
-            number='12'
+            number={phone}
           />
           <AffliationBox />
           <View style={{ marginTop: 5 }}>

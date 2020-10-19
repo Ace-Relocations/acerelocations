@@ -139,6 +139,7 @@ const CreateJobPDF = ({ invoice }) => {
     gcnno,
     isInvoiceAdded,
     isExpenseAdded,
+    invoice: invoiceData,
 
     // will be added later
     rupeesInNumber = '',
@@ -147,7 +148,7 @@ const CreateJobPDF = ({ invoice }) => {
     billNo = '',
     lrNo = '',
   } = invoice;
-
+  console.log({ invoiceData })
   const invoiceDetail = {
     consignor: { firstName: consignorF, lastName: consignorL },
     consignee: { firstName: consigneeF, lastName: consigneeL },
@@ -162,6 +163,7 @@ const CreateJobPDF = ({ invoice }) => {
     type,
     date,
     gcnno,
+    phone: contact,
     // carGcnno,
     customer: {
       firstName: consignorF,
@@ -180,8 +182,8 @@ const CreateJobPDF = ({ invoice }) => {
       dcity,
       gcnno,
       date,
-      from: consignorF,
-      to: consignorL,
+      from: `${consignorF} ${consignorL}`,
+      to: `${consigneeF} ${consigneeL}`,
       originAddress: {
         addressLine1: oaddress1,
         addressLine2: oaddress2 || `${oaddress2}, ${ocity}`,
@@ -215,6 +217,33 @@ const CreateJobPDF = ({ invoice }) => {
         addressLine3: `${dcity} - ${dpincode}`,
       },
     },
+    reciept: {
+      chequeIssuer: `${consignorF} ${consignorL}`,
+      rupeesInNumber,
+      rupeesInText,
+      chequeNo,
+      date,
+      billNo,
+      lrNo,
+      from: `${consignorF} ${consignorL}`,
+      to: `${consigneeF} ${consigneeL}`,
+    },
+    invoice: {
+      name: `${consignorF} ${consignorL}`,
+      dcity,
+      invoiceNo: '',
+      date,
+      lrNo: invoiceData.billno,
+      invoiceDetails : invoiceData?.invoiceDetails,
+      total: '',
+      totalInWords: '',
+      paymentCity: dcity,
+    },
+    transitData: {
+      fullName: `${consignorF} ${consignorL}`,
+      gcnNo: gcnno,
+      date
+    }
   };
 
   const isCar = type === 'car';
@@ -233,9 +262,10 @@ const CreateJobPDF = ({ invoice }) => {
               consignee={invoiceDetail?.consignee}
               originAddress={invoiceDetail?.originAddress}
               destinationAddress={invoiceDetail?.destinationAddress}
-              type={invoiceDetail?.type}
+              type={isBoth ? 'household' : invoiceDetail?.type} 
               gcnno={invoiceDetail?.gcnno}
               date={invoiceDetail?.date}
+              phone={invoiceDetail?.phone}
             />
           </Page>
           <Page size='A4' style={styles.page} orientation='landscape'>
@@ -245,9 +275,10 @@ const CreateJobPDF = ({ invoice }) => {
               consignee={invoiceDetail?.consignee}
               originAddress={invoiceDetail?.originAddress}
               destinationAddress={invoiceDetail?.destinationAddress}
-              type={invoiceDetail?.type}
+              type={isBoth ? 'household' : invoiceDetail?.type} 
               gcnno={invoiceDetail?.gcnno}
               date={invoiceDetail?.date}
+              phone={invoiceDetail?.phone}
             />
           </Page>
         </>
@@ -263,9 +294,10 @@ const CreateJobPDF = ({ invoice }) => {
               consignee={invoiceDetail?.consignee}
               originAddress={invoiceDetail?.originAddress}
               destinationAddress={invoiceDetail?.destinationAddress}
-              type={invoiceDetail?.type}
+              type={isBoth ? 'car' : invoiceDetail?.type} 
               gcnno={invoiceDetail?.carGcnno}
               date={invoiceDetail?.date}
+              phone={invoiceDetail?.phone}
             />
           </Page>
           <Page size='A4' style={styles.page} orientation='landscape'>
@@ -275,9 +307,10 @@ const CreateJobPDF = ({ invoice }) => {
               consignee={invoiceDetail?.consignee}
               originAddress={invoiceDetail?.originAddress}
               destinationAddress={invoiceDetail?.destinationAddress}
-              type={invoiceDetail?.type}
+              type={isBoth ? 'car' : invoiceDetail?.type} 
               gcnno={invoiceDetail?.carGcnno}
               date={invoiceDetail?.date}
+              phone={invoiceDetail?.phone}
             />
           </Page>
         </>
@@ -302,6 +335,17 @@ const CreateJobPDF = ({ invoice }) => {
       {/* TellySheet */}
       <TellySheet tellyData={invoiceDetail?.tellyData} />
 
+      {/* TransitPlan */}
+      <Page size='A4' style={styles.page}>
+        <View>
+          <Header />
+          <TransitPlanFormBox transitData={invoiceDetail?.transitData} />
+          <View style={{ border: 1 }} />
+          <View style={{ border: '1 solid red', marginTop: '2px' }} />
+          <FooterWithImage />
+        </View>
+      </Page>
+
       {/* Invoice */}
       {isInvoiceAdded && (
         <>
@@ -309,16 +353,6 @@ const CreateJobPDF = ({ invoice }) => {
             <View>
               <Header />
               <InvoiceTable invoice={invoiceDetail?.invoice} />
-            </View>
-          </Page>
-
-          <Page size='A4' style={styles.page}>
-            <View>
-              <Header />
-              <TransitPlanFormBox transitData={invoiceDetail?.transitData} />
-              <View style={{ border: 1 }} />
-              <View style={{ border: '1 solid red', marginTop: '2px' }} />
-              <FooterWithImage />
             </View>
           </Page>
 

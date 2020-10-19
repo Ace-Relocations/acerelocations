@@ -38,6 +38,7 @@ import {
 } from '@material-ui/icons';
 import AddExpenseDialog from '../AddExpenseDialog/AddExpenseDialog';
 import { getExpensesRequest, getInvoiceRequest } from '../../actions';
+import CreateJobPDF from '../CreateJobPDF/CreateJobPDF';
 
 const options = ['ongoing', 'completed'];
 
@@ -487,7 +488,11 @@ const AllJobsTable = ({
       >
         <DialogTitle id='responsive-dialog-title'>{'Converting to PDF'}</DialogTitle>
         <DialogContent>
-          <PDFDownloadLink document={<Invoice invoice={selectedJob} />} fileName='invoice.pdf'>
+        {/* <Invoice invoice={selectedJob} /> */}
+          <PDFDownloadLink 
+            document={<CreateJobPDF invoice={selectedJob} />} 
+            fileName='invoice.pdf'
+          >
             {({ blob, url, loading, error }) =>
               loading ? <HorizontalLoader /> : <Button>Download Now</Button>
             }

@@ -76,7 +76,7 @@ const AcknowledgementTable = ({ fullName, number }) => {
             color: 'black',
           }}
         >
-          <Text>S.R.P.</Text>
+          <Text> </Text>
         </View>
       </View>
     </View>
