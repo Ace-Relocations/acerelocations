@@ -29,7 +29,7 @@ export const updateInvoiceRequestSuccess = (payload) => ({
 
 export const getInvoiceRequest = (payload) => ({
   type: GET_INVOICE_REQUEST,
-  payload,
+  gcnNo: payload.selectedGcnNo,
 });
 
 export const getInvoiceRequestSuccess = (payload) => ({

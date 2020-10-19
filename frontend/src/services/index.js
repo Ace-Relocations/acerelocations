@@ -1,6 +1,6 @@
 import axios from 'axios';
-// const baseURL = 'http://localhost:3000/api/';
-const baseURL = 'http://192.168.43.150:3000/api/';
+const baseURL = 'http://localhost:3000/api/';
+// const baseURL = 'http://192.168.43.150:3000/api/';
 
 const token = localStorage.getItem('userToken');
 

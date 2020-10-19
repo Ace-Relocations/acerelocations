@@ -86,16 +86,6 @@ const AddInvoiceDialog = ({
     },
   ]);
 
-  useEffect(() => {
-    if (isEditing) {
-      dispatch(getInvoiceRequest({ gcnno: gcnNo }));
-      // const invoiceDetails = fields.filter((o1) =>
-      //   invoiceData.some((o2) => o1.expense === o2.expense),
-      // );
-      // console.log({ invoiceDetails });
-    }
-  }, [gcnNo]);
-
   // const invoceData = useMemo(() => {
   //   return allJobs.filter(({ id }) => id === gcnNo);
   // }, [gcnNo]);
