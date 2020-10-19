@@ -54,20 +54,18 @@ function* updateExpensesRequest({ payload }) {
   }
 }
 
-function* getExpensesRequest({ payload }) {
+function* getExpensesRequest(payload ) {
   try {
+    const { gcnNo } = payload;
     yield put(expensesAction.showLoader());
-
-    let response = yield axios.post('/expense/update', {
-      ...payload,
-    });
-
-    yield put(expensesAction.hideLoader());
+    
+    let response = yield axios.get(`/expense/view?gcnno=${gcnNo}`);
 
     if (response.status === 200) {
       yield put(expensesAction.getExpensesRequestSuccess(response.data));
-      toaster(response.data.message);
+      yield put(expensesAction.hideLoader());
     } else {
+      yield put(expensesAction.hideLoader());
       toaster(response.data.message);
     }
   } catch (error) {

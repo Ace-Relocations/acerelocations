@@ -37,7 +37,7 @@ import {
   Money as MoneyIcon,
 } from '@material-ui/icons';
 import AddExpenseDialog from '../AddExpenseDialog/AddExpenseDialog';
-import { getInvoiceRequest } from '../../actions';
+import { getExpensesRequest, getInvoiceRequest } from '../../actions';
 
 const options = ['ongoing', 'completed'];
 
@@ -253,7 +253,7 @@ const AllJobsTable = ({
 
   const selectedJob = useMemo(() => {
     return allJobs.find(({ gcnno }) => gcnno === selectedToDownloadGcnNo);
-  }, [updateSelectedToDownloadGcnNo, handleOpenDownload]);
+  }, [allJobs, selectedToDownloadGcnNo]);
 
   const headCells = [
     { id: 'gcnno', numeric: false, label: 'GCN No.' },
@@ -310,7 +310,15 @@ const AllJobsTable = ({
       console.log('selectedInvoiceStatus in');
       dispatch(getInvoiceRequest({ selectedGcnNo }));
     }
-  }, [openInvoice]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [openInvoice, selectedGcnNo]);
+
+  useEffect(() => {
+    if (selectedExpenseStatus) {
+      dispatch(getExpensesRequest({ selectedGcnNo }));
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [openExpense, selectedGcnNo]);
 
   return (
     <>
