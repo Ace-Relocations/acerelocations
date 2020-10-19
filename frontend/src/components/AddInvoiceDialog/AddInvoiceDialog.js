@@ -58,7 +58,9 @@ const AddInvoiceDialog = ({
   gcnNo,
 }) => {
   const classes = useStyles();
-  const invoice = useSelector((state) => state.Invoice);
+  const {
+    invoice: { invoiceDetails },
+  } = useSelector((state) => state.Invoice);
 
   const [fields, setFields] = useState([
     {
@@ -85,6 +87,34 @@ const AddInvoiceDialog = ({
     },
   ]);
 
+  const invoiceData = useMemo(() => {
+    if (isEditing && !!invoiceDetails) {
+      const invoice = fields.map((invoice) => {
+        const isInvoicePresent = invoiceDetails.filter((item) => invoice.expense === item.expense);
+        if (isInvoicePresent.length > 0) {
+          // setFields({ ...invoice, ...isInvoicePresent });    
+          invoice.amount=isInvoicePresent[0].amount;
+          invoice.isChecked=isInvoicePresent[0].isChecked;     
+          // return invoice;
+        }
+        return invoice;
+      }) || [];
+      setFields(invoice);    
+    } 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isEditing, invoiceDetails]);
+
+
+
+  // const see = fields.map(function (x) {
+  //   var result = invoiceDetails?.filter((a1) => a1.id == x.id);
+  //   if (result.length > 0) {
+  //     x.name = result[0].name;
+  //   }
+  //   return x;
+  // });
+
+  // console.log({ see });
   // const invoceData = useMemo(() => {
   //   return allJobs.filter(({ id }) => id === gcnNo);
   // }, [gcnNo]);
@@ -125,7 +155,7 @@ const AddInvoiceDialog = ({
       if (fields.length < 1) {
         return false;
       }
-      return (isChecked == true && amount > 0) || (isChecked === false && amount === 0);
+      return (isChecked && amount > 0) || (isChecked === false && amount === 0);
     });
     updateValidateExpenses(isValid);
   }, [fields]);

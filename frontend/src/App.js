@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from 'react';
-import { Switch, Route, Redirect, Link, useHistory, useLocation } from 'react-router-dom';
+import { Switch, Route, useHistory, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -41,14 +41,14 @@ function App() {
 
   useEffect(() => {
     if (
-      location.pathname != '/login' &&
+      location.pathname !== '/login' &&
       (authUser === null || authUser === undefined || authUser === 'undefined')
     ) {
       history.push('/login');
-    } else if (location.pathname == '/login' && authUser && !logout) {
+    } else if (location.pathname === '/login' && authUser && !logout) {
       history.push('/');
     }
-  }, [authUser, logout]);
+  }, [authUser, history, location.pathname, logout]);
 
   return (
     <Fragment>
