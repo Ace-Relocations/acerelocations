@@ -17,7 +17,7 @@ function* createExpensesRequest({ payload }) {
     yield put(expensesAction.hideLoader());
 
     if (response.status === 200) {
-      yield put(expensesAction.createExpensesRequestSuccess(response.data));
+      yield put(expensesAction.createExpensesRequestSuccess(response.data.data));
       toaster(response.data.message);
     } else {
       toaster(response.data.message);
