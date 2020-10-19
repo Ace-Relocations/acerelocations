@@ -16,7 +16,7 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         expenses: action.payload,
       };
-    case actions.UPDATE_EXPENSES_REQUEST_SUCCESSs:
+    case actions.UPDATE_EXPENSES_REQUEST_SUCCESS:
       return {
         ...state,
         expenses: action.payload,
