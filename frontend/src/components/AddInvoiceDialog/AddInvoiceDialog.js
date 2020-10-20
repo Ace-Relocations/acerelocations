@@ -114,7 +114,6 @@ const AddInvoiceDialog = ({
   //   return x;
   // });
 
-  // console.log({ see });
   // const invoceData = useMemo(() => {
   //   return allJobs.filter(({ id }) => id === gcnNo);
   // }, [gcnNo]);

@@ -323,16 +323,13 @@ const AllJobsTable = ({
   const getIconColor = (added) => (added ? 'green' : 'red');
 
   useEffect(() => {
-    console.log({ selectedInvoiceStatus });
     if (selectedInvoiceStatus) {
-      console.log('selectedInvoiceStatus in');
       dispatch(getInvoiceRequest({ selectedGcnNo }));
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [openInvoice, selectedGcnNo]);
 
   useEffect(() => {
-    console.log({ selectedGcnNo })
     if (selectedExpenseStatus) {
       dispatch(getExpensesRequest({ selectedGcnNo }));
     }

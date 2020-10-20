@@ -70,7 +70,6 @@ const DownloadJobPage = () => {
   };
 
   const generatePDFDocument = async (data) => {
-    console.log(data, Object.keys(jobDetails).length);
     if (Object.keys(jobDetails).length) {
       setLoading(true);
       const blobPdf = await pdf(<CreateJobPDF invoice={data} />).toBlob();

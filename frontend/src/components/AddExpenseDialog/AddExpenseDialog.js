@@ -99,12 +99,9 @@ const AddExpenseDialog = ({ openExpense, handleAddExpenses, handleCancleExpenses
 
   useEffect(() => {
     if (isEditing && !!expenses?.expenseDetails) {
-      console.log('in')
       setFields(expenses?.expenseDetails);    
     } 
   }, [isEditing, expenses])
-
-  console.log({ expenses})
 
   const isValid = fields.length > 0 && validateExpenses;
 

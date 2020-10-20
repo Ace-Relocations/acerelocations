@@ -211,9 +211,6 @@ const CreateHouseHoldPDF = React.memo(({ invoice }) => {
     },
   };
 
-  useEffect(() => {
-    console.log('rendering', invoice);
-  });
   return (
     <Document>
       <Page size='A4' style={styles.page} orientation='landscape'>

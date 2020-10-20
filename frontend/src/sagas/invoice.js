@@ -14,7 +14,6 @@ function* getInvoiceRequest(payload) {
     let response = yield axios.get(`/invoice/view?gcnno=${gcnNo}`);
 
     yield put(invoiceAction.hideLoader());
-    console.log({ response });
     if (!!response) {
       yield put(invoiceAction.getInvoiceRequestSuccess(response.data.data));
       toaster(response.data.message);
@@ -23,9 +22,7 @@ function* getInvoiceRequest(payload) {
     }
   } catch (error) {
     yield put(invoiceAction.hideLoader());
-    // yield localStorage.clear();
     toaster(error, { type: 'error' });
-    // yield put(invoiceAction.logoutRequestSuccess(true));
   }
 }
 
