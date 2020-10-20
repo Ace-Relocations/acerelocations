@@ -33,15 +33,18 @@ function* createJobRequest({ payload }) {
 function* allJobRequest() {
   try {
     let response = yield axios.get('/job/view/all');
-
+    yield put(jobAction.showLoader());
     if (response.status === 200) {
       yield put(jobAction.allJobRequestSuccess(response.data));
+      yield put(jobAction.hideLoader());
     } else {
       toaster(response.data.message, { type: 'error' });
+      yield put(jobAction.hideLoader());
     }
   } catch (error) {
     if (error == 'Error: Request failed with status code 401') {
       yield put(push('/login'));
+      yield put(jobAction.hideLoader());
       // yield localStorage.clear();
       toaster(error, { type: 'error' });
       // yield put(jobAction.logoutRequestSuccess(true));
