@@ -39,6 +39,7 @@ import {
 import AddExpenseDialog from '../AddExpenseDialog/AddExpenseDialog';
 import { getExpensesRequest, getInvoiceRequest } from '../../actions';
 import CreateJobPDF from '../CreateJobPDF/CreateJobPDF';
+import CreateInvoiceOnlyPDF from '../PDFGenerator/CreateInvoiceOnlyPDF';
 
 const options = ['ongoing', 'completed'];
 
@@ -542,7 +543,7 @@ const AllJobsTable = ({
         <DialogTitle id='responsive-dialog-title'>{'Converting to PDF'}</DialogTitle>
         <DialogContent>
           <PDFDownloadLink 
-            document={<CreateJobPDF invoice={selectedInvoice} />} 
+            document={<CreateInvoiceOnlyPDF invoice={selectedInvoice} />} 
             fileName='invoice.pdf'
           >
             {({ blob, url, loading, error }) =>

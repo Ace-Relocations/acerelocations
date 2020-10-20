@@ -84,11 +84,15 @@ const InvoiceTable = ({ invoice }) => {
             </View>
           </View>
 
-          {invoiceDetails.map(({ expense, Amount }) => (
-            <View style={{ flexDirection: 'row', alignContent: 'center', marginVertical: 'auto' }}>
-              <Text>{`${expense} ${Amount}`}</Text>
-            </View>
-          ))}
+          {invoiceDetails.map(({ expense, amount }) => {
+            if ( !!amount ) {
+              return (
+                <View style={{ flexDirection: 'row', alignContent: 'center', marginVertical: 'auto' }}>
+                <Text>{`${expense} ${amount}`}</Text>
+              </View>
+              )
+            }
+          })}
           {/* <View style={{ flexDirection: 'row', alignContent: 'center', marginVertical: 'auto' }}>
             <Text>
               Transportation charges inclusive of allied services for your Personal effects From
@@ -106,13 +110,17 @@ const InvoiceTable = ({ invoice }) => {
         <View style={{ width: '39%', border: 1, fontSize: 10 }}>
           <View style={{ flexDirection: 'row', marginTop: '15px' }}></View>
 
-          {invoiceDetails.map(({ Amount }) => (
-            <View style={{ flexDirection: 'row', alignContent: 'center', marginVertical: 'auto' }}>
-              <View style={{ flexDirection: 'row', alignContent: 'center', margin: 'auto' }}>
-                <Text>{Amount}</Text>
+          {invoiceDetails.map(({ amount }) => {
+              if (!!amount) {
+                return (
+                  <View style={{ flexDirection: 'row', alignContent: 'center', marginVertical: 'auto' }}>
+                <View style={{ flexDirection: 'row', alignContent: 'center', margin: 'auto' }}>
+                  <Text>{amount}</Text>
+                </View>
               </View>
-            </View>
-          ))}
+                )
+              }
+          })}
         </View>
       </View>
 
