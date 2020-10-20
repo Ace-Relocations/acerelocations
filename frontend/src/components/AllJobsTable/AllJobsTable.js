@@ -155,12 +155,14 @@ const AllJobsTable = ({
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [selectedGcnNo, updateSelectedGcnNo] = useState();
   const [selectedToDownloadGcnNo, updateSelectedToDownloadGcnNo] = useState();
+  const [selectedInoiceDownloadGcnNo, updateSelectedInoiceDownloadGcnNo] = useState();
   const [open, setOpen] = useState(false);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   const [openStatus, setOpenStatus] = useState(false);
   const [openDownload, setOpenDownload] = useState(false);
+  const [openDownloadInvoice, setOpenDownloadInvoice] = useState(false);
   const [openInvoice, setOpenInvoice] = useState(false);
   const [openExpense, setOpenExpense] = useState(false);
   const [selectedInvoiceStatus, updateSelectedInvoiceStatus] = useState();
@@ -197,9 +199,18 @@ const AllJobsTable = ({
     setOpenDownload(false);
   };
 
+  const handleCloseDownloadInvoice = () => {
+    setOpenDownloadInvoice(false);
+  };
+
   const handleOpenDownload = (gcnNo) => {
     updateSelectedToDownloadGcnNo(gcnNo);
     setOpenDownload(true);
+  };
+
+  const handleOpenDownloadInvoice = (gcnNo) => {
+    updateSelectedInoiceDownloadGcnNo(gcnNo);
+    setOpenDownloadInvoice(true);
   };
 
   const handleRequestSort = (event, property) => {
@@ -256,6 +267,10 @@ const AllJobsTable = ({
     return allJobs.find(({ gcnno }) => gcnno === selectedToDownloadGcnNo);
   }, [allJobs, selectedToDownloadGcnNo]);
 
+  const selectedInvoice = useMemo(() => {
+    return allJobs.find(({ gcnno }) => gcnno === selectedInoiceDownloadGcnNo);
+  }, [allJobs, selectedInoiceDownloadGcnNo]);
+
   const headCells = [
     { id: 'gcnno', numeric: false, label: 'GCN No.' },
     { id: 'consignor', numeric: false, label: 'Consignor' },
@@ -271,6 +286,7 @@ const AllJobsTable = ({
     { id: 'download', numeric: false, label: 'Download' },
     { id: 'addInvoice', numeric: false, label: 'Add Invoice' },
     { id: 'addExpense', numeric: false, label: 'Add Expense' },
+    { id: 'downloadInvoice', numeric: false, label: 'Download Invoice' },
   ];
 
   const createSortHandler = (property) => (event) => {
@@ -431,6 +447,17 @@ const AllJobsTable = ({
                       </SvgIcon>
                     </IconButton>
                   </StyledTableCell>
+
+                  <StyledTableCell align='center'>
+                    <IconButton aria-label='download_invoice' 
+                    disabled={!row.isInvoiceAdded} 
+                    onClick={() => handleOpenDownloadInvoice(row.gcnno)}
+                  >
+                      <SvgIcon>
+                        <CloudDownloadIcon />
+                      </SvgIcon>
+                    </IconButton>
+                  </StyledTableCell>
                 </StyledTableRow>
               ))}
           </TableBody>
@@ -501,6 +528,30 @@ const AllJobsTable = ({
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseDownload} color='primary' autoFocus>
+            cancle
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog
+        fullScreen={fullScreen}
+        open={openDownloadInvoice}
+        onClose={handleCloseDownloadInvoice}
+        aria-labelledby='responsive-dialog-title'
+      >
+        <DialogTitle id='responsive-dialog-title'>{'Converting to PDF'}</DialogTitle>
+        <DialogContent>
+          <PDFDownloadLink 
+            document={<CreateJobPDF invoice={selectedInvoice} />} 
+            fileName='invoice.pdf'
+          >
+            {({ blob, url, loading, error }) =>
+              loading ? <HorizontalLoader /> : <Button>Download Invoice Now</Button>
+            }
+          </PDFDownloadLink>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDownloadInvoice} color='primary' autoFocus>
             cancle
           </Button>
         </DialogActions>
