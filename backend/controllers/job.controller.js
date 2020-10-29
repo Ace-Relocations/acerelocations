@@ -18,18 +18,19 @@ createJob: async (req, res) => {
         const {
             consignorF, consignorL, consigneeF, consigneeL, contact, email, oaddress1, oaddress2, ocity, ostate, opincode, daddress1, daddress2, dcity, dstate, dpincode, type, status, insuranceP, insuranceA, date
             } = req.body;
-        // const defaultV = await service.setGcnno(491);
+        //const defaultV = await service.setGcnno(4312);
         const gcnno = await service.incrementGcnno();
         
         let gcnnoC = 0;
         if(type.toLowerCase() == "both"){
             gcnnoC = await service.incrementGcnno();
         }
+
         const user = await User.findById(req.userId)
         const createdBy = user.email;
-        const year = moment(Date.now()).format('YYYY');
+        // const year = moment(Date.now()).format('YYYY');
         let obj = new Customer();
-        obj.gcnno = "Y"+year+"N"+gcnno;
+        obj.gcnno = gcnno;
         console.log(obj.gcnno)
         obj.consignorF = consignorF;
         obj.consignorL = consignorL; 
@@ -49,13 +50,12 @@ createJob: async (req, res) => {
         obj.dpincode = dpincode; 
         obj.type = type;
         obj.status = status;
-        obj.carGcnno = "Y"+year+"N"+gcnnoC;
+        obj.carGcnno = gcnnoC;
         obj.insuranceP = insuranceP; 
         obj.insuranceA = insuranceA;
         obj.insuranceAInText = numberToText.convertToText(insuranceA);
         obj.createdBy = createdBy; 
         obj.date = moment(date).format('DD/MM/YYYY');
-
         obj.save(err => {
             if (err) {
                 if(err.code == 11000) {
