@@ -1,11 +1,11 @@
 import React from 'react';
 import { Image, Text, View, StyleSheet } from '@react-pdf/renderer';
-import logo from '../../logo.png';
+import logo from '../../assets/affiliation.png';
 
 const styles = StyleSheet.create({
   logo1: {
-    width: 110,
-    height: 66,
+    width: 70,
+    height: 70,
     alignItems: 'center',
     margin: '0 auto',
   },
