@@ -48,6 +48,7 @@ const CustomerPackageDesTable = ({ description, noOfPkg }) => {
           flexDirection: 'row',
           border: 1,
           fontSize: 8,
+          lineHeight: 2.7
         }}
       >
         <View style={{ width: '50%' }}>
