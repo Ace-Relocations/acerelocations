@@ -77,7 +77,7 @@ const CustomerCopy = ({
             310, Arista, Sindhubhavan Road, Opp. HOF Showroom, 
           </Text>
           <Text style={styles.headerSubText2}>Off. S.G.Highway, Ahmedabad-380054. M. 9825219378</Text>
-          <Text style={styles.headerSubText}>E: shaivpidadi@gmail.com W: www.shaivpidadi.com</Text>
+          <Text style={styles.headerSubText}>E: info@acerelocations.co.in W: www.acerelocations.co.in</Text>
         </View>
       </View>
       <View
