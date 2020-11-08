@@ -1,5 +1,6 @@
 import React from 'react';
-import { Text, View, StyleSheet } from '@react-pdf/renderer';
+import { Text, View, StyleSheet, Image } from '@react-pdf/renderer';
+import signImage from '../../assets/sign.jpg';
 
 const styles = StyleSheet.create({
   centerRow: {
@@ -273,7 +274,7 @@ const TransitPlanFormBox = ({ transitData }) => {
                 <Text style={{ margin: 'auto' }}>Option Selected</Text>
               </View>
               <View style={{ width: '15%', borderRight: 1, borderLeft: 1, paddingTop: 5 }}>
-                <Text style={{ margin: 'auto' }}> Two </Text>
+                <Text style={{ margin: 'auto' }}>  </Text>
               </View>
               <View style={{ width: '65%', paddingTop: 5, textAlign: 'left', fontSize: 7 }}>
                 <Text style={{ marginVertical: 'auto', fontSize: 7, marginLeft: 3 }}>
@@ -321,14 +322,16 @@ const TransitPlanFormBox = ({ transitData }) => {
 
           <View style={{ width: '50%', flexDirection: 'row' }}>
             <View style={{ width: '40%', borderRight: 1 }}>
-              <Text style={{ marginVertical: 'auto', borderBottom: 1 }}>Consignor's Signature</Text>
-              <Text style={{ marginVertical: 'auto', lineHeight: 1 }}>
+              <Text style={{ marginVertical: 'auto', height: '25px', borderBottom: 1 }}>Consignor's Signature</Text>
+              <Text style={{ marginVertical: 'auto', height: '25px' }}>
                 Authorised Signatory of Ace Relocations
               </Text>
             </View>
             <View style={{ width: '60%' }}>
-              <Text style={{ marginVertical: 'auto', borderBottom: 1 }}> </Text>
-              <Text style={{ marginVertical: 'auto' }}> </Text>
+              <Text style={{ marginVertical: 'auto', height: '25px', borderBottom: 1 }}> </Text>
+              <Image style={{ width: '25px', height: '25px', marginVertical: 'auto', marginLeft: '40px' }} src={signImage} />
+
+              {/* <Text style={{ marginVertical: 'auto' }}> </Text> */}
             </View>
           </View>
         </View>
