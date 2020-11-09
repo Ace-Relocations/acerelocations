@@ -14,7 +14,8 @@ const Invoice = mongoose.model(
       unique: true,
     },
     invoiceDetails: Object,
-    total: Number
+    total: Number,
+    totalInText: String
   })
 );
 

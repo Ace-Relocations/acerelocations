@@ -6,13 +6,14 @@ const BillCounter = db.billCounter;
 
 module.exports = {
 
-    createInvoice: async (gcnno, billno, invoice, total) => {
+    createInvoice: async (gcnno, billno, invoice, total, totalInText) => {
         try {
             let obj = new Invoice();
             obj.gcnno = gcnno;
             obj.billno = billno;
             obj.invoiceDetails = invoice;
             obj.total = total;
+            obj.totalInText = totalInText;
 
             let createData = await obj.save();
             if (!createData) {
