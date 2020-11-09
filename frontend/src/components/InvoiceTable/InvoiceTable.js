@@ -27,6 +27,7 @@ const InvoiceTable = ({ invoice }) => {
     totalInWords,
     paymentCity,
   } = invoice;
+
   return (
     <View>
       <View style={{ flexDirection: 'row', marginTop: 20 }}>
@@ -95,18 +96,13 @@ const InvoiceTable = ({ invoice }) => {
               )
             }
           })}
-          {/* <View style={{ flexDirection: 'row', alignContent: 'center', marginVertical: 'auto' }}>
-            <Text>
-              Transportation charges inclusive of allied services for your Personal effects From
-              Tiroda to Raipur 40096.00
-            </Text>
+
+          <View style={{ flexDirection: 'row' }}>
+            <View style={{ width: '90%' }}>
+              <Text style={{ textAlign: 'left' }}>GSTN No. 24ABGPS4759M2ZZ</Text>
+            </View>
           </View>
-          <View style={{ flexDirection: 'row', alignContent: 'center', marginVertical: 'auto' }}>
-            <Text>
-              Transportation charges inclusive of allied services for your Personal effects From
-              Tiroda to Raipur 40096.00
-            </Text>
-          </View> */}
+
         </View>
         <View style={{ width: '1%' }} />
         <View style={{ width: '39%', border: 1, fontSize: 10 }}>
