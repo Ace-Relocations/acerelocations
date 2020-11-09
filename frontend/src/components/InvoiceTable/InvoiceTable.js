@@ -13,6 +13,17 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: 10,
   },
+  pageBackground: {
+    position: 'absolute',
+    // minWidth: '100%',
+    // minHeight: '100%',
+    display: 'block',
+    height: '80%',
+    width: '80%',
+    opacity: 0.5,
+    marginLeft: '50px',
+    marginTop: '50px'
+  },
 });
 const InvoiceTable = ({ invoice }) => {
   const {
@@ -70,6 +81,7 @@ const InvoiceTable = ({ invoice }) => {
       </View>
 
       <View style={{ flexDirection: 'row', marginTop: 5, height: 300 }}>
+        <Image src={require('../../assets/watermark.jpg')} style={styles.pageBackground} />
         <View
           style={{
             width: '60%',
