@@ -74,7 +74,7 @@ const CustomerCopy = ({
         <View wrap={false} style={styles.width90}>
           <Text style={styles.headerText}>We Make Moving Easy</Text>
           <Text style={styles.headerSubText}>
-            310, Arista, Sindhubhavan Road, Opp. HOF Showroom, 
+            310, Arista, Sindhubhavan Road, Opp. HOF Showroom,
           </Text>
           <Text style={styles.headerSubText2}>Off. S.G.Highway, Ahmedabad-380054. M. 9825219378</Text>
           <Text style={styles.headerSubText}>E: info@acerelocations.co.in W: www.acerelocations.co.in</Text>
@@ -110,8 +110,8 @@ const CustomerCopy = ({
               <BoxWith4LineKeys
                 gsnNo={gcnno}
                 date={date}
-                from={consignor?.firstName}
-                to={consignee?.firstName}
+                from={consignor?.originAddress?.ocity}
+                to={consignee?.firstName?.dcity}
               />
             </View>
           </View>
