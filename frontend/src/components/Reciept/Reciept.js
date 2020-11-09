@@ -2,6 +2,8 @@ import React from 'react';
 
 import { Image, Text, View, StyleSheet } from '@react-pdf/renderer';
 
+import signImage from '../../assets/sign.jpg';
+
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
@@ -251,7 +253,7 @@ const Reciept = ({ reciept }) => {
             >
               <Text style={{ fontSize: 12, color: '#fff', marginVertical: 'auto' }}>Rs.</Text>
             </View>
-            <View style={{ width: '70%' }}>
+            <View style={{ width: '70%', marginTop: '8px' }}>
               <Text>{rupeesInNumber}</Text>
             </View>
           </View>
@@ -276,7 +278,7 @@ const Reciept = ({ reciept }) => {
               <Text style={{ fontSize: 12, marginVertical: 'auto' }}>Signature</Text>
             </View>
             <View style={{ width: '70%', border: 1 }}>
-              <Text></Text>
+              <Image style={{ width: '25px', height: '25px', marginLeft: '60px' }} src={signImage} />
             </View>
           </View>
         </View>
