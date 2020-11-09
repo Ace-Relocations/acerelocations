@@ -274,7 +274,7 @@ const TransitPlanFormBox = ({ transitData }) => {
                 <Text style={{ margin: 'auto' }}>Option Selected</Text>
               </View>
               <View style={{ width: '15%', borderRight: 1, borderLeft: 1, paddingTop: 5 }}>
-                <Text style={{ margin: 'auto' }}>  </Text>
+                <Text style={{ margin: 'auto' }}> {(!!transitData?.moneyInText && !!transitData?.moneyInNumber) ? 'TWO' : ''}  </Text>
               </View>
               <View style={{ width: '65%', paddingTop: 5, textAlign: 'left', fontSize: 7 }}>
                 <Text style={{ marginVertical: 'auto', fontSize: 7, marginLeft: 3 }}>

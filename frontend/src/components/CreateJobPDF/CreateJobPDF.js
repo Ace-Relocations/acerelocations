@@ -131,10 +131,11 @@ const CreateJobPDF = ({ invoice }) => {
     status,
     contact,
     car,
-    carGcnno='',
+    carGcnno = '',
     email,
     insuranceP,
     insuranceA,
+    insuranceAInText = '',
     type,
     date,
     gcnno,
@@ -222,33 +223,37 @@ const CreateJobPDF = ({ invoice }) => {
     transitData: {
       fullName: `${consignorF} ${consignorL}`,
       gcnno,
-      date
+      date,
+      moneyInNumber: insuranceA,
+      moneyInText: insuranceAInText
     }
   };
 
   if (isInvoiceAdded) {
-    invoiceDetail = { ...invoiceDetail, reciept: {
-      chequeIssuer: `${consignorF} ${consignorL}`,
-      rupeesInNumber,
-      rupeesInText,
-      chequeNo,
-      date,
-      billNo,
-      lrNo,
-      from: `${consignorF} ${consignorL}`,
-      to: `${consigneeF} ${consigneeL}`,
-    },
-    invoice: {
-      name: `${consignorF} ${consignorL}`,
-      dcity,
-      invoiceNo: '',
-      date,
-      lrNo: invoiceData[0].billno,
-      invoiceDetails : invoiceData[0]?.invoiceDetails,
-      total: '',
-      totalInWords: '',
-      paymentCity: dcity,
-    },}
+    invoiceDetail = {
+      ...invoiceDetail, reciept: {
+        chequeIssuer: `${consignorF} ${consignorL}`,
+        rupeesInNumber,
+        rupeesInText,
+        chequeNo,
+        date,
+        billNo,
+        lrNo,
+        from: `${consignorF} ${consignorL}`,
+        to: `${consigneeF} ${consigneeL}`,
+      },
+      invoice: {
+        name: `${consignorF} ${consignorL}`,
+        dcity,
+        invoiceNo: '',
+        date,
+        lrNo: invoiceData[0].billno,
+        invoiceDetails: invoiceData[0]?.invoiceDetails,
+        total: '',
+        totalInWords: '',
+        paymentCity: dcity,
+      },
+    }
   }
   const isCar = type === 'car';
   const isHouseHold = type === 'household';
@@ -266,7 +271,7 @@ const CreateJobPDF = ({ invoice }) => {
               consignee={invoiceDetail?.consignee}
               originAddress={invoiceDetail?.originAddress}
               destinationAddress={invoiceDetail?.destinationAddress}
-              type={isBoth ? 'household' : invoiceDetail?.type} 
+              type={isBoth ? 'household' : invoiceDetail?.type}
               gcnno={invoiceDetail?.gcnno}
               date={invoiceDetail?.date}
               phone={invoiceDetail?.phone}
@@ -279,7 +284,7 @@ const CreateJobPDF = ({ invoice }) => {
               consignee={invoiceDetail?.consignee}
               originAddress={invoiceDetail?.originAddress}
               destinationAddress={invoiceDetail?.destinationAddress}
-              type={isBoth ? 'household' : invoiceDetail?.type} 
+              type={isBoth ? 'household' : invoiceDetail?.type}
               gcnno={invoiceDetail?.gcnno}
               date={invoiceDetail?.date}
               phone={invoiceDetail?.phone}
@@ -298,7 +303,7 @@ const CreateJobPDF = ({ invoice }) => {
               consignee={invoiceDetail?.consignee}
               originAddress={invoiceDetail?.originAddress}
               destinationAddress={invoiceDetail?.destinationAddress}
-              type={isBoth ? 'car' : invoiceDetail?.type} 
+              type={isBoth ? 'car' : invoiceDetail?.type}
               gcnno={invoiceDetail?.carGcnno}
               date={invoiceDetail?.date}
               phone={invoiceDetail?.phone}
@@ -311,7 +316,7 @@ const CreateJobPDF = ({ invoice }) => {
               consignee={invoiceDetail?.consignee}
               originAddress={invoiceDetail?.originAddress}
               destinationAddress={invoiceDetail?.destinationAddress}
-              type={isBoth ? 'car' : invoiceDetail?.type} 
+              type={isBoth ? 'car' : invoiceDetail?.type}
               gcnno={invoiceDetail?.carGcnno}
               date={invoiceDetail?.date}
               phone={invoiceDetail?.phone}
