@@ -100,8 +100,8 @@ const RatingsForm = () => {
 
         <View style={styles.rowWithoutBorder}>
           <View style={{ width: '60%', flexDirection: 'row' }}>
-            <Text style={{ marginRight: 10 }}>1.</Text>
-            <Text>Crew's Punctuality</Text>
+            <Text style={{ marginRight: 10 }}>2.</Text>
+            <Text>Team leaders management & assistance</Text>
           </View>
           <View style={{ width: '40%', flexDirection: 'row' }}>
             <View style={styles.checkboxContainer}>
@@ -121,8 +121,8 @@ const RatingsForm = () => {
 
         <View style={styles.rowWithoutBorder}>
           <View style={{ width: '60%', flexDirection: 'row' }}>
-            <Text style={{ marginRight: 10 }}>1.</Text>
-            <Text>Crew's Punctuality</Text>
+            <Text style={{ marginRight: 10 }}>3.</Text>
+            <Text>Crew's professionalism and aptitude</Text>
           </View>
           <View style={{ width: '40%', flexDirection: 'row' }}>
             <View style={styles.checkboxContainer}>
@@ -142,8 +142,8 @@ const RatingsForm = () => {
 
         <View style={styles.rowWithoutBorder}>
           <View style={{ width: '60%', flexDirection: 'row' }}>
-            <Text style={{ marginRight: 10 }}>1.</Text>
-            <Text>Crew's Punctuality</Text>
+            <Text style={{ marginRight: 10 }}>4.</Text>
+            <Text>Completion of job without breakage/damage</Text>
           </View>
           <View style={{ width: '40%', flexDirection: 'row' }}>
             <View style={styles.checkboxContainer}>
@@ -163,8 +163,8 @@ const RatingsForm = () => {
 
         <View style={styles.rowWithoutBorder}>
           <View style={{ width: '60%', flexDirection: 'row' }}>
-            <Text style={{ marginRight: 10 }}>1.</Text>
-            <Text>Crew's Punctuality</Text>
+            <Text style={{ marginRight: 10 }}>5.</Text>
+            <Text>Neatness & clearance of debris</Text>
           </View>
           <View style={{ width: '40%', flexDirection: 'row' }}>
             <View style={styles.checkboxContainer}>
@@ -184,8 +184,8 @@ const RatingsForm = () => {
 
         <View style={styles.rowWithoutBorder}>
           <View style={{ width: '60%', flexDirection: 'row' }}>
-            <Text style={{ marginRight: 10 }}>1.</Text>
-            <Text>Crew's Punctuality</Text>
+            <Text style={{ marginRight: 10 }}>6.</Text>
+            <Text>How will you rate our overall quality of our packing and moving ?</Text>
           </View>
           <View style={{ width: '40%', flexDirection: 'row' }}>
             <View style={styles.checkboxContainer}>
