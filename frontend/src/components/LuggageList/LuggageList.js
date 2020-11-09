@@ -127,10 +127,10 @@ const LuggageList = ({ luggageListDetails }) => {
 
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: '0 10' }}>
           <View style={{ border: 1, width: '45%' }}>
-            <TableWithOnlyRows details={from} address={destinationAddress} />
+            <TableWithOnlyRows details={from} address={originAddress} />
           </View>
           <View style={{ border: 1, width: '45%' }}>
-            <TableWithOnlyRows details={to} address={originAddress} />
+            <TableWithOnlyRows details={to} address={destinationAddress} />
           </View>
         </View>
 
