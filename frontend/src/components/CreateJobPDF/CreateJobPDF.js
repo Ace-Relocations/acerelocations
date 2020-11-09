@@ -182,6 +182,18 @@ const CreateJobPDF = ({ invoice }) => {
       destination: dcity,
       email,
     },
+    customerDestination: {
+      firstName: consignorF,
+      lastName: consignorL,
+      adderess: `${daddress1}, ${daddress2}, ${dcity} - ${dpincode}`,
+      contact,
+      gcnno,
+      birthDate: '',
+      Anniversary: '',
+      jobno: gcnno,
+      destination: dcity,
+      email,
+    },
     luggageListDetails: {
       ocity,
       dcity,
@@ -344,7 +356,7 @@ const CreateJobPDF = ({ invoice }) => {
 
       <Page size='A4' style={styles.page}>
         <Header />
-        <CustomerFeedbackForm title='ORIGIN' customer={invoiceDetail?.customer} />
+        <CustomerFeedbackForm title='ORIGIN' customer={invoiceDetail?.customerDestination} />
       </Page>
 
       {/* LuggageList */}
