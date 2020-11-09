@@ -40,7 +40,7 @@ const LuggageListHeader = ({ ocity, dcity, gcnno, date }) => (
           marginRight: 5,
         }}
       >
-        <Text>{ocity}</Text>
+        <Text>{dcity}</Text>
       </View>{' '}
       to{' '}
       <View
@@ -53,7 +53,7 @@ const LuggageListHeader = ({ ocity, dcity, gcnno, date }) => (
           marginRight: 5,
         }}
       >
-        <Text>{dcity}</Text>
+        <Text>{ocity}</Text>
       </View>
       by ROAD.These are purely for domestic purpose and not for any kind of sale. So please allow
       destination. Sent through{' '}

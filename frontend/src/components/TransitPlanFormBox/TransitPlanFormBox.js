@@ -161,7 +161,9 @@ const TransitPlanFormBox = ({ transitData }) => {
               The consignment is to be insuied under carriers risk scheme. Under this scheme you
               will be charged a premium of
             </Text>
-            <View style={{ border: 1, width: 30, height: 10, marginTop: -5 }} />
+            <View style={{ border: 1, width: 30, height: 10, marginTop: -5 }}>
+              <Text>{transitData?.insuranceP}</Text>
+            </View>
           </View>
           <Text>
             of the consignrnent value declared by you. No separate insurance policy or premium

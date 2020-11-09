@@ -227,7 +227,8 @@ const CreateJobPDF = ({ invoice }) => {
       gcnno,
       date,
       moneyInNumber: insuranceA,
-      moneyInText: insuranceAInText
+      moneyInText: insuranceAInText,
+      insuranceP
     }
   };
 
