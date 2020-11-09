@@ -65,7 +65,9 @@ const CustomerCopy = ({
   type,
   gcnno,
   date,
-  phone
+  phone,
+  ocity,
+  dcity
 }) => {
   return (
     <View>
@@ -110,8 +112,8 @@ const CustomerCopy = ({
               <BoxWith4LineKeys
                 gsnNo={gcnno}
                 date={date}
-                from={consignor?.originAddress?.ocity}
-                to={consignee?.firstName?.dcity}
+                from={ocity}
+                to={dcity}
               />
             </View>
           </View>

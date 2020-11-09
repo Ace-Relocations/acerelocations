@@ -157,6 +157,8 @@ const CreateJobPDF = ({ invoice }) => {
     contact,
     email,
     originAddress: [oaddress1, `${oaddress2}, ${ocity}`, `${ostate} - ${opincode}`],
+    ocity,
+    dcity,
     destinationAddress: [daddress1, `${daddress2}, ${dcity}`, `${dstate} - ${dpincode}`],
     status,
     car,
@@ -275,6 +277,8 @@ const CreateJobPDF = ({ invoice }) => {
               gcnno={invoiceDetail?.gcnno}
               date={invoiceDetail?.date}
               phone={invoiceDetail?.phone}
+              ocity={ocity}
+              dcity={dcity}
             />
           </Page>
           <Page size='A4' style={styles.page} orientation='landscape'>
@@ -288,6 +292,8 @@ const CreateJobPDF = ({ invoice }) => {
               gcnno={invoiceDetail?.gcnno}
               date={invoiceDetail?.date}
               phone={invoiceDetail?.phone}
+              ocity={ocity}
+              dcity={dcity}
             />
           </Page>
         </>
@@ -307,6 +313,8 @@ const CreateJobPDF = ({ invoice }) => {
               gcnno={invoiceDetail?.carGcnno}
               date={invoiceDetail?.date}
               phone={invoiceDetail?.phone}
+              ocity={ocity}
+              dcity={dcity}
             />
           </Page>
           <Page size='A4' style={styles.page} orientation='landscape'>
@@ -320,6 +328,8 @@ const CreateJobPDF = ({ invoice }) => {
               gcnno={invoiceDetail?.carGcnno}
               date={invoiceDetail?.date}
               phone={invoiceDetail?.phone}
+              ocity={ocity}
+              dcity={dcity}
             />
           </Page>
         </>
