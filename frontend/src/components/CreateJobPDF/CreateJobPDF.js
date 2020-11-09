@@ -143,12 +143,12 @@ const CreateJobPDF = ({ invoice }) => {
     isExpenseAdded,
     invoice: invoiceData,
     totalInText = '',
+    total,
 
     // will be added later
     rupeesInNumber = '',
-    rupeesInText = '',
     chequeNo = '',
-    billNo = '',
+    billno,
     lrNo = '',
   } = invoice;
 
@@ -249,14 +249,14 @@ const CreateJobPDF = ({ invoice }) => {
     invoiceDetail = {
       ...invoiceDetail, reciept: {
         chequeIssuer: `${consignorF} ${consignorL}`,
-        rupeesInNumber,
+        rupeesInNumber: total,
         rupeesInText: totalInText,
         chequeNo,
         date,
-        billNo,
+        billNo: billno,
         lrNo: gcnno,
-        from: `${consignorF} ${consignorL}`,
-        to: `${consigneeF} ${consigneeL}`,
+        from: ocity,
+        to: dcity,
       },
       invoice: {
         name: `${consignorF} ${consignorL}`,
@@ -266,7 +266,7 @@ const CreateJobPDF = ({ invoice }) => {
         date,
         lrNo: invoiceData[0].billno,
         invoiceDetails: invoiceData[0]?.invoiceDetails,
-        total: '',
+        total,
         totalInWords: totalInText,
         paymentCity: dcity,
       },
