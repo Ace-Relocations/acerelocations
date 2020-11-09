@@ -18,6 +18,7 @@ const InvoiceTable = ({ invoice }) => {
   const {
     name,
     dcity,
+    oCity,
     invoiceNo,
     date,
     lrNo,
@@ -89,7 +90,7 @@ const InvoiceTable = ({ invoice }) => {
             if (!!amount) {
               return (
                 <View style={{ flexDirection: 'row', alignContent: 'center', marginVertical: 'auto' }}>
-                  <Text>{`${expense} ${amount}`}</Text>
+                  <Text>{`${expense}`}</Text>
                 </View>
               )
             }
