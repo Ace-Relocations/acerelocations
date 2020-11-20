@@ -14,10 +14,10 @@ const LuggageListTable = () => {
         <View style={{ borderRight: 1, width: '8%' }}>
           <Text>ITEM NO.</Text>
         </View>
-        <View style={{ borderRight: 1, width: '17%' }}>
-          <Text>MODE OF PACKTNG</Text>
+        <View style={{ borderRight: 1, width: '10%' }}>
+          <Text>MODE OF PKT.</Text>
         </View>
-        <View style={{ borderRight: 1, width: '45%' }}>
+        <View style={{ borderRight: 1, width: '52%' }}>
           <Text style={{ marginVertical: 'auto' }}>CONTENT</Text>
         </View>
         <View style={{ borderRight: 1, width: '15%' }}>
@@ -37,8 +37,8 @@ const LuggageListTable = () => {
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
-        <View style={{ borderRight: 1, width: '17%' }} />
-        <View style={{ borderRight: 1, width: '45%' }} />
+        <View style={{ borderRight: 1, width: '10%' }} />
+        <View style={{ borderRight: 1, width: '52%' }} />
         <View style={{ borderRight: 1, width: '15%' }} />
         <View style={{ width: '15%' }} />
       </View>
@@ -52,8 +52,8 @@ const LuggageListTable = () => {
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
-        <View style={{ borderRight: 1, width: '17%' }} />
-        <View style={{ borderRight: 1, width: '45%' }} />
+        <View style={{ borderRight: 1, width: '10%' }} />
+        <View style={{ borderRight: 1, width: '52%' }} />
         <View style={{ borderRight: 1, width: '15%' }} />
         <View style={{ width: '15%' }} />
       </View>
@@ -67,8 +67,8 @@ const LuggageListTable = () => {
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
-        <View style={{ borderRight: 1, width: '17%' }} />
-        <View style={{ borderRight: 1, width: '45%' }} />
+        <View style={{ borderRight: 1, width: '10%' }} />
+        <View style={{ borderRight: 1, width: '52%' }} />
         <View style={{ borderRight: 1, width: '15%' }} />
         <View style={{ width: '15%' }} />
       </View>
@@ -82,8 +82,8 @@ const LuggageListTable = () => {
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
-        <View style={{ borderRight: 1, width: '17%' }} />
-        <View style={{ borderRight: 1, width: '45%' }} />
+        <View style={{ borderRight: 1, width: '10%' }} />
+        <View style={{ borderRight: 1, width: '52%' }} />
         <View style={{ borderRight: 1, width: '15%' }} />
         <View style={{ width: '15%' }} />
       </View>
@@ -97,8 +97,8 @@ const LuggageListTable = () => {
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
-        <View style={{ borderRight: 1, width: '17%' }} />
-        <View style={{ borderRight: 1, width: '45%' }} />
+        <View style={{ borderRight: 1, width: '10%' }} />
+        <View style={{ borderRight: 1, width: '52%' }} />
         <View style={{ borderRight: 1, width: '15%' }} />
         <View style={{ width: '15%' }} />
       </View>
@@ -112,8 +112,8 @@ const LuggageListTable = () => {
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
-        <View style={{ borderRight: 1, width: '17%' }} />
-        <View style={{ borderRight: 1, width: '45%' }} />
+        <View style={{ borderRight: 1, width: '10%' }} />
+        <View style={{ borderRight: 1, width: '52%' }} />
         <View style={{ borderRight: 1, width: '15%' }} />
         <View style={{ width: '15%' }} />
       </View>
@@ -127,8 +127,8 @@ const LuggageListTable = () => {
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
-        <View style={{ borderRight: 1, width: '17%' }} />
-        <View style={{ borderRight: 1, width: '45%' }} />
+        <View style={{ borderRight: 1, width: '10%' }} />
+        <View style={{ borderRight: 1, width: '52%' }} />
         <View style={{ borderRight: 1, width: '15%' }} />
         <View style={{ width: '15%' }} />
       </View>
@@ -142,8 +142,8 @@ const LuggageListTable = () => {
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
-        <View style={{ borderRight: 1, width: '17%' }} />
-        <View style={{ borderRight: 1, width: '45%' }} />
+        <View style={{ borderRight: 1, width: '10%' }} />
+        <View style={{ borderRight: 1, width: '52%' }} />
         <View style={{ borderRight: 1, width: '15%' }} />
         <View style={{ width: '15%' }} />
       </View>
@@ -157,8 +157,8 @@ const LuggageListTable = () => {
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
-        <View style={{ borderRight: 1, width: '17%' }} />
-        <View style={{ borderRight: 1, width: '45%' }} />
+        <View style={{ borderRight: 1, width: '10%' }} />
+        <View style={{ borderRight: 1, width: '52%' }} />
         <View style={{ borderRight: 1, width: '15%' }} />
         <View style={{ width: '15%' }} />
       </View>
@@ -172,8 +172,8 @@ const LuggageListTable = () => {
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
-        <View style={{ borderRight: 1, width: '17%' }} />
-        <View style={{ borderRight: 1, width: '45%' }} />
+        <View style={{ borderRight: 1, width: '10%' }} />
+        <View style={{ borderRight: 1, width: '52%' }} />
         <View style={{ borderRight: 1, width: '15%' }} />
         <View style={{ width: '15%' }} />
       </View>
@@ -187,8 +187,8 @@ const LuggageListTable = () => {
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
-        <View style={{ borderRight: 1, width: '17%' }} />
-        <View style={{ borderRight: 1, width: '45%' }} />
+        <View style={{ borderRight: 1, width: '10%' }} />
+        <View style={{ borderRight: 1, width: '52%' }} />
         <View style={{ borderRight: 1, width: '15%' }} />
         <View style={{ width: '15%' }} />
       </View>
@@ -202,8 +202,8 @@ const LuggageListTable = () => {
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
-        <View style={{ borderRight: 1, width: '17%' }} />
-        <View style={{ borderRight: 1, width: '45%' }} />
+        <View style={{ borderRight: 1, width: '10%' }} />
+        <View style={{ borderRight: 1, width: '52%' }} />
         <View style={{ borderRight: 1, width: '15%' }} />
         <View style={{ width: '15%' }} />
       </View>
@@ -217,8 +217,8 @@ const LuggageListTable = () => {
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
-        <View style={{ borderRight: 1, width: '17%' }} />
-        <View style={{ borderRight: 1, width: '45%' }} />
+        <View style={{ borderRight: 1, width: '10%' }} />
+        <View style={{ borderRight: 1, width: '52%' }} />
         <View style={{ borderRight: 1, width: '15%' }} />
         <View style={{ width: '15%' }} />
       </View>
@@ -232,8 +232,8 @@ const LuggageListTable = () => {
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
-        <View style={{ borderRight: 1, width: '17%' }} />
-        <View style={{ borderRight: 1, width: '45%' }} />
+        <View style={{ borderRight: 1, width: '10%' }} />
+        <View style={{ borderRight: 1, width: '52%' }} />
         <View style={{ borderRight: 1, width: '15%' }} />
         <View style={{ width: '15%' }} />
       </View>
@@ -247,8 +247,8 @@ const LuggageListTable = () => {
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
-        <View style={{ borderRight: 1, width: '17%' }} />
-        <View style={{ borderRight: 1, width: '45%' }} />
+        <View style={{ borderRight: 1, width: '10%' }} />
+        <View style={{ borderRight: 1, width: '52%' }} />
         <View style={{ borderRight: 1, width: '15%' }} />
         <View style={{ width: '15%' }} />
       </View>
@@ -262,8 +262,8 @@ const LuggageListTable = () => {
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
-        <View style={{ borderRight: 1, width: '17%' }} />
-        <View style={{ borderRight: 1, width: '45%' }} />
+        <View style={{ borderRight: 1, width: '10%' }} />
+        <View style={{ borderRight: 1, width: '52%' }} />
         <View style={{ borderRight: 1, width: '15%' }} />
         <View style={{ width: '15%' }} />
       </View>
@@ -277,8 +277,8 @@ const LuggageListTable = () => {
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
-        <View style={{ borderRight: 1, width: '17%' }} />
-        <View style={{ borderRight: 1, width: '45%' }} />
+        <View style={{ borderRight: 1, width: '10%' }} />
+        <View style={{ borderRight: 1, width: '52%' }} />
         <View style={{ borderRight: 1, width: '15%' }} />
         <View style={{ width: '15%' }} />
       </View>
@@ -292,8 +292,8 @@ const LuggageListTable = () => {
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
-        <View style={{ borderRight: 1, width: '17%' }} />
-        <View style={{ borderRight: 1, width: '45%' }} />
+        <View style={{ borderRight: 1, width: '10%' }} />
+        <View style={{ borderRight: 1, width: '52%' }} />
         <View style={{ borderRight: 1, width: '15%' }} />
         <View style={{ width: '15%' }} />
       </View>
@@ -307,8 +307,8 @@ const LuggageListTable = () => {
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
-        <View style={{ borderRight: 1, width: '17%' }} />
-        <View style={{ borderRight: 1, width: '45%' }} />
+        <View style={{ borderRight: 1, width: '10%' }} />
+        <View style={{ borderRight: 1, width: '52%' }} />
         <View style={{ borderRight: 1, width: '15%' }} />
         <View style={{ width: '15%' }} />
       </View>
@@ -322,8 +322,8 @@ const LuggageListTable = () => {
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
-        <View style={{ borderRight: 1, width: '17%' }} />
-        <View style={{ borderRight: 1, width: '45%' }} />
+        <View style={{ borderRight: 1, width: '10%' }} />
+        <View style={{ borderRight: 1, width: '52%' }} />
         <View style={{ borderRight: 1, width: '15%' }} />
         <View style={{ width: '15%' }} />
       </View>
@@ -337,8 +337,8 @@ const LuggageListTable = () => {
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
-        <View style={{ borderRight: 1, width: '17%' }} />
-        <View style={{ borderRight: 1, width: '45%' }} />
+        <View style={{ borderRight: 1, width: '10%' }} />
+        <View style={{ borderRight: 1, width: '52%' }} />
         <View style={{ borderRight: 1, width: '15%' }} />
         <View style={{ width: '15%' }} />
       </View>
@@ -352,8 +352,8 @@ const LuggageListTable = () => {
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
-        <View style={{ borderRight: 1, width: '17%' }} />
-        <View style={{ borderRight: 1, width: '45%' }} />
+        <View style={{ borderRight: 1, width: '10%' }} />
+        <View style={{ borderRight: 1, width: '52%' }} />
         <View style={{ borderRight: 1, width: '15%' }} />
         <View style={{ width: '15%' }} />
       </View>
@@ -367,8 +367,8 @@ const LuggageListTable = () => {
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
-        <View style={{ borderRight: 1, width: '17%' }} />
-        <View style={{ borderRight: 1, width: '45%' }} />
+        <View style={{ borderRight: 1, width: '10%' }} />
+        <View style={{ borderRight: 1, width: '52%' }} />
         <View style={{ borderRight: 1, width: '15%' }} />
         <View style={{ width: '15%' }} />
       </View>
@@ -382,8 +382,8 @@ const LuggageListTable = () => {
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
-        <View style={{ borderRight: 1, width: '17%' }} />
-        <View style={{ borderRight: 1, width: '45%' }} />
+        <View style={{ borderRight: 1, width: '10%' }} />
+        <View style={{ borderRight: 1, width: '52%' }} />
         <View style={{ borderRight: 1, width: '15%' }} />
         <View style={{ width: '15%' }} />
       </View>
@@ -397,8 +397,8 @@ const LuggageListTable = () => {
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
-        <View style={{ borderRight: 1, width: '17%' }} />
-        <View style={{ borderRight: 1, width: '45%' }} />
+        <View style={{ borderRight: 1, width: '10%' }} />
+        <View style={{ borderRight: 1, width: '52%' }} />
         <View style={{ borderRight: 1, width: '15%' }} />
         <View style={{ width: '15%' }} />
       </View>
@@ -412,8 +412,8 @@ const LuggageListTable = () => {
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
-        <View style={{ borderRight: 1, width: '17%' }} />
-        <View style={{ borderRight: 1, width: '45%' }} />
+        <View style={{ borderRight: 1, width: '10%' }} />
+        <View style={{ borderRight: 1, width: '52%' }} />
         <View style={{ borderRight: 1, width: '15%' }} />
         <View style={{ width: '15%' }} />
       </View>
@@ -427,8 +427,8 @@ const LuggageListTable = () => {
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
-        <View style={{ borderRight: 1, width: '17%' }} />
-        <View style={{ borderRight: 1, width: '45%' }} />
+        <View style={{ borderRight: 1, width: '10%' }} />
+        <View style={{ borderRight: 1, width: '52%' }} />
         <View style={{ borderRight: 1, width: '15%' }} />
         <View style={{ width: '15%' }} />
       </View>

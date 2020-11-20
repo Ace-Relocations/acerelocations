@@ -134,12 +134,10 @@ const CustomerFeedbackForm = ({ title, customer, ...props }) => {
         </View>
       </View>
 
-      <View>
-        <FooterWithImage />
-      </View>
 
       <View>
-        <FooterBorder />
+        <View style={{ border: '1 solid red', marginTop: '20px' }} />
+        <FooterWithImage />
       </View>
     </View>
   );

@@ -67,7 +67,7 @@ const LuggageListHeader = ({ ocity, dcity, gcnno, date }) => (
           marginRight: 5,
         }}
       >
-        <Text> ???? </Text>
+        <Text> Ace Relocations </Text>
       </View>{' '}
       G.C.No.{' '}
       <View

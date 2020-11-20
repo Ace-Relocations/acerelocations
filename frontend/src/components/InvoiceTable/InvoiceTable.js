@@ -29,7 +29,7 @@ const InvoiceTable = ({ invoice }) => {
   const {
     name,
     dcity,
-    oCity,
+    ocity,
     invoiceNo,
     date,
     lrNo,
@@ -38,6 +38,11 @@ const InvoiceTable = ({ invoice }) => {
     totalInWords,
     paymentCity,
   } = invoice;
+
+  const mapCity = {
+    ORIGIN: ocity,
+    DESTINATION: dcity,
+  };
 
   return (
     <View>
@@ -100,10 +105,14 @@ const InvoiceTable = ({ invoice }) => {
           </View>
 
           {invoiceDetails.map(({ expense, amount }) => {
+            let newExpense = expense.replace(/ORIGIN|DESTINATION/gi, (matched) => {
+              return mapCity[matched];
+            });
+
             if (!!amount) {
               return (
                 <View style={{ flexDirection: 'row', alignContent: 'center', marginVertical: 'auto' }}>
-                  <Text>{`${expense}`}</Text>
+                  <Text>{`${newExpense}`}</Text>
                 </View>
               )
             }
