@@ -388,7 +388,7 @@ const LuggageListTable = () => {
         <View style={{ width: '15%' }} />
       </View>
 
-      <View
+      {/* <View
         style={{
           flexDirection: 'row',
           textAlign: 'center',
@@ -401,9 +401,9 @@ const LuggageListTable = () => {
         <View style={{ borderRight: 1, width: '52%' }} />
         <View style={{ borderRight: 1, width: '15%' }} />
         <View style={{ width: '15%' }} />
-      </View>
+      </View> */}
 
-      <View
+      {/* <View
         style={{
           flexDirection: 'row',
           textAlign: 'center',
@@ -416,7 +416,7 @@ const LuggageListTable = () => {
         <View style={{ borderRight: 1, width: '52%' }} />
         <View style={{ borderRight: 1, width: '15%' }} />
         <View style={{ width: '15%' }} />
-      </View>
+      </View> */}
 
       <View
         style={{

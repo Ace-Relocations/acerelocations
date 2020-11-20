@@ -137,6 +137,46 @@ const LuggageList = ({ luggageListDetails }) => {
         <View style={{ marginTop: 10 }}>
           <LuggageListTable />
         </View>
+
+        <View style={{ flexDirection: 'row', marginTop: 20, height: 30 }}>
+          <View style={{ width: '30%', height: 30 }}>
+            <View
+              style={{
+                width: '80%',
+                // border: 1,
+                flexDirection: 'row',
+                height: 30,
+                textAlign: 'center',
+              }}
+            >
+
+            </View>
+          </View>
+
+          <View style={{ width: '70%', height: 30, alignItems: 'flex-end' }}>
+            <View
+              style={{
+                width: '80%',
+                flexDirection: 'row',
+                height: 30,
+                textAlign: 'center',
+              }}
+            >
+              <View
+                style={{
+                  width: '40%',
+                  textAlign: 'center',
+                  alignContent: 'flex-end',
+                }}
+              >
+                <Text style={{ fontSize: 10, marginVertical: 'auto' }}>Customer Signature</Text>
+              </View>
+              <View style={{ width: '60%', border: 1 }}>
+                {/* <Image style={{ width: '25px', height: '25px', marginLeft: '60px' }} src={signImage} /> */}
+              </View>
+            </View>
+          </View>
+        </View>
       </View>
     </View>
   );
