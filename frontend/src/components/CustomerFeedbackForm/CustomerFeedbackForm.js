@@ -4,6 +4,7 @@ import CustomerInfoBox from '../CustomerInfoBox/CustomerInfoBox';
 import RatingsForm from '../RatingsForm/RatingsForm';
 import CustomerCommnetsBox from '../CustomerCommnetsBox/CustomerCommnetsBox';
 import FooterBorder from '../FooterBorder/FooterBorder';
+import FooterWithImage from '../FooterWithImage/FooterWithImage';
 
 const styles = StyleSheet.create({
   container: {
@@ -131,6 +132,10 @@ const CustomerFeedbackForm = ({ title, customer, ...props }) => {
             </View>
           </View>
         </View>
+      </View>
+
+      <View>
+        <FooterWithImage />
       </View>
 
       <View>
