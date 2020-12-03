@@ -18,7 +18,6 @@ createJob: async (req, res) => {
         const {
             consignorF, consignorL, consigneeF, consigneeL, contact, email, oaddress1, oaddress2, ocity, ostate, opincode, daddress1, daddress2, dcity, dstate, dpincode, type, status, insuranceP, insuranceA, date
             } = req.body;
-        //const defaultV = await service.setGcnno(4312);
         const gcnno = await service.incrementGcnno();
         
         let gcnnoC = 0;
@@ -256,6 +255,15 @@ deleteJob: async (req, res) => {
     } catch (err) {
         res.status(500).send({ message: err });
         return;    
+    }
+},
+
+setGcnno: async (req, res) => {
+    try {
+        const defaultV = await service.setGcnno(req.body.gcnno);
+        return res.status(200).send({ message: "Job gcnno was updated!", data: defaultV });
+    } catch (err) {
+        res.status(500).send({ message: err });
     }
 },
 

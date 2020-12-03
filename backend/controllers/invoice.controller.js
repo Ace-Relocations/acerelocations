@@ -16,7 +16,6 @@ module.exports = {
             if(invoice == false) {
                 res.status(500).send({ message: "The value passed is null" });
             }
-            //const defaultV = await service.setBillno(491);
             const billno = await service.incrementBillno();
 
             let newInvoice = invoice.filter(function(obj){
@@ -107,7 +106,15 @@ module.exports = {
             res.status(500).send({ message: "Failed to fetch Invoice", data: err });
             return;    
         }
-    }
+    },
 
+    setBillno: async (req, res) => {
+        try {
+            const defaultV = await service.setBillno(req.body.billno);
+            return res.status(200).send({ message: "Job billno was updated!", data: defaultV });
+        } catch (err) {
+            res.status(500).send({ message: err });
+        }
+    },
 
 }

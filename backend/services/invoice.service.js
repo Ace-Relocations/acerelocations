@@ -63,7 +63,13 @@ module.exports = {
 
     setBillno: async (defaultBillno) => {
         try {
+            let current = await BillCounter.findById("entityId");
             let obj = new BillCounter();
+            if (current) { 
+                obj.seq = defaultBillno;
+                var newvalues = { $set: obj };
+            return BillCounter.updateOne({ _id: "entityId"}, newvalues);
+            } else { 
             obj._id = "entityId";
             obj.seq = defaultBillno;
             let defautV = obj.save();
@@ -71,6 +77,7 @@ module.exports = {
                 return "error";
             }
             return defautV;
+        }
         } catch (err) {
             return err;    
         }
