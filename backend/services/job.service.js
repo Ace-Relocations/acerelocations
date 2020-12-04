@@ -44,7 +44,13 @@ module.exports = {
 
     setGcnno: async (defaultGcnno) => {
         try {
+            let current = await Counter.findById("entityId");
             let obj = new Counter();
+            if (current) {
+                obj.seq = defaultGcnno;
+                var newvalues = { $set: obj };
+            return Counter.updateOne({ _id: "entityId"}, newvalues);
+            } else { 
             obj.seq = defaultGcnno;
             obj._id = "entityId";
             let defautV = obj.save();
@@ -52,6 +58,7 @@ module.exports = {
                 return "error";
             }
             return defautV;
+            }
         } catch (err) {
             return err;    
         }
