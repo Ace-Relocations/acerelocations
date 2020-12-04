@@ -9,6 +9,11 @@ const styles = StyleSheet.create({
     marginVertical: 'auto',
     paddingTop: 4,
   },
+  centerRow2: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+    marginVertical: 'auto'
+  },
 });
 
 const TransitPlanFormBox = ({ transitData }) => {
@@ -161,8 +166,8 @@ const TransitPlanFormBox = ({ transitData }) => {
               The consignment is to be insuied under carriers risk scheme. Under this scheme you
               will be charged a premium of
             </Text>
-            <View style={{ border: 1, width: 30, height: 10, marginTop: -5 }}>
-              <Text>{transitData?.insuranceP}</Text>
+            <View style={{ border: 1, width: 30, marginTop: -5 }}>
+              <Text style={styles.centerRow2}>{transitData?.insuranceP}</Text>
             </View>
           </View>
           <Text>
@@ -338,7 +343,7 @@ const TransitPlanFormBox = ({ transitData }) => {
           </View>
         </View>
       </View>
-    </View>
+    </View >
   );
 };
 
