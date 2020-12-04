@@ -153,7 +153,7 @@ filterJob: async (req, res) => {
 updateJob: async (req, res) => {
     try {
         const {
-            consignorF, consigneeF, consignorL, consigneeL, contact, email, oaddress1, oaddress2, ocity, ostate, opincode, daddress1, daddress2, dcity, dstate, dpincode, type, insuranceP, insuranceA, date,status   
+            consignorF, consigneeF, consignorL, consigneeL, contact, email, oaddress1, oaddress2, ocity, ostate, opincode, daddress1, daddress2, dcity, dstate, dpincode, type, insuranceP, insuranceA, date,status, isExpenseAdded, isInvoiceAdded
             } = req.body;
 
         Customer.findOne({ gcnno: req.query.gcnno }, async (err, user) => {
@@ -190,6 +190,10 @@ updateJob: async (req, res) => {
             obj.insuranceA = insuranceA || user.insuranceA;
             obj.createdBy = createdBy; 
             obj.date = date || user.date;
+            obj.invoice = user.invoice;
+            obj.expense = user.expense;
+            obj.isInvoiceAdded = isInvoiceAdded || user.isInvoiceAdded;
+            obj.isExpenseAdded = isExpenseAdded || user.isExpenseAdded;
 
             var newvalues = { $set: obj };
 
