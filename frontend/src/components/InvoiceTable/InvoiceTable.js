@@ -44,6 +44,8 @@ const InvoiceTable = ({ invoice }) => {
     DESTINATION: dcity,
   };
 
+  console.log({ invoice })
+
   return (
     <View>
       <View style={{ flexDirection: 'row', marginTop: 20 }}>

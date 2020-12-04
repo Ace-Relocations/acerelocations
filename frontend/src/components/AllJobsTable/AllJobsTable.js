@@ -326,14 +326,14 @@ const AllJobsTable = ({
     if (selectedInvoiceStatus) {
       dispatch(getInvoiceRequest({ selectedGcnNo }));
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [openInvoice, selectedGcnNo]);
 
   useEffect(() => {
     if (selectedExpenseStatus) {
       dispatch(getExpensesRequest({ selectedGcnNo }));
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [openExpense, selectedGcnNo]);
 
   return (
@@ -425,7 +425,7 @@ const AllJobsTable = ({
                       aria-label='invoice'
                       onClick={() => handleOpenInvoice(row.gcnno, row.isInvoiceAdded)}
                       style={{ color: getIconColor(row.isInvoiceAdded) }}
-                      // disabled={row.isInvoiceAdded}
+                    // disabled={row.isInvoiceAdded}
                     >
                       <SvgIcon>
                         <MoneyIcon />
@@ -438,7 +438,7 @@ const AllJobsTable = ({
                       aria-label='invoice'
                       onClick={() => handleOpenExpenses(row.gcnno, row.isExpenseAdded)}
                       style={{ color: getIconColor(row.isExpenseAdded) }}
-                      // disabled={row.isExpenseAdded}
+                    // disabled={row.isExpenseAdded}
                     >
                       <SvgIcon>
                         <MoneyIcon />
@@ -447,10 +447,10 @@ const AllJobsTable = ({
                   </StyledTableCell>
 
                   <StyledTableCell align='center'>
-                    <IconButton aria-label='download_invoice' 
-                    disabled={!row.isInvoiceAdded} 
-                    onClick={() => handleOpenDownloadInvoice(row.gcnno)}
-                  >
+                    <IconButton aria-label='download_invoice'
+                      disabled={!row.isInvoiceAdded}
+                      onClick={() => handleOpenDownloadInvoice(row.gcnno)}
+                    >
                       <SvgIcon>
                         <CloudDownloadIcon />
                       </SvgIcon>
@@ -514,9 +514,9 @@ const AllJobsTable = ({
       >
         <DialogTitle id='responsive-dialog-title'>{'Converting to PDF'}</DialogTitle>
         <DialogContent>
-        {/* <Invoice invoice={selectedJob} /> */}
-          <PDFDownloadLink 
-            document={<CreateJobPDF invoice={selectedJob} />} 
+          {/* <Invoice invoice={selectedJob} /> */}
+          <PDFDownloadLink
+            document={<CreateJobPDF invoice={selectedJob} />}
             fileName='invoice.pdf'
           >
             {({ blob, url, loading, error }) =>
@@ -539,8 +539,8 @@ const AllJobsTable = ({
       >
         <DialogTitle id='responsive-dialog-title'>{'Converting to PDF'}</DialogTitle>
         <DialogContent>
-          <PDFDownloadLink 
-            document={<CreateInvoiceOnlyPDF invoice={selectedInvoice} />} 
+          <PDFDownloadLink
+            document={<CreateInvoiceOnlyPDF invoice={selectedInvoice} />}
             fileName='invoice.pdf'
           >
             {({ blob, url, loading, error }) =>

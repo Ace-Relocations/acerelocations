@@ -262,7 +262,7 @@ const CreateJobPDF = ({ invoice }) => {
         name: `${consignorF} ${consignorL}`,
         ocity,
         dcity,
-        invoiceNo: '',
+        invoiceNo: invoiceData[0]?.invoiceNo,
         date,
         lrNo: invoiceData[0].billno,
         invoiceDetails: invoiceData[0]?.invoiceDetails,
@@ -353,12 +353,12 @@ const CreateJobPDF = ({ invoice }) => {
       {/* CustomerFeedbackForm */}
       <Page size='A4' style={styles.page}>
         <Header />
-        <CustomerFeedbackForm title='DESTINATION' customer={invoiceDetail?.customer} />
+        <CustomerFeedbackForm title='ORIGIN' customer={invoiceDetail?.customer} />
       </Page>
 
       <Page size='A4' style={styles.page}>
         <Header />
-        <CustomerFeedbackForm title='ORIGIN' customer={invoiceDetail?.customerDestination} />
+        <CustomerFeedbackForm title='DESTINATION' customer={invoiceDetail?.customerDestination} />
       </Page>
 
       {/* LuggageList */}
