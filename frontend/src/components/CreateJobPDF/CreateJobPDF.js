@@ -262,7 +262,7 @@ const CreateJobPDF = ({ invoice }) => {
         name: `${consignorF} ${consignorL}`,
         ocity,
         dcity,
-        invoiceNo: invoiceData[0]?.invoiceNo,
+        invoiceNo: invoiceData[0]?.billno,
         date,
         lrNo: invoiceData[0].billno,
         invoiceDetails: invoiceData[0]?.invoiceDetails,

@@ -125,7 +125,7 @@ const CreateInvoiceOnlyPDF = ({ invoice }) => {
     status,
     contact,
     car,
-    carGcnno='',
+    carGcnno = '',
     email,
     insuranceP,
     insuranceA,
@@ -232,13 +232,13 @@ const CreateInvoiceOnlyPDF = ({ invoice }) => {
     invoice: {
       name: `${consignorF} ${consignorL}`,
       dcity,
-      invoiceNo: '',
+      invoiceNo: invoiceData[0]?.billno,
       date,
       lrNo: invoiceData[0].billno,
-      invoiceDetails : invoiceData[0]?.invoiceDetails,
-      total: '',
-      totalInWords: '',
+      invoiceDetails: invoiceData[0]?.invoiceDetails,
       paymentCity: dcity,
+      total: invoiceData[0]?.total,
+      totalInWords: invoiceData[0]?.totalInText,
     }
   };
 
@@ -246,8 +246,8 @@ const CreateInvoiceOnlyPDF = ({ invoice }) => {
     <Document>
       <Page size='A4' style={styles.page}>
         <View>
-            <Header />
-            <InvoiceTable invoice={invoiceDetail?.invoice} />
+          <Header />
+          <InvoiceTable invoice={invoiceDetail?.invoice} />
         </View>
       </Page>
 
