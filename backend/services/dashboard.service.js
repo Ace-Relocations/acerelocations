@@ -12,7 +12,7 @@ module.exports = {
             let invoices = await Invoice.find({});
             let revenue = 0;
             for (i=0; i<invoices.length; i++){
-                revenue = revenue + invoices[i].total;
+                revenue = revenue + parseInt(invoices[i].total);
             }
             return revenue;
         } catch (err) {
@@ -25,7 +25,7 @@ module.exports = {
             let expenses = await Expense.find({});
             let costs = 0;
             for (i=0; i<expenses.length; i++){
-                costs = costs + expenses[i].total;
+                costs = costs + parseInt(expenses[i].total);
             }
             return costs;
         } catch (err) {
