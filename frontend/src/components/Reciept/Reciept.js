@@ -32,10 +32,10 @@ const Reciept = ({ reciept }) => {
     <View>
       <View style={{ flexDirection: 'row' }}>
         <View style={{ width: '70%' }}>
-          <Text>No:</Text>
+          <Text>{`No: ${billNo}`}</Text>
         </View>
         <View style={{ width: '30%' }}>
-          <Text>Date:</Text>
+          <Text>{`Date: ${new Date().toLocaleDateString()}`}</Text>
         </View>
       </View>
 
