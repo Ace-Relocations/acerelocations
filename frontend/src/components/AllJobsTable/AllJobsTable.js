@@ -40,6 +40,7 @@ import AddExpenseDialog from '../AddExpenseDialog/AddExpenseDialog';
 import { getExpensesRequest, getInvoiceRequest } from '../../actions';
 import CreateJobPDF from '../CreateJobPDF/CreateJobPDF';
 import CreateInvoiceOnlyPDF from '../PDFGenerator/CreateInvoiceOnlyPDF';
+import SearchInput from '../SearchInput/SearchInput';
 
 const options = ['ongoing', 'completed'];
 
@@ -168,6 +169,8 @@ const AllJobsTable = ({
   const [openExpense, setOpenExpense] = useState(false);
   const [selectedInvoiceStatus, updateSelectedInvoiceStatus] = useState();
   const [selectedExpenseStatus, updateSelectedExpenseStatus] = useState();
+  const [isSearching, updateIsSearching] = useState(false);
+  const [searchedTableData, updateSearchedTableData] = useState([]);
 
   const [valueStatus, setValueStatus] = useState();
 
@@ -336,8 +339,34 @@ const AllJobsTable = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [openExpense, selectedGcnNo]);
 
+  const handleSearchRequest = (value) => {
+    updateIsSearching(true)
+    const newJObs = allJobs.filter(job => {
+      const regex = new RegExp(value, 'gi');
+      return Object.values(job).some((jobItem) => {
+        return jobItem.toString().match(regex)
+      })
+    });
+    updateSearchedTableData(newJObs);
+  }
+
+  const getTableData = useMemo(() => {
+    if (isSearching) {
+      return searchedTableData;
+    } else {
+      return data;
+    }
+  }, [handleSearchRequest])
+
   return (
     <>
+      <div style={{ marginBottom: '10px' }}>
+        <SearchInput
+          onSearching={(value) => handleSearchRequest(value)}
+          onSearchRequest={(value) => handleSearchRequest(value)}
+        />
+      </div>
+
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label='customized table'>
           <TableHead>
@@ -367,7 +396,7 @@ const AllJobsTable = ({
             </TableRow>
           </TableHead>
           <TableBody>
-            {stableSort(data, getComparator(order, orderBy))
+            {stableSort(getTableData, getComparator(order, orderBy))
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => (
                 <StyledTableRow key={row.id}>
