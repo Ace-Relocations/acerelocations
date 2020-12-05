@@ -517,7 +517,7 @@ const AllJobsTable = ({
           {/* <Invoice invoice={selectedJob} /> */}
           <PDFDownloadLink
             document={<CreateJobPDF invoice={selectedJob} />}
-            fileName='invoice.pdf'
+            fileName={`${selectedJob?.gcnno}_${selectedJob?.consignorF}_${selectedJob?.consignorL}_jobdocs.pdf`}
           >
             {({ blob, url, loading, error }) =>
               loading ? <HorizontalLoader /> : <Button>Download Now</Button>
