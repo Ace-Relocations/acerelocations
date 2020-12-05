@@ -29,7 +29,7 @@ module.exports = {
         try {
             let totalA = 0;
             for (i=0; i<invoice.length; i++) {
-                totalA = totalA + invoice[i].amount; 
+                totalA = totalA + parseInt(invoice[i].amount); 
             }
             return totalA;
         } catch (err) {
