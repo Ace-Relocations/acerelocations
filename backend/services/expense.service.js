@@ -28,7 +28,7 @@ module.exports = {
         try {
             let totalA = 0;
             for (i=0; i<expense.length; i++) {
-                totalA = totalA + expense[i].amount; 
+                totalA = totalA + parseInt(expense[i].amount); 
             }
             return totalA;
         } catch (err) {
