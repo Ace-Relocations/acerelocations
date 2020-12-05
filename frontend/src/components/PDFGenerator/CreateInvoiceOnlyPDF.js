@@ -220,28 +220,27 @@ const CreateInvoiceOnlyPDF = ({ invoice }) => {
     },
     reciept: {
       chequeIssuer: `${consignorF} ${consignorL}`,
-      rupeesInNumber,
-      rupeesInText,
-      from: `${consignorF} ${consignorL}`,
-      to: `${consigneeF} ${consigneeL}`,
       rupeesInNumber: invoiceData[0]?.total,
       rupeesInText: invoiceData[0]?.totalInText,
       chequeNo,
       date,
       billNo: invoiceData[0]?.billno,
       lrNo: invoiceData[0]?.gcnno,
+      from: ocity,
+      to: dcity,
     },
     invoice: {
       name: `${consignorF} ${consignorL}`,
+      ocity,
       dcity,
       invoiceNo: invoiceData[0]?.billno,
       date,
       lrNo: invoiceData[0].billno,
       invoiceDetails: invoiceData[0]?.invoiceDetails,
-      paymentCity: dcity,
       total: invoiceData[0]?.total,
       totalInWords: invoiceData[0]?.totalInText,
-    }
+      paymentCity: dcity,
+    },
   };
 
   return (
