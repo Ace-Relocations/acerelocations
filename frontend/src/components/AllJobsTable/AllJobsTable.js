@@ -363,7 +363,7 @@ const AllJobsTable = ({
       <div style={{ marginBottom: '10px' }}>
         <SearchInput
           onSearching={(value) => handleSearchRequest(value)}
-          onSearchRequest={(value) => handleSearchRequest(value)}
+        // onSearchRequest={(value) => handleSearchRequest(value)}
         />
       </div>
 

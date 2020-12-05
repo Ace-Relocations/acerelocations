@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SearchInput = ({ onSearching, onSearchRequest }) => {
+const SearchInput = ({ onSearching }) => {
   const classes = useStyles();
 
   const [searchString, updateSearchString] = useState();
@@ -46,7 +46,7 @@ const SearchInput = ({ onSearching, onSearchRequest }) => {
           onSearching(event.target.value);
         }}
       />
-      <IconButton className={classes.iconButton} aria-label="search" onClick={() => onSearchRequest(searchString)}>
+      <IconButton className={classes.iconButton} aria-label="search" >
         <SearchIcon />
       </IconButton>
     </Paper>
