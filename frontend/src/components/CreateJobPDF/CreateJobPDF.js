@@ -151,7 +151,6 @@ const CreateJobPDF = ({ invoice }) => {
     lrNo = '',
   } = invoice;
 
-  console.log({ invoice });
   let invoiceDetail = {
     consignor: { firstName: consignorF, lastName: consignorL },
     consignee: { firstName: consigneeF, lastName: consigneeL },

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View, StyleSheet, Image } from '@react-pdf/renderer';
 import signImage from '../../assets/sign.jpg';
+import checkMark from '../../assets/checkMark.png';
 
 const styles = StyleSheet.create({
   centerRow: {
@@ -116,7 +117,11 @@ const TransitPlanFormBox = ({ transitData }) => {
               <Text style={styles.centerRow}>Option One: </Text>
             </View>
             <View style={{ border: 1, width: '30%' }}>
-              <Text style={styles.centerRow}></Text>
+              {!!transitData?.insuranceP ?
+                (<Image style={{ width: '10px', height: '10px', marginVertical: 'auto', marginLeft: '15px' }} src={checkMark} />)
+                : (<Text style={styles.centerRow}></Text>)
+              }
+              {/* <Text style={styles.centerRow}></Text> */}
             </View>
             <View style={{ width: '60%', paddingTop: 5 }}>
               <Text> (tick here for acceptance)</Text>
@@ -152,7 +157,11 @@ const TransitPlanFormBox = ({ transitData }) => {
               <Text style={styles.centerRow}>Option Two: </Text>
             </View>
             <View style={{ border: 1, width: '30%' }}>
-              <Text style={styles.centerRow}></Text>
+              {!transitData?.insuranceP ?
+                (<Image style={{ width: '10px', height: '10px', marginVertical: 'auto', marginLeft: '15px' }} src={checkMark} />)
+                : (<Text style={styles.centerRow}></Text>)
+              }
+              {/* <Image style={{ width: '10px', height: '10px', marginVertical: 'auto', marginLeft: '15px' }} src={checkMark} /> */}
             </View>
             <View style={{ width: '60%', paddingTop: 5 }}>
               <Text> (tick here for acceptance)</Text>
