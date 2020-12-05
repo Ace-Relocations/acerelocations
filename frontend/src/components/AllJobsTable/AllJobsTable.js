@@ -40,6 +40,7 @@ import AddExpenseDialog from '../AddExpenseDialog/AddExpenseDialog';
 import { getExpensesRequest, getInvoiceRequest } from '../../actions';
 import CreateJobPDF from '../CreateJobPDF/CreateJobPDF';
 import CreateInvoiceOnlyPDF from '../PDFGenerator/CreateInvoiceOnlyPDF';
+import SearchInput from '../SearchInput/SearchInput';
 
 const options = ['ongoing', 'completed'];
 
@@ -338,6 +339,13 @@ const AllJobsTable = ({
 
   return (
     <>
+      <div style={{ marginBottom: '10px' }}>
+        <SearchInput
+          onSearching={(value) => console.log(value)}
+          onSearchRequest={(value) => console.log(value)}
+        />
+      </div>
+
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label='customized table'>
           <TableHead>
