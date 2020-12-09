@@ -66,7 +66,7 @@ module.exports = {
     updateInvoice: async (req, res) => {
         try {
         const {
-            gcnno, invoice
+            gcnno, invoice, billno
             } = req.body;
             let invoiceC = await Invoice.findOne({gcnno: gcnno});
 
@@ -90,7 +90,7 @@ module.exports = {
             let obj = {};
             obj._id = invoiceC._id;
             obj.gcnno = gcnno;
-            obj.billno = invoiceC.billno;
+            obj.billno = billno || invoiceC.billno;
             obj.invoiceDetails = invoice || invoiceC.invoiceDetails; 
             obj.total = await service.getTotal(obj.invoiceDetails);
             var newvalues = { $set: obj };

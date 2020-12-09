@@ -153,7 +153,7 @@ filterJob: async (req, res) => {
 updateJob: async (req, res) => {
     try {
         const {
-            consignorF, consigneeF, consignorL, consigneeL, contact, email, oaddress1, oaddress2, ocity, ostate, opincode, daddress1, daddress2, dcity, dstate, dpincode, type, insuranceP, insuranceA, date,status, isExpenseAdded, isInvoiceAdded
+            gcnno, consignorF, consigneeF, consignorL, consigneeL, contact, email, oaddress1, oaddress2, ocity, ostate, opincode, daddress1, daddress2, dcity, dstate, dpincode, type, insuranceP, insuranceA, date,status, isExpenseAdded, isInvoiceAdded
             } = req.body;
 
         Customer.findOne({ gcnno: req.query.gcnno }, async (err, user) => {
@@ -167,7 +167,7 @@ updateJob: async (req, res) => {
 
             let obj = new Customer();
             obj._id = user._id;
-            obj.gcnno = user.gcnno;
+            obj.gcnno = gcnno || user.gcnno;
             obj.consignorF = consignorF || user.consignorF; 
             obj.consigneeF = consigneeF || user.consigneeF;
             obj.consignorL = consignorL || user.consignorL; 
