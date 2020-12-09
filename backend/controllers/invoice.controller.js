@@ -70,7 +70,7 @@ module.exports = {
             } = req.body;
             let invoiceC = await Invoice.findOne({gcnno: gcnno});
 
-            if(invoice == false || invoice == "" || invoice == null) {
+            if(invoice == false && billno == null || invoice == "" && billno == null || invoice == null && billno == null) {
                 let deleteV = await Invoice.deleteOne({ gcnno: gcnno});
                 if (!deleteV){
                     res.status(500).send({ message: "Failed to delete Invoice" });
