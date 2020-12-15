@@ -225,6 +225,7 @@ const CreateJobForm = ({
                       rules={{ required: true }}
                       className={classes.formControl}
                       name='consignorF'
+                      defaultValue='Mr '
                       value={values.consignorF}
                       error={errors.consignorF}
                       helperText={errors.consignorF && 'FirstName is required'}
@@ -288,9 +289,6 @@ const CreateJobForm = ({
                       className={classes.formControl}
                       name='consigneeL'
                       value={values.consigneeL}
-                      error={errors.consigneeL}
-                      helperText={errors.consigneeL && 'LastName is required'}
-                      required
                     />
                   </Grid>
 
@@ -324,9 +322,6 @@ const CreateJobForm = ({
                       className={classes.formControl}
                       name='email'
                       value={values.email}
-                      error={errors.email}
-                      helperText={errors.email && 'Email is required'}
-                      required
                     />
                   </Grid>
                 </Grid>
@@ -352,9 +347,7 @@ const CreateJobForm = ({
                         className={classes.formControl}
                         name='oaddress1'
                         value={values.oaddress1}
-                        error={errors.oaddress1}
-                        helperText={errors.oaddress1 && 'Address is required'}
-                        required
+                       
                       />
                     </Box>
 
@@ -405,9 +398,7 @@ const CreateJobForm = ({
                       className={classes.formControl}
                       name='ostate'
                       value={values.ostate}
-                      error={errors.ostate}
-                      helperText={errors.ostate && 'State is required'}
-                      required
+                   
                     />
                   </Grid>
                   <Grid item lg={12} container className={classes.gridItem}>
@@ -441,9 +432,7 @@ const CreateJobForm = ({
                         className={classes.formControl}
                         name='opincode'
                         value={values.opincode}
-                        error={errors.opincode}
-                        helperText={errors.opincode && 'Pincode is required'}
-                        required
+                       
                       />
                     </Box>
                     <Box width='100%'></Box>
@@ -473,9 +462,7 @@ const CreateJobForm = ({
                         className={classes.formControl}
                         name='daddress1'
                         value={values.daddress1}
-                        error={errors.daddress1}
-                        helperText={errors.daddress1 && 'Address is required'}
-                        required
+                       
                       />
                     </Box>
 
@@ -490,7 +477,7 @@ const CreateJobForm = ({
                       className={classes.formControl}
                       name='daddress2'
                       value={values.daddress2}
-                      required
+                    
                     />
                   </Grid>
 
@@ -524,9 +511,7 @@ const CreateJobForm = ({
                       className={classes.formControl}
                       name='dstate'
                       value={values.dstate}
-                      error={errors.dstate}
-                      helperText={errors.dstate && 'State is required'}
-                      required
+                     
                     />
                   </Grid>
                   <Grid item lg={12} container className={classes.gridItem}>
@@ -559,9 +544,7 @@ const CreateJobForm = ({
                       className={classes.formControl}
                       name='dpincode'
                       value={values.dpincode}
-                      error={errors.dpincode}
-                      helperText={errors.dpincode && 'Pincode is required'}
-                      required
+                     
                     />
                   </Grid>
                 </Grid>
@@ -615,6 +598,7 @@ const CreateJobForm = ({
                       rules={{ required: true }}
                       className={classes.formControl}
                       name='insuranceP'
+                      defaultValue='3'
                       value={values.insuranceP}
                       error={errors.insuranceP}
                       helperText={errors.insuranceP && 'Insurance is required'}

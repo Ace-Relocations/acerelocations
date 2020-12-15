@@ -55,11 +55,16 @@ const InvoiceTable = ({ invoice }) => {
             <Text></Text>
           </View>
           <View style={{ borderBottom: 1, height: 17 }}>
-            <Text>{dcity}</Text>
+            <Text>{ocity}</Text>
           </View>
         </View>
         <View style={{ width: '1%' }} />
-        <View style={{ width: '39%', border: 1, fontSize: 10 }}>
+        <View style={{ width: '39%', fontSize: 12, margin: 'auto' }}>
+        <Text style = {{textAlign: 'center'}}>INVOICE </Text>
+        <View style={{ border: 1, fontSize: 10, height: 52 }}>
+        {/* <View style={{ flexDirection: 'row', margin: 'auto' }}>
+            <Text>INVOICE </Text>
+          </View> */}
           <View style={{ flexDirection: 'row', margin: 'auto' }}>
             <Text>Invoice No.:</Text>
             <Text>{invoiceNo}</Text>
@@ -68,6 +73,7 @@ const InvoiceTable = ({ invoice }) => {
             <Text>Date:</Text>
             <Text>{date}</Text>
           </View>
+        </View>
         </View>
       </View>
 
@@ -148,7 +154,7 @@ const InvoiceTable = ({ invoice }) => {
           style={{ width: '60%', border: 1, padding: 10, lineHeight: 1.2, flexDirection: 'row' }}
         >
           <View style={{ width: '70%' }}>
-            <Text style={{ textAlign: 'left' }}>PAYMENT AT: {paymentCity}</Text>
+            <Text style={{ textAlign: 'left' }}>PAYMENT AT: Ahmedabad</Text>
           </View>
           <View style={{ width: '30%' }}>
             <Text style={{ textAlign: 'right' }}>Total</Text>

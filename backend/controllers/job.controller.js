@@ -58,11 +58,14 @@ createJob: async (req, res) => {
         obj.save(err => {
             if (err) {
                 if(err.code == 11000) {
+                    const gcnno = service.decrementGcnno();
                     res.status(500).send({ message: "User with this email already exist" });
                     return;
+                } else {
+                const gcnno = service.decrementGcnno(); 
+                res.status(500).send({ message: err });
+                return;
                 }
-            res.status(500).send({ message: err });
-            return;
             }  
             res.status(200).send({ message: "Customer was registered successfully!", data: obj });
         });
