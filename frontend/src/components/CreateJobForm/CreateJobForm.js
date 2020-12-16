@@ -301,7 +301,12 @@ const CreateJobForm = ({
                         label='Mobile'
                         variant='outlined'
                         width={300}
-                        rules={{ required: true }}
+                        rules={{
+                          required: true,
+                          minLength: 10,
+                          maxLength: 12,
+                          pattern: /^\d{10}$/,
+                        }}
                         className={classes.formControl}
                         name='contact'
                         value={values.contact}
@@ -318,7 +323,7 @@ const CreateJobForm = ({
                       label='Email'
                       variant='outlined'
                       width={300}
-                      rules={{ required: true }}
+                      rules={{ required: true, pattern: /^\S+@\S+$/i }}
                       className={classes.formControl}
                       name='email'
                       value={values.email}
@@ -347,7 +352,6 @@ const CreateJobForm = ({
                         className={classes.formControl}
                         name='oaddress1'
                         value={values.oaddress1}
-                       
                       />
                     </Box>
 
@@ -398,7 +402,6 @@ const CreateJobForm = ({
                       className={classes.formControl}
                       name='ostate'
                       value={values.ostate}
-                   
                     />
                   </Grid>
                   <Grid item lg={12} container className={classes.gridItem}>
@@ -432,7 +435,6 @@ const CreateJobForm = ({
                         className={classes.formControl}
                         name='opincode'
                         value={values.opincode}
-                       
                       />
                     </Box>
                     <Box width='100%'></Box>
@@ -462,7 +464,6 @@ const CreateJobForm = ({
                         className={classes.formControl}
                         name='daddress1'
                         value={values.daddress1}
-                       
                       />
                     </Box>
 
@@ -477,7 +478,6 @@ const CreateJobForm = ({
                       className={classes.formControl}
                       name='daddress2'
                       value={values.daddress2}
-                    
                     />
                   </Grid>
 
@@ -511,7 +511,6 @@ const CreateJobForm = ({
                       className={classes.formControl}
                       name='dstate'
                       value={values.dstate}
-                     
                     />
                   </Grid>
                   <Grid item lg={12} container className={classes.gridItem}>
@@ -544,7 +543,6 @@ const CreateJobForm = ({
                       className={classes.formControl}
                       name='dpincode'
                       value={values.dpincode}
-                     
                     />
                   </Grid>
                 </Grid>
