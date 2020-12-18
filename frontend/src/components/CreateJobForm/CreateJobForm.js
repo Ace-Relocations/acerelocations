@@ -149,6 +149,7 @@ const CreateJobForm = ({
     },
   });
   const submit = (data) => {
+    console.log({ data });
     updateJobDetails(data);
     if (isEditing) {
       onUpdateJob(data);
@@ -240,13 +241,13 @@ const CreateJobForm = ({
                     label='LastName'
                     variant='outlined'
                     width={300}
-                    rules={{ required: true }}
+                    // rules={{ required: true }}
                     className={classes.formControl}
                     name='consignorL'
                     value={values.consignorL}
-                    error={errors.consignorL}
-                    helperText={errors.consignorL && 'LastName is required'}
-                    required
+                    // error={errors.consignorL}
+                    // helperText={errors.consignorL && 'LastName is required'}
+                    // required
                   />
                 </Grid>
                 {/* </fieldset> */}
@@ -285,7 +286,7 @@ const CreateJobForm = ({
                       label='LastName'
                       variant='outlined'
                       width={300}
-                      rules={{ required: true }}
+                      // rules={{ required: true }}
                       className={classes.formControl}
                       name='consigneeL'
                       value={values.consigneeL}
@@ -311,7 +312,7 @@ const CreateJobForm = ({
                         name='contact'
                         value={values.contact}
                         error={errors.contact}
-                        helperText={errors.contact && 'Contact number is required'}
+                        helperText={errors.contact && 'This number is not valid'}
                         required
                       />
                     </Box>
@@ -323,10 +324,11 @@ const CreateJobForm = ({
                       label='Email'
                       variant='outlined'
                       width={300}
-                      rules={{ required: true, pattern: /^\S+@\S+$/i }}
+                      rules={{ pattern: /^\S+@\S+$/i }}
                       className={classes.formControl}
                       name='email'
                       value={values.email}
+                      helperText={errors.contact && 'This Email is not valid'}
                     />
                   </Grid>
                 </Grid>
@@ -348,7 +350,7 @@ const CreateJobForm = ({
                         label='Address Line 1'
                         variant='outlined'
                         width={300}
-                        rules={{ required: true }}
+                        // rules={{ required: true }}
                         className={classes.formControl}
                         name='oaddress1'
                         value={values.oaddress1}
@@ -362,7 +364,7 @@ const CreateJobForm = ({
                       label='Address Line 2'
                       variant='outlined'
                       width={300}
-                      rules={{}}
+                      // rules={{}}
                       className={classes.formControl}
                       name='oaddress2'
                       value={values.oaddress2}
@@ -398,7 +400,7 @@ const CreateJobForm = ({
                       label='State'
                       variant='outlined'
                       width={300}
-                      rules={{ required: true }}
+                      // rules={{ required: true }}
                       className={classes.formControl}
                       name='ostate'
                       value={values.ostate}
@@ -431,7 +433,7 @@ const CreateJobForm = ({
                         label='Pincode'
                         variant='outlined'
                         width={300}
-                        rules={{ required: true }}
+                        // rules={{ required: true }}
                         className={classes.formControl}
                         name='opincode'
                         value={values.opincode}
@@ -460,7 +462,7 @@ const CreateJobForm = ({
                         label='Address Line 1'
                         variant='outlined'
                         width={300}
-                        rules={{ required: true }}
+                        // rules={{ required: true }}
                         className={classes.formControl}
                         name='daddress1'
                         value={values.daddress1}
@@ -507,7 +509,7 @@ const CreateJobForm = ({
                       label='State'
                       variant='outlined'
                       width={300}
-                      rules={{ required: true }}
+                      // rules={{ required: true }}
                       className={classes.formControl}
                       name='dstate'
                       value={values.dstate}
@@ -539,7 +541,7 @@ const CreateJobForm = ({
                       label='Pincode'
                       variant='outlined'
                       width={300}
-                      rules={{ required: true }}
+                      // rules={{ required: true }}
                       className={classes.formControl}
                       name='dpincode'
                       value={values.dpincode}
