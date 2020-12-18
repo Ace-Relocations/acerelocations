@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   centerRow2: {
     textAlign: 'center',
     fontWeight: 'bold',
-    marginVertical: 'auto'
+    marginVertical: 'auto',
   },
 });
 
@@ -117,10 +117,19 @@ const TransitPlanFormBox = ({ transitData }) => {
               <Text style={styles.centerRow}>Option One: </Text>
             </View>
             <View style={{ border: 1, width: '30%' }}>
-              {!!transitData?.insuranceP ?
-                (<Image style={{ width: '10px', height: '10px', marginVertical: 'auto', marginLeft: '15px' }} src={checkMark} />)
-                : (<Text style={styles.centerRow}></Text>)
-              }
+              {!!transitData?.insuranceP && !transitData?.insuranceA ? (
+                <Image
+                  style={{
+                    width: '10px',
+                    height: '10px',
+                    marginVertical: 'auto',
+                    marginLeft: '15px',
+                  }}
+                  src={checkMark}
+                />
+              ) : (
+                <Text style={styles.centerRow}></Text>
+              )}
               {/* <Text style={styles.centerRow}></Text> */}
             </View>
             <View style={{ width: '60%', paddingTop: 5 }}>
@@ -157,10 +166,19 @@ const TransitPlanFormBox = ({ transitData }) => {
               <Text style={styles.centerRow}>Option Two: </Text>
             </View>
             <View style={{ border: 1, width: '30%' }}>
-              {!transitData?.insuranceP ?
-                (<Image style={{ width: '10px', height: '10px', marginVertical: 'auto', marginLeft: '15px' }} src={checkMark} />)
-                : (<Text style={styles.centerRow}></Text>)
-              }
+              {!transitData?.insuranceP && !!transitData?.insuranceA ? (
+                <Image
+                  style={{
+                    width: '10px',
+                    height: '10px',
+                    marginVertical: 'auto',
+                    marginLeft: '15px',
+                  }}
+                  src={checkMark}
+                />
+              ) : (
+                <Text style={styles.centerRow}></Text>
+              )}
               {/* <Image style={{ width: '10px', height: '10px', marginVertical: 'auto', marginLeft: '15px' }} src={checkMark} /> */}
             </View>
             <View style={{ width: '60%', paddingTop: 5 }}>
@@ -290,7 +308,10 @@ const TransitPlanFormBox = ({ transitData }) => {
                 <Text style={{ margin: 'auto' }}>Option Selected</Text>
               </View>
               <View style={{ width: '15%', borderRight: 1, borderLeft: 1, paddingTop: 5 }}>
-                <Text style={{ margin: 'auto' }}> {(!!transitData?.moneyInText && !!transitData?.moneyInNumber) ? 'TWO' : ''}  </Text>
+                <Text style={{ margin: 'auto' }}>
+                  {' '}
+                  {!!transitData?.moneyInText && !!transitData?.moneyInNumber ? 'TWO' : ''}{' '}
+                </Text>
               </View>
               <View style={{ width: '65%', paddingTop: 5, textAlign: 'left', fontSize: 7 }}>
                 <Text style={{ marginVertical: 'auto', fontSize: 7, marginLeft: 3 }}>
@@ -338,21 +359,31 @@ const TransitPlanFormBox = ({ transitData }) => {
 
           <View style={{ width: '50%', flexDirection: 'row' }}>
             <View style={{ width: '40%', borderRight: 1 }}>
-              <Text style={{ marginVertical: 'auto', height: '25px', borderBottom: 1 }}>Consignor's Signature</Text>
+              <Text style={{ marginVertical: 'auto', height: '25px', borderBottom: 1 }}>
+                Consignor's Signature
+              </Text>
               <Text style={{ marginVertical: 'auto', height: '25px' }}>
                 Authorised Signatory of Ace Relocations
               </Text>
             </View>
             <View style={{ width: '60%' }}>
               <Text style={{ marginVertical: 'auto', height: '25px', borderBottom: 1 }}> </Text>
-              <Image style={{ width: '25px', height: '25px', marginVertical: 'auto', marginLeft: '40px' }} src={signImage} />
+              <Image
+                style={{
+                  width: '25px',
+                  height: '25px',
+                  marginVertical: 'auto',
+                  marginLeft: '40px',
+                }}
+                src={signImage}
+              />
 
               {/* <Text style={{ marginVertical: 'auto' }}> </Text> */}
             </View>
           </View>
         </View>
       </View>
-    </View >
+    </View>
   );
 };
 
