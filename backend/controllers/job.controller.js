@@ -52,7 +52,7 @@ createJob: async (req, res) => {
         obj.carGcnno = gcnnoC;
         obj.insuranceP = insuranceP; 
         obj.insuranceA = insuranceA;
-        obj.insuranceAInText = numberToText.convertToText(insuranceA);
+        obj.insuranceAInText = numberToText.convertToText(insuranceA) + " "+ "only";
         obj.createdBy = createdBy; 
         obj.date = moment(date).format('DD/MM/YYYY');
         obj.save(err => {
@@ -190,13 +190,14 @@ updateJob: async (req, res) => {
             obj.type = type || user.type;
             obj.status = status || user.status;
             obj.insuranceP = insuranceP || user.insuranceP; 
-            obj.insuranceA = insuranceA || user.insuranceA;
+            obj.insuranceA = insuranceA  || user.insuranceA;
             obj.createdBy = createdBy; 
             obj.date = date || user.date;
             obj.invoice = user.invoice;
             obj.expense = user.expense;
             obj.isInvoiceAdded = isInvoiceAdded || user.isInvoiceAdded;
             obj.isExpenseAdded = isExpenseAdded || user.isExpenseAdded;
+            obj.insuranceAInText = numberToText.convertToText(obj.insuranceA) + " "+ "only";
 
             var newvalues = { $set: obj };
 

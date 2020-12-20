@@ -25,7 +25,7 @@ module.exports = {
                 return false;
             });
             let total = await service.getTotal(newInvoice);
-            const totalInText = numberToText.convertToText(total);
+            const totalInText = numberToText.convertToText(total)+ " "+ "only";
             let createData = await service.createInvoice(gcnno, billno, newInvoice, total, totalInText);
             if (createData == false) {
             res.status(500).send({ message: "failed to register invoice", data: createData });
@@ -92,7 +92,7 @@ module.exports = {
             obj.gcnno = gcnno;
             obj.billno = billno || invoiceC.billno;
             obj.invoiceDetails = invoice || invoiceC.invoiceDetails; 
-            obj.total = await service.getTotal(obj.invoiceDetails);
+            obj.total = await service.getTotal(obj.invoiceDetails)+ " "+ "only";
             var newvalues = { $set: obj };
 
             let updateV = await Invoice.updateOne({gcnno: obj.gcnno}, newvalues)

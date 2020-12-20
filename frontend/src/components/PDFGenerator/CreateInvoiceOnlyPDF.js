@@ -235,7 +235,7 @@ const CreateInvoiceOnlyPDF = ({ invoice }) => {
       dcity,
       invoiceNo: invoiceData[0]?.billno,
       date,
-      lrNo: invoiceData[0].billno,
+      lrNo: invoiceData[0].gcnno,
       invoiceDetails: invoiceData[0]?.invoiceDetails,
       total: invoiceData[0]?.total,
       totalInWords: invoiceData[0]?.totalInText,
