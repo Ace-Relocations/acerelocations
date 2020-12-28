@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
+import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -21,6 +22,7 @@ import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid/index';
 import { useSelector } from 'react-redux';
+import DateFnsUtils from '@date-io/date-fns';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -47,7 +49,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 const AddExpenseDialog = ({ openExpense, handleAddExpenses, handleCancleExpenses, isEditing }) => {
   const classes = useStyles();
 
-  const [fields, setFields] = useState([{ details: null, amount: null, settled: null }]);
+  const [fields, setFields] = useState([{ details: null, amount: null, settled: null, date: null }]);
 
   const { expenses } = useSelector((state) => state.Expenses) || [];
 
@@ -98,9 +100,9 @@ const AddExpenseDialog = ({ openExpense, handleAddExpenses, handleCancleExpenses
 
 
   useEffect(() => {
-    if (isEditing && !!expenses?.expenseDetails) {
-      setFields(expenses?.expenseDetails);    
-    } 
+    if (isEditing && !!expenses ?.expenseDetails) {
+      setFields(expenses ?.expenseDetails);
+    }
   }, [isEditing, expenses])
 
   const isValid = fields.length > 0 && validateExpenses;
@@ -145,8 +147,8 @@ const AddExpenseDialog = ({ openExpense, handleAddExpenses, handleCancleExpenses
           {fields.map((field, idx) => {
             return (
               <div key={`${field}-${idx}`} style={{ marginBottom: '10px' }}>
-                <Grid container lg={12}>
-                  <Grid item xs container className={classes.gridItem}>
+                <Grid container spacing={1}>
+                  <Grid item xs={2} container className={classes.gridItem}>
                     <Box marginRight='10px'>
                       <TextField
                         type='text'
@@ -156,11 +158,14 @@ const AddExpenseDialog = ({ openExpense, handleAddExpenses, handleCancleExpenses
                         name='expense'
                         value={field.details || ''}
                         onChange={(e) => handleChange(idx, e)}
+                        size='small'
+                        fullWidth='false'
+                        width='30px'
                         required
                       />
                     </Box>
                   </Grid>
-                  <Grid item xs container className={classes.gridItem}>
+                  <Grid item xs={2} container className={classes.gridItem}>
                     <Box>
                       <TextField
                         type='number'
@@ -175,7 +180,7 @@ const AddExpenseDialog = ({ openExpense, handleAddExpenses, handleCancleExpenses
                     </Box>
                   </Grid>
 
-                  <Grid item xs container className={classes.gridItem}>
+                  <Grid item xs={3} container className={classes.gridItem}>
                     <Box>
                       <TextField
                         type='number'
@@ -189,7 +194,23 @@ const AddExpenseDialog = ({ openExpense, handleAddExpenses, handleCancleExpenses
                       />
                     </Box>
                   </Grid>
-
+                  <Grid item xs={3} container className={classes.gridItem}>
+                    <Box>
+                      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                        <KeyboardDatePicker
+                          disableToolbar
+                          variant='inline'
+                          format='MM/dd/yyyy'
+                          margin='normal'
+                          id='date-picker-inline'
+                          value={field.date || ''}
+                          KeyboardButtonProps={{
+                            'aria-label': 'change date',
+                          }}
+                        />
+                      </MuiPickersUtilsProvider>
+                    </Box>
+                  </Grid>
                   <Grid item xs={2} container className={classes.gridItem}>
                     <Button type='button' onClick={() => handleRemove(idx)}>
                       REMOVE

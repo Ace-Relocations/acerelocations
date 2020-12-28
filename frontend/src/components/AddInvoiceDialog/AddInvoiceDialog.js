@@ -68,40 +68,70 @@ const AddInvoiceDialog = ({
         'Transportation charges inclusive of allied services for your personal effects and car from ORIGIN to DESTINATION',
       amount: null,
       isChecked: false,
+      editable: false
+
     },
     {
       expense:
         'Transportation charges inclusive of allied services for your personal effects from ORIGIN to DESTINATION',
       amount: null,
       isChecked: false,
+      editable: false
+
+    },
+    {
+      expense:
+        'Transportation charges inclusive of allied services for your car/ bike from ORIGIN to DESTINATION',
+      amount: null,
+      isChecked: false,
+      editable: false
+
     },
     {
       expense: 'Transportation charges for your Office effects from ORIGIN to DESTINATION',
       amount: null,
       isChecked: false,
+      editable: false
+
+    },
+    {
+      expense: 'Allied Services',
+      amount: null,
+      isChecked: false,
+      editable: false
     },
     {
       expense: 'Others',
       amount: null,
       isChecked: false,
+      editable: true
     },
   ]);
 
   const invoiceData = useMemo(() => {
     if (isEditing && !!invoiceDetails) {
       const invoice = fields.map((invoice) => {
-        const isInvoicePresent = invoiceDetails.filter((item) => invoice.expense === item.expense);
+        const isInvoicePresent = invoiceDetails.filter((item) => (invoice.expense === item.expense && !item.editable));
         if (isInvoicePresent.length > 0) {
-          // setFields({ ...invoice, ...isInvoicePresent });    
-          invoice.amount=isInvoicePresent[0].amount;
-          invoice.isChecked=isInvoicePresent[0].isChecked;     
-          // return invoice;
+          console.log("Frist IF", isInvoicePresent[0]);
+          // setFields({ ...invoice, ...isInvoicePresent });
+          invoice.amount = isInvoicePresent[0].amount;
+          invoice.isChecked = isInvoicePresent[0].isChecked;
+          // return invoice;  
+        }
+        const isInvoicePresent1 = invoiceDetails.filter((item1) => item1.editable === true);
+        if (isInvoicePresent1.length > 0 && invoice.editable === true) {
+          console.log("Second IF", isInvoicePresent1[0]);
+          invoice.amount = isInvoicePresent1[0].amount;
+          invoice.expense = isInvoicePresent1[0].expense;
+          invoice.isChecked = isInvoicePresent1[0].isChecked;
+          console.log(invoiceDetails[0].editable);
         }
         return invoice;
       }) || [];
-      setFields(invoice);    
-    } 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+      setFields(invoice);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isEditing, invoiceDetails]);
 
 
@@ -131,6 +161,13 @@ const AddInvoiceDialog = ({
     values[i].amount = event.target.value;
     setFields(values);
   };
+
+  const handleChangeExpense = (i, event) => {
+    const values = [...fields];
+    values[i].expense = event.target.value;
+    setFields(values);
+  };
+
   const handleChangeCheckbox = (i, event) => {
     const values = [...fields];
     values[i].isChecked = !values[i].isChecked;
@@ -217,8 +254,8 @@ const AddInvoiceDialog = ({
                         aria-label='Invoice'
                         rowsMin={3}
                         name='expense'
-                        value={field.expense || ''}
-                        disabled
+                        defaultValue={field.expense || ''}
+                        onChange={(e) => handleChangeExpense(idx, e)}
                         style={{ width: '400px' }}
                       />
                     </Box>
@@ -249,7 +286,7 @@ const AddInvoiceDialog = ({
                       <FormControlLabel
                         control={
                           <Checkbox
-                            checked={fields[idx]?.isChecked || false}
+                            checked={fields[idx] ?.isChecked || false}
                             onChange={(event) => handleChangeCheckbox(idx, event)}
                             name='add'
                           />
