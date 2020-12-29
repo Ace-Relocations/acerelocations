@@ -20,9 +20,16 @@ module.exports = {
             } = req.body;
             const gcnno = await service.incrementGcnno();
 
-            let gcnnoC = 0;
+
             if (type.toLowerCase() == "both") {
-                gcnnoC = await service.incrementGcnno();
+                let gcnno = await service.incrementGcnno();
+                let gcnnoC = await service.incrementGcnno();
+            } else if (type.toLowerCase() == "household") {
+                let gcnno = await service.incrementGcnno();
+                let gcnnoC = 0;
+            } else if (type.toLowerCase() == "car") {
+                let gcnno = 0;
+                let gcnnoC = await service.incrementGcnno();
             }
 
             const user = await User.findById(req.userId)
@@ -201,18 +208,19 @@ module.exports = {
                 obj.insuranceAInText = numberToText.convertToText(obj.insuranceA) + " " + "only";
 
                 if (type) {
-                    if (user.type.toLowerCase() != "both" && type.toLowerCase() == "both") {
+                    if (user.type.toLowerCase() == "household" && type.toLowerCase() == "both") {
                         obj.carGcnno = await service.incrementGcnno();
                     }
-
-                    if (user.type.toLowerCase() == "both" && type.toLowerCase() != "both" && type.toLowerCase() != "household") {
-                        const set = await service.decrementGcnno();
-                        obj.carGcnno = 0;
+                    if (user.type.toLowerCase() == "car" && type.toLowerCase() == "both") {
+                        obj.gcnno = await service.incrementGcnno();
                     }
 
-                    if (user.type.toLowerCase() == "both" && type.toLowerCase() != "both" && type.toLowerCase() != "car") {
-                        const set = await service.decrementGcnno();
-                        obj.carGcnno = 0;
+                    if (user.type.toLowerCase() == "both" && type.toLowerCase() == "car") {
+                        obj.carGcnno = user.gcnno;
+                    }
+
+                    if (user.type.toLowerCase() == "household" && type.toLowerCase() == "household") {
+                        obj.gcnno = user.carGcnno;
                     }
                 }
 
