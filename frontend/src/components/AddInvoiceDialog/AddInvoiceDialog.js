@@ -111,13 +111,13 @@ const AddInvoiceDialog = ({
   const invoiceData = useMemo(() => {
     if (isEditing && !!invoiceDetails) {
       const invoice = fields.map((invoice, idx) => {
-        const isInvoicePresent1 = invoiceDetails.filter((item1) => item1.editable === true);
-        if (isInvoicePresent1[idx]) {
+        const isInvoicePresent1 = invoiceDetails.filter((item1) => item1.isChecked === true);
+        if (isInvoicePresent1.length > 0 && isInvoicePresent1[idx]) {
           console.log("Second IF", isInvoicePresent1[idx]);
           invoice.amount = isInvoicePresent1[idx].amount;
           invoice.expense = isInvoicePresent1[idx].expense;
           invoice.isChecked = isInvoicePresent1[idx].isChecked;
-          console.log(invoiceDetails[idx].editable);
+          // console.log(invoiceDetails[0].editable);
         }
         return invoice;
       }) || [];
@@ -141,12 +141,6 @@ const AddInvoiceDialog = ({
   // }, [gcnNo]);
 
   const [validateExpenses, updateValidateExpenses] = useState(false);
-
-  const handleChange = (i, event) => {
-    const values = [...fields];
-    values[i].expense = event.target.value;
-    setFields(values);
-  };
 
   const handleChangeAmount = (i, event) => {
     const values = [...fields];
