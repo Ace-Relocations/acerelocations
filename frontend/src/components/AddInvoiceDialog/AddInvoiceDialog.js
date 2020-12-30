@@ -68,7 +68,7 @@ const AddInvoiceDialog = ({
         'Transportation charges inclusive of allied services for your personal effects and car from ORIGIN to DESTINATION',
       amount: null,
       isChecked: false,
-      editable: false
+      editable: true
 
     },
     {
@@ -76,7 +76,7 @@ const AddInvoiceDialog = ({
         'Transportation charges inclusive of allied services for your personal effects from ORIGIN to DESTINATION',
       amount: null,
       isChecked: false,
-      editable: false
+      editable: true
 
     },
     {
@@ -84,21 +84,21 @@ const AddInvoiceDialog = ({
         'Transportation charges inclusive of allied services for your car/ bike from ORIGIN to DESTINATION',
       amount: null,
       isChecked: false,
-      editable: false
+      editable: true
 
     },
     {
       expense: 'Transportation charges for your Office effects from ORIGIN to DESTINATION',
       amount: null,
       isChecked: false,
-      editable: false
+      editable: true
 
     },
     {
       expense: 'Allied Services',
       amount: null,
       isChecked: false,
-      editable: false
+      editable: true
     },
     {
       expense: 'Others',
@@ -110,20 +110,13 @@ const AddInvoiceDialog = ({
 
   const invoiceData = useMemo(() => {
     if (isEditing && !!invoiceDetails) {
-      const invoice = fields.map((invoice) => {
-        const isInvoicePresent = invoiceDetails.filter((item) => (invoice.expense === item.expense && !item.editable));
-        if (isInvoicePresent.length > 0) {
-          // setFields({ ...invoice, ...isInvoicePresent });
-          invoice.amount = isInvoicePresent[0].amount;
-          invoice.isChecked = isInvoicePresent[0].isChecked;
-          // return invoice;  
-        }
-        const isInvoicePresent1 = invoiceDetails.filter((item1) => item1.editable === true);
-        if (isInvoicePresent1.length > 0 && invoice.editable === true) {
-          console.log("Second IF", isInvoicePresent1[0]);
-          invoice.amount = isInvoicePresent1[0].amount;
-          invoice.expense = isInvoicePresent1[0].expense;
-          invoice.isChecked = isInvoicePresent1[0].isChecked;
+      const invoice = fields.map((invoice, idx) => {
+        const isInvoicePresent1 = invoiceDetails.filter((item1) => item1.isChecked === true);
+        if (isInvoicePresent1.length > 0 && isInvoicePresent1[idx]) {
+          console.log("Second IF", isInvoicePresent1[idx]);
+          invoice.amount = isInvoicePresent1[idx].amount;
+          invoice.expense = isInvoicePresent1[idx].expense;
+          invoice.isChecked = isInvoicePresent1[idx].isChecked;
           // console.log(invoiceDetails[0].editable);
         }
         return invoice;
