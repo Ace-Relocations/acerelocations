@@ -18,18 +18,19 @@ module.exports = {
             const {
                 consignorF, consignorL, consigneeF, consigneeL, contact, email, oaddress1, oaddress2, ocity, ostate, opincode, daddress1, daddress2, dcity, dstate, dpincode, type, status, insuranceP, insuranceA, date
             } = req.body;
-            const gcnno = await service.incrementGcnno();
 
+            let gcnno = 0;
+            let gcnnoC = 0;
 
             if (type.toLowerCase() == "both") {
-                let gcnno = await service.incrementGcnno();
-                let gcnnoC = await service.incrementGcnno();
+                gcnno = await service.incrementGcnno();
+                gcnnoC = await service.incrementGcnno();
             } else if (type.toLowerCase() == "household") {
-                let gcnno = await service.incrementGcnno();
-                let gcnnoC = 0;
+                gcnno = await service.incrementGcnno();
+                gcnnoC = 0;
             } else if (type.toLowerCase() == "car") {
-                let gcnno = 0;
-                let gcnnoC = await service.incrementGcnno();
+                gcnno = 0;
+                gcnnoC = await service.incrementGcnno();
             }
 
             const user = await User.findById(req.userId)
