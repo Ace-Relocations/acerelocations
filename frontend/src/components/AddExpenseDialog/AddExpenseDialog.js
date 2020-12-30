@@ -25,6 +25,9 @@ import { useSelector } from 'react-redux';
 import DateFnsUtils from '@date-io/date-fns';
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
   appBar: {
     position: 'relative',
   },
@@ -49,7 +52,9 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 const AddExpenseDialog = ({ openExpense, handleAddExpenses, handleCancleExpenses, isEditing }) => {
   const classes = useStyles();
 
-  const [fields, setFields] = useState([{ details: null, amount: null, settled: null, date: null }]);
+  const [fields, setFields] = useState([
+    { details: null, amount: null, settled: null, date: null },
+  ]);
 
   const { expenses } = useSelector((state) => state.Expenses) || [];
 
@@ -98,12 +103,11 @@ const AddExpenseDialog = ({ openExpense, handleAddExpenses, handleCancleExpenses
     updateValidateExpenses(isValid);
   }, [fields]);
 
-
   useEffect(() => {
-    if (isEditing && !!expenses ?.expenseDetails) {
-      setFields(expenses ?.expenseDetails);
+    if (isEditing && !!expenses?.expenseDetails) {
+      setFields(expenses?.expenseDetails);
     }
-  }, [isEditing, expenses])
+  }, [isEditing, expenses]);
 
   const isValid = fields.length > 0 && validateExpenses;
 
@@ -147,8 +151,8 @@ const AddExpenseDialog = ({ openExpense, handleAddExpenses, handleCancleExpenses
           {fields.map((field, idx) => {
             return (
               <div key={`${field}-${idx}`} style={{ marginBottom: '10px' }}>
-                <Grid container spacing={1}>
-                  <Grid item xs={2} container className={classes.gridItem}>
+                <Grid container spacing={3} className={classes.root}>
+                  <Grid item xs={3} className={classes.gridItem}>
                     <Box marginRight='10px'>
                       <TextField
                         type='text'
@@ -162,10 +166,11 @@ const AddExpenseDialog = ({ openExpense, handleAddExpenses, handleCancleExpenses
                         fullWidth='false'
                         width='30px'
                         required
+                        style={{ maxWidth: '80%' }}
                       />
                     </Box>
                   </Grid>
-                  <Grid item xs={2} container className={classes.gridItem}>
+                  <Grid item xs={2} className={classes.gridItem}>
                     <Box>
                       <TextField
                         type='number'
@@ -173,14 +178,16 @@ const AddExpenseDialog = ({ openExpense, handleAddExpenses, handleCancleExpenses
                         label='Amount'
                         variant='outlined'
                         name='amount'
+                        size='small'
                         value={field.amount || ''}
                         onChange={(e) => handleChangeAmount(idx, e)}
                         required
+                        style={{ maxWidth: '80%' }}
                       />
                     </Box>
                   </Grid>
 
-                  <Grid item xs={3} container className={classes.gridItem}>
+                  <Grid item xs={2} className={classes.gridItem}>
                     <Box>
                       <TextField
                         type='number'
@@ -188,13 +195,15 @@ const AddExpenseDialog = ({ openExpense, handleAddExpenses, handleCancleExpenses
                         label='Settled'
                         variant='outlined'
                         name='settled'
+                        size='small'
                         value={field.settled || ''}
                         onChange={(e) => handleChangeSettled(idx, e)}
                         required
+                        style={{ maxWidth: '80%' }}
                       />
                     </Box>
                   </Grid>
-                  <Grid item xs={3} container className={classes.gridItem}>
+                  <Grid item xs={3} className={classes.gridItem}>
                     <Box>
                       <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         <KeyboardDatePicker
@@ -207,11 +216,12 @@ const AddExpenseDialog = ({ openExpense, handleAddExpenses, handleCancleExpenses
                           KeyboardButtonProps={{
                             'aria-label': 'change date',
                           }}
+                          style={{ maxWidth: '70%', marginTop: '-10px' }}
                         />
                       </MuiPickersUtilsProvider>
                     </Box>
                   </Grid>
-                  <Grid item xs={2} container className={classes.gridItem}>
+                  <Grid item xs={2} className={classes.gridItem}>
                     <Button type='button' onClick={() => handleRemove(idx)}>
                       REMOVE
                     </Button>
