@@ -77,6 +77,12 @@ const AddExpenseDialog = ({ openExpense, handleAddExpenses, handleCancleExpenses
     setFields(values);
   };
 
+  const handleChangeDate = (i, event) => {
+    const values = [...fields];
+    values[i].date = event.target.value;
+    setFields(values);
+  };
+
   const handleAdd = () => {
     const values = [...fields];
     values.push({ details: null, amount: null });
@@ -104,8 +110,8 @@ const AddExpenseDialog = ({ openExpense, handleAddExpenses, handleCancleExpenses
   }, [fields]);
 
   useEffect(() => {
-    if (isEditing && !!expenses?.expenseDetails) {
-      setFields(expenses?.expenseDetails);
+    if (isEditing && !!expenses ?.expenseDetails) {
+      setFields(expenses ?.expenseDetails);
     }
   }, [isEditing, expenses]);
 
@@ -216,6 +222,7 @@ const AddExpenseDialog = ({ openExpense, handleAddExpenses, handleCancleExpenses
                           KeyboardButtonProps={{
                             'aria-label': 'change date',
                           }}
+                          onChange={(e) => handleChangeDate(idx, e)}
                           style={{ maxWidth: '70%', marginTop: '-10px' }}
                         />
                       </MuiPickersUtilsProvider>

@@ -64,6 +64,7 @@ const CustomerCopy = ({
   destinationAddress,
   type,
   gcnno,
+  carGcnno,
   date,
   phone,
   ocity,
@@ -105,12 +106,12 @@ const CustomerCopy = ({
               <Boxwith4Line
                 title='Cognisor'
                 address={originAddress}
-                fullName={`${consignor?.firstName} ${consignor?.lastName}`}
+                fullName={`${consignor ?.firstName} ${consignor ?.lastName}`}
               />
             </View>
             <View style={{ width: '30%', border: '1 1 1 0' }}>
               <BoxWith4LineKeys
-                gsnNo={gcnno}
+                gcnNo={gcnno}
                 date={date}
                 from={ocity}
                 to={dcity}
@@ -121,7 +122,7 @@ const CustomerCopy = ({
             <Boxwith4Line
               title='Consignee'
               address={destinationAddress}
-              fullName={`${consignee?.firstName} ${consignee?.lastName}`}
+              fullName={`${consignee ?.firstName} ${consignee ?.lastName}`}
             />
           </View>
 
@@ -149,7 +150,7 @@ const CustomerCopy = ({
           <Text style={styles.title}>{title}</Text>
           <ConsignmentBox />
           <AcknowledgementTable
-            fullName={`${consignee?.firstName} ${consignee?.lastName}`}
+            fullName={`${consignee ?.firstName} ${consignee ?.lastName}`}
             number={phone}
           />
           <AffliationBox />

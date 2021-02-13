@@ -213,66 +213,67 @@ const CreateCarInvoicePDF = ({ invoice }) => {
       },
     },
   };
+  console.log("Inside CAR PDFFF")
   return (
     <Document>
       <Page size='A4' style={styles.page} orientation='landscape'>
         <CustomerCopy
           title='CUSTOMER COPY'
-          consignor={invoiceDetail?.consignor}
-          consignee={invoiceDetail?.consignee}
-          originAddress={invoiceDetail?.originAddress}
-          destinationAddress={invoiceDetail?.destinationAddress}
-          type={invoiceDetail?.type}
-          gcnno={invoiceDetail?.carGcnno}
-          date={invoiceDetail?.date}
+          consignor={invoiceDetail ?.consignor}
+          consignee={invoiceDetail ?.consignee}
+          originAddress={invoiceDetail ?.originAddress}
+          destinationAddress={invoiceDetail ?.destinationAddress}
+          type={invoiceDetail ?.type}
+          gcnno={invoiceDetail ?.carGcnno}
+          date={invoiceDetail ?.date}
         />
       </Page>
       <Page size='A4' style={styles.page} orientation='landscape'>
         <CustomerCopy
           title='TRUCK COPY'
-          consignor={invoiceDetail?.consignor}
-          consignee={invoiceDetail?.consignee}
-          originAddress={invoiceDetail?.originAddress}
-          destinationAddress={invoiceDetail?.destinationAddress}
-          type={invoiceDetail?.type}
-          gcnno={invoiceDetail?.carGcnno}
-          date={invoiceDetail?.date}
+          consignor={invoiceDetail ?.consignor}
+          consignee={invoiceDetail ?.consignee}
+          originAddress={invoiceDetail ?.originAddress}
+          destinationAddress={invoiceDetail ?.destinationAddress}
+          type={invoiceDetail ?.type}
+          gcnno={invoiceDetail ?.carGcnno}
+          date={invoiceDetail ?.date}
         />
       </Page>
       {/* CustomerFeedbackForm */}
 
       <Page size='A4' style={styles.page}>
         <Header />
-        <CustomerFeedbackForm title='DESTINATION' customer={invoiceDetail?.customer} />
+        <CustomerFeedbackForm title='DESTINATION' customer={invoiceDetail ?.customer} />
       </Page>
       <Page size='A4' style={styles.page}>
         <Header />
-        <CustomerFeedbackForm title='ORIGIN' customer={invoiceDetail?.customer} />
+        <CustomerFeedbackForm title='ORIGIN' customer={invoiceDetail ?.customer} />
       </Page>
 
       {/* LuggageList */}
       <Page size='A4' style={styles.page}>
-        <LuggageList luggageListDetails={invoiceDetail?.luggageListDetails} />
+        <LuggageList luggageListDetails={invoiceDetail ?.luggageListDetails} />
       </Page>
 
       <Page size='A4' style={styles.page}>
         <View>
           <Header />
-          <InvoiceTable invoice={invoiceDetail?.invoice} />
+          <InvoiceTable invoice={invoiceDetail ?.invoice} />
         </View>
       </Page>
 
       <Page size='A4' style={styles.page}>
         <View>
           <Header />
-          <TransitPlanFormBox transitData={invoiceDetail?.transitData} />
+          <TransitPlanFormBox transitData={invoiceDetail ?.transitData} />
           <View style={{ border: 1 }} />
           <View style={{ border: '1 solid red', marginTop: '2px' }} />
           <FooterWithImage />
         </View>
       </Page>
 
-      <TellySheet tellyData={invoiceDetail?.tellyData} />
+      <TellySheet tellyData={invoiceDetail ?.tellyData} />
     </Document>
   );
 };

@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
 });
 
 const CustomerInfoBox = ({ customer }) => {
-  const { firstName, lastName, adderess, contact, gcnno, destination, email } = customer;
+  const { firstName, lastName, adderess, contact, gcnno, destination, email, carGcnno } = customer;
   return (
     <>
       <View style={styles.row}>
@@ -61,24 +61,24 @@ const CustomerInfoBox = ({ customer }) => {
         <View style={styles.subRow}>
           <Text style={styles.rowHeading}>Birth Date: </Text>
           <Text style={styles.rowSubHeading}>
-            {!!customer?.birthDate ? customer?.birthDate : ''}
+            {!!customer ?.birthDate ? customer ?.birthDate : ''}
           </Text>
         </View>
         <View style={styles.subRow}>
           <Text style={styles.rowHeading}>Anniversary: </Text>
           <Text style={styles.rowSubHeading}>
-            {!!customer?.anniversary ? customer?.anniversary : ''}
+            {!!customer ?.anniversary ? customer ?.anniversary : ''}
           </Text>
         </View>
       </View>
       <View style={styles.row}>
         <View style={styles.subRow}>
           <Text style={styles.rowHeading}>Job No: </Text>
-          <Text style={styles.rowSubHeading}>{!!customer?.jobno ? customer?.jobno : ''}</Text>
+          <Text style={styles.rowSubHeading}>{!!customer ?.jobno ? customer ?.jobno : ''}</Text>
         </View>
         <View style={styles.subRow}>
           <Text style={styles.rowHeading}>GCNNo.: </Text>
-          <Text style={styles.rowSubHeading}>{gcnno}</Text>
+          <Text style={styles.rowSubHeading}>{gcnno ? gcnno : carGcnno}</Text>
         </View>
       </View>
       <View style={styles.row}>

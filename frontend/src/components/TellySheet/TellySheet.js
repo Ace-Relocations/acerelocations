@@ -71,13 +71,13 @@ const TellySheet = ({ tellyData }) => {
             <Text style={{ marginVertical: 'auto' }}>LOCATION</Text>
           </View>
           <View style={{ borderRight: 1, width: '13.33%' }}>
-            <Text style={{ marginVertical: 'auto' }}>{tellyData?.location}</Text>
+            <Text style={{ marginVertical: 'auto' }}>{tellyData ?.location}</Text>
           </View>
           <View style={{ borderRight: 1, width: '13.33%' }}>
             <Text style={{ marginVertical: 'auto' }}>MODE</Text>
           </View>
           <View style={{ borderRight: 1, width: '13.33%' }}>
-            <Text style={{ marginVertical: 'auto' }}>{tellyData?.mode}</Text>
+            <Text style={{ marginVertical: 'auto' }}>{tellyData ?.mode}</Text>
           </View>
         </View>
 
@@ -95,7 +95,7 @@ const TellySheet = ({ tellyData }) => {
             <Text style={{ textAlign: 'center', marginVertical: 'auto' }}>GCN NUMBER</Text>
           </View>
           <View style={{ borderRight: 1, width: '16.66%' }}>
-            <Text style={{ textAlign: 'center', marginVertical: 'auto' }}>{tellyData?.gcnno}</Text>
+            <Text style={{ textAlign: 'center', marginVertical: 'auto' }}>{tellyData ?.gcnno ? tellyData ?.gcnno : tellyData ?.carGcnno}</Text>
           </View>
           <View style={{ borderRight: 1, width: '16.66%' }}>
             <Text style={{ marginVertical: 'auto' }}>JOB NO.</Text>
@@ -107,7 +107,7 @@ const TellySheet = ({ tellyData }) => {
             <Text style={{ marginVertical: 'auto' }}>ORIGIN</Text>
           </View>
           <View style={{ borderRight: 1, width: '16.66%' }}>
-            <Text style={{ marginVertical: 'auto' }}>{tellyData?.origin}</Text>
+            <Text style={{ marginVertical: 'auto' }}>{tellyData ?.origin}</Text>
           </View>
         </View>
 
@@ -124,19 +124,19 @@ const TellySheet = ({ tellyData }) => {
             <Text style={{ textAlign: 'center', marginVertical: 'auto' }}>GCN DATE</Text>
           </View>
           <View style={{ borderRight: 1, width: '16.66%' }}>
-            <Text style={{ textAlign: 'center', marginVertical: 'auto' }}>{tellyData?.date}</Text>
+            <Text style={{ textAlign: 'center', marginVertical: 'auto' }}>{tellyData ?.date}</Text>
           </View>
           <View style={{ borderRight: 1, width: '16.66%' }}>
             <Text style={{ marginVertical: 'auto' }}>JOB DATE</Text>
           </View>
           <View style={{ borderRight: 1, width: '16.66%' }}>
-            <Text style={{ marginVertical: 'auto' }}>{tellyData?.date}</Text>
+            <Text style={{ marginVertical: 'auto' }}>{tellyData ?.date}</Text>
           </View>
           <View style={{ borderRight: 1, width: '16.66%' }}>
             <Text style={{ marginVertical: 'auto' }}>DESTINATION</Text>
           </View>
           <View style={{ borderRight: 1, width: '16.66%' }}>
-            <Text style={{ marginVertical: 'auto' }}>{tellyData?.destination}</Text>
+            <Text style={{ marginVertical: 'auto' }}>{tellyData ?.destination}</Text>
           </View>
         </View>
 

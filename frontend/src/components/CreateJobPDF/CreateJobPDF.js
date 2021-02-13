@@ -176,6 +176,7 @@ const CreateJobPDF = ({ invoice }) => {
       adderess: `${oaddress1}, ${oaddress2}, ${ocity} - ${opincode}`,
       contact,
       gcnno,
+      carGcnno,
       birthDate: '',
       Anniversary: '',
       jobno: gcnno,
@@ -188,6 +189,7 @@ const CreateJobPDF = ({ invoice }) => {
       adderess: `${daddress1}, ${daddress2}, ${dcity} - ${dpincode}`,
       contact,
       gcnno,
+      carGcnno,
       birthDate: '',
       Anniversary: '',
       jobno: gcnno,
@@ -198,6 +200,7 @@ const CreateJobPDF = ({ invoice }) => {
       ocity,
       dcity,
       gcnno,
+      carGcnno,
       date,
       from: `${consignorF} ${consignorL}`,
       to: `${consigneeF} ${consigneeL}`,
@@ -218,6 +221,7 @@ const CreateJobPDF = ({ invoice }) => {
       location: ocity,
       mode: 'Road',
       gcnno,
+      carGcnno,
       jobno: '??',
       origin: ocity,
       date,
@@ -237,6 +241,7 @@ const CreateJobPDF = ({ invoice }) => {
     transitData: {
       fullName: `${consignorF} ${consignorL}`,
       gcnno,
+      carGcnno,
       date,
       moneyInNumber: insuranceA,
       moneyInText: insuranceAInText,
@@ -248,12 +253,12 @@ const CreateJobPDF = ({ invoice }) => {
     invoiceDetail = {
       ...invoiceDetail, reciept: {
         chequeIssuer: `${consignorF} ${consignorL}`,
-        rupeesInNumber: invoiceData[0]?.total,
-        rupeesInText: invoiceData[0]?.totalInText,
+        rupeesInNumber: invoiceData[0] ?.total,
+        rupeesInText: invoiceData[0] ?.totalInText,
         chequeNo,
         date,
-        billNo: invoiceData[0]?.billno,
-        lrNo: invoiceData[0]?.gcnno,
+        billNo: invoiceData[0] ?.billno,
+        lrNo: invoiceData[0] ?.gcnno ? invoiceData[0] ?.gcnno : invoiceData[0] ?.carGcnno,
         from: ocity,
         to: dcity,
       },
@@ -261,12 +266,12 @@ const CreateJobPDF = ({ invoice }) => {
         name: `${consignorF} ${consignorL}`,
         ocity,
         dcity,
-        invoiceNo: invoiceData[0]?.billno,
+        invoiceNo: invoiceData[0] ?.billno,
         date,
-        lrNo: invoiceData[0]?.gcnno,
-        invoiceDetails: invoiceData[0]?.invoiceDetails,
-        total: invoiceData[0]?.total,
-        totalInWords: invoiceData[0]?.totalInText,
+        lrNo: invoiceData[0] ?.gcnno ? invoiceData[0] ?.gcnno : invoiceData[0] ?.carGcnno,
+        invoiceDetails: invoiceData[0] ?.invoiceDetails,
+        total: invoiceData[0] ?.total,
+        totalInWords: invoiceData[0] ?.totalInText,
         paymentCity: dcity,
       },
     }
@@ -274,6 +279,7 @@ const CreateJobPDF = ({ invoice }) => {
   const isCar = type === 'car';
   const isHouseHold = type === 'household';
   const isBoth = type === 'both';
+  console.log("HERE")
 
   return (
     <Document>
@@ -283,14 +289,15 @@ const CreateJobPDF = ({ invoice }) => {
           <Page size='A4' style={styles.page} orientation='landscape'>
             <CustomerCopy
               title='CUSTOMER COPY'
-              consignor={invoiceDetail?.consignor}
-              consignee={invoiceDetail?.consignee}
-              originAddress={invoiceDetail?.originAddress}
-              destinationAddress={invoiceDetail?.destinationAddress}
-              type={isBoth ? 'household' : invoiceDetail?.type}
-              gcnno={invoiceDetail?.gcnno}
-              date={invoiceDetail?.date}
-              phone={invoiceDetail?.phone}
+              consignor={invoiceDetail ?.consignor}
+              consignee={invoiceDetail ?.consignee}
+              originAddress={invoiceDetail ?.originAddress}
+              destinationAddress={invoiceDetail ?.destinationAddress}
+              type={isBoth ? 'household' : invoiceDetail ?.type}
+              gcnno={invoiceDetail ?.gcnno}
+              carGcnno={invoiceDetail ?.carGcnno}
+              date={invoiceDetail ?.date}
+              phone={invoiceDetail ?.phone}
               ocity={ocity}
               dcity={dcity}
             />
@@ -298,14 +305,15 @@ const CreateJobPDF = ({ invoice }) => {
           <Page size='A4' style={styles.page} orientation='landscape'>
             <CustomerCopy
               title='TRUCK COPY'
-              consignor={invoiceDetail?.consignor}
-              consignee={invoiceDetail?.consignee}
-              originAddress={invoiceDetail?.originAddress}
-              destinationAddress={invoiceDetail?.destinationAddress}
-              type={isBoth ? 'household' : invoiceDetail?.type}
-              gcnno={invoiceDetail?.gcnno}
-              date={invoiceDetail?.date}
-              phone={invoiceDetail?.phone}
+              consignor={invoiceDetail ?.consignor}
+              consignee={invoiceDetail ?.consignee}
+              originAddress={invoiceDetail ?.originAddress}
+              destinationAddress={invoiceDetail ?.destinationAddress}
+              type={isBoth ? 'household' : invoiceDetail ?.type}
+              gcnno={invoiceDetail ?.gcnno}
+              carGcnno={invoiceDetail ?.carGcnno}
+              date={invoiceDetail ?.date}
+              phone={invoiceDetail ?.phone}
               ocity={ocity}
               dcity={dcity}
             />
@@ -319,14 +327,15 @@ const CreateJobPDF = ({ invoice }) => {
           <Page size='A4' style={styles.page} orientation='landscape'>
             <CustomerCopy
               title='CUSTOMER COPY'
-              consignor={invoiceDetail?.consignor}
-              consignee={invoiceDetail?.consignee}
-              originAddress={invoiceDetail?.originAddress}
-              destinationAddress={invoiceDetail?.destinationAddress}
-              type={isBoth ? 'car' : invoiceDetail?.type}
-              gcnno={invoiceDetail?.carGcnno}
-              date={invoiceDetail?.date}
-              phone={invoiceDetail?.phone}
+              consignor={invoiceDetail ?.consignor}
+              consignee={invoiceDetail ?.consignee}
+              originAddress={invoiceDetail ?.originAddress}
+              destinationAddress={invoiceDetail ?.destinationAddress}
+              type={isBoth ? 'car' : invoiceDetail ?.type}
+              gcnno={invoiceDetail ?.carGcnno}
+              carGcnno={invoiceDetail ?.carGcnno}
+              date={invoiceDetail ?.date}
+              phone={invoiceDetail ?.phone}
               ocity={ocity}
               dcity={dcity}
             />
@@ -334,14 +343,15 @@ const CreateJobPDF = ({ invoice }) => {
           <Page size='A4' style={styles.page} orientation='landscape'>
             <CustomerCopy
               title='TRUCK COPY'
-              consignor={invoiceDetail?.consignor}
-              consignee={invoiceDetail?.consignee}
-              originAddress={invoiceDetail?.originAddress}
-              destinationAddress={invoiceDetail?.destinationAddress}
-              type={isBoth ? 'car' : invoiceDetail?.type}
-              gcnno={invoiceDetail?.carGcnno}
-              date={invoiceDetail?.date}
-              phone={invoiceDetail?.phone}
+              consignor={invoiceDetail ?.consignor}
+              consignee={invoiceDetail ?.consignee}
+              originAddress={invoiceDetail ?.originAddress}
+              destinationAddress={invoiceDetail ?.destinationAddress}
+              type={isBoth ? 'car' : invoiceDetail ?.type}
+              gcnno={invoiceDetail ?.carGcnno}
+              carGcnno={invoiceDetail ?.carGcnno}
+              date={invoiceDetail ?.date}
+              phone={invoiceDetail ?.phone}
               ocity={ocity}
               dcity={dcity}
             />
@@ -352,27 +362,27 @@ const CreateJobPDF = ({ invoice }) => {
       {/* CustomerFeedbackForm */}
       <Page size='A4' style={styles.page}>
         <Header />
-        <CustomerFeedbackForm title='ORIGIN' customer={invoiceDetail?.customer} />
+        <CustomerFeedbackForm title='ORIGIN' customer={invoiceDetail ?.customer} />
       </Page>
 
       <Page size='A4' style={styles.page}>
         <Header />
-        <CustomerFeedbackForm title='DESTINATION' customer={invoiceDetail?.customerDestination} />
+        <CustomerFeedbackForm title='DESTINATION' customer={invoiceDetail ?.customerDestination} />
       </Page>
 
       {/* LuggageList */}
       <Page size='A4' style={styles.page}>
-        <LuggageList luggageListDetails={invoiceDetail?.luggageListDetails} />
+        <LuggageList luggageListDetails={invoiceDetail ?.luggageListDetails} />
       </Page>
 
       {/* TellySheet */}
-      <TellySheet tellyData={invoiceDetail?.tellyData} />
+      <TellySheet tellyData={invoiceDetail ?.tellyData} />
 
       {/* TransitPlan */}
       <Page size='A4' style={styles.page}>
         <View>
           <Header />
-          <TransitPlanFormBox transitData={invoiceDetail?.transitData} />
+          <TransitPlanFormBox transitData={invoiceDetail ?.transitData} />
           <View style={{ border: 1 }} />
           <View style={{ border: '1 solid red', marginTop: '2px' }} />
           <FooterWithImage />
@@ -385,7 +395,7 @@ const CreateJobPDF = ({ invoice }) => {
           <Page size='A4' style={styles.page}>
             <View>
               <Header />
-              <InvoiceTable invoice={invoiceDetail?.invoice} />
+              <InvoiceTable invoice={invoiceDetail ?.invoice} />
             </View>
           </Page>
 
@@ -393,7 +403,7 @@ const CreateJobPDF = ({ invoice }) => {
             <View style={{ border: 1, margin: 50, padding: 10 }}>
               <HeaderWithAddress />
               <View style={{ marginTop: 20, padding: 10 }}>
-                <Reciept reciept={invoiceDetail?.reciept} />
+                <Reciept reciept={invoiceDetail ?.reciept} />
               </View>
             </View>
           </Page>

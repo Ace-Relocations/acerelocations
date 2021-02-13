@@ -18,12 +18,14 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
 });
-const BoxWith4LineKeys = ({ gsnNo, date, from, to }) => {
+const BoxWith4LineKeys = ({ gcnNo, date, from, to }) => {
+  console.log("Inside to define the box", gcnNo)
+
   return (
     <>
       <View style={styles.row}>
         <Text style={styles.title}>GCN No:</Text>
-        <Text style={styles.cognisor1}>{gsnNo}</Text>
+        <Text style={styles.cognisor1}>{gcnNo}</Text>
       </View>
       <View style={styles.row}>
         <Text style={styles.title}>Date:</Text>

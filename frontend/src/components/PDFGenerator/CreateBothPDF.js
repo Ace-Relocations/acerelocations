@@ -133,8 +133,6 @@ const CreateBothPDF = ({ invoice }) => {
     date,
     gcnno,
     carGcnno,
-
-    // will be added later
     rupeesInNumber = '',
     rupeesInText = '',
     chequeNo = '',
@@ -204,69 +202,69 @@ const CreateBothPDF = ({ invoice }) => {
       <Page size='A4' style={styles.page} orientation='landscape'>
         <CustomerCopy
           title='CUSTOMER COPY'
-          consignor={invoiceDetail?.consignor}
-          consignee={invoiceDetail?.consignee}
-          originAddress={invoiceDetail?.originAddress}
-          destinationAddress={invoiceDetail?.destinationAddress}
-          type={invoiceDetail?.type}
-          gcnno={invoiceDetail?.gcnno}
-          date={invoiceDetail?.date}
+          consignor={invoiceDetail ?.consignor}
+          consignee={invoiceDetail ?.consignee}
+          originAddress={invoiceDetail ?.originAddress}
+          destinationAddress={invoiceDetail ?.destinationAddress}
+          type={invoiceDetail ?.type}
+          gcnno={invoiceDetail ?.gcnno}
+          date={invoiceDetail ?.date}
         />
       </Page>
       <Page size='A4' style={styles.page} orientation='landscape'>
         <CustomerCopy
           title='TRUCK COPY'
-          consignor={invoiceDetail?.consignor}
-          consignee={invoiceDetail?.consignee}
-          originAddress={invoiceDetail?.originAddress}
-          destinationAddress={invoiceDetail?.destinationAddress}
-          type={invoiceDetail?.type}
-          gcnno={invoiceDetail?.gcnno}
-          date={invoiceDetail?.date}
+          consignor={invoiceDetail ?.consignor}
+          consignee={invoiceDetail ?.consignee}
+          originAddress={invoiceDetail ?.originAddress}
+          destinationAddress={invoiceDetail ?.destinationAddress}
+          type={invoiceDetail ?.type}
+          gcnno={invoiceDetail ?.gcnno}
+          date={invoiceDetail ?.date}
         />
       </Page>
 
       <Page size='A4' style={styles.page} orientation='landscape'>
         <CustomerCopy
           title='CUSTOMER COPY'
-          consignor={invoiceDetail?.consignor}
-          consignee={invoiceDetail?.consignee}
-          originAddress={invoiceDetail?.originAddress}
-          destinationAddress={invoiceDetail?.destinationAddress}
-          type={invoiceDetail?.type}
-          gcnno={invoiceDetail?.carGcnno}
-          date={invoiceDetail?.date}
+          consignor={invoiceDetail ?.consignor}
+          consignee={invoiceDetail ?.consignee}
+          originAddress={invoiceDetail ?.originAddress}
+          destinationAddress={invoiceDetail ?.destinationAddress}
+          type={invoiceDetail ?.type}
+          gcnno={invoiceDetail ?.carGcnno}
+          date={invoiceDetail ?.date}
         />
       </Page>
       <Page size='A4' style={styles.page} orientation='landscape'>
         <CustomerCopy
           title='TRUCK COPY'
-          consignor={invoiceDetail?.consignor}
-          consignee={invoiceDetail?.consignee}
-          originAddress={invoiceDetail?.originAddress}
-          destinationAddress={invoiceDetail?.destinationAddress}
-          type={invoiceDetail?.type}
-          gcnno={invoiceDetail?.carGcnno}
-          date={invoiceDetail?.date}
+          consignor={invoiceDetail ?.consignor}
+          consignee={invoiceDetail ?.consignee}
+          originAddress={invoiceDetail ?.originAddress}
+          destinationAddress={invoiceDetail ?.destinationAddress}
+          type={invoiceDetail ?.type}
+          gcnno={invoiceDetail ?.carGcnno}
+          date={invoiceDetail ?.date}
         />
       </Page>
       {/* CustomerFeedbackForm */}
 
       <Page size='A4' style={styles.page}>
         <Header />
-        <CustomerFeedbackForm title='DESTINATION' customer={invoiceDetail?.customer} />
+        <CustomerFeedbackForm title='DESTINATION' customer={invoiceDetail ?.customer} />
       </Page>
       <Page size='A4' style={styles.page}>
         <Header />
-        <CustomerFeedbackForm title='ORIGIN' customer={invoiceDetail?.customer} />
+        <CustomerFeedbackForm title='ORIGIN' customer={invoiceDetail ?.customer} />
       </Page>
 
       {/* LuggageList */}
       <Page size='A4' style={styles.page}>
-        <LuggageList luggageListDetails={invoiceDetail?.luggageListDetails} />
+        <LuggageList luggageListDetails={invoiceDetail ?.luggageListDetails} />
       </Page>
 
-      <TellySheet tellyData={invoiceDetail?.tellyData} />
+      <TellySheet tellyData={invoiceDetail ?.tellyData} />
     </Document>
   );
 };

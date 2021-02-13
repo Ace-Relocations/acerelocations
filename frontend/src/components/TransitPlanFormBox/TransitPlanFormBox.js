@@ -42,7 +42,7 @@ const TransitPlanFormBox = ({ transitData }) => {
               <Text style={styles.centerRow}>Consignor</Text>
             </View>
             <View style={{ border: 1, width: '70%' }}>
-              <Text style={styles.centerRow}>{transitData?.fullName}</Text>
+              <Text style={styles.centerRow}>{transitData ?.fullName}</Text>
             </View>
           </View>
 
@@ -51,7 +51,7 @@ const TransitPlanFormBox = ({ transitData }) => {
               <Text style={styles.centerRow}>GCN No</Text>
             </View>
             <View style={{ border: 1, width: '60%' }}>
-              <Text style={styles.centerRow}>{transitData?.gcnno}</Text>
+              <Text style={styles.centerRow}>{transitData ?.gcnno ? transitData ?.gcnno : transitData ?.carGcnno}</Text>
             </View>
           </View>
 
@@ -60,7 +60,7 @@ const TransitPlanFormBox = ({ transitData }) => {
               <Text style={styles.centerRow}>Dated</Text>
             </View>
             <View style={{ border: 1, width: '60%' }}>
-              <Text style={styles.centerRow}>{transitData?.date}</Text>
+              <Text style={styles.centerRow}>{transitData ?.date}</Text>
             </View>
           </View>
         </View>
@@ -117,7 +117,7 @@ const TransitPlanFormBox = ({ transitData }) => {
               <Text style={styles.centerRow}>Option One: </Text>
             </View>
             <View style={{ border: 1, width: '30%' }}>
-              {!!transitData?.insuranceP && !transitData?.insuranceA ? (
+              {!!transitData ?.insuranceP && !transitData ?.insuranceA ? (
                 <Image
                   style={{
                     width: '10px',
@@ -128,8 +128,8 @@ const TransitPlanFormBox = ({ transitData }) => {
                   src={checkMark}
                 />
               ) : (
-                <Text style={styles.centerRow}></Text>
-              )}
+                  <Text style={styles.centerRow}></Text>
+                )}
               {/* <Text style={styles.centerRow}></Text> */}
             </View>
             <View style={{ width: '60%', paddingTop: 5 }}>
@@ -166,7 +166,7 @@ const TransitPlanFormBox = ({ transitData }) => {
               <Text style={styles.centerRow}>Option Two: </Text>
             </View>
             <View style={{ border: 1, width: '30%' }}>
-              {!transitData?.insuranceP && !!transitData?.insuranceA ? (
+              {!transitData ?.insuranceP && !!transitData ?.insuranceA ? (
                 <Image
                   style={{
                     width: '10px',
@@ -177,8 +177,8 @@ const TransitPlanFormBox = ({ transitData }) => {
                   src={checkMark}
                 />
               ) : (
-                <Text style={styles.centerRow}></Text>
-              )}
+                  <Text style={styles.centerRow}></Text>
+                )}
               {/* <Image style={{ width: '10px', height: '10px', marginVertical: 'auto', marginLeft: '15px' }} src={checkMark} /> */}
             </View>
             <View style={{ width: '60%', paddingTop: 5 }}>
@@ -194,7 +194,7 @@ const TransitPlanFormBox = ({ transitData }) => {
               will be charged a premium of
             </Text>
             <View style={{ border: 1, width: 30, marginTop: -5 }}>
-              <Text style={styles.centerRow2}>{transitData?.insuranceP}</Text>
+              <Text style={styles.centerRow2}>{transitData ?.insuranceP}</Text>
             </View>
           </View>
           <Text>
@@ -310,7 +310,7 @@ const TransitPlanFormBox = ({ transitData }) => {
               <View style={{ width: '15%', borderRight: 1, borderLeft: 1, paddingTop: 5 }}>
                 <Text style={{ margin: 'auto' }}>
                   {' '}
-                  {!!transitData?.moneyInText && !!transitData?.moneyInNumber ? 'TWO' : ''}{' '}
+                  {!!transitData ?.moneyInText && !!transitData ?.moneyInNumber ? 'TWO' : ''}{' '}
                 </Text>
               </View>
               <View style={{ width: '65%', paddingTop: 5, textAlign: 'left', fontSize: 7 }}>
@@ -341,7 +341,7 @@ const TransitPlanFormBox = ({ transitData }) => {
               </View>
               <View style={{ width: '80%' }}>
                 <View style={{ borderBottom: 1 }}>
-                  <Text> Rs. {transitData?.moneyInNumber} /- </Text>
+                  <Text> Rs. {transitData ?.moneyInNumber} /- </Text>
                 </View>
               </View>
             </View>
@@ -351,7 +351,7 @@ const TransitPlanFormBox = ({ transitData }) => {
               </View>
               <View style={{ width: '80%' }}>
                 <View style={{ borderBottom: 1 }}>
-                  <Text> {transitData?.moneyInText} </Text>
+                  <Text> {transitData ?.moneyInText} </Text>
                 </View>
               </View>
             </View>
