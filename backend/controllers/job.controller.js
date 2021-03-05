@@ -230,7 +230,7 @@ module.exports = {
 
                 Customer.updateOne({ gcnno: req.query.gcnno }, newvalues, (err, user) => {
                     if (err) {
-                        res.status(500).send({ message: "Job not updated" });
+                        res.status(500).send({ message: err });
                         return;
                     }
                     return res.status(200).send({ message: "Customer was updated successfully!", data: obj });
