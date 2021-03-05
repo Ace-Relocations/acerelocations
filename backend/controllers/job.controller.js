@@ -220,9 +220,6 @@ module.exports = {
                         obj.carGcnno = user.gcnno;
                     }
 
-                    if (user.type.toLowerCase() == "household" && type.toLowerCase() == "household") {
-                        obj.gcnno = user.carGcnno;
-                    }
                 }
 
 
