@@ -16,7 +16,6 @@ module.exports = {
             if (invoice == false) {
                 res.status(500).send({ message: "The value passed is null" });
             }
-            const billno = await service.incrementBillno();
 
             let newInvoice = invoice.filter(function (obj) {
                 if (obj.isChecked === true) {
@@ -26,6 +25,8 @@ module.exports = {
             });
             let total = await service.getTotal(newInvoice);
             const totalInText = numberToText.convertToText(total) + " " + "only";
+            const billno = await service.incrementBillno();
+
             let createData = await service.createInvoice(gcnno, billno, newInvoice, total, totalInText);
             if (createData == false) {
                 res.status(500).send({ message: "failed to register invoice", data: createData });
