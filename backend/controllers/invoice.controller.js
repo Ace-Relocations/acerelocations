@@ -29,6 +29,7 @@ module.exports = {
 
             let createData = await service.createInvoice(gcnno, billno, newInvoice, total, totalInText);
             if (createData == false) {
+                billno = service.decrementBillno();
                 res.status(500).send({ message: "failed to register invoice", data: createData });
                 return;
             }
@@ -39,6 +40,7 @@ module.exports = {
             var newvalues = { $set: jobById };
             Customer.updateOne({ gcnno: gcnno }, newvalues, (err, user) => {
                 if (err) {
+                    billno = service.decrementBillno();
                     res.status(500).send({ message: "Invoice not linked to Job, duplicate value" });
                     return;
                 }
