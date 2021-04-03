@@ -25,7 +25,7 @@ module.exports = {
             });
             let total = await service.getTotal(newInvoice);
             const totalInText = numberToText.convertToText(total) + " " + "only";
-            const billno = await service.incrementBillno();
+            var billno = await service.incrementBillno();
 
             let createData = await service.createInvoice(gcnno, billno, newInvoice, total, totalInText);
             if (createData == false) {
