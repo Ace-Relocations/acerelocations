@@ -11,7 +11,7 @@ module.exports = {
     createInvoice: async (req, res) => {
         try {
             const {
-                gcnno, invoice
+                gcnno, invoice, billno
             } = req.body;
             if (invoice == false) {
                 res.status(500).send({ message: "The value passed is null" });
@@ -25,11 +25,11 @@ module.exports = {
             });
             let total = await service.getTotal(newInvoice);
             const totalInText = numberToText.convertToText(total) + " " + "only";
-            var billno = await service.incrementBillno();
+            // var billno = await service.incrementBillno();
 
             let createData = await service.createInvoice(gcnno, billno, newInvoice, total, totalInText);
             if (createData == false) {
-                billno = service.decrementBillno();
+                // billno = service.decrementBillno();
                 res.status(500).send({ message: "failed to register invoice", data: createData });
                 return;
             }
@@ -40,7 +40,7 @@ module.exports = {
             var newvalues = { $set: jobById };
             Customer.updateOne({ gcnno: gcnno }, newvalues, (err, user) => {
                 if (err) {
-                    billno = service.decrementBillno();
+                    // billno = service.decrementBillno();
                     res.status(500).send({ message: "Invoice not linked to Job, duplicate value" });
                     return;
                 }
@@ -78,7 +78,7 @@ module.exports = {
                 if (!deleteV) {
                     res.status(500).send({ message: "Failed to delete Invoice" });
                 }
-                let number = await service.decrementBillno();
+                // let number = await service.decrementBillno();
 
                 let jobById = {};
                 jobById.isInvoiceAdded = false;

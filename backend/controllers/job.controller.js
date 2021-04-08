@@ -16,29 +16,28 @@ module.exports = {
     createJob: async (req, res) => {
         try {
             const {
-                consignorF, consignorL, consigneeF, consigneeL, contact, email, oaddress1, oaddress2, ocity, ostate, opincode, daddress1, daddress2, dcity, dstate, dpincode, type, status, insuranceP, insuranceA, date
+                gcnno, carGcnno, consignorF, consignorL, consigneeF, consigneeL, contact, email, oaddress1, oaddress2, ocity, ostate, opincode, daddress1, daddress2, dcity, dstate, dpincode, type, status, insuranceP, insuranceA, date
             } = req.body;
 
-            let gcnno = 0;
-            let gcnnoC = 0;
+            // let gcnno = 0;
+            // let gcnnoC = 0;
 
-            if (type.toLowerCase() == "both") {
-                gcnno = await service.incrementGcnno();
-                gcnnoC = await service.incrementGcnno();
-            } else if (type.toLowerCase() == "household") {
-                gcnno = await service.incrementGcnno();
-                gcnnoC = 0;
-            } else if (type.toLowerCase() == "car") {
-                gcnno = 0;
-                gcnnoC = await service.incrementGcnno();
-            }
+            // if (type.toLowerCase() == "both") {
+            //     gcnno = await service.incrementGcnno();
+            //     gcnnoC = await service.incrementGcnno();
+            // } else if (type.toLowerCase() == "household") {
+            //     gcnno = await service.incrementGcnno();
+            //     gcnnoC = 0;
+            // } else if (type.toLowerCase() == "car") {
+            //     gcnno = 0;
+            //     gcnnoC = await service.incrementGcnno();
+            // }
 
             const user = await User.findById(req.userId)
             const createdBy = user.email;
             // const year = moment(Date.now()).format('YYYY');
             let obj = new Customer();
             obj.gcnno = gcnno;
-            console.log(obj.gcnno)
             obj.consignorF = consignorF;
             obj.consignorL = consignorL;
             obj.consigneeF = consigneeF;
@@ -57,7 +56,7 @@ module.exports = {
             obj.dpincode = dpincode;
             obj.type = type;
             obj.status = status;
-            obj.carGcnno = gcnnoC;
+            obj.carGcnno = carGcnno;
             obj.insuranceP = insuranceP;
             obj.insuranceA = insuranceA;
             obj.insuranceAInText = numberToText.convertToText(insuranceA) + " " + "only";
@@ -208,19 +207,19 @@ module.exports = {
                 obj.isExpenseAdded = isExpenseAdded || user.isExpenseAdded;
                 obj.insuranceAInText = numberToText.convertToText(obj.insuranceA) + " " + "only";
 
-                if (type) {
-                    if (user.type.toLowerCase() == "household" && type.toLowerCase() == "both") {
-                        obj.carGcnno = await service.incrementGcnno();
-                    }
-                    if (user.type.toLowerCase() == "car" && type.toLowerCase() == "both") {
-                        obj.gcnno = await service.incrementGcnno();
-                    }
+                // if (type) {
+                //     if (user.type.toLowerCase() == "household" && type.toLowerCase() == "both") {
+                //         obj.carGcnno = await service.incrementGcnno();
+                //     }
+                //     if (user.type.toLowerCase() == "car" && type.toLowerCase() == "both") {
+                //         obj.gcnno = await service.incrementGcnno();
+                //     }
 
-                    if (user.type.toLowerCase() == "both" && type.toLowerCase() == "car") {
-                        obj.carGcnno = user.gcnno;
-                    }
+                //     if (user.type.toLowerCase() == "both" && type.toLowerCase() == "car") {
+                //         obj.carGcnno = user.gcnno;
+                //     }
 
-                }
+                // }
 
 
                 var newvalues = { $set: obj };
@@ -248,13 +247,14 @@ module.exports = {
                 return;
             }
 
-            let current = await Counter.findById("entityId");
-            if ((current.seq - 1) == user.gcnno || (user.type.toLowerCase() == "both" && (current.seq - 2) == user.gcnno)) {
-                let number = await service.decrementGcnno(user.gcnno);
+            // let current = await Counter.findById("entityId");
+            // if ((current.seq - 1) == user.gcnno || (user.type.toLowerCase() == "both" && (current.seq - 2) == user.gcnno)) {
+            //     let number = await service.decrementGcnno(user.gcnno);
 
-                if (user.type.toLowerCase() == "both") {
-                    let number1 = await service.decrementGcnno(user.gcnno);
-                }
+            //     if (user.type.toLowerCase() == "both") {
+            //         let number1 = await service.decrementGcnno(user.gcnno);
+            //     }
+            
                 let deleteV = await Customer.deleteOne({ gcnno: req.query.gcnno });
                 if (!deleteV) {
                     return res.status(500).send({ message: "Failed to delete Customer", data: deleteV });
@@ -272,18 +272,19 @@ module.exports = {
                     }
                 }
                 return res.status(200).send({ message: "Customer was deleted successfully!", data: user.gcnno });
-            } else {
-                let obj = new Customer();
-                obj.status = "Canceled";
 
-                const user = await Customer.updateOne({ gcnno: req.query.gcnno }, { status: 'canceled' });
+            // } else {
+            //     let obj = new Customer();
+            //     obj.status = "Canceled";
 
-                if (!user) {
-                    res.status(500).send({ message: "Job status not updated" });
-                    return;
-                }
-                return res.status(200).send({ message: "Customer job status was updated to cancelled!", data: obj });
-            }
+            //     const user = await Customer.updateOne({ gcnno: req.query.gcnno }, { status: 'canceled' });
+
+            //     if (!user) {
+            //         res.status(500).send({ message: "Job status not updated" });
+            //         return;
+            //     }
+            //     return res.status(200).send({ message: "Customer job status was updated to cancelled!", data: obj });
+            // }
         } catch (err) {
             res.status(500).send({ message: err });
             return;
