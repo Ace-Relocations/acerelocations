@@ -6,7 +6,6 @@ var Customer = mongoose.model(
   new mongoose.Schema({
     gcnno: {
       type: Number,
-      required: true,
       unique: true,
     },
     consignorF: {
