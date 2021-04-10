@@ -7,6 +7,7 @@ var Customer = mongoose.model(
     gcnno: {
       type: Number,
       unique: true,
+      required: true
     },
     consignorF: {
       type: String,

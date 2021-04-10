@@ -32,12 +32,19 @@ module.exports = {
             //     gcnno = 0;
             //     gcnnoC = await service.incrementGcnno();
             // }
-
+            console.log("Gcnno",carGcnno)
+            let uno;
+            if (!gcnno) {
+                uno = carGcnno;
+            } else {
+                uno = gcnno;
+            }
+            console.log("Gcnno",gcnno)
             const user = await User.findById(req.userId)
             const createdBy = user.email;
             // const year = moment(Date.now()).format('YYYY');
             let obj = new Customer();
-            obj.gcnno = gcnno;
+            obj.gcnno = uno;
             obj.consignorF = consignorF;
             obj.consignorL = consignorL;
             obj.consigneeF = consigneeF;
@@ -165,6 +172,10 @@ module.exports = {
             const {
                 gcnno, consignorF, consigneeF, consignorL, consigneeL, contact, email, oaddress1, oaddress2, ocity, ostate, opincode, daddress1, daddress2, dcity, dstate, dpincode, type, insuranceP, insuranceA, date, status, isExpenseAdded, isInvoiceAdded, carGcnno
             } = req.body;
+            let uno = gcnno;
+            if (!gcnno && carGcnno) {
+                uno = carGcnno;
+            }
 
             Customer.findOne({ gcnno: req.query.gcnno }, async (err, user) => {
                 if (!user) {
@@ -177,7 +188,11 @@ module.exports = {
 
                 let obj = new Customer();
                 obj._id = user._id;
-                obj.gcnno = gcnno || user.gcnno;
+                if (user.type == "car"){
+                    obj.gcnno = uno || user.gcnno;
+                } else {
+                    obj.gcnno = gcnno || user.gcnno;
+                }
                 obj.carGcnno = carGcnno || user.carGcnno;
                 obj.consignorF = consignorF || user.consignorF;
                 obj.consigneeF = consigneeF || user.consigneeF;
@@ -220,8 +235,6 @@ module.exports = {
                 //     }
 
                 // }
-
-
                 var newvalues = { $set: obj };
 
                 Customer.updateOne({ gcnno: req.query.gcnno }, newvalues, (err, user) => {
