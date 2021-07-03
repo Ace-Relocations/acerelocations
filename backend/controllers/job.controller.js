@@ -183,6 +183,7 @@ module.exports = {
                     return;
                 }
 
+                console.log("DATEE", date)
                 const admin = await User.findById(req.userId)
                 const createdBy = admin.email;
 
@@ -193,29 +194,29 @@ module.exports = {
                 } else {
                     obj.gcnno = gcnno || user.gcnno;
                 }
-                obj.carGcnno = carGcnno || user.carGcnno;
-                obj.consignorF = consignorF || user.consignorF;
-                obj.consigneeF = consigneeF || user.consigneeF;
-                obj.consignorL = consignorL || user.consignorL;
-                obj.consigneeL = consigneeL || user.consigneeL;
-                obj.contact = contact || user.contact;
-                obj.email = email || user.email;
-                obj.oaddress1 = oaddress1 || user.oaddress1;
-                obj.oaddress2 = oaddress2 || user.oaddress2;
-                obj.ocity = ocity || user.ocity;
-                obj.ostate = ostate || user.ostate;
-                obj.opincode = opincode || user.opincode;
-                obj.daddress1 = daddress1 || user.daddress1;
-                obj.daddress2 = daddress2 || user.daddress2;
-                obj.dcity = dcity || user.dcity;
-                obj.dstate = dstate || user.dstate;
-                obj.dpincode = dpincode || user.dpincode;
-                obj.type = type || user.type;
-                obj.status = status || user.status;
-                obj.insuranceP = insuranceP || user.insuranceP;
-                obj.insuranceA = insuranceA || user.insuranceA;
+                obj.carGcnno = carGcnno;
+                obj.consignorF = consignorF;
+                obj.consigneeF = consigneeF;
+                obj.consignorL = consignorL;
+                obj.consigneeL = consigneeL;
+                obj.contact = contact;
+                obj.email = email;
+                obj.oaddress1 = oaddress1;
+                obj.oaddress2 = oaddress2;
+                obj.ocity = ocity;
+                obj.ostate = ostate;
+                obj.opincode = opincode;
+                obj.daddress1 = daddress1;
+                obj.daddress2 = daddress2;
+                obj.dcity = dcity;
+                obj.dstate = dstate;
+                obj.dpincode = dpincode;
+                obj.type = type;
+                obj.status = status;
+                obj.insuranceP = insuranceP;
+                obj.insuranceA = insuranceA;
                 obj.createdBy = createdBy;
-                obj.date = moment(date).format('DD/MM/YYYY') || user.date;
+                obj.date = moment(date).format('DD/MM/YYYY');
                 obj.invoice = user.invoice;
                 obj.expense = user.expense;
                 obj.isInvoiceAdded = isInvoiceAdded || user.isInvoiceAdded;
