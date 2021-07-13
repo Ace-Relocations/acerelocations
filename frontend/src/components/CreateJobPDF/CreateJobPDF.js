@@ -259,6 +259,7 @@ const CreateJobPDF = ({ invoice }) => {
         date,
         billNo: invoiceData[0] ?.billno,
         lrNo: invoiceData[0] ?.gcnno ? invoiceData[0] ?.gcnno : invoiceData[0] ?.carGcnno,
+        carLrNo: invoiceData[0] ?.gcnno && carGcnno ? carGcnno : null,
         from: ocity,
         to: dcity,
       },

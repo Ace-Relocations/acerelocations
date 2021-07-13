@@ -34,7 +34,9 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(5),
   },
 }));
+
 const CreateJobPage = () => {
+  
   const classes = useStyles();
   const dispatch = useDispatch();
   const { jobId } = useParams();

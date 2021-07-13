@@ -25,6 +25,7 @@ const Reciept = ({ reciept }) => {
     date,
     billNo,
     lrNo,
+    carLrNo,
     from,
     to,
   } = reciept;
@@ -215,7 +216,10 @@ const Reciept = ({ reciept }) => {
             marginRight: 45,
           }}
         >
+          { carLrNo?
+          <Text>{lrNo}, {carLrNo}</Text>:
           <Text>{lrNo}</Text>
+          }
         </View>
 
         <Text>Dated</Text>

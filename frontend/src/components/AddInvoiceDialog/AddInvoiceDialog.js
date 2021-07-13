@@ -55,14 +55,14 @@ const AddInvoiceDialog = ({
   handleAddInvoice,
   handleCancleInvoice,
   isEditing,
-  gcnNo,
 }) => {
   const classes = useStyles();
   const {
-    invoice: { invoiceDetails },
+    invoice: { invoiceDetails, billno },
   } = useSelector((state) => state.Invoice);
 
-  const [fields, setFields] = useState([
+  const [fields, setFields] = useState(
+    [
     {
       expense:
         'Transportation charges inclusive of allied services for your personal effects and car from ORIGIN to DESTINATION',
@@ -110,8 +110,11 @@ const AddInvoiceDialog = ({
 
   const invoiceData = useMemo(() => {
     if (isEditing && !!invoiceDetails) {
+      
       const invoice = fields.map((invoice, idx) => {
         const isInvoicePresent1 = invoiceDetails.filter((item1) => item1.isChecked === true);
+        // invoice.billno = isInvoicePresent1.billno;
+
         if (isInvoicePresent1.length > 0 && isInvoicePresent1[idx]) {
           console.log("Second IF", isInvoicePresent1[idx]);
           invoice.amount = isInvoicePresent1[idx].amount;
@@ -121,6 +124,7 @@ const AddInvoiceDialog = ({
         }
         return invoice;
       }) || [];
+
       setFields(invoice);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -145,18 +149,38 @@ const AddInvoiceDialog = ({
   const handleChangeAmount = (i, event) => {
     const values = [...fields];
     values[i].amount = event.target.value;
+    if(fields.billno){ 
+      values.billno = fields.billno;
+      }
+  
+    setFields(values);
+  };
+
+  const handleBillChange = (event) => {
+    const values = [...fields];
+    values.billno = event.target.value;
+    
     setFields(values);
   };
 
   const handleChangeExpense = (i, event) => {
     const values = [...fields];
     values[i].expense = event.target.value;
+    if(fields.billno){ 
+      values.billno = fields.billno;
+      }
+  
     setFields(values);
   };
 
   const handleChangeCheckbox = (i, event) => {
     const values = [...fields];
     values[i].isChecked = !values[i].isChecked;
+    console.log("Values", values)
+    if(fields.billno){ 
+    values.billno = fields.billno;
+    }
+
     setFields(values);
   };
 
@@ -212,11 +236,30 @@ const AddInvoiceDialog = ({
           </Button>
         </Toolbar>
       </AppBar>
+
       <DialogTitle style={{ cursor: 'move' }} id='draggable-dialog-title'>
         Add More
       </DialogTitle>
       <DialogContent>
         <DialogContentText>
+                <Grid item lg={12} container className={classes.gridItem}>
+                  <Box marginRight='10px'>
+                    <TextField
+                        type='number'
+                        placeholder='Enter Bill No'
+                        label='Bill No'
+                        variant='outlined'
+                        name='Bill No'
+                        value={fields.billno || billno}
+                        onChange={(e) => handleBillChange(e)}
+                        required
+                        style={{ width: '150px !important' }}
+                        inputStyle={{ width: '150px !important' }}
+                        fullWidth={false}
+                        // disabled={!fields[idx].isChecked}
+                      />
+                  </Box>
+                </Grid>
           {fields.map((field, idx) => {
             return (
               <div key={`${field}-${idx}`} style={{ marginBottom: '10px' }}>

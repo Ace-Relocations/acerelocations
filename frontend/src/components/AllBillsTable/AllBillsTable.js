@@ -62,10 +62,6 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-function createData(consignor, consignee, contact, email, status, type, date) {
-  return { consignor, consignee, contact, email, status, type, date };
-}
-
 const useStyles = makeStyles({
   table: {
     minWidth: 700,
@@ -137,7 +133,7 @@ const ConfirmationDialogRaw = (props) => {
   );
 };
 
-const AllJobsTable = ({
+const AllBillsTable = ({
   data,
   onDeleteJob,
   onUpdateJobStatus,
@@ -171,8 +167,6 @@ const AllJobsTable = ({
   const [selectedExpenseStatus, updateSelectedExpenseStatus] = useState();
   const [isSearching, updateIsSearching] = useState(false);
   const [searchedTableData, updateSearchedTableData] = useState([]);
-  const [invoiceData, setInvoiceData] = useState([]);
-
 
   const [valueStatus, setValueStatus] = useState();
 
@@ -222,6 +216,7 @@ const AllJobsTable = ({
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'desc';
     setOrder(isAsc ? 'asc' : 'desc');
+
     setOrderBy(property);
   };
 
@@ -237,10 +232,6 @@ const AllJobsTable = ({
   const handleDeleteClick = () => {
     onDeleteJob(selectedGcnNo);
     setOpen(false);
-  };
-
-  const debug = (val) => {
-    console.log(val);
   };
 
   const handleOpenInvoice = (gcnno, isAdded) => {
@@ -284,6 +275,12 @@ const AllJobsTable = ({
   const headCells = [
     { id: 'gcnno', numeric: false, label: 'GCN No.' },
     { id: 'consignor', numeric: false, label: 'Consignor' },
+    { id: 'consignee', numeric: false, label: 'Consignee' },
+    { id: 'contact', numeric: false, label: 'Contact' },
+    { id: 'email', numeric: false, label: 'Email' },
+    { id: 'status', numeric: false, label: 'Status' },
+    { id: 'type', numeric: false, label: 'Type' },
+    { id: 'date', numeric: false, label: 'Date' },
     { id: 'view', numeric: false, label: 'View' },
     { id: 'update', numeric: false, label: 'Update' },
     { id: 'delete', numeric: false, label: 'Delete' },
@@ -291,11 +288,6 @@ const AllJobsTable = ({
     { id: 'addInvoice', numeric: false, label: 'Add Invoice' },
     { id: 'addExpense', numeric: false, label: 'Add Expense' },
     { id: 'downloadInvoice', numeric: false, label: 'Download Invoice' },
-    { id: 'date', numeric: false, label: 'Date' },
-    // { id: 'status', numeric: false, label: 'Status' },
-    { id: 'type', numeric: false, label: 'Type' },
-    { id: 'contact', numeric: false, label: 'Contact' },
-    { id: 'email', numeric: false, label: 'Email' },
   ];
 
   const createSortHandler = (property) => (event) => {
@@ -320,6 +312,8 @@ const AllJobsTable = ({
   }
 
   function stableSort(array, comparator) {
+
+    console.log("Data :::", array)
 
     const stabilizedThis = array.map((el, index) => [el, index]);
     stabilizedThis.sort((a, b) => {
@@ -351,22 +345,20 @@ const AllJobsTable = ({
     const newJObs = allJobs.filter(job => {
       const regex = new RegExp(value, 'gi');
       return Object.values(job).some((jobItem) => {
-        if(jobItem) {
-        return jobItem.toString().match(regex);
-        } else {
-          return false;
-        }
+        return jobItem.toString().match(regex)
       })
     });
     updateSearchedTableData(newJObs);
   }
 
   const getTableData = useMemo(() => {
+
     if (isSearching) {
       return searchedTableData;
     } else {
       return data;
     }
+
   }, [handleSearchRequest])
 
   return (
@@ -409,12 +401,24 @@ const AllJobsTable = ({
           <TableBody>
             {stableSort(getTableData, getComparator(order, orderBy))
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row, invoice) => (
+              .map((row) => (
                 <StyledTableRow key={row.id}>
                   <StyledTableCell align='center' width='200px'>
-                    {row.gcnno ? row.gcnno : row.carGcnno }
+                    {row.gcnno? row.gcnno: row.carGcnno}
                   </StyledTableCell>
                   <StyledTableCell align='center'>{row.consignorF}</StyledTableCell>
+                  <StyledTableCell align='center'>{row.consigneeF}</StyledTableCell>
+                  <StyledTableCell align='center'>{row.contact}</StyledTableCell>
+                  <StyledTableCell align='center'>{row.email}</StyledTableCell>
+                  <StyledTableCell
+                    align='center'
+                    onClick={() => handleClickListItem(row.status, row.gcnno)}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    {row.status}
+                  </StyledTableCell>
+                  <StyledTableCell align='center'>{row.type}</StyledTableCell>
+                  <StyledTableCell align='center'>{row.date}</StyledTableCell>
                   <StyledTableCell align='center'>
                     <IconButton
                       aria-label='view'
@@ -428,7 +432,7 @@ const AllJobsTable = ({
                     </IconButton>
                   </StyledTableCell>
                   <StyledTableCell align='center'>
-                    <IconButton aria-label='edit' onClick={() => debug(invoice)}>
+                    <IconButton aria-label='edit' onClick={() => onEditJobClick(row.gcnno)}>
                       <SvgIcon>
                         <EditIcon />
                       </SvgIcon>
@@ -460,7 +464,7 @@ const AllJobsTable = ({
                       </SvgIcon>
                     </IconButton>
                   </StyledTableCell>
-                  
+
                   <StyledTableCell align='center'>
                     <IconButton
                       aria-label='invoice'
@@ -484,17 +488,6 @@ const AllJobsTable = ({
                       </SvgIcon>
                     </IconButton>
                   </StyledTableCell>
-                  <StyledTableCell align='center'>{row.date}</StyledTableCell>
-                  {/* <StyledTableCell
-                    align='center'
-                    onClick={() => handleClickListItem(row.status, row.gcnno)}
-                    style={{ cursor: 'pointer' }}
-                  >
-                    {row.status}
-                  </StyledTableCell> */}
-                  <StyledTableCell align='center'>{row.type}</StyledTableCell>
-                  <StyledTableCell align='center'>{row.contact}</StyledTableCell>
-                  <StyledTableCell align='center'>{row.email}</StyledTableCell>
                 </StyledTableRow>
               ))}
           </TableBody>
@@ -635,4 +628,4 @@ const AllJobsTable = ({
   );
 };
 
-export default AllJobsTable;
+export default AllBillsTable;

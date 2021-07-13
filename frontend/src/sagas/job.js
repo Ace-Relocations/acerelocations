@@ -78,10 +78,18 @@ function* getJobRequest(payload) {
 }
 
 function* updateJobRequest(payload) {
+  console.log("Payload", payload);
   try {
-    let response = yield axios.post(`/job/update?gcnno=${payload.gcnno}`, {
+    let response = 0 ;
+    if(payload.gcnno) { 
+    response = yield axios.post(`/job/update?gcnno=${payload.gcnno}`, {
       ...payload.payload,
     });
+  } else {
+    response = yield axios.post(`/job/update?carGcnno=${payload.carGcnno}`, {
+      ...payload.payload,
+    });
+  }
 
     if (response.status === 200) {
       yield put(jobAction.updateJobRequestSuccess(response.data));
@@ -100,6 +108,8 @@ function* updateJobRequest(payload) {
 
 function* deleteJobRequest(payload) {
   try {
+    console.log("Payload", payload);
+
     const { gcnNo } = payload;
     yield put(jobAction.showLoader());
     let response = yield axios.post(`/job/delete?gcnno=${gcnNo}`);

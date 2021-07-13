@@ -32,6 +32,7 @@ const InvoiceTable = ({ invoice }) => {
     ocity,
     invoiceNo,
     date,
+    carGcnno,
     lrNo,
     invoiceDetails,
     total,
@@ -103,7 +104,12 @@ const InvoiceTable = ({ invoice }) => {
         >
           <View style={{ flexDirection: 'row' }}>
             <View style={{ width: '50%' }}>
-              <Text style={{ textAlign: 'left' }}>{`LR No. ${lrNo}`}</Text>
+              { lrNo && carGcnno?
+              <Text style={{ textAlign: 'left' }}>{`LR No. ${lrNo}, ${carGcnno}`}</Text> : 
+              lrNo ?
+              <Text style={{ textAlign: 'left' }}>{`LR No. ${lrNo}`}</Text> :
+              <Text style={{ textAlign: 'left' }}>{`LR No. ${carGcnno}`}</Text>
+              }
             </View>
             <View style={{ width: '50%' }}>
               <Text style={{ textAlign: 'right' }}>{`Dated ${date}`}</Text>

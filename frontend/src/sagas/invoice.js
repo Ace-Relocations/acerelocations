@@ -29,7 +29,7 @@ function* getInvoiceRequest(payload) {
 function* createInvoiceRequest({ payload }) {
   try {
     yield put(invoiceAction.showLoader());
-
+    console.log("PAYLOAD", payload);
     let response = yield axios.post('/invoice/create', {
       ...payload,
     });
@@ -53,7 +53,6 @@ function* createInvoiceRequest({ payload }) {
 function* updateInvoiceRequest({ payload }) {
   try {
     yield put(invoiceAction.showLoader());
-
     let response = yield axios.post('/invoice/update', {
       ...payload,
     });

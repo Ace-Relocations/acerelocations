@@ -19,8 +19,6 @@ import {
   updateExpensesRequest,
   updateInvoiceRequest,
 } from '../../actions';
-import toaster from '../../utils/toaster';
-import AllJobsTableV3 from '../AllJobsTable/AllJobsTable_V3';
 
 const useStyles = makeStyles((theme) => ({
   introBox: {
@@ -84,12 +82,12 @@ const AllJobsPage = ({ match }) => {
     history.push(`${match.path}/edit/${gcnno}`);
   });
 
-  const onAddInvoiceClick = useCallback((data, gcnno, shouldUpdate) => {
+  const onAddInvoiceClick = useCallback((data, gcnno, billno, shouldUpdate) => {
     updateIsChanged(true);
     if (shouldUpdate) {
-      dispatch(updateInvoiceRequest({ invoice: data, gcnno }));
+      dispatch(updateInvoiceRequest({ invoice: data, gcnno, billno }));
     } else {
-      dispatch(createInvoiceRequest({ invoice: data, gcnno }));
+      dispatch(createInvoiceRequest({ invoice: data, gcnno, billno }));
     }
   }, [dispatch]);
 

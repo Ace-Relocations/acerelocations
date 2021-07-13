@@ -32,12 +32,20 @@ const CustomerPackageDesTable = ({ description, noOfPkg }) => {
           border: 1,
         }}
       >
+        { description == "car"?
+        <View style={{ width: '70%' }}>
+          <Text>
+            Old and used <Text>{description}</Text> for personal use only, not meant for sell
+            and has no commercial value
+          </Text>
+        </View> :
         <View style={{ width: '70%' }}>
           <Text>
             Old and used <Text>{description}</Text> item for personal use only, not meant for sell
             and has no commercial value
           </Text>
-        </View>
+       </View>
+        }
         <View style={{ width: '30%', borderLeft: 1, alignItems: 'center' }}>
           <Text>{noOfPkg}</Text>
         </View>

@@ -87,6 +87,8 @@ const CreateJobForm = ({
   onUpdateJob,
   isEditing,
   job: {
+    gcnno,
+    carGcnno,
     consignorF,
     consignorL,
     consigneeF,
@@ -109,7 +111,6 @@ const CreateJobForm = ({
     insuranceA,
     type,
     date,
-    gcnNo,
   },
 }) => {
   const classes = useStyles();
@@ -124,6 +125,8 @@ const CreateJobForm = ({
   const { handleSubmit, control, errors, getValues, watch, reset } = useForm({
     mode: 'onChange',
     defaultValues: {
+      gcnno: getDefaultValue(isEditing, gcnno),
+      carGcnno: getDefaultValue(isEditing, carGcnno),
       consignorF: getDefaultValue(isEditing, consignorF),
       consignorL: getDefaultValue(isEditing, consignorL),
       consigneeF: getDefaultValue(isEditing, consigneeF),
@@ -213,6 +216,44 @@ const CreateJobForm = ({
               </div> */}
 
                 {/* <fieldset style={{ borderColor: '#ccc' }}> */}
+
+                <legend>Job Document Numbers</legend>
+                <Grid item lg={12} container className={classes.gridItem}>
+                  <Box marginRight='10px'>
+                    <Controller
+                      as={TextField}
+                      control={control}
+                      id='outlined-basic'
+                      label='GCNNO'
+                      variant='outlined'
+                      width={300}
+                      // rules={{ required: true }}
+                      className={classes.formControl}
+                      name='gcnno'
+                      value={values.gcnno}
+                      // error={errors.gcnno}
+                      // helperText={errors.consignorF && 'GCNNO is required'}
+                      // required
+                    />
+                  </Box>
+
+                  <Controller
+                    as={TextField}
+                    control={control}
+                    id='outlined-basic'
+                    label='CAR GCNNO'
+                    variant='outlined'
+                    width={300}
+                    // rules={{ required: true }}
+                    className={classes.formControl}
+                    name='carGcnno'
+                    value={values.carGcnno}
+                    // error={errors.consignorL}
+                    // helperText={errors.consignorL && 'LastName is required'}
+                    // required
+                  />
+                </Grid>
+
                 <legend>Consignor Details</legend>
                 <Grid item lg={12} container className={classes.gridItem}>
                   <Box marginRight='10px'>
