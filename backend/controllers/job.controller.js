@@ -92,6 +92,7 @@ module.exports = {
 
     viewJob: async (req, res) => {
         try {
+            console.log("Hi")
             let viewData = await service.viewJob(req.query.gcnno);
             console.log("Controller:", viewData);
             if (!viewData) {
