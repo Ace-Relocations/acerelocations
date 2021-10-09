@@ -8,6 +8,8 @@ module.exports = {
         try {
             
             let user = await Customer.findOne({ gcnno: gcnno }).populate("expense").populate("invoice");
+            console.log("Service user:", user);
+
             if (!user) {
             return user;
             }

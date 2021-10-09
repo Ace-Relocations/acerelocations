@@ -93,6 +93,7 @@ module.exports = {
     viewJob: async (req, res) => {
         try {
             let viewData = await service.viewJob(req.query.gcnno);
+            console.log("Controller:", viewData);
             if (!viewData) {
                 res.status(500).send({ message: "User with the following gcnnno not found" });
                 return;
