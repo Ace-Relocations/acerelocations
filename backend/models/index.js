@@ -9,7 +9,7 @@ db.user = require("./user.model");
 db.role = require("./role.model");
 db.customer = require("./customer.model");
 db.counter = require("./counter.model");
-db.invoice = require("./invoice.model");
+db.invoice = require("./invoice2021.model");
 db.expense = require("./expense.model");
 db.billCounter = require("./billCounter.model");
 

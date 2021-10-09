@@ -1,7 +1,6 @@
 const db = require("../models");
 const Customer = db.customer;
 const Invoice = db.invoice;
-const invoice = db.invoice;
 const BillCounter = db.billCounter;
 
 module.exports = {
