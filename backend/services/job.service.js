@@ -7,7 +7,7 @@ module.exports = {
     viewJob: async (gcnno) => {
         try {
             console.log("Hi")
-            let user = await Customer.findOne({ gcnno: gcnno }).populate("expense").populate("invoice2021");
+            let user = await Customer.findOne({ gcnno: gcnno }).populate("expense").populate("invoice");
             console.log("Service user:", user);
 
             if (!user) {
@@ -72,7 +72,7 @@ module.exports = {
                            .skip(skip) // Always apply 'skip' before 'limit'
                            .limit(limit)
                            .populate("expense")
-                           .populate("invoice2021"); // This is your 'page size'
+                           .populate("invoice"); // This is your 'page size'
 
         } catch {
             return err;    
