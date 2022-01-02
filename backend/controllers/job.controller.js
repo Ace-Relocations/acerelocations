@@ -16,7 +16,7 @@ module.exports = {
     createJob: async (req, res) => {
         try {
             const {
-                gcnno, carGcnno, consignorF, consignorL, consigneeF, consigneeL, contact, email, oaddress1, oaddress2, ocity, ostate, opincode, daddress1, daddress2, dcity, dstate, dpincode, type, status, insuranceP, insuranceA, date
+                gcnno, carGcnno, consignorF, consignorL, consigneeF, consigneeL, contact, email, oaddress1, oaddress2, ocity, ostate, opincode, daddress1, daddress2, dcity, dstate, dpincode, type, status, insuranceP, insuranceA, date, items
             } = req.body;
 
             // let gcnno = 0;
@@ -66,6 +66,7 @@ module.exports = {
             obj.carGcnno = carGcnno;
             obj.insuranceP = insuranceP;
             obj.insuranceA = insuranceA;
+            obj.items = items;
             obj.insuranceAInText = numberToText.convertToText(insuranceA) + " " + "only";
             obj.createdBy = createdBy;
             obj.date = moment(date).format('DD/MM/YYYY');
@@ -172,7 +173,7 @@ module.exports = {
     updateJob: async (req, res) => {
         try {
             const {
-                gcnno, consignorF, consigneeF, consignorL, consigneeL, contact, email, oaddress1, oaddress2, ocity, ostate, opincode, daddress1, daddress2, dcity, dstate, dpincode, type, insuranceP, insuranceA, date, status, isExpenseAdded, isInvoiceAdded, carGcnno
+                gcnno, consignorF, consigneeF, consignorL, consigneeL, contact, email, oaddress1, oaddress2, ocity, ostate, opincode, daddress1, daddress2, dcity, dstate, dpincode, type, insuranceP, insuranceA, date, status, isExpenseAdded, isInvoiceAdded, carGcnno, items
             } = req.body;
             let uno = gcnno;
             if (!gcnno && carGcnno) {
@@ -218,6 +219,7 @@ module.exports = {
                 obj.insuranceP = insuranceP;
                 obj.insuranceA = insuranceA;
                 obj.createdBy = createdBy;
+                obj.items = items;
                 obj.date = moment(date).format('DD/MM/YYYY');
                 obj.invoice = user.invoice;
                 obj.expense = user.expense;

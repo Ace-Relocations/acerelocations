@@ -55,6 +55,7 @@ var Customer = mongoose.model(
       type: Boolean,
       default: false
     },
+    items: Number,
     createdAt: { type: Date, default: Date.now() },
     updatedAt: { type: Date, default: Date.now() },
     invoice: [

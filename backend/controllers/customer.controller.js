@@ -7,7 +7,7 @@ module.exports = {
    createCustomer: async (req, res) => {
     try {
         const {
-            consignor, consignee, contact, email, oaddress1, oaddress2, ocity, ostate, opincode, daddress1, daddress2, dcity, dstate, dpincode, type, insuranceP, insuranceA, date
+            consignor, consignee, contact, email, oaddress1, oaddress2, ocity, ostate, opincode, daddress1, daddress2, dcity, dstate, dpincode, type, insuranceP, insuranceA, date, items
             } = req.body;
         const user = await User.findById(req.userId)
         const createdBy = user.email;
@@ -33,6 +33,7 @@ module.exports = {
         obj.insuranceA = insuranceA;
         obj.createdBy = createdBy; 
         obj.date = date;
+        obj.items = items;
 
         console.log(obj);
 
