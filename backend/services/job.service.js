@@ -15,8 +15,7 @@ module.exports = {
             }
             return user;
         } catch (err) {
-            res.status(500).send({ message: err });
-            return;    
+            return err;    
         }
     },
 
@@ -39,8 +38,7 @@ module.exports = {
             return Counter.updateOne({ _id: "entityId"}, newvalues);
            
         } catch (err) {
-            res.status(500).send({ message: err });
-            return;    
+            return err;    
         }
     },
 

@@ -12,6 +12,7 @@ db.counter = require("./counter.model");
 db.invoice = require("./invoice2021.model");
 db.expense = require("./expense.model");
 db.billCounter = require("./billCounter.model");
+db.barcode = require("./barcode.model");
 
 
 db.ROLES = ["user", "admin", "moderator"];
