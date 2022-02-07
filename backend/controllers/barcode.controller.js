@@ -23,6 +23,7 @@ module.exports = {
             const user = await User.findById(req.userId)
             const createdBy = user.email;
             let obj = new Barcode();
+        
             obj.empCode = empCode;
             obj.empName = empName;
             obj.fromLocation = fromLocation;
@@ -36,6 +37,7 @@ module.exports = {
             obj.workstationNo = workstationNo;
             obj.createdBy = createdBy;
             obj.date = date;
+            obj.boxLabels[0] = empCode + "_1"
             obj.save(err => {
                 if (err) {
                     if (err.code == 11000) {

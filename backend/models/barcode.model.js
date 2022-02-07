@@ -18,6 +18,7 @@ var Barcode = mongoose.model(
     fromWing: String,
     department: String,
     box: String,
+    boxLabels: [[Number]],
     toLocation: String,
     toFloor: String,
     toWing: String,

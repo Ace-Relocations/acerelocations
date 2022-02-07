@@ -33,6 +33,7 @@ var Customer = mongoose.model(
     opincode: String,
     daddress1: String,
     daddress2: String,
+    gst: String,
     dcity: {
       type: String,
       required: true
