@@ -15,11 +15,11 @@ transportation and logistics software
 
 ## For Frontend
 
-Step 1: `npm install`
-Step 2: `npm start`
+- Step 1: `npm install`
+- Step 2: `npm start`
 
 ### For Production
 
-Step 1: `npm install`
-Step 2: `npm run-script build`
-Step 3: `npm run-script deploy`
+- Step 1: `npm install`
+- Step 2: `npm run-script build`
+- Step 3: `npm run-script deploy`
