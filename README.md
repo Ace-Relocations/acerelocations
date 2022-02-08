@@ -8,10 +8,18 @@ transportation and logistics software
 
 ### For Development
 
-Step 1: `yarn`
-Step 2: `yarn start`
+## For Backend
+
+Step 1: `npm install`
+Step 2: `npm start`
+
+## For Frontend
+
+Step 1: `npm install`
+Step 2: `npm start`
 
 ### For Production
 
-Step 1: `yarn`
-Step 2: `yarn build`
+Step 1: `npm install`
+Step 2: `npm run-script build`
+Step 3: `npm run-script deploy`
