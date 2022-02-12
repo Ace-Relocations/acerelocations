@@ -16,5 +16,7 @@ router.post(
 
 router.post("/signin", controller.signin);
 router.post("/logout", [authJwt.verifyToken], controller.logout);
+router.post("/verify", controller.verify);
+router.post("/verifyOTP", controller.verifyOTP);
 
 module.exports = router;

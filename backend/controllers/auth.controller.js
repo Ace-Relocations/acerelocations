@@ -1,6 +1,9 @@
 const config = require("../config/auth.config");
 const db = require("../models");
 const { handleResponse, handleError } = require('../middlewares/responsehandler');
+const nodemailer = require("nodemailer");
+// var data = require('./index.html');
+const service = require("../services/auth.service")
 
 const User = db.user;
 const Role = db.role;
@@ -9,11 +12,12 @@ var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 
 
-exports.signup = (req, res) => {
+exports.signup = async (req, res) => {
   const user = new User({
     username: req.body.username.toLowerCase(),
     email: req.body.email,
-    password: bcrypt.hashSync(req.body.password, 8)
+    password: bcrypt.hashSync(req.body.password, 8),
+    createdAt: Date.now()
   });
 
   user.save((err, user) => {
@@ -40,7 +44,6 @@ exports.signup = (req, res) => {
               return;
             }
 
-            res.status(200).send({ message: "User was registered successfully!", data: user });
           });
         }
       );
@@ -57,11 +60,51 @@ exports.signup = (req, res) => {
             res.status(500).send({ message: err });
             return;
           }
-
-          res.status(200).send({ message: "User was registered successfully!", data: user });
         });
       });
     }
+
+    let transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: 'shahdishant28@gmail.com',
+        pass: 'dtigxclbutwxuwaw'
+      },
+    });
+
+    rand = Math.floor((Math.random() * 100) + 54);
+    host = req.get('host');
+    link = "http://" + "acerelocations-frontend.s3-website.us-east-2.amazonaws.com" + "/verified-message/"+ rand + "/" + req.body.email;
+
+    user.emailVerifyNo = rand;
+    var newvalues = { $set: user };
+    let updatev = user.updateOne({ _id: user._id }, newvalues);
+
+    // fs.readFile('index.html', function (err, html) {
+    //   if (err) {
+    //     res.status(500).send({ message: err });
+    //   }       
+      mailOptions = {
+        from: 'info@rhodium.com',
+        to: req.body.email,
+        subject: "Please confirm your Email account",
+        html: "Hi, Please click here to confirm your email" + String(link)
+      } 
+      
+   
+    transporter.sendMail(mailOptions, (err, info) => {
+      if (err) {
+        console.log("ERROR:", err);
+
+        res.status(500).send({ message: err });
+        return;
+      }
+      console.log("INFO:", info);
+      res.status(200).send({ message: "User was registered successfully!", data: user });
+
+    }) 
+  // });
+
   });
 };
 
@@ -130,5 +173,37 @@ exports.logout = (req, res) => {
     })
   } catch (err) {
     res.status(500).send({ message: "Unable to Logout" });
+  }
+}
+
+exports.verify = async (req, res) => {
+  try {
+    let user = await User.findOne({ email: req.query.email.toLowerCase() });
+    let verifyData = await service.verifyEmail(req, res, user.emailVerifyNo);
+    console.log("verifyData:", verifyData);
+
+    if (!verifyData) {
+      res.status(500).send({ message: "User with the following email was not registered" });
+      return;
+    }
+    return res.status(200).send({ message: "User with the following email was registered" });
+  } catch (err) {
+    res.status(500).send({ message: err });
+    return;
+  }
+}
+
+exports.verifyOTP = async (req, res) => {
+  try {
+    let user = await User.findOne({ email: req.body.email.toLowerCase() })
+    let verifyData = await service.verifyOTP(user, req.body.otp);
+    if (!verifyData) {
+      res.status(500).send({ message: "Login failed" });
+      return;
+    }
+    return res.status(200).send(verifyData);
+  } catch (err) {
+    res.status(500).send({ message: err });
+    return;
   }
 }
