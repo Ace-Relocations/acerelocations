@@ -2,16 +2,29 @@
 
 transportation and logistics software
 
-# Front-End Setup
-
-- Change directory to fronend `cd frontend/`
-
 ### For Development
 
-Step 1: `yarn`
-Step 2: `yarn start`
+## Database (UBUNTU)
+- curl -fsSL https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
+- echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
+- sudo apt update
+- sudo apt install mongodb-org
+- sudo systemctl start mongod.service
 
-### For Production
+## Backend
 
-Step 1: `yarn`
-Step 2: `yarn build`
+- Step 1: Change directory to backend `cd backend/`
+- Step 2: `npm install`
+- Step 3: `npm start`
+
+## Frontend
+
+- Step 1: Change directory to frontend `cd frontend/`
+- Step 2: `npm install`
+- Step 3: `npm start`
+
+### Production
+
+- Step 1: `npm install`
+- Step 2: `npm run-script build`
+- Step 3: `npm run-script deploy`
