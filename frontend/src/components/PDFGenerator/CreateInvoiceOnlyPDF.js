@@ -134,6 +134,7 @@ const CreateInvoiceOnlyPDF = ({ invoice }) => {
     gcnno,
     isInvoiceAdded,
     isExpenseAdded,
+    gst,
     invoice: invoiceData,
 
     // will be added later
@@ -242,6 +243,7 @@ const CreateInvoiceOnlyPDF = ({ invoice }) => {
       total: invoiceData[0]?.total,
       totalInWords: invoiceData[0]?.totalInText,
       paymentCity: dcity,
+      gst: gst,
     },
   };
 

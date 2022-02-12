@@ -12,8 +12,8 @@ const AcknowledgementTable = ({ fullName, number }) => {
         marginTop: '10px',
       }}
     >
-      <Text style={{ fontSize: 11, borderBottom: 1 }}>ACKNOWLEDGEMENT</Text>
-      <Text style={{ borderBottom: 1, height: '15px' }}>
+      <Text style={{ fontSize: 12, borderBottom: 1 }}>ACKNOWLEDGEMENT</Text>
+      <Text style={{ fontSize: 11, borderBottom: 1, height: '18px' }}>
         Recieved all the goods in good condition
       </Text>
       <View
@@ -21,11 +21,11 @@ const AcknowledgementTable = ({ fullName, number }) => {
           width: '100%',
           flexDirection: 'row',
           borderBottom: 1,
-          height: '12px',
+          height: '18px',
         }}
       >
-        <View style={{ width: '20%' }}>
-          <Text>Name: </Text>
+        <View style={{ width: '40%' }}>
+          <Text style={{ fontSize: 11, borderBottom: 1, height: '18px' }}>Name: </Text>
         </View>
         <View
           style={{
@@ -34,7 +34,7 @@ const AcknowledgementTable = ({ fullName, number }) => {
             color: 'black',
           }}
         >
-          <Text>{fullName}</Text>
+          <Text style={{ fontSize: 11, borderBottom: 1, height: '18px' }}>{fullName}</Text>
         </View>
       </View>
       <View
@@ -42,11 +42,11 @@ const AcknowledgementTable = ({ fullName, number }) => {
           width: '100%',
           flexDirection: 'row',
           borderBottom: 1,
-          height: '12px',
+          height: '18px',
         }}
       >
-        <View style={{ width: '20%' }}>
-          <Text>No. :</Text>
+        <View style={{ width: '40%' }}>
+          <Text style={{ fontSize: 11, borderBottom: 1, height: '18px' }}>No. :</Text>
         </View>
         <View
           style={{
@@ -55,7 +55,7 @@ const AcknowledgementTable = ({ fullName, number }) => {
             color: 'black',
           }}
         >
-          <Text>{number}</Text>
+          <Text style={{ fontSize: 11, borderBottom: 1, height: '18px', marginLeft: 11 }}>{number}</Text>
         </View>
       </View>
       <View
@@ -63,11 +63,11 @@ const AcknowledgementTable = ({ fullName, number }) => {
           width: '100%',
           flexDirection: 'row',
           borderBottom: 1,
-          height: '12px',
+          height: '18px',
         }}
       >
-        <View style={{ width: '20%' }}>
-          <Text>Sign.</Text>
+        <View style={{ width: '40%' }}>
+          <Text style={{ fontSize: 11, borderBottom: 1, height: '18px' }}>Sign.</Text>
         </View>
         <View
           style={{
@@ -76,7 +76,7 @@ const AcknowledgementTable = ({ fullName, number }) => {
             color: 'black',
           }}
         >
-          <Text> </Text>
+          <Text style={{ fontSize: 11, borderBottom: 1, height: '18px' }}> </Text>
         </View>
       </View>
     </View>

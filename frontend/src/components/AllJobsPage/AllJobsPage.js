@@ -51,6 +51,7 @@ const AllJobsPage = ({ match }) => {
   const [isChanged, updateIsChanged] = useState(true);
   const dispatch = useDispatch();
   const { allJobs, job } = useSelector((state) => state.Job);
+  console.log("All Jobs:", allJobs);
   const loading = useSelector((state) => state.Loader);
 
   const jobIds = allJobs.map(({ id }) => id).join(',');

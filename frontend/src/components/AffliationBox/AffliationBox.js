@@ -19,24 +19,34 @@ const AffliationBox = () => {
         width: '100%',
         fontSize: 7,
         color: 'red',
-        marginTop: '10px',
+        marginTop: '15px',
         justifyContent: 'center',
       }}
     >
-      <Text style={{ fontSize: 11, textAlign: 'center' }}>AFFILIATION</Text>
+      {/* <Text style={{ fontSize: 11, textAlign: 'center' }}>AFFILIATION</Text> */}
       <View
         style={{
           alignItems: 'center',
           textAlign: 'center',
           justifyContent: 'space-between',
-          margin: '10px auto',
+          margin: '8px auto',
         }}
       >
-        <Image style={styles.logo1} src={logo} />
+        {/* <Image style={styles.logo1} src={logo} /> */}
       </View>
-      <Text style={{ fontSize: 8, borderBottom: 1, textAlign: 'center' }}>
+      <Text style={{ fontSize: 18, borderBottom: 1, textAlign: 'center' }}>
         Serving Pan India and Overseas
       </Text>
+         <View
+        style={{
+          alignItems: 'center',
+          textAlign: 'center',
+          justifyContent: 'space-between',
+          margin: '9px auto',
+        }}
+      >
+        {/* <Image style={styles.logo1} src={logo} /> */}
+      </View>
     </View>
   );
 };

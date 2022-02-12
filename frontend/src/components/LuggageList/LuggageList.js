@@ -40,7 +40,7 @@ const LuggageListHeader = ({ ocity, dcity, gcnno, date }) => (
           marginRight: 5,
         }}
       >
-        <Text>{dcity}</Text>
+        <Text>{ocity}</Text>
       </View>{' '}
       to{' '}
       <View
@@ -53,10 +53,10 @@ const LuggageListHeader = ({ ocity, dcity, gcnno, date }) => (
           marginRight: 5,
         }}
       >
-        <Text>{ocity}</Text>
+        <Text>{dcity}</Text>
       </View>
       by ROAD.These are purely for domestic purpose and not for any kind of sale. So please allow
-      destination. Sent through{' '}
+      it to reach the destination. Sent through{' '}
       <View
         style={{
           marginHorizontal: 10,
@@ -134,7 +134,7 @@ const LuggageList = ({ luggageListDetails }) => {
           </View>
         </View>
 
-        <View style={{ marginTop: 10 }}>
+        <View style={{ marginTop: 5 }}>
           <LuggageListTable />
         </View>
 
@@ -158,7 +158,7 @@ const LuggageList = ({ luggageListDetails }) => {
               style={{
                 width: '80%',
                 flexDirection: 'row',
-                height: 30,
+                height: 0,
                 textAlign: 'center',
               }}
             >
@@ -170,9 +170,6 @@ const LuggageList = ({ luggageListDetails }) => {
                 }}
               >
                 <Text style={{ fontSize: 10, marginVertical: 'auto' }}>Customer Signature</Text>
-              </View>
-              <View style={{ width: '60%', border: 1 }}>
-                {/* <Image style={{ width: '25px', height: '25px', marginLeft: '60px' }} src={signImage} /> */}
               </View>
             </View>
           </View>

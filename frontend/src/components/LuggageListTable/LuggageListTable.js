@@ -15,7 +15,7 @@ const LuggageListTable = () => {
           <Text>ITEM NO.</Text>
         </View>
         <View style={{ borderRight: 1, width: '10%' }}>
-          <Text>MODE OF PKT.</Text>
+          <Text>MODE OF PKG.</Text>
         </View>
         <View style={{ borderRight: 1, width: '52%' }}>
           <Text style={{ marginVertical: 'auto' }}>CONTENT</Text>
@@ -33,7 +33,7 @@ const LuggageListTable = () => {
           flexDirection: 'row',
           textAlign: 'center',
           border: '1 1 1 0',
-          height: 20,
+          height: 14.5,
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
@@ -48,7 +48,7 @@ const LuggageListTable = () => {
           flexDirection: 'row',
           textAlign: 'center',
           border: '1 1 1 0',
-          height: 20,
+          height: 14.5,
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
@@ -63,7 +63,7 @@ const LuggageListTable = () => {
           flexDirection: 'row',
           textAlign: 'center',
           border: '1 1 1 0',
-          height: 20,
+          height: 14.5,
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
@@ -78,7 +78,7 @@ const LuggageListTable = () => {
           flexDirection: 'row',
           textAlign: 'center',
           border: '1 1 1 0',
-          height: 20,
+          height: 14.5,
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
@@ -93,7 +93,7 @@ const LuggageListTable = () => {
           flexDirection: 'row',
           textAlign: 'center',
           border: '1 1 1 0',
-          height: 20,
+          height: 14.5,
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
@@ -108,7 +108,7 @@ const LuggageListTable = () => {
           flexDirection: 'row',
           textAlign: 'center',
           border: '1 1 1 0',
-          height: 20,
+          height: 14.5,
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
@@ -123,7 +123,7 @@ const LuggageListTable = () => {
           flexDirection: 'row',
           textAlign: 'center',
           border: '1 1 1 0',
-          height: 20,
+          height: 14.5,
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
@@ -138,7 +138,7 @@ const LuggageListTable = () => {
           flexDirection: 'row',
           textAlign: 'center',
           border: '1 1 1 0',
-          height: 20,
+          height: 14.5,
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
@@ -153,7 +153,7 @@ const LuggageListTable = () => {
           flexDirection: 'row',
           textAlign: 'center',
           border: '1 1 1 0',
-          height: 20,
+          height: 14.5,
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
@@ -168,7 +168,7 @@ const LuggageListTable = () => {
           flexDirection: 'row',
           textAlign: 'center',
           border: '1 1 1 0',
-          height: 20,
+          height: 14.5,
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
@@ -183,7 +183,7 @@ const LuggageListTable = () => {
           flexDirection: 'row',
           textAlign: 'center',
           border: '1 1 1 0',
-          height: 20,
+          height: 14.5,
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
@@ -198,7 +198,7 @@ const LuggageListTable = () => {
           flexDirection: 'row',
           textAlign: 'center',
           border: '1 1 1 0',
-          height: 20,
+          height: 14.5,
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
@@ -213,7 +213,7 @@ const LuggageListTable = () => {
           flexDirection: 'row',
           textAlign: 'center',
           border: '1 1 1 0',
-          height: 20,
+          height: 14.5,
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
@@ -228,7 +228,7 @@ const LuggageListTable = () => {
           flexDirection: 'row',
           textAlign: 'center',
           border: '1 1 1 0',
-          height: 20,
+          height: 14.5,
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
@@ -243,7 +243,7 @@ const LuggageListTable = () => {
           flexDirection: 'row',
           textAlign: 'center',
           border: '1 1 1 0',
-          height: 20,
+          height: 14.5,
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
@@ -258,7 +258,7 @@ const LuggageListTable = () => {
           flexDirection: 'row',
           textAlign: 'center',
           border: '1 1 1 0',
-          height: 20,
+          height: 14.5,
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
@@ -273,7 +273,7 @@ const LuggageListTable = () => {
           flexDirection: 'row',
           textAlign: 'center',
           border: '1 1 1 0',
-          height: 20,
+          height: 14.5,
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
@@ -288,7 +288,7 @@ const LuggageListTable = () => {
           flexDirection: 'row',
           textAlign: 'center',
           border: '1 1 1 0',
-          height: 20,
+          height: 14.5,
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
@@ -303,7 +303,7 @@ const LuggageListTable = () => {
           flexDirection: 'row',
           textAlign: 'center',
           border: '1 1 1 0',
-          height: 20,
+          height: 14.5,
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
@@ -318,7 +318,7 @@ const LuggageListTable = () => {
           flexDirection: 'row',
           textAlign: 'center',
           border: '1 1 1 0',
-          height: 20,
+          height: 14.5,
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
@@ -333,7 +333,7 @@ const LuggageListTable = () => {
           flexDirection: 'row',
           textAlign: 'center',
           border: '1 1 1 0',
-          height: 20,
+          height: 14.5,
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
@@ -348,7 +348,7 @@ const LuggageListTable = () => {
           flexDirection: 'row',
           textAlign: 'center',
           border: '1 1 1 0',
-          height: 20,
+          height: 14.5,
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
@@ -363,7 +363,7 @@ const LuggageListTable = () => {
           flexDirection: 'row',
           textAlign: 'center',
           border: '1 1 1 0',
-          height: 20,
+          height: 14.5,
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
@@ -378,7 +378,7 @@ const LuggageListTable = () => {
           flexDirection: 'row',
           textAlign: 'center',
           border: '1 1 1 0',
-          height: 20,
+          height: 14.5,
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
@@ -388,12 +388,12 @@ const LuggageListTable = () => {
         <View style={{ width: '15%' }} />
       </View>
 
-      {/* <View
+      <View
         style={{
           flexDirection: 'row',
           textAlign: 'center',
           border: '1 1 1 0',
-          height: 20,
+          height: 14.5,
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />
@@ -401,29 +401,149 @@ const LuggageListTable = () => {
         <View style={{ borderRight: 1, width: '52%' }} />
         <View style={{ borderRight: 1, width: '15%' }} />
         <View style={{ width: '15%' }} />
-      </View> */}
-
-      {/* <View
-        style={{
-          flexDirection: 'row',
-          textAlign: 'center',
-          border: '1 1 1 0',
-          height: 20,
-        }}
-      >
-        <View style={{ borderRight: 1, width: '8%' }} />
-        <View style={{ borderRight: 1, width: '10%' }} />
-        <View style={{ borderRight: 1, width: '52%' }} />
-        <View style={{ borderRight: 1, width: '15%' }} />
-        <View style={{ width: '15%' }} />
-      </View> */}
+      </View>
 
       <View
         style={{
           flexDirection: 'row',
           textAlign: 'center',
           border: '1 1 1 0',
-          height: 20,
+          height: 14.5,
+        }}
+      >
+        <View style={{ borderRight: 1, width: '8%' }} />
+        <View style={{ borderRight: 1, width: '10%' }} />
+        <View style={{ borderRight: 1, width: '52%' }} />
+        <View style={{ borderRight: 1, width: '15%' }} />
+        <View style={{ width: '15%' }} />
+      </View>
+
+      <View
+        style={{
+          flexDirection: 'row',
+          textAlign: 'center',
+          border: '1 1 1 0',
+          height: 14.5,
+        }}
+      >
+        <View style={{ borderRight: 1, width: '8%' }} />
+        <View style={{ borderRight: 1, width: '10%' }} />
+        <View style={{ borderRight: 1, width: '52%' }} />
+        <View style={{ borderRight: 1, width: '15%' }} />
+        <View style={{ width: '15%' }} />
+      </View>
+
+      <View
+        style={{
+          flexDirection: 'row',
+          textAlign: 'center',
+          border: '1 1 1 0',
+          height: 14.5,
+        }}
+      >
+        <View style={{ borderRight: 1, width: '8%' }} />
+        <View style={{ borderRight: 1, width: '10%' }} />
+        <View style={{ borderRight: 1, width: '52%' }} />
+        <View style={{ borderRight: 1, width: '15%' }} />
+        <View style={{ width: '15%' }} />
+      </View>
+
+      <View
+        style={{
+          flexDirection: 'row',
+          textAlign: 'center',
+          border: '1 1 1 0',
+          height: 14.5,
+        }}
+      >
+        <View style={{ borderRight: 1, width: '8%' }} />
+        <View style={{ borderRight: 1, width: '10%' }} />
+        <View style={{ borderRight: 1, width: '52%' }} />
+        <View style={{ borderRight: 1, width: '15%' }} />
+        <View style={{ width: '15%' }} />
+      </View>
+
+      <View
+        style={{
+          flexDirection: 'row',
+          textAlign: 'center',
+          border: '1 1 1 0',
+          height: 14.5,
+        }}
+      >
+        <View style={{ borderRight: 1, width: '8%' }} />
+        <View style={{ borderRight: 1, width: '10%' }} />
+        <View style={{ borderRight: 1, width: '52%' }} />
+        <View style={{ borderRight: 1, width: '15%' }} />
+        <View style={{ width: '15%' }} />
+      </View>
+
+      <View
+        style={{
+          flexDirection: 'row',
+          textAlign: 'center',
+          border: '1 1 1 0',
+          height: 14.5,
+        }}
+      >
+        <View style={{ borderRight: 1, width: '8%' }} />
+        <View style={{ borderRight: 1, width: '10%' }} />
+        <View style={{ borderRight: 1, width: '52%' }} />
+        <View style={{ borderRight: 1, width: '15%' }} />
+        <View style={{ width: '15%' }} />
+      </View>
+
+      <View
+        style={{
+          flexDirection: 'row',
+          textAlign: 'center',
+          border: '1 1 1 0',
+          height: 14.5,
+        }}
+      >
+        <View style={{ borderRight: 1, width: '8%' }} />
+        <View style={{ borderRight: 1, width: '10%' }} />
+        <View style={{ borderRight: 1, width: '52%' }} />
+        <View style={{ borderRight: 1, width: '15%' }} />
+        <View style={{ width: '15%' }} />
+      </View>
+
+      <View
+        style={{
+          flexDirection: 'row',
+          textAlign: 'center',
+          border: '1 1 1 0',
+          height: 14.5,
+        }}
+      >
+        <View style={{ borderRight: 1, width: '8%' }} />
+        <View style={{ borderRight: 1, width: '10%' }} />
+        <View style={{ borderRight: 1, width: '52%' }} />
+        <View style={{ borderRight: 1, width: '15%' }} />
+        <View style={{ width: '15%' }} />
+      </View>
+
+      <View
+        style={{
+          flexDirection: 'row',
+          textAlign: 'center',
+          border: '1 1 1 0',
+          height: 14.5,
+        }}
+      >
+        <View style={{ borderRight: 1, width: '8%' }} />
+        <View style={{ borderRight: 1, width: '10%' }} />
+        <View style={{ borderRight: 1, width: '52%' }} />
+        <View style={{ borderRight: 1, width: '15%' }} />
+        <View style={{ width: '15%' }} />
+      </View>
+
+      <View
+        style={{
+          flexDirection: 'row',
+          textAlign: 'center',
+          border: '1 1 1 0',
+          height: 14.5,
         }}
       >
         <View style={{ borderRight: 1, width: '8%' }} />

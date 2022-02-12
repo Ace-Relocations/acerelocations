@@ -38,6 +38,7 @@ const InvoiceTable = ({ invoice }) => {
     total,
     totalInWords,
     paymentCity,
+    gst,
   } = invoice;
 
   const mapCity = {
@@ -53,7 +54,9 @@ const InvoiceTable = ({ invoice }) => {
             <Text>{name}</Text>
           </View>
           <View style={{ borderBottom: 1, height: 17 }}>
-            <Text></Text>
+            {gst? <Text>GST No: {gst}</Text>
+            :
+            <Text></Text>}
           </View>
           <View style={{ borderBottom: 1, height: 17 }}>
             <Text>{ocity}</Text>

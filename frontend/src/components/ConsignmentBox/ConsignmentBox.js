@@ -46,7 +46,7 @@ const ConsignmentBox = () => {
       </View>
       <View style={{ width: '100%', flexDirection: 'row', padding: 3 }}>
         <View style={{ width: '70%', alignItems: 'center', marginVertical: 'auto' }}>
-          <Text>Ace Relcoatios Uner Carrier's Risk Scheme</Text>
+          <Text>Owner Risk /Third Party Insurance by Consignor</Text>
         </View>
         <View style={{ width: '30%', alignItems: 'center' }}>
           {/* <Text>Cbox</Text> */}

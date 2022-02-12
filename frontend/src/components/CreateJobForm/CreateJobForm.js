@@ -111,6 +111,8 @@ const CreateJobForm = ({
     insuranceA,
     type,
     date,
+    items,
+    gst,
   },
 }) => {
   const classes = useStyles();
@@ -146,11 +148,14 @@ const CreateJobForm = ({
       status: getDefaultValue(isEditing, status),
       insuranceP: getDefaultValue(isEditing, insuranceP),
       insuranceA: getDefaultValue(isEditing, insuranceA),
+      items: getDefaultValue(isEditing, items),
+      gst: getDefaultValue(isEditing, gst),
       type: isEditing ? type : 'household',
       date: getDefaultValue(isEditing, date),
       car: isEditing ? car : true,
     },
   });
+  
   const submit = (data) => {
     console.log({ data });
     updateJobDetails(data);
@@ -247,12 +252,39 @@ const CreateJobForm = ({
                     // rules={{ required: true }}
                     className={classes.formControl}
                     name='carGcnno'
-                    value={values.carGcnno}
-                    // error={errors.consignorL}
-                    // helperText={errors.consignorL && 'LastName is required'}
-                    // required
+                    value={values.carGcnno}                
                   />
                 </Grid>
+
+              <Grid item lg={12} container className={classes.gridItem}>
+                <Box marginRight='10px'>
+                  <Controller
+                    as={TextField}
+                    control={control}
+                    id='outlined-basic'
+                    label='Items'
+                    variant='outlined'
+                    width={300}
+                    // rules={{ required: true }}
+                    className={classes.formControl}
+                    name='items'
+                    value={values.items}
+                  />
+                </Box>
+
+                <Controller
+                    as={TextField}
+                    control={control}
+                    id='outlined-basic'
+                    label='Company GST.No'
+                    variant='outlined'
+                    width={300}
+                    // rules={{ required: true }}
+                    className={classes.formControl}
+                    name='gst'
+                    value={values.gst}                
+                  />
+              </Grid>
 
                 <legend>Consignor Details</legend>
                 <Grid item lg={12} container className={classes.gridItem}>

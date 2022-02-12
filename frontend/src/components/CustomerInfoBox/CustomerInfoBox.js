@@ -5,11 +5,11 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     alignItems: 'center',
-    height: 24,
+    height: 22,
     borderBottomWidth: '1 solid #000',
     width: '100%',
     fontSize: 8,
-    height: 20,
+    height: 18,
     paddingTop: 3,
   },
   rowWithoutBorder: {

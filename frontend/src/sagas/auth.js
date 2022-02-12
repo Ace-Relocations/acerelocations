@@ -4,6 +4,7 @@ import { all, takeEvery, put, delay } from 'redux-saga/effects';
 import * as actionTypes from '../constants/actionTypes';
 import * as authAction from '../actions';
 
+
 import axios from '../services';
 import toaster from '../utils/toaster';
 
@@ -15,18 +16,21 @@ function* loginRequest({ payload }) {
     let response = yield axios.post('/auth/signin', { username, password });
 
     if (response.status === 200) {
+      toaster(response.message);
       yield localStorage.setItem('userToken', response.data.accessToken);
       yield localStorage.setItem('userData', JSON.stringify(response.data));
+      yield localStorage.setItem('dp', JSON.stringify(response.data.displayPicture));
+      yield localStorage.setItem('email', JSON.stringify(response.data.email));
       yield put(authAction.loginRequestSuccess(response.data.accessToken));
-      // yield put(push('/'));
+      window.location.reload(false);
     } else {
-      yield put(authAction.hideLoader());
       toaster(response.message);
+      yield put(authAction.hideLoader());
+      
     }
   } catch (error) {
     yield put(authAction.hideLoader());
-    // toaster('Signing out ...');
-    // yield put(authAction.logoutRequestSuccess(true));
+    toaster(error);
   }
 }
 

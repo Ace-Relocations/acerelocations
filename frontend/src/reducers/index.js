@@ -7,6 +7,7 @@ import Loader from './loader';
 import Dashboard from './dashboard';
 import Invoice from './invoice';
 import Expenses from './expenses';
+import Barcode from './barcode';
 
 export default (history) =>
   combineReducers({
@@ -17,4 +18,5 @@ export default (history) =>
     Dashboard,
     Invoice,
     Expenses,
+    Barcode
   });

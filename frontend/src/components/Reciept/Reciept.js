@@ -36,7 +36,7 @@ const Reciept = ({ reciept }) => {
           <Text>{`No: ${billNo}`}</Text>
         </View>
         <View style={{ width: '30%' }}>
-          <Text>{`Date: ${new Date().toLocaleDateString()}`}</Text>
+          <Text>{`Date: ${new Date().toLocaleDateString('en-IN', { year: 'numeric', month: '2-digit', day: '2-digit' })}`}</Text>
         </View>
       </View>
 

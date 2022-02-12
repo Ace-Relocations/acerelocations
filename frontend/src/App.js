@@ -1,21 +1,40 @@
 import React, { Fragment, useEffect } from 'react';
-import { Switch, Route, useHistory, useLocation } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, useHistory, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 
 import './App.css';
+
+import './assets/css/style.css';
+import Spinner from './views/Spinner/Spinner';
+
 import axios from './services';
 import CustomerInfoForm from './components/CustomerInfoForm/CustomerInfoForm';
-import Login from './components/Login/Login';
-import Signup from './components/Signup/Signup';
+import Intro from './views/Introduction/Introduction';
+import Login from './views/Login/Login';
+// import Signup from './components/Signup/Signup';
 import 'react-toastify/dist/ReactToastify.css';
 import HomePage from './components/HomePage/HomePage';
-import Sidebar from './components/Sidebar/Sidebar';
+// import Sidebar from './components/Sidebar/Sidebar';
 import CreateJobPage from './components/CreateJobPage/CreateJobPage';
 import ViewJobPage from './components/ViewJobPage/ViewJobPage';
 import AllJobsPage from './components/AllJobsPage/AllJobsPage';
 import DownloadJobPage from './components/DownloadJobPage/DownloadJobPage';
 import TestPDF from './components/TestPDF/TestPDF';
+import CreateBarcode from './components/CreateBarcode/CreateBarcode';
+import ViewBarcode from './components/ViewBarcode/ViewBarcode';
+import DownloadBarcodePage from './components/CreateBarcode/CreateBarcodePDF';
+import Sidebar from './views/Sidebar/Sidebar';
+import Header from './views/Header/Header';
+import Profile from './views/Profile/Profile';
+import Settings from './views/Settings/Settings';
+import Locked from './views/AccountLocked/AccountLocked';
+import Signup from './views/Signup/Signup';
+import ResetPassword from './views/ResetPassword/ResetPassword';
+import VerifyOTP from './views/VerifyOTP/VerifyOTP';
+import VerMessage from './views/VerifiedMessage/VerifiedMessage';
+import VerEmail from './views/VerifyEmail/VerifyEmail';
+import ResendOTP from './views/ResendOTP/ResendOTP';
 
 toast.configure();
 
@@ -50,37 +69,103 @@ function App() {
     }
   }, [authUser, history, location.pathname, logout]);
 
-  return (
-    <Fragment>
-      {authUser && <Sidebar />}
-      <Switch>
-        <Route path='/login' component={Login} />
+  let mainContent = (
+    <>
+      <Route
+        exact
+        path='/'
+        component={React.lazy(() => import('./views/Introduction/Introduction'))}
+      />
+       <Route
+        exact
+        path='/login'
+        component={React.lazy(() => import('./views/Login/Login'))}
+      />
+      <Route path='/signup' component={Signup} exact/>
+      <Route path='/reset-password' component={ResetPassword} exact/>
+      <Route path='/verify-otp' component={VerifyOTP} exact/>
+      <Route path='/resend-otp' component={ResendOTP} exact/>
+      <Route path='/verified-message/:id/:email' component={VerMessage} exact/>
+      <Route path='/verify-email' component={VerEmail} exact/>
+    </>
+  )
 
-        <div style={{ marginLeft: '250px' }}>
+  if(authUser) {
+    mainContent = (
+      <>
           <Route path='/customer' component={CustomerInfoForm} />
-          <Route path='/' component={HomePage} exact />
+          <Route path='/' component={HomePage}  exact/>
           <Route path='/create-job' component={CreateJobPage} exact />
           <Route path='/edit-job/:jobId' component={CreateJobPage} />
           <Route path='/view-job/:jobId' component={ViewJobPage} />
           <Route path='/jobs' component={AllJobsPage} exact />
           <Route path='/jobs/edit/:jobId' component={CreateJobPage} />
           <Route path='/download-job' component={DownloadJobPage} />
+          <Route path='/download-barcode' component={DownloadBarcodePage} />
           <Route path='/test-pdf' component={TestPDF} />
+          <Route path='/create-barcode' component={CreateBarcode} />
+          <Route path='/barcode' component={ViewBarcode} exact/>
+          <Route path='/profile' component={Profile} exact/>
+          <Route path='/settings-profile' component={Settings} exact/>
+          <Route path='/account-locked' component={Locked} exact/>
+          
+      </>
+    )
+  }
 
-          {/* <Route path='/view-job' exact render={() => <Redirect to='/' />} /> */}
+  // return (
+  //   <Fragment>
+  //     {authUser && <Sidebar />}
+  //     <Switch>
 
-          {/* <Route path='/' exact render={() => <Redirect to='/login' />} /> */}
+  //       <div style={{ marginLeft: '250px' }}>
+  //         <Route path='/customer' component={CustomerInfoForm} />
+  //         <Route path='/' component={HomePage} exact />
+  //         <Route path='/create-job' component={CreateJobPage} exact />
+  //         <Route path='/edit-job/:jobId' component={CreateJobPage} />
+  //         <Route path='/view-job/:jobId' component={ViewJobPage} />
+  //         <Route path='/jobs' component={AllJobsPage} exact />
+  //         <Route path='/jobs/edit/:jobId' component={CreateJobPage} />
+  //         <Route path='/download-job' component={DownloadJobPage} />
+  //         <Route path='/download-barcode' component={DownloadBarcodePage} />
+  //         <Route path='/test-pdf' component={TestPDF} />
+  //         <Route path='/create-barcode' component={CreateBarcode} />
+  //         <Route path='/barcode' component={ViewBarcode} exact/>
+  //       </div>
+  //     </Switch>
 
-          {/* Hiding Registration temporary */}
-          {/* <Route path='/signup' component={Signup} /> */}
-        </div>
-      </Switch>
+  //     {/* Toaster Container  */}
+  //     <div style={{ position: 'fixed', top: '92px', right: '92px', zIndex: '3' }}>
+  //       <ToastContainer containerId='appLayoutToaster' />
+  //     </div>
+  //   </Fragment>
+  // );
 
-      {/* Toaster Container  */}
+  return (
+    <React.Suspense fallback={<Spinner/>}>
+      <BrowserRouter>
+        <Switch>
+        <React.Fragment>
+          {authUser &&
+        <>
+        <Header />
+        <Sidebar />
+        <br />
+        <br />
+        <br />
+        <br />
+        </>
+          }
+        <div style={{ marginLeft: '100px' }}>
+          {mainContent}
+          </div>
+          </React.Fragment>
+        </Switch>
+      </BrowserRouter>
       <div style={{ position: 'fixed', top: '92px', right: '92px', zIndex: '3' }}>
         <ToastContainer containerId='appLayoutToaster' />
       </div>
-    </Fragment>
+    </React.Suspense>
   );
 }
 

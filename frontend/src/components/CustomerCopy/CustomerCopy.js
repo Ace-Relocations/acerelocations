@@ -133,7 +133,7 @@ const CustomerCopy = ({
           />
 
           <View>
-            <Text style={{ color: 'red', fontSize: 7, marginLeft: 2 }}>
+            <Text style={{ marginTop: 2, color: 'red', fontSize: 8, marginLeft: 2 }}>
               Note : Corrugated boxes, PVC boxes, Fiber drums & Moving blankets are property of ACE
               Relocations
             </Text>
@@ -154,7 +154,7 @@ const CustomerCopy = ({
             number={phone}
           />
           <AffliationBox />
-          <View style={{ marginTop: 5 }}>
+          <View style={{ marginTop: 2 }}>
             <Text style={{ color: 'red', fontSize: 8 }}>Subject to Ahmedabad jurisdiction</Text>
           </View>
         </View>

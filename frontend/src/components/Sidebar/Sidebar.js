@@ -16,6 +16,7 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import DashboardIcon from '@material-ui/icons/Dashboard';
+// import CropFreeIcon from '@mui/icons-material/CropFree';
 import Avatar from '@material-ui/core/Avatar';
 
 import logo from '../../logo.png';
@@ -111,6 +112,21 @@ const Sidebar = ({ props }) => {
             </ListItemIcon>
             <ListItemText primary='All Job' />
           </ListItem>
+
+          <ListItem button key='Generate Barcode' onClick={() => history.push('/create-barcode')}>
+            <ListItemIcon>
+              <DashboardIcon/>
+            </ListItemIcon>
+            <ListItemText primary='Generate Barcode' />
+          </ListItem>
+
+          <ListItem button key='View Barcodes' onClick={() => history.push('/barcode')}>
+            <ListItemIcon>
+              <MailIcon/>
+            </ListItemIcon>
+            <ListItemText primary='View Barcode' />
+          </ListItem>
+
           <ListItem
             button
             key='logout'

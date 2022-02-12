@@ -4,6 +4,7 @@ import CustomerCopy from '../CustomerCopy/CustomerCopy';
 import CustomerFeedbackForm from '../CustomerFeedbackForm/CustomerFeedbackForm';
 import Header from '../Header/Header';
 import LuggageList from '../LuggageList/LuggageList';
+import CarList from '../CarList/CarList';
 import TellySheet from '../TellySheet/TellySheet';
 import InvoiceTable from '../InvoiceTable/InvoiceTable';
 import TransitPlanFormBox from '../TransitPlanFormBox/TransitPlanFormBox';
@@ -139,6 +140,8 @@ const CreateJobPDF = ({ invoice }) => {
     type,
     date,
     gcnno,
+    items,
+    gst,
     isInvoiceAdded,
     isExpenseAdded,
     invoice: invoiceData,
@@ -169,6 +172,8 @@ const CreateJobPDF = ({ invoice }) => {
     gcnno,
     carGcnno,
     phone: contact,
+    items,
+    gst,
     // carGcnno,
     customer: {
       firstName: consignorF,
@@ -216,6 +221,22 @@ const CreateJobPDF = ({ invoice }) => {
         addressLine3: `${dcity} - ${dpincode}`,
       },
     },
+
+
+    carListDetails: {
+      firstName: consignorF,
+      lastName: consignorL,
+      adderess: `${oaddress1}, ${oaddress2}, ${ocity} - ${opincode}`,
+      contact,
+      gcnno,
+      carGcnno,
+      birthDate: '',
+      Anniversary: '',
+      jobno: gcnno,
+      destination: dcity,
+      email,
+    },
+
     tellyData: {
       fullName: `${consignorF} ${consignorL}`,
       location: ocity,
@@ -274,13 +295,14 @@ const CreateJobPDF = ({ invoice }) => {
         total: invoiceData[0] ?.total,
         totalInWords: invoiceData[0] ?.totalInText,
         paymentCity: dcity,
+        gst: invoiceData[0] ?.gst,
       },
     }
   }
   const isCar = type === 'car';
   const isHouseHold = type === 'household';
   const isBoth = type === 'both';
-  console.log("HERE")
+  console.log("GSTNN", invoiceData[0] ?.gst)
 
   return (
     <Document>
@@ -372,9 +394,42 @@ const CreateJobPDF = ({ invoice }) => {
       </Page>
 
       {/* LuggageList */}
-      <Page size='A4' style={styles.page}>
-        <LuggageList luggageListDetails={invoiceDetail ?.luggageListDetails} />
-      </Page>
+      {invoiceDetail.items < 40 || invoiceDetail.items == 0 ?( 
+      <><Page size='A4' style={styles.page}>
+          <LuggageList luggageListDetails={invoiceDetail?.luggageListDetails} />
+        </Page>
+        <Page size='A4' style={styles.page}>
+            <LuggageList luggageListDetails={invoiceDetail?.luggageListDetails} />
+        </Page>
+        <Page size='A4' style={styles.page}>
+            <LuggageList luggageListDetails={invoiceDetail?.luggageListDetails} />
+        </Page></>) :
+      (<><Page size='A4' style={styles.page}>
+          <LuggageList luggageListDetails={invoiceDetail?.luggageListDetails} />
+        </Page>
+        <Page size='A4' style={styles.page}>
+            <LuggageList luggageListDetails={invoiceDetail?.luggageListDetails} />
+        </Page>
+        <Page size='A4' style={styles.page}>
+            <LuggageList luggageListDetails={invoiceDetail?.luggageListDetails} />
+        </Page>
+        <Page size='A4' style={styles.page}>
+            <LuggageList luggageListDetails={invoiceDetail?.luggageListDetails} />
+        </Page>
+        <Page size='A4' style={styles.page}>
+            <LuggageList luggageListDetails={invoiceDetail?.luggageListDetails} />
+        </Page>
+        <Page size='A4' style={styles.page}>
+            <LuggageList luggageListDetails={invoiceDetail?.luggageListDetails} />
+        </Page></>) 
+      }
+
+        {(isCar || isBoth) && (
+        <Page size='A4' style={styles.page}>
+        <Header />
+          <CarList carListDetails={invoiceDetail?.customer} />
+        </Page>
+        )}
 
       {/* TellySheet */}
       <TellySheet tellyData={invoiceDetail ?.tellyData} />

@@ -87,7 +87,9 @@ const LoginForm = () => {
   }, [logout, authUser]);
 
   const submit = (data) => {
-    dispatch(loginRequest(data));
+      dispatch(loginRequest(data));
+      history.push('/');
+
   };
 
   watch(['username', 'password']);

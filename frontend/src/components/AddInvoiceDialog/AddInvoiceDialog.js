@@ -65,7 +65,7 @@ const AddInvoiceDialog = ({
     [
     {
       expense:
-        'Transportation charges inclusive of allied services for your personal effects and car from ORIGIN to DESTINATION',
+        'Transportation charges for your personal effects and car from ORIGIN to DESTINATION',
       amount: null,
       isChecked: false,
       editable: true
@@ -73,7 +73,7 @@ const AddInvoiceDialog = ({
     },
     {
       expense:
-        'Transportation charges inclusive of allied services for your personal effects from ORIGIN to DESTINATION',
+        'Transportation charges for your personal effects from ORIGIN to DESTINATION',
       amount: null,
       isChecked: false,
       editable: true
@@ -81,7 +81,7 @@ const AddInvoiceDialog = ({
     },
     {
       expense:
-        'Transportation charges inclusive of allied services for your car/ bike from ORIGIN to DESTINATION',
+        'Transportation charges for your car/ bike from ORIGIN to DESTINATION',
       amount: null,
       isChecked: false,
       editable: true

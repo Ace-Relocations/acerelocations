@@ -117,7 +117,10 @@ const TransitPlanFormBox = ({ transitData }) => {
               <Text style={styles.centerRow}>Option One: </Text>
             </View>
             <View style={{ border: 1, width: '30%' }}>
-              {!!transitData ?.insuranceP && !transitData ?.insuranceA ? (
+              {transitData ?.insuranceP && !transitData ?.insuranceA ? 
+              (
+                  <Text style={styles.centerRow}></Text>
+                ) : (
                 <Image
                   style={{
                     width: '10px',
@@ -127,9 +130,7 @@ const TransitPlanFormBox = ({ transitData }) => {
                   }}
                   src={checkMark}
                 />
-              ) : (
-                  <Text style={styles.centerRow}></Text>
-                )}
+              )}
               {/* <Text style={styles.centerRow}></Text> */}
             </View>
             <View style={{ width: '60%', paddingTop: 5 }}>
@@ -166,7 +167,7 @@ const TransitPlanFormBox = ({ transitData }) => {
               <Text style={styles.centerRow}>Option Two: </Text>
             </View>
             <View style={{ border: 1, width: '30%' }}>
-              {!transitData ?.insuranceP && !!transitData ?.insuranceA ? (
+              {!transitData ?.insuranceA ? (
                 <Image
                   style={{
                     width: '10px',

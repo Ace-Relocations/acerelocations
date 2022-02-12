@@ -428,7 +428,7 @@ const AllJobsTable = ({
                     </IconButton>
                   </StyledTableCell>
                   <StyledTableCell align='center'>
-                    <IconButton aria-label='edit' onClick={() => debug(invoice)}>
+                    <IconButton aria-label='edit' onClick={() => onEditJobClick(row.gcnno)}>
                       <SvgIcon>
                         <EditIcon />
                       </SvgIcon>
