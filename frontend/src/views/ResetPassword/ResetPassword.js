@@ -1,6 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link, useHistory, useParams } from 'react-router-dom';
+import axiosMain from '../../services';
 
-const ResetPassword = () => (
+const ResetPassword = props => { 
+
+  const { id, email } = useParams();
+
+    const [verified, setVerified] = useState(false);
+
+    useEffect(() => {
+        axiosMain
+        .post('/auth/forgot')
+        .then(response => {
+          if (response.status === 200) {
+            setVerified(true);
+          }
+        })
+        .catch(error => {
+          console.error('Error', error);
+        });
+    }, []);
+
+  return (
+  
   <div id="main-wrapper">
     <div className="authincation section-padding">
       <div className="container h-100">
@@ -22,7 +44,10 @@ const ResetPassword = () => (
                   </div>
                 </form>
                 <div className="new-account mt-3">
-                  <p>Don't get code? <a className="text-primary" href="otp-1.html">Resend</a></p>
+                  {verified?
+                  <p>The OTP has been sent</p>:
+                  <p></p>}
+                  <p>Din't get a code? <a className="text-primary" href="otp-1.html">Resend</a></p>
                 </div>
               </div>
             </div>
@@ -31,6 +56,7 @@ const ResetPassword = () => (
       </div>
     </div>
   </div>
-)
+  )
+}
 
 export default ResetPassword;

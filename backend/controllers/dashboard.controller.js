@@ -6,13 +6,21 @@ module.exports = {
     getDashboard: async (req, res) => {
         try {
             let obj = {};
-            obj.revenue = await dashboardService.getRevenue();
-            obj.cost = await dashboardService.getCost();
-            obj.profit = obj.revenue - obj.cost;
-            obj.totalJobs = await dashboardService.getTotal();
-            obj.ongoingJobs = await dashboardService.getOngoing();
-            obj.completedJobs = await dashboardService.getCompleted();
+            revenue = await dashboardService.getRevenue();
+            cost = await dashboardService.getCost();
+            profit = revenue - cost;
+            totalJobs = await dashboardService.getTotal();
+            ongoingJobs = await dashboardService.getOngoing();
+            completedJobs = await dashboardService.getCompleted();
 
+            obj = {
+                'Revenue': revenue,
+                'Cost': cost,
+                'Profit': profit,
+                'Total Jobs': totalJobs,
+                'Ongoing Jobs': ongoingJobs,
+                'Completed Jobs': completedJobs
+            }
             console.log(obj);
             return res.status(200).send({ message: "Dashboard was fetched successfully!", data: obj });
 

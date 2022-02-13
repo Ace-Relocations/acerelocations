@@ -8,7 +8,6 @@ const VerifyEmail = props => {
     const history = useHistory();
 
     useEffect(() => {
-        console.log("Props", props);
         if (!emailValue) {
         if (props.location.state) {
                 axiosMain

@@ -310,7 +310,7 @@ const ResendOTP = () => (
                     </div>
                   </div>
                   <div className="alert-text">
-                    <small>Security is critical in Rhodium. to help keep your account safe, we'll text
+                    <small>Security is critical in Acerelocations. to help keep your account safe, we'll text
                         you
                                             a verification code when you sign in on a new device</small>
                   </div>

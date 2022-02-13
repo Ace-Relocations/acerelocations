@@ -60,37 +60,37 @@ const Signup = props => {
   };
 
   const signUpAPI = () => {
-    // axiosMain
-    //   .post('/auth/signup', {
-    //     username: usernameValue,
-    //     email: emailValue,
-    //     password: passwordValue,
-    //     roles: ["admin", "moderator"]
-    //   })
-    //   .then(response => {
-    //     if (response.status === 200) {
-    //       setData(response.data.data);
-    //       toast.success(`Sign Up Successful`, {
-    //         position: 'top-right',
-    //         autoClose: 3000,
-    //         hideProgressBar: true,
-    //         closeOnClick: true,
-    //         pauseOnHover: true,
-    //         draggable: true,
-    //         progress: undefined,
-    //       });
-    //       props.history.push({
-    //         pathname: `/verify-email`,
-    //         state: {
-    //           email: emailValue,
-    //         },
-    //       });
-    //     }
-    //   })
-    //   .catch(error => {
-    //     console.error('Error', error);
-    //     setErrValue("This Email is already registered on the platform");
-    //   });
+    axiosMain
+      .post('/auth/signup', {
+        username: usernameValue,
+        email: emailValue,
+        password: passwordValue,
+        roles: ["admin", "moderator"]
+      })
+      .then(response => {
+        if (response.status === 200) {
+          setData(response.data.data);
+          toast.success(`Sign Up Successful`, {
+            position: 'top-right',
+            autoClose: 3000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          props.history.push({
+            pathname: `/verify-email`,
+            state: {
+              email: emailValue,
+            },
+          });
+        }
+      })
+      .catch(error => {
+        console.error('Error', error);
+        setErrValue("This Email is already registered on the platform");
+      });
 
     props.history.push({
       pathname: `/verify-email`,

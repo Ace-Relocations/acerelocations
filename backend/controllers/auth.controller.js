@@ -11,6 +11,14 @@ const Role = db.role;
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 
+let transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'shahdishant28@gmail.com',
+    pass: 'dtigxclbutwxuwaw'
+  },
+});
+
 
 exports.signup = async (req, res) => {
   const user = new User({
@@ -64,14 +72,6 @@ exports.signup = async (req, res) => {
       });
     }
 
-    let transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: 'shahdishant28@gmail.com',
-        pass: 'dtigxclbutwxuwaw'
-      },
-    });
-
     rand = Math.floor((Math.random() * 100) + 54);
     host = req.get('host');
     link = "http://" + "acerelocations-frontend.s3-website.us-east-2.amazonaws.com" + "/verified-message/"+ rand + "/" + req.body.email;
@@ -85,7 +85,7 @@ exports.signup = async (req, res) => {
     //     res.status(500).send({ message: err });
     //   }       
       mailOptions = {
-        from: 'info@rhodium.com',
+        from: 'info@acerelocations.co.in',
         to: req.body.email,
         subject: "Please confirm your Email account",
         html: "Hi, Please click here to confirm your email" + String(link)
@@ -94,12 +94,9 @@ exports.signup = async (req, res) => {
    
     transporter.sendMail(mailOptions, (err, info) => {
       if (err) {
-        console.log("ERROR:", err);
-
         res.status(500).send({ message: err });
         return;
       }
-      console.log("INFO:", info);
       res.status(200).send({ message: "User was registered successfully!", data: user });
 
     }) 
@@ -202,6 +199,40 @@ exports.verifyOTP = async (req, res) => {
       return;
     }
     return res.status(200).send(verifyData);
+  } catch (err) {
+    res.status(500).send({ message: err });
+    return;
+  }
+}
+
+exports.forgotPassword = async (req, res) => {
+  try {
+    let user = await User.findOne({ email: req.body.email.toLowerCase() })
+    if(user) {
+    
+    rand = Math.floor((Math.random() * 100) + 54);
+
+    user.emailVerifyNo = rand;
+    var newvalues = { $set: user };
+    let updatev = user.updateOne({ _id: user._id }, newvalues);
+    
+      mailOptions = {
+        from: 'info@acerelocations.co.in',
+        to: req.body.email,
+        subject: "OTP to reset password",
+        html: "Hi, Please find your otp" + String(rand)
+      } 
+      
+   
+    transporter.sendMail(mailOptions, (err, info) => {
+      if (err) {
+        res.status(500).send({ message: err });
+        return;
+      }
+      res.status(200).send({ message: "Forgot Password mail was sent!", data: user });
+
+    })
+  } 
   } catch (err) {
     res.status(500).send({ message: err });
     return;

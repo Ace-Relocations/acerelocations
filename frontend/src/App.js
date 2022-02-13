@@ -14,7 +14,8 @@ import Intro from './views/Introduction/Introduction';
 import Login from './views/Login/Login';
 // import Signup from './components/Signup/Signup';
 import 'react-toastify/dist/ReactToastify.css';
-import HomePage from './components/HomePage/HomePage';
+// import HomePage from './components/HomePage/HomePage';
+import HomePage from './views/Home/Home';
 // import Sidebar from './components/Sidebar/Sidebar';
 import CreateJobPage from './components/CreateJobPage/CreateJobPage';
 import ViewJobPage from './components/ViewJobPage/ViewJobPage';
@@ -94,7 +95,7 @@ function App() {
     mainContent = (
       <>
           <Route path='/customer' component={CustomerInfoForm} />
-          <Route path='/' component={HomePage}  exact/>
+          <Route path='/dashboard' component={HomePage}  exact/>
           <Route path='/create-job' component={CreateJobPage} exact />
           <Route path='/edit-job/:jobId' component={CreateJobPage} />
           <Route path='/view-job/:jobId' component={ViewJobPage} />
@@ -150,6 +151,8 @@ function App() {
         <>
         <Header />
         <Sidebar />
+        <br />
+        <br />
         <br />
         <br />
         <br />

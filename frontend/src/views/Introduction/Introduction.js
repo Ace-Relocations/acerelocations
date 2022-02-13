@@ -21,8 +21,7 @@ const Introduction = props => {
                             <nav className="navbar">
                                 <div className="brand-logo">
                                     <a href="index.html">
-                                    <span><img src={logo} alt="" height="100px" width="100px" /></span>
-                                    <span align="left">Ace Relocations</span>
+                                    <span><img src={logo} alt=""/></span>
                                     </a>
                                 </div>
                                 <Link to="/login" className="btn btn-success">Sign in</Link>
@@ -46,7 +45,7 @@ const Introduction = props => {
                                     company in India. </p>
                                 <div className="intro-btn">
                                 <Link to="/login" className="btn btn-primary">Get Started</Link>
-                                    <a href="index.html" className="btn btn-outline-primary">Browse Now</a>
+                                    <a href="https://www.acerelocations.co.in" className="btn btn-outline-primary">Our Website</a>
                                 </div>
                             </div>
                         </div>

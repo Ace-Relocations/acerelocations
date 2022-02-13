@@ -14,12 +14,13 @@ import {
 import { loginRequest } from '../../actions';
 import { Spinner } from '../../views';
 
-const Login = () => {
+const Login = props => {
   const history = useHistory();
 
   const [usernameValue, setUsernameValue] = useState({});
   const [passwordValue, setPasswordValue] = useState({});
   const [errValue, setErrValue] = useState();
+  const stats = useSelector((state) => state.Dashboard.dashboardStats);
 
   const handleValidation = () => {
     let errors = {};
@@ -63,6 +64,9 @@ const Login = () => {
     } else {
       console.log("Error Value", errValue)
     }
+    props.history.push({
+      pathname: `/dashboard`
+    }); 
 
   };
 
@@ -121,7 +125,7 @@ const Login = () => {
                       }
                     </div>
                   </div>
-                  <div className='col-6 text-right'>
+                  <div className='col-6'>
                     <Link to='/reset-password'>Forgot Password?</Link>
                   </div>
                   <div className='text-center'>
@@ -144,7 +148,7 @@ const Login = () => {
                   </p>
                 </div>
               </div>
-              <div className='privacy-link'>
+              {/* <div className='privacy-link'>
                 <Link
                   to='/signup'
                 >
@@ -155,7 +159,7 @@ const Login = () => {
                   to='/signup'>
                   Privacy Policy
                 </Link>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

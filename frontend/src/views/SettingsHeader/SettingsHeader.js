@@ -20,10 +20,10 @@ const SettingsHeader = props => {
                 </Link>
                 <a href="settings-security.html">Security</a>
                 <a href="settings-activity.html">Activity</a>
-                <a href="settings-privacy.html">Privacy</a>
+                {/* <a href="settings-privacy.html">Privacy</a>
                 <a href="settings-payment-method.html">Application</a>
-                <a href="settings-api.html">API</a>
-                <a href="settings-fees.html">Fees</a>
+                <a href="settings-api.html">API</a> */}
+                <a href="settings-fees.html">Subscription</a>
             </div>
         </div>
 

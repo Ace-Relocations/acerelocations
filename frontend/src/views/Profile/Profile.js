@@ -26,7 +26,7 @@ const Profile = props => {
                 if (response.status === 200) {
                     setData(response.data);
                     console.log("Response:", response.data);
-                    toast.success(`Sign Up Successful`, {
+                    toast.success(`User profile Populated`, {
                         position: 'top-right',
                         autoClose: 3000,
                         hideProgressBar: true,
@@ -63,7 +63,7 @@ const Profile = props => {
                                     <img src={dp} alt="" />
                                     <h4>Welcome, {data.username}!</h4>
                                     <p>Looks like you are not verified yet. Verify yourself to use the full potential of
-                                    Rhodium Exchange.</p>
+                                    Acerelocations Exchange.</p>
                                     <ul>
                                         <li>
                                             <a href="#">

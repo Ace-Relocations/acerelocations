@@ -35,12 +35,11 @@ const DashboardSection = () => {
   useEffect(() => {
     dispatch(dashbordStatsRequest());
   }, []);
+  console.log("Stats:", stats)
 
   return (
     <div>
-      {loader ? (
-        <Loader />
-      ) : (stats &&
+      {stats?
           <Grid container>
             <Grid item lg={12} container className={classes.gridItem}>
               <Grid item lg={4} container>
@@ -62,8 +61,9 @@ const DashboardSection = () => {
                 <CustomCard title='Completed Jobs' value={stats?.completedJobs} />
               </Grid>
             </Grid>
-          </Grid>
-        )}
+          </Grid>:
+          <p> Refresh to Load Dashboard </p>
+        }
     </div>
   );
 };
