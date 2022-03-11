@@ -58,5 +58,28 @@ module.exports = {
         } catch (err) {
             return err;  
         }
+    },
+
+    getExpense: async () => {
+        try {
+            return Expense.find({})  // You may want to add a query
+        } catch {
+            return err;    
+        }
+    },
+
+    getInvoice: async () => {
+        try {
+            
+            const data = Customer.find({})  // You may want to add a query
+                           .populate("expense")
+                           .populate("invoice"); // This is your 'page size'
+
+            return data;
+
+        } catch {
+            return err;    
+        }
     }
+
 }
