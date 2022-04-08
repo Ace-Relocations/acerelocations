@@ -32,14 +32,12 @@ module.exports = {
             //     gcnno = 0;
             //     gcnnoC = await service.incrementGcnno();
             // }
-            console.log("Gcnno",carGcnno)
             let uno;
             if (!gcnno) {
                 uno = carGcnno;
             } else {
                 uno = gcnno;
             }
-            console.log("Gcnno",gcnno)
             const user = await User.findById(req.userId)
             const createdBy = user.email;
             // const year = moment(Date.now()).format('YYYY');
@@ -70,7 +68,7 @@ module.exports = {
             obj.gst = gst;
             obj.insuranceAInText = numberToText.convertToText(insuranceA) + " " + "only";
             obj.createdBy = createdBy;
-            obj.date = moment(date).format('DD/MM/YYYY');
+            obj.date = moment(date).format('MM/DD/YYYY');
             obj.save(err => {
                 if (err) {
                     if (err.code == 11000) {
@@ -94,9 +92,7 @@ module.exports = {
 
     viewJob: async (req, res) => {
         try {
-            console.log("Hi")
             let viewData = await service.viewJob(req.query.gcnno);
-            console.log("Controller:", viewData);
             if (!viewData) {
                 res.status(500).send({ message: "User with the following gcnnno not found" });
                 return;
@@ -190,7 +186,6 @@ module.exports = {
                     return;
                 }
 
-                console.log("DATEE", date)
                 const admin = await User.findById(req.userId)
                 const createdBy = admin.email;
 
@@ -225,7 +220,7 @@ module.exports = {
                 obj.createdBy = createdBy;
                 obj.items = items;
                 obj.gst = gst;
-                obj.date = moment(date).format('DD/MM/YYYY');
+                obj.date = moment(date).format('MM/DD/YYYY');
                 obj.invoice = user.invoice;
                 obj.expense = user.expense;
                 obj.isInvoiceAdded = isInvoiceAdded || user.isInvoiceAdded;
