@@ -220,7 +220,9 @@ module.exports = {
                 obj.createdBy = createdBy;
                 obj.items = items;
                 obj.gst = gst;
-                obj.date = moment(date).format('MM/DD/YYYY');
+                console.log("Input:", date)
+                obj.date = moment(date).format('DD/MM/YYYY');
+                console.log("Output:", obj.date)
                 obj.invoice = user.invoice;
                 obj.expense = user.expense;
                 obj.isInvoiceAdded = isInvoiceAdded || user.isInvoiceAdded;

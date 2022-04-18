@@ -8,7 +8,8 @@ module.exports = {
         try {
             console.log("Hi")
             let user = await Customer.findOne({ gcnno: gcnno }).populate("expense").populate("invoice");
-            console.log("Service user:", user);
+            console.log("Service user:", user.date);
+            // user.date = moment(user.date).format('DD/MM/YYYY');
 
             if (!user) {
             return user;
