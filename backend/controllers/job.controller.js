@@ -68,7 +68,7 @@ module.exports = {
             obj.gst = gst;
             obj.insuranceAInText = numberToText.convertToText(insuranceA) + " " + "only";
             obj.createdBy = createdBy;
-            obj.date = moment(date).format('MM/DD/YYYY');
+            obj.date = moment(date).format('DD/MM/YYYY');
             obj.save(err => {
                 if (err) {
                     if (err.code == 11000) {
