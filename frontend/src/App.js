@@ -95,7 +95,7 @@ function App() {
     mainContent = (
       <>
           <Route path='/customer' component={CustomerInfoForm} />
-          <Route path='/dashboard' component={HomePage}  exact/>
+          <Route path='/' component={HomePage}  exact/>
           <Route path='/create-job' component={CreateJobPage} exact />
           <Route path='/edit-job/:jobId' component={CreateJobPage} />
           <Route path='/view-job/:jobId' component={ViewJobPage} />
@@ -162,6 +162,9 @@ function App() {
         <div style={{ marginLeft: '100px' }}>
           {mainContent}
           </div>
+          <br />
+          <br />
+          <br />
           </React.Fragment>
         </Switch>
       </BrowserRouter>

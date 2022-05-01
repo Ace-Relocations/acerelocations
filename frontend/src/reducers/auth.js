@@ -4,6 +4,8 @@ export const INITIAL_STATE = {
   email: '',
   password: '',
   authUser: localStorage.getItem('userToken'),
+  error: false,
+  errorMessage: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -15,6 +17,13 @@ export default (state = INITIAL_STATE, action) => {
         logout: false,
         username: '',
         password: '',
+      };
+
+    case actions.LOGIN_FAIL:
+      return {
+        ...state,
+        error: true,
+        errorMessage: 'Incorrect Login or Password'
       };
 
     case actions.LOGOUT_REQUEST_SUCCESS:

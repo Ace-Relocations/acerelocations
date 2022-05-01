@@ -164,29 +164,6 @@ const CreateJobForm = ({
       // updateIsDownloadingPDF(true);
     } else {
       onCreateJob(data);
-      // updateIsDownloadingPDF(true);
-      // reset({
-      //   cnsFirstName: getDefaultValue(isEditing, consignor),
-      //   cneFirstName: getDefaultValue(isEditing, consignee),
-      //   cneMobile: getDefaultValue(isEditing, contact),
-      //   cneEmail: getDefaultValue(isEditing, email),
-      //   originAddress1: getDefaultValue(isEditing, oaddress1),
-      //   originAddress2: getDefaultValue(isEditing, oaddress2),
-      //   originCity: getDefaultValue(isEditing, ocity),
-      //   ooriginState: getDefaultValue(isEditing, ostate),
-      //   originPincode: getDefaultValue(isEditing, opincode),
-      //   destinationAddress1: getDefaultValue(isEditing, daddress1),
-      //   destinationAddress2: getDefaultValue(isEditing, daddress2),
-      //   destinationCity: getDefaultValue(isEditing, dcity),
-      //   destinationState: getDefaultValue(isEditing, dstate),
-      //   destinationPincode: getDefaultValue(isEditing, dpincode),
-      //   status: getDefaultValue(isEditing, status),
-      //   insuranceP: getDefaultValue(isEditing, insuranceP),
-      //   insuranceA: getDefaultValue(isEditing, insuranceA),
-      //   type: getDefaultValue(isEditing, type),
-      //   date: getDefaultValue(isEditing, date),
-      //   car: isEditing ? car : false,
-      // });
     }
   };
 
@@ -707,7 +684,7 @@ const CreateJobForm = ({
                               <KeyboardDatePicker
                                 disableToolbar
                                 variant='inline'
-                                format='MM/dd/yyyy'
+                                format='dd/MM/yyyy'
                                 margin='normal'
                                 id='date-picker-inline'
                                 value={values.date}

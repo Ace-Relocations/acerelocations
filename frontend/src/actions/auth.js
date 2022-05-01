@@ -1,5 +1,6 @@
 import {
   LOGIN_REQUEST,
+  LOGIN_FAIL,
   LOGIN_REQUEST_SUCCESS,
   ON_HIDE_LOADER,
   ON_SHOW_LOADER,
@@ -11,7 +12,10 @@ export const loginRequest = (payload) => ({
   type: LOGIN_REQUEST,
   payload,
 });
-
+export const loginFail = (payload) => ({
+  type: LOGIN_FAIL,
+  payload,
+});
 export const loginRequestSuccess = (payload) => ({
   type: LOGIN_REQUEST_SUCCESS,
   payload,

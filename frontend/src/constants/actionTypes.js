@@ -1,5 +1,6 @@
 //AUTH
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
+export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGIN_REQUEST_SUCCESS = 'LOGIN_REQUEST_SUCCESS';
 export const RESET_APP = 'RESET_APP';
 export const ON_SHOW_LOADER = 'ON_SHOW_LOADER';

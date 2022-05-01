@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axiosMain from "../../services";
 import { toast } from "react-toastify";
-import CandleGraph from "../Graphs/CandleGraph";
+import LineGraph from "../Graphs/LineGraph";
 import CustomDropdown from "../CustomDropdown/CustomDropdown";
 import { withRouter } from "react-router";
 
@@ -28,81 +28,69 @@ const Analytics = (props) => {
   const [data, setData] = useState([]);
   const [selectOptions, setSelectionOptions] = useState([]);
   const [selectedDuration, setSelectedDuration] = useState([]);
-  const [pair, setPair] = useState();
-  const [symbol, setSymbol] = useState();
-  const [lastPrice, setLastPrice] = useState();
   const [errValue, setErrValue] = useState();
   const [volume, setVolume] = useState();
   const [open, setOpen] = useState();
 
   useEffect(() => {
-    setPair('BTCUSDT') 
-    setSelectedDuration("1h");
-    getPairs();
+    getInsight();
   }, []);
 
-  const getPairs = () => {
+  const getInsight = () => {
     axiosMain
-      .get("/market/price")
+      .get("/dashboard/insight/invoice")
       .then((response) => {
         if (response.status === 200) {
-          // for (let j in response.data) {
-          //     console.log("YAY", Object.keys(response.data)[j])
-          // }
-          let dataArr = [];
-          Object.keys(response.data).forEach((prop) => {
-            dataArr.push({
-              label: prop,
-              value: prop,
-            });
-          });
-          setSelectionOptions(dataArr);
+
+          console.log("HEREEE", response.data)
+          setData(response.data)
+          setSelectionOptions([{label: "Invoice", value: "Invoice"}]);
         }
       })
       .catch((error) => {
         console.error("Error", error);
-        setErrValue("The Crypto Data Feetch Unsuccessful");
+        setErrValue("Data Fetch was Unsuccessful");
       });
   };
 
-  const onPairSelect = () => {
-    axiosMain
-      .post("/market/candleGraph", {
-        pair: pair,
-        timeInterval: selectedDuration
-      })
-      .then((response) => {
-        if (response.status === 200) {
-          let dataArr = [];
-          let data = response.data;
-          // Object.keys(data).map(({ graph }, index) => {
-          //     Object.keys(graph).map((ww) => {
-          //         console.log("DATA", ww);
-          //     })
-          // })
+  // const onPairSelect = () => {
+  //   axiosMain
+  //     .post("/market/candleGraph", {
+  //       pair: pair,
+  //       timeInterval: selectedDuration
+  //     })
+  //     .then((response) => {
+  //       if (response.status === 200) {
+  //         let dataArr = [];
+  //         let data = response.data;
+  //         // Object.keys(data).map(({ graph }, index) => {
+  //         //     Object.keys(graph).map((ww) => {
+  //         //         console.log("DATA", ww);
+  //         //     })
+  //         // })
 
-          //   for (let i = 0; i < 50; i++) {
-          Object.values(data.graph).forEach((i) => {
-            let obj = {};
-            obj.x = new Date(i[0]);
-            obj.y = [Number(i[1]), Number(i[2]), Number(i[3]), Number(i[4])];
-            dataArr.push(obj);
-          });
-          //   }
+  //         //   for (let i = 0; i < 50; i++) {
+  //         Object.values(data.graph).forEach((i) => {
+  //           let obj = {};
+  //           obj.x = new Date(i[0]);
+  //           obj.y = [Number(i[1]), Number(i[2]), Number(i[3]), Number(i[4])];
+  //           dataArr.push(obj);
+  //         });
+  //         //   }
 
-          setData(dataArr);
-          setSymbol(data.symbol);
-          setLastPrice(data.close);
-          setOpen(data.open);
-          setVolume(data.volume);
-          console.log("Response", dataArr);
-        }
-      })
-      .catch((error) => {
-        console.error("Error", error);
-        setErrValue("The Crypto Data Feetch Unsuccessful");
-      });
-  };
+  //         setData(dataArr);
+  //         setSymbol(data.symbol);
+  //         setLastPrice(data.close);
+  //         setOpen(data.open);
+  //         setVolume(data.volume);
+  //         console.log("Response", dataArr);
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error", error);
+  //       setErrValue("The Crypto Data Feetch Unsuccessful");
+  //     });
+  // };
 
   return (
     <React.Fragment>
@@ -112,30 +100,19 @@ const Analytics = (props) => {
             <h4 className="card-title home-chart">Analytics</h4>
             {errValue? <p>{errValue}</p> : null}
 
-            <CustomDropdown
+            {/* <CustomDropdown
               className="form-select"
               name="report-type"
               id="report-select"
               options={selectOptions}
               defaultLabel="Choose Ticker"
               // value={"BTCUSDT" || "N/A"}
-              onChangeOption={(selected) => { setPair(selected); onPairSelect(); }}
-            />
-            <CustomDropdown
-              className="form-select"
-              name="report-type"
-              id="report-select"
-              options={selectDurationOptions}
-              defaultLabel="Choose Duration"
-              // value={"BTCUSDT" || "N/A"}
-              onChangeOption={(selected) => { setSelectedDuration(selected); onPairSelect(); }}
-            />
+              onChangeOption={(selected) => { }}
+            /> */}
           </div>
           <div className="card-body">
-            <div className=" home-chart-height">
-              <div id="chartx"></div>
-              <CandleGraph graphData={data} />
-              <div className="row">
+              <LineGraph graphData={data} />
+              {/* <div className="row">
                 <div className="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-6">
                   <div className="chart-price-value">
                     <span>24hr Volume</span>
@@ -160,8 +137,7 @@ const Analytics = (props) => {
                     <h5>{lastPrice}</h5>
                   </div>
                 </div>
-              </div>
-            </div>
+              </div> */}
           </div>
         </div>
       </div>

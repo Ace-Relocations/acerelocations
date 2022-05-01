@@ -22,14 +22,13 @@ function* loginRequest({ payload }) {
       yield localStorage.setItem('dp', JSON.stringify(response.data.displayPicture));
       yield localStorage.setItem('email', JSON.stringify(response.data.email));
       yield put(authAction.loginRequestSuccess(response.data.accessToken));
-      window.location.reload(false);
+      window.location.assign('/')    
     } else {
       toaster(response.message);
-      yield put(authAction.hideLoader());
-      
+      yield put(authAction.loginFail());
     }
   } catch (error) {
-    yield put(authAction.hideLoader());
+    yield put(authAction.loginFail());
     toaster(error);
   }
 }

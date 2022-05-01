@@ -7231,7 +7231,7 @@ strong {
   background: #282828; }
 
 .bg-usdt {
-  background: #2CA07A; }
+  background: #000000; }
 
 .bg-xrp {
   background: #346AA9; }
@@ -7699,7 +7699,7 @@ strong {
       text-align: center; } }
 
 .sidebar {
-  background: #1830a3;
+  background: #000000;
   position: fixed;
   left: 20px;
   height: calc(100%-20px);

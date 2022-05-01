@@ -19,11 +19,12 @@ const Login = props => {
 
   const [usernameValue, setUsernameValue] = useState({});
   const [passwordValue, setPasswordValue] = useState({});
-  const [errValue, setErrValue] = useState();
+  const [errValue, setErrValue] = useState(null);
   const stats = useSelector((state) => state.Dashboard.dashboardStats);
+  const error = useSelector((state) => state.Auth.errorMessage);
 
   const handleValidation = () => {
-    let errors = {};
+    let errors = null;
     let formIsValid = true;
 
     //Email
@@ -64,9 +65,9 @@ const Login = props => {
     } else {
       console.log("Error Value", errValue)
     }
-    props.history.push({
-      pathname: `/dashboard`
-    }); 
+    // props.history.push({
+    //   pathname: `/dashboard`
+    // }); 
 
   };
 
@@ -89,11 +90,14 @@ const Login = props => {
               <div className='auth-form card'>
                 <div className='card-body'>
                   <div className='col-12'>
+                  {error &&
+                          <p style={{ color: "red" }}>{error}</p>
+                  }
                     <input
-                      type='email'
+                      type='text'
                       className='form-control'
-                      placeholder='hello@example.com'
-                      name='email'
+                      placeholder='Enter your username'
+                      name='username'
                       onChange={(e) => setUsernameValue(e.target.value)}
                     />
                   </div>

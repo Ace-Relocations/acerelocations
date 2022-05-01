@@ -33,7 +33,6 @@ const Home = props => {
   useEffect(() => {
     dispatch(dashbordStatsRequest());
   }, []);
-  console.log("Stats:", stats)
 
   // useEffect(() => {
   //   getUserProfile();
@@ -66,8 +65,6 @@ const Home = props => {
             <InviteFriend />
             { stats.length !== 0?
             Object.keys(stats).map((key) => {
-              console.log("Key", key)
-              console.log("Value", key)
               return(
             <div className="col-xxl-4 col-xl-4 col-lg-6">
                 <div className="price-widget bg-usdt">
