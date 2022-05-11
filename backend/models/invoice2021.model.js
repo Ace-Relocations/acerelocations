@@ -14,6 +14,7 @@ const Invoice2021 = mongoose.model(
       unique: true,
     },
     invoiceDetails: Object,
+    invoiceDate: String,
     total: Number,
     totalInText: String
   })

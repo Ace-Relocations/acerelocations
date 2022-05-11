@@ -11,8 +11,9 @@ module.exports = {
     createInvoice: async (req, res) => {
         try {
             const {
-                gcnno, invoice, billno
+                gcnno, invoice, billno, invoiceDate, recieptDate
             } = req.body;
+
             if (invoice == false) {
                 res.status(500).send({ message: "The value passed is null" });
             }
@@ -27,7 +28,7 @@ module.exports = {
             const totalInText = numberToText.convertToText(total) + " " + "only";
             // var billno = await service.incrementBillno();
 
-            let createData = await service.createInvoice(gcnno, billno, newInvoice, total, totalInText);
+            let createData = await service.createInvoice(req.body, newInvoice, total, totalInText);
             if (createData == false) {
                 // billno = service.decrementBillno();
                 res.status(500).send({ message: "failed to register invoice", data: createData });
@@ -38,6 +39,7 @@ module.exports = {
             jobById.invoice = createData;
             jobById.isInvoiceAdded = true;
             var newvalues = { $set: jobById };
+            console.log("New Values:", newvalues)
             Customer.updateOne({ gcnno: gcnno }, newvalues, (err, user) => {
                 if (err) {
                     // billno = service.decrementBillno();
@@ -60,7 +62,6 @@ module.exports = {
             }
             return res.status(200).send({ message: "Invoice was fetched successfully!", data: findInvoice });
         } catch (err) {
-            console.log(err)
             res.status(500).send({ message: "Failed to fetch Invoice", data: err });
             return;
         }
@@ -69,7 +70,7 @@ module.exports = {
     updateInvoice: async (req, res) => {
         try {
             const {
-                gcnno, invoice, billno
+                gcnno, invoice, billno, invoiceDate, recieptDate
             } = req.body;
             let invoiceC = await Invoice.findOne({ gcnno: gcnno });
 
@@ -94,6 +95,8 @@ module.exports = {
             obj._id = invoiceC._id;
             obj.gcnno = gcnno;
             obj.billno = billno || invoiceC.billno;
+            obj.invoiceDate = invoiceDate || invoiceC.invoiceDate;
+            obj.recieptDate = recieptDate || invoiceC.recieptDate;
             obj.invoiceDetails = invoice || invoiceC.invoiceDetails;
             obj.total = await service.getTotal(obj.invoiceDetails);
             obj.totalInText = numberToText.convertToText(obj.total) + " " + "only";
@@ -106,7 +109,6 @@ module.exports = {
             return res.status(200).send({ message: "Invoice was updated successfully!", data: obj });
 
         } catch (err) {
-            console.log(err)
             res.status(500).send({ message: "Failed to fetch Invoice", data: err });
             return;
         }

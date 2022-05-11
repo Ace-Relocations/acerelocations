@@ -5,11 +5,17 @@ const BillCounter = db.billCounter;
 
 module.exports = {
 
-    createInvoice: async (gcnno, billno, invoice, total, totalInText) => {
+    createInvoice: async (input, invoice, total, totalInText) => {
         try {
+            const {
+                gcnno, invoice, billno, invoiceDate, recieptDate
+            } = input;
             let obj = new Invoice();
             obj.gcnno = gcnno;
             obj.billno = billno;
+            obj.invoiceDate = invoiceDate;
+
+            obj.recieptDate = recieptDate;
             obj.invoiceDetails = invoice;
             obj.total = total;
             obj.totalInText = totalInText;

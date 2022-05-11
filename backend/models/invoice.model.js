@@ -13,6 +13,8 @@ const Invoice = mongoose.model(
       required: true,
       unique: true,
     },
+    invoiceDate: String,
+    recieptDate: String,
     invoiceDetails: Object,
     total: Number,
     totalInText: String
