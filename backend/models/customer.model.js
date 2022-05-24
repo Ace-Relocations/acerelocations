@@ -62,7 +62,7 @@ var Customer = mongoose.model(
     invoice: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Invoice2021"
+        ref: "Invoice2022"
       }
     ],
     expense: [
