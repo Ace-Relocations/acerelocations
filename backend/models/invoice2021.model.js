@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
-const Invoice2022 = mongoose.model(
-  "Invoice2022",
+const Invoice2021 = mongoose.model(
+  "Invoice2021",
   new mongoose.Schema({
     gcnno:{
       type: Number,
@@ -20,4 +20,4 @@ const Invoice2022 = mongoose.model(
   })
 );
 
-module.exports = Invoice2022;
+module.exports = Invoice2021;
