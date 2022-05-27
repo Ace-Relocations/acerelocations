@@ -1,6 +1,7 @@
 const service = require("../services/invoice.service");
 const db = require("../models");
 const numberToText = require('number-to-text');
+const moment = require('moment');
 
 const Customer = db.customer;
 const User = db.user;
@@ -94,7 +95,9 @@ module.exports = {
             let obj = {};
             obj._id = invoiceC._id;
             obj.gcnno = gcnno;
-            obj.billno = billno || invoiceC.billno;
+            const curr_year = moment(Date.now()).format('YY');
+            prev_year = curr_year-1
+            obj.billno = prev_year.toString() + "-" + curr_year.toString() + "/" +billno.toString() || invoiceC.billno;
             obj.invoiceDate = invoiceDate || invoiceC.invoiceDate;
             obj.recieptDate = recieptDate || invoiceC.recieptDate;
             obj.invoiceDetails = invoice || invoiceC.invoiceDetails;
@@ -120,6 +123,19 @@ module.exports = {
             return res.status(200).send({ message: "Job billno was updated!", data: defaultV });
         } catch (err) {
             res.status(500).send({ message: err });
+        }
+    },
+
+    deleteInvoice: async (req, res) => {
+        try {
+            let delInvoice = await service.deleteByGcnno(req.query.gcnno);
+            if (!delInvoice) {
+                return res.status(500).send({ message: "Invoice failed to Delete, does not exist!", data: delInvoice });
+            }
+            return res.status(200).send({ message: "Invoice was Deleted successfully!", data: delInvoice });
+        } catch (err) {
+            res.status(500).send({ message: "Failed to fetch Invoice", data: err });
+            return;
         }
     },
 

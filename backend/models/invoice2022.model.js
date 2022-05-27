@@ -4,7 +4,7 @@ const Invoice2022 = mongoose.model(
   "Invoice2022",
   new mongoose.Schema({
     gcnno:{
-      type: String,
+      type: Number,
       required: true,
       unique: true,
     },

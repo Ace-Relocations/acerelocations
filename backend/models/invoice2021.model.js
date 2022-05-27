@@ -9,7 +9,7 @@ const Invoice2021 = mongoose.model(
       unique: true,
     },
     billno:{
-      type: Number,
+      type: String,
       required: true,
       unique: true,
     },

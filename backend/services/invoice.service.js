@@ -2,6 +2,8 @@ const db = require("../models");
 const Customer = db.customer;
 const Invoice = db.invoice;
 const BillCounter = db.billCounter;
+const moment = require('moment');
+
 
 module.exports = {
 
@@ -10,9 +12,11 @@ module.exports = {
             const {
                 gcnno, invoice, billno, invoiceDate, recieptDate
             } = input;
+            const curr_year = moment(Date.now()).format('YY');
+            prev_year = curr_year-1
             let obj = new Invoice();
             obj.gcnno = gcnno;
-            obj.billno = billno;
+            obj.billno = prev_year.toString() + "-" + curr_year.toString() + "/" +billno.toString();
             obj.invoiceDate = invoiceDate;
 
             obj.recieptDate = recieptDate;
@@ -112,6 +116,19 @@ module.exports = {
         } catch (err) {
             return err;
         }
+    },
+
+    deleteInvoice: async (gcnNo) => {
+        try {
+            let invoice = await Invoice.deleteOne({ gcnno: gcnNo });
+            if (!invoice) {
+                return invoice;
+            }
+            return invoice;
+        } catch (err) {
+            return err;
+        }
     }
+
 
 }
