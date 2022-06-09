@@ -13,10 +13,10 @@ module.exports = {
                 gcnno, invoice, billno, invoiceDate, recieptDate
             } = input;
             const curr_year = moment(Date.now()).format('YY');
-            prev_year = curr_year-1
+            next_year = curr_year+1
             let obj = new Invoice();
             obj.gcnno = gcnno;
-            obj.billno = prev_year.toString() + "-" + curr_year.toString() + "/" +billno.toString();
+            obj.billno = curr_year.toString() + "-" + next_year.toString() + "/" +billno.toString();
             obj.invoiceDate = invoiceDate;
 
             obj.recieptDate = recieptDate;
