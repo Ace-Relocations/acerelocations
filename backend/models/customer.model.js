@@ -48,6 +48,8 @@ var Customer = mongoose.model(
     createdBy: String,
     status: String,
     date: String,
+    item: Object,
+    assignedUser: String,
     isInvoiceAdded: {
       type: Boolean,
       default: false

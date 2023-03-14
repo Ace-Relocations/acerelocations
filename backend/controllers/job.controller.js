@@ -16,7 +16,7 @@ module.exports = {
     createJob: async (req, res) => {
         try {
             const {
-                gcnno, carGcnno, consignorF, consignorL, consigneeF, consigneeL, contact, email, oaddress1, oaddress2, ocity, ostate, opincode, daddress1, daddress2, dcity, dstate, dpincode, type, status, insuranceP, insuranceA, date, items, gst
+                gcnno, carGcnno, consignorF, consignorL, consigneeF, consigneeL, contact, email, oaddress1, oaddress2, ocity, ostate, opincode, daddress1, daddress2, dcity, dstate, dpincode, type, status, insuranceP, insuranceA, date, items, gst, item, assignedUser
             } = req.body;
 
             // let gcnno = 0;
@@ -65,7 +65,9 @@ module.exports = {
             obj.insuranceP = insuranceP;
             obj.insuranceA = insuranceA;
             obj.items = items;
+            obj.assignedUser = assignedUser;
             obj.gst = gst;
+            obj.item = item;
             obj.insuranceAInText = numberToText.convertToText(insuranceA) + " " + "only";
             obj.createdBy = createdBy;
             obj.date = moment(date).format('DD/MM/YYYY');
@@ -173,7 +175,7 @@ module.exports = {
     updateJob: async (req, res) => {
         try {
             const {
-                gcnno, consignorF, consigneeF, consignorL, consigneeL, contact, email, oaddress1, oaddress2, ocity, ostate, opincode, daddress1, daddress2, dcity, dstate, dpincode, type, insuranceP, insuranceA, date, status, isExpenseAdded, isInvoiceAdded, carGcnno, items, gst
+                gcnno, consignorF, consigneeF, consignorL, consigneeL, contact, email, oaddress1, oaddress2, ocity, ostate, opincode, daddress1, daddress2, dcity, dstate, dpincode, type, insuranceP, insuranceA, date, status, isExpenseAdded, isInvoiceAdded, carGcnno, items, gst, item, assignedUser
             } = req.body;
             let uno = gcnno;
             if (!gcnno && carGcnno) {
@@ -219,7 +221,9 @@ module.exports = {
                 obj.insuranceA = insuranceA;
                 obj.createdBy = createdBy;
                 obj.items = items;
+                obj.item = item;
                 obj.gst = gst;
+                obj.assignedUser = assignedUser;
                 console.log("Input:", date)
                 obj.date = moment(date).format('DD/MM/YYYY');
                 console.log("Output:", obj.date)
