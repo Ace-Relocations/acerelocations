@@ -73,6 +73,7 @@ module.exports = {
             const {
                 gcnno, invoice, billno, invoiceDate, recieptDate
             } = req.body;
+
             let invoiceC = await Invoice.findOne({ gcnno: gcnno });
 
             if (invoice == false && billno == null || invoice == "" && billno == null || invoice == null && billno == null) {
@@ -99,7 +100,7 @@ module.exports = {
             // next_year = parseInt(curr_year)
             // curr_year = parseInt(curr_year)-1
             // obj.billno = curr_year.toString() + "-" + next_year.toString() + "/" +billno.toString() || invoiceC.billno;
-            obj.billno = billno.toString() || invoiceC.billno;
+            obj.billno = billno || invoiceC.billno;
             obj.invoiceDate = invoiceDate || invoiceC.invoiceDate;
             obj.recieptDate = recieptDate || invoiceC.recieptDate;
             obj.invoiceDetails = invoice || invoiceC.invoiceDetails;
@@ -108,6 +109,7 @@ module.exports = {
             var newvalues = { $set: obj };
 
             let updateV = await Invoice.updateOne({ gcnno: obj.gcnno }, newvalues)
+            console.log("hi")
             if (!updateV) {
                 return res.status(500).send({ message: "Invoice not updated", data: updateV });
             }
