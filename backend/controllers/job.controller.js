@@ -16,7 +16,7 @@ module.exports = {
     createJob: async (req, res) => {
         try {
             const {
-                gcnno, carGcnno, consignorF, consignorL, consigneeF, consigneeL, contact, email, oaddress1, oaddress2, ocity, ostate, opincode, daddress1, daddress2, dcity, dstate, dpincode, type, status, insuranceP, insuranceA, date, items, gst, item, assignedUser
+                gcnno, carGcnno, consignorF, consignorL, consigneeF, consigneeL, contact, email, oaddress1, oaddress2, ocity, ostate, opincode, daddress1, daddress2, dcity, dstate, dpincode, type, status, insuranceP, insuranceA, insuranceCarP, insuranceCarA, date, items, gst, item, assignedUser
             } = req.body;
 
             // let gcnno = 0;
@@ -64,11 +64,14 @@ module.exports = {
             obj.carGcnno = carGcnno;
             obj.insuranceP = insuranceP;
             obj.insuranceA = insuranceA;
+            obj.insuranceCarP = insuranceCarP;
+            obj.insuranceCarA = insuranceCarA;
             obj.items = items;
             obj.assignedUser = assignedUser;
             obj.gst = gst;
             obj.item = item;
             obj.insuranceAInText = numberToText.convertToText(insuranceA) + " " + "only";
+            obj.insuranceCarAInText = numberToText.convertToText(insuranceCarA) + " " + "only";
             obj.createdBy = createdBy;
             obj.date = moment(date).format('DD/MM/YYYY');
             obj.save(err => {
@@ -175,7 +178,7 @@ module.exports = {
     updateJob: async (req, res) => {
         try {
             const {
-                gcnno, consignorF, consigneeF, consignorL, consigneeL, contact, email, oaddress1, oaddress2, ocity, ostate, opincode, daddress1, daddress2, dcity, dstate, dpincode, type, insuranceP, insuranceA, date, status, isExpenseAdded, isInvoiceAdded, carGcnno, items, gst, item, assignedUser
+                gcnno, consignorF, consigneeF, consignorL, consigneeL, contact, email, oaddress1, oaddress2, ocity, ostate, opincode, daddress1, daddress2, dcity, dstate, dpincode, type, insuranceP, insuranceA, insuranceCarP, insuranceCarA, date, status, isExpenseAdded, isInvoiceAdded, carGcnno, items, gst, item, assignedUser
             } = req.body;
             let uno = gcnno;
             if (!gcnno && carGcnno) {
@@ -219,6 +222,8 @@ module.exports = {
                 obj.status = status;
                 obj.insuranceP = insuranceP;
                 obj.insuranceA = insuranceA;
+                obj.insuranceCarP = insuranceCarP;
+                obj.insuranceCarA = insuranceCarA;
                 obj.createdBy = createdBy;
                 obj.items = items;
                 obj.item = item;
@@ -232,6 +237,7 @@ module.exports = {
                 obj.isInvoiceAdded = isInvoiceAdded || user.isInvoiceAdded;
                 obj.isExpenseAdded = isExpenseAdded || user.isExpenseAdded;
                 obj.insuranceAInText = numberToText.convertToText(obj.insuranceA) + " " + "only";
+                obj.insuranceCarAInText = numberToText.convertToText(insuranceCarA) + " " + "only";
                 
 
                 // if (type) {
