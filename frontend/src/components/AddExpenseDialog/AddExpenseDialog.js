@@ -23,6 +23,7 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid/index';
 import { useSelector } from 'react-redux';
 import DateFnsUtils from '@date-io/date-fns';
+import moment from 'moment';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -79,7 +80,7 @@ const AddExpenseDialog = ({ openExpense, handleAddExpenses, handleCancleExpenses
 
   const handleChangeDate = (i, event) => {
     const values = [...fields];
-    values[i].date = event.target.value;
+    values[i].date = moment(event).format("DD-MM-yy");
     setFields(values);
   };
 
@@ -96,14 +97,14 @@ const AddExpenseDialog = ({ openExpense, handleAddExpenses, handleCancleExpenses
   };
 
   useEffect(() => {
-    const isValid = !Object.values(fields).some(({ details, amount, settled }) => {
+    const isValid = !Object.values(fields).some(({ details, amount, settled, date }) => {
       if (fields.length < 1) {
         return false;
       }
 
       return !(
-        (details !== null && amount !== null && settled !== null) ||
-        (details === '' && amount === 0 && settled === 0)
+        (details !== null && amount !== null && settled !== null && date !== null) ||
+        (details === '' && amount === 0 && settled === 0 && date === 0)
       );
     });
     updateValidateExpenses(isValid);
@@ -211,14 +212,15 @@ const AddExpenseDialog = ({ openExpense, handleAddExpenses, handleCancleExpenses
                   </Grid>
                   <Grid item xs={3} className={classes.gridItem}>
                     <Box>
+                    <Typography lineHeight='10px'>Expense Date</Typography>
                       <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         <KeyboardDatePicker
                           disableToolbar
-                          variant='inline'
-                          format='dd/MM/yyyy'
+                          variant='inline2'
+                          format='dd-MM-yy'
                           margin='normal'
-                          id='date-picker-inline'
-                          value={field.date || ''}
+                          id='expense-date'
+                          value={fields.date || ''}
                           KeyboardButtonProps={{
                             'aria-label': 'change date',
                           }}

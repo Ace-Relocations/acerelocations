@@ -22,6 +22,7 @@ const Reciept = ({ reciept }) => {
     rupeesInNumber,
     rupeesInText,
     chequeNo,
+    recieptDate,
     date,
     billNo,
     lrNo,

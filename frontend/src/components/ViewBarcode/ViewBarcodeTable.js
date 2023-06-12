@@ -474,7 +474,7 @@ const AllBarcodesTable = ({
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseDownload} color='primary' autoFocus>
-            cancle
+            cancel
           </Button>
         </DialogActions>
       </Dialog>

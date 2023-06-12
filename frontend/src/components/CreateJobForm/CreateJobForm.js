@@ -109,10 +109,13 @@ const CreateJobForm = ({
     car,
     insuranceP,
     insuranceA,
+    insuranceCarP,
+    insuranceCarA,
     type,
     date,
     items,
     gst,
+    item,
   },
 }) => {
   const classes = useStyles();
@@ -148,8 +151,11 @@ const CreateJobForm = ({
       status: getDefaultValue(isEditing, status),
       insuranceP: getDefaultValue(isEditing, insuranceP),
       insuranceA: getDefaultValue(isEditing, insuranceA),
+      insuranceCarP: getDefaultValue(isEditing, insuranceCarP),
+      insuranceCarA: getDefaultValue(isEditing, insuranceCarA),
       items: getDefaultValue(isEditing, items),
       gst: getDefaultValue(isEditing, gst),
+      item: getDefaultValue(isEditing, item),
       type: isEditing ? type : 'household',
       date: getDefaultValue(isEditing, date),
       car: isEditing ? car : true,
@@ -642,7 +648,7 @@ const CreateJobForm = ({
                       as={TextField}
                       control={control}
                       id='outlined-basic'
-                      label='Insurance P'
+                      label='Household Insurance Percentage'
                       variant='outlined'
                       width={300}
                       rules={{ required: true }}
@@ -662,7 +668,7 @@ const CreateJobForm = ({
                         as={TextField}
                         control={control}
                         id='outlined-basic'
-                        label='Insurance A'
+                        label='Household Insurance Amount'
                         variant='outlined'
                         width={300}
                         rules={{ required: true }}
@@ -672,6 +678,42 @@ const CreateJobForm = ({
                         error={errors.insuranceA}
                         helperText={errors.insuranceA && 'Insurance is required'}
                         required
+                      />
+                    </Box>
+
+                    <Controller
+                      as={TextField}
+                      control={control}
+                      id='outlined-basic'
+                      label='Car Insurance Percentage'
+                      variant='outlined'
+                      width={300}
+                      rules={{ required: true }}
+                      className={classes.formControl}
+                      name='insuranceCarP'
+                      defaultValue='1.5'
+                      value={values.insuranceCarP}
+                      error={errors.insuranceCarP}
+                      helperText={errors.insuranceCarP && 'Car Insurance Percentage'}
+                    />
+                  </Grid>
+
+                  <Grid item lg={12} container className={classes.gridItem}>
+                    <Box marginRight='10px'>
+                      <Controller
+                        as={TextField}
+                        control={control}
+                        id='outlined-basic'
+                        label='Car Insurance Amount'
+                        variant='outlined'
+                        width={300}
+                        rules={{ required: true }}
+                        className={classes.formControl}
+                        name='insuranceCarA'
+                        defaultValue='0'
+                        value={values.insuranceCarA}
+                        error={errors.insuranceCarA}
+                        helperText={errors.insuranceCarA && 'Car Insurance Amount'}
                       />
                     </Box>
 
@@ -711,8 +753,9 @@ const CreateJobForm = ({
                       </MuiPickersUtilsProvider>
                     </Box>
                   </Grid>
-                </Grid>
 
+                  
+                </Grid>
                 <div className={classes.actionCont}>
                   <Button className={classes.actionBtn} fullWidth type='submit'>
                     {isEditing ? 'Update Job' : 'Create Job'}

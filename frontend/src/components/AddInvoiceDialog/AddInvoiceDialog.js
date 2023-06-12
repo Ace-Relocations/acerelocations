@@ -27,6 +27,12 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import { getInvoiceRequest } from '../../actions';
+import DateFnsUtils from '@date-io/date-fns';
+import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
+import { useForm, Controller } from 'react-hook-form';
+import moment from 'moment'
+
+
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -57,9 +63,13 @@ const AddInvoiceDialog = ({
   isEditing,
 }) => {
   const classes = useStyles();
+  const getDefaultValue = (isEditing, value) => (isEditing ? value : '');
   const {
-    invoice: { invoiceDetails, billno },
+    invoice: { invoiceDetails, billno, invoiceDate },
   } = useSelector((state) => state.Invoice);
+
+  const [bill, setBillno] = useState()
+  const [date, setDate] = useState()
 
   const [fields, setFields] = useState(
     [
@@ -108,6 +118,14 @@ const AddInvoiceDialog = ({
     },
   ]);
 
+  // const { handleSubmit, control, errors, getValues, watch, reset} = useForm({
+  //   mode: 'onChange',
+  //   defaultValues: {
+  //     invoiveDate: getDefaultValue(isEditing, invoiceDate),
+  //     recieptDate: getDefaultValue(isEditing, recieptDate)
+  //   },
+  // });
+
   const invoiceData = useMemo(() => {
     if (isEditing && !!invoiceDetails) {
       
@@ -149,8 +167,11 @@ const AddInvoiceDialog = ({
   const handleChangeAmount = (i, event) => {
     const values = [...fields];
     values[i].amount = event.target.value;
-    if(fields.billno){ 
-      values.billno = fields.billno;
+    if(bill){ 
+      values.billno = bill;
+      }
+    if(date){ 
+      values.invoiceDate = date;
       }
   
     setFields(values);
@@ -159,6 +180,30 @@ const AddInvoiceDialog = ({
   const handleBillChange = (event) => {
     const values = [...fields];
     values.billno = event.target.value;
+    setBillno(event.target.value)
+    console.log("inBillChange", values)
+    if(date){ 
+      values.invoiceDate = date;
+      }
+
+    
+    setFields(values);
+  };
+  const invoiceDateChange = (event) => {
+    console.log("Here", moment(event).format("DD-MM-yy"))
+    const values = [...fields];
+    values.invoiceDate = moment(event).format("DD-MM-yy");
+    setDate(moment(event).format("DD-MM-yy"))
+    if(bill){ 
+      values.billno = bill;
+      }
+    
+    setFields(values);
+  };
+  const recieptDateChange = (event) => {
+    console.log("Here", moment(event).format("DD-MM-yy"))
+    const values = [...fields];
+    values.recieptDate = event;
     
     setFields(values);
   };
@@ -166,8 +211,11 @@ const AddInvoiceDialog = ({
   const handleChangeExpense = (i, event) => {
     const values = [...fields];
     values[i].expense = event.target.value;
-    if(fields.billno){ 
-      values.billno = fields.billno;
+    if(bill){ 
+      values.billno = bill;
+      }
+    if(date){ 
+      values.invoiceDate = date;
       }
   
     setFields(values);
@@ -176,10 +224,14 @@ const AddInvoiceDialog = ({
   const handleChangeCheckbox = (i, event) => {
     const values = [...fields];
     values[i].isChecked = !values[i].isChecked;
-    console.log("Values", values)
-    if(fields.billno){ 
-    values.billno = fields.billno;
-    }
+    if(bill){ 
+      values.billno = bill;
+      }
+    if(date){ 
+      values.invoiceDate = date;
+      }
+      console.log("Values", values)
+
 
     setFields(values);
   };
@@ -245,7 +297,7 @@ const AddInvoiceDialog = ({
                 <Grid item lg={12} container className={classes.gridItem}>
                   <Box marginRight='10px'>
                     <TextField
-                        type='number'
+                        as={TextField}
                         placeholder='Enter Bill No'
                         label='Bill No'
                         variant='outlined'
@@ -260,6 +312,49 @@ const AddInvoiceDialog = ({
                       />
                   </Box>
                 </Grid>
+                <Grid item lg={12} container className={classes.gridItem}>
+                  {/* <Box>
+                  <Typography lineHeight='10px'>Invoice Date</Typography>
+                      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                        <KeyboardDatePicker
+                          disableToolbar
+                          variant='inline1'
+                          format='dd/MM/yyyy'
+                          margin='normal'
+                          id='invoice-date'
+                          value={fields.invoiveDate || ''}
+                          KeyboardButtonProps={{
+                            'aria-label': 'change dates',
+                          }}
+                          onChange={(e) => recieptDateChange(e)}
+                          style={{ width: '150px !important' }}
+                          inputStyle={{ width: '150px !important' }}
+                          fullWidth={false}
+                        />
+                      </MuiPickersUtilsProvider>
+                    </Box> */}
+
+                    <Box>
+                    <Typography lineHeight='10px'>Invoice Date</Typography>
+                      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                        <KeyboardDatePicker
+                          disableToolbar
+                          variant='inline2'
+                          format='dd/MM/yyyy'
+                          margin='normal'
+                          id='reciept-date'
+                          value={fields.invoiceDate || invoiceDate}
+                          KeyboardButtonProps={{
+                            'aria-label': 'change date',
+                          }}
+                          onChange={(e) => invoiceDateChange(e)}
+                          style={{ width: '150px !important' }}
+                          inputStyle={{ width: '150px !important' }}
+                          fullWidth={false}
+                        />
+                      </MuiPickersUtilsProvider>
+                    </Box>
+                  </Grid>
           {fields.map((field, idx) => {
             return (
               <div key={`${field}-${idx}`} style={{ marginBottom: '10px' }}>

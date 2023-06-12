@@ -252,7 +252,7 @@ const AllJobsTable = ({
   };
 
   const handleAddInvoice = (data) => {
-    onAddInvoiceClick(data, selectedGcnNo, data.billno, selectedInvoiceStatus);
+    onAddInvoiceClick(data, selectedGcnNo, data.billno, data.invoiceDate, selectedInvoiceStatus);
     setOpenInvoice(false);
   };
 

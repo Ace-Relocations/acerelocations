@@ -8,6 +8,7 @@ import CarList from '../CarList/CarList';
 import TellySheet from '../TellySheet/TellySheet';
 import InvoiceTable from '../InvoiceTable/InvoiceTable';
 import TransitPlanFormBox from '../TransitPlanFormBox/TransitPlanFormBox';
+import TransitPlanCarFormBox from '../TransitPlanCarFormBox/TransitPlanCarFormBox';
 import Reciept from '../Reciept/Reciept';
 import FooterWithImage from '../FooterWithImage/FooterWithImage';
 import HeaderWithAddress from '../HeaderWithAddress/HeaderWithAddress';
@@ -136,7 +137,10 @@ const CreateJobPDF = ({ invoice }) => {
     email,
     insuranceP,
     insuranceA,
+    insuranceCarP,
+    insuranceCarA,
     insuranceAInText = '',
+    insuranceCarAInText = '',
     type,
     date,
     gcnno,
@@ -167,6 +171,8 @@ const CreateJobPDF = ({ invoice }) => {
     car,
     insuranceP,
     insuranceA,
+    insuranceCarP,
+    insuranceCarA,
     type,
     date,
     gcnno,
@@ -267,6 +273,15 @@ const CreateJobPDF = ({ invoice }) => {
       moneyInNumber: insuranceA,
       moneyInText: insuranceAInText,
       insuranceP
+    },
+    transitCarData: {
+      fullName: `${consignorF} ${consignorL}`,
+      gcnno,
+      carGcnno,
+      date,
+      moneyInNumber: insuranceCarA,
+      moneyInText: insuranceCarAInText,
+      insuranceCarP
     }
   };
 
@@ -277,6 +292,7 @@ const CreateJobPDF = ({ invoice }) => {
         rupeesInNumber: invoiceData[0] ?.total,
         rupeesInText: invoiceData[0] ?.totalInText,
         chequeNo,
+        recieptDate: invoiceData[0]?.recieptDate,
         date,
         billNo: invoiceData[0] ?.billno,
         lrNo: invoiceData[0] ?.gcnno ? invoiceData[0] ?.gcnno : invoiceData[0] ?.carGcnno,
@@ -289,6 +305,7 @@ const CreateJobPDF = ({ invoice }) => {
         ocity,
         dcity,
         invoiceNo: invoiceData[0] ?.billno,
+        invoiceDate: invoiceData[0]?.invoiceDate,
         date,
         lrNo: invoiceData[0] ?.gcnno ? invoiceData[0] ?.gcnno : invoiceData[0] ?.carGcnno,
         invoiceDetails: invoiceData[0] ?.invoiceDetails,
@@ -434,7 +451,7 @@ const CreateJobPDF = ({ invoice }) => {
       {/* TellySheet */}
       <TellySheet tellyData={invoiceDetail ?.tellyData} />
 
-      {/* TransitPlan */}
+      {/* Transit Protection Plan */}
       <Page size='A4' style={styles.page}>
         <View>
           <Header />
@@ -444,6 +461,21 @@ const CreateJobPDF = ({ invoice }) => {
           <FooterWithImage />
         </View>
       </Page>
+
+      {/* Car Transit Protection Plan */}
+      {insuranceCarP && (isCar || isBoth) && (
+        <>
+          <Page size='A4' style={styles.page}>
+            <View>
+              <Header />
+              <TransitPlanCarFormBox transitData={invoiceDetail ?.transitCarData} />
+              <View style={{ border: 1 }} />
+              <View style={{ border: '1 solid red', marginTop: '2px' }} />
+              <FooterWithImage />
+            </View>
+          </Page>
+        </>
+      )}
 
       {/* Invoice */}
       {isInvoiceAdded && (

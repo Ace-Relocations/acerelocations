@@ -31,6 +31,7 @@ const InvoiceTable = ({ invoice }) => {
     dcity,
     ocity,
     invoiceNo,
+    invoiceDate,
     date,
     carGcnno,
     lrNo,
@@ -75,7 +76,7 @@ const InvoiceTable = ({ invoice }) => {
           </View>
           <View style={{ flexDirection: 'row', margin: 'auto' }}>
             <Text>Date:</Text>
-            <Text>{date}</Text>
+            <Text>{invoiceDate?invoiceDate:date}</Text>
           </View>
         </View>
         </View>
@@ -115,7 +116,7 @@ const InvoiceTable = ({ invoice }) => {
               }
             </View>
             <View style={{ width: '50%' }}>
-              <Text style={{ textAlign: 'right' }}>{`Dated ${date}`}</Text>
+              <Text style={{ textAlign: 'right' }}>{`Dated ${date?date:date}`}</Text>
             </View>
           </View>
 

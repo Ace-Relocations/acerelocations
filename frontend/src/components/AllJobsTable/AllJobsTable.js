@@ -250,7 +250,8 @@ const AllJobsTable = ({
   };
 
   const handleAddInvoice = (data) => {
-    onAddInvoiceClick(data, selectedGcnNo, data.billno, selectedInvoiceStatus);
+    console.log("Invoice data", data)
+    onAddInvoiceClick(data, selectedGcnNo, data.billno, data.invoiceDate, selectedInvoiceStatus);
     setOpenInvoice(false);
   };
 
@@ -527,7 +528,7 @@ const AllJobsTable = ({
             yes
           </Button>
           <Button onClick={handleClose} color='primary' autoFocus>
-            cancle
+            cancel
           </Button>
         </DialogActions>
       </Dialog>
@@ -584,7 +585,7 @@ const AllJobsTable = ({
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseDownload} color='primary' autoFocus>
-            cancle
+            cancel
           </Button>
         </DialogActions>
       </Dialog>

@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const TransitPlanFormBox = ({ transitData }) => {
+const TransitPlanCarFormBox = ({ transitData }) => {
 
   const [isInsurance, updateIsInsurance] = useState(false);
 
@@ -29,11 +29,12 @@ const TransitPlanFormBox = ({ transitData }) => {
     }
   });
 
+
   return (
     <View style={{ border: 1, margin: '10 30', lineHeight: 2 }}>
       <View style={{ borderBottom: 1, marginVertical: 'auto', paddingTop: 6 }}>
         <Text style={{ textAlign: 'center', marginVertical: 'auto', fontWeight: 'bold' }}>
-          HOUSEHOLD GOODS TRANSIT PROTECTION PLAN
+          CAR TRANSIT PROTECTION PLAN
         </Text>
       </View>
 
@@ -128,10 +129,8 @@ const TransitPlanFormBox = ({ transitData }) => {
               <Text style={styles.centerRow}>Option One: </Text>
             </View>
             <View style={{ border: 1, width: '30%' }}>
-              {isInsurance ? 
+              {!isInsurance ? 
               (
-                  <Text style={styles.centerRow}></Text>
-                ) : (
                 <Image
                   style={{
                     width: '10px',
@@ -141,6 +140,10 @@ const TransitPlanFormBox = ({ transitData }) => {
                   }}
                   src={checkMark}
                 />
+              ) : (
+
+                <Text style={styles.centerRow}></Text>
+                
               )}
               {/* <Text style={styles.centerRow}></Text> */}
             </View>
@@ -206,7 +209,7 @@ const TransitPlanFormBox = ({ transitData }) => {
               will be charged a premium of
             </Text>
             <View style={{ border: 1, width: 30, marginTop: -5 }}>
-              <Text style={styles.centerRow2}>{transitData ?.insuranceP}</Text>
+              <Text style={styles.centerRow2}>{transitData ?.insuranceCarP}</Text>
             </View>
           </View>
           <Text>
@@ -220,29 +223,6 @@ const TransitPlanFormBox = ({ transitData }) => {
         </View>
 
         <View style={{ lineHeight: 1.2 }}>
-          <View style={{ flexDirection: 'row', fontSize: 7, lineHeight: 1.2, padding: '5 5 0 5' }}>
-            <View style={{ width: '5%' }}>
-              <Text>1.</Text>
-            </View>
-            <View style={{ width: '95%' }}>
-              <Text>
-                The item will be repaired if repairable through Ace Relocations - partner vendor or
-                its i'epa ir cost reimbursed.
-              </Text>
-            </View>
-          </View>
-
-          <View style={{ flexDirection: 'row', fontSize: 7, lineHeight: 1.2, padding: '5 5 0 5' }}>
-            <View style={{ width: '5%' }}>
-              <Text>2.</Text>
-            </View>
-            <View style={{ width: '95%' }}>
-              <Text>
-                For all the item cannot be repaired or has been misplaced it will be replaced or its
-                declared value reimbursed which ever is lesser.
-              </Text>
-            </View>
-          </View>
 
           <View style={{ flexDirection: 'row', fontSize: 7, lineHeight: 1.2, padding: '10 5 0 5' }}>
             <Text>Terms & Conditions:</Text>
@@ -254,8 +234,7 @@ const TransitPlanFormBox = ({ transitData }) => {
             </View>
             <View style={{ width: '95%' }}>
               <Text>
-                Claim if any has to be immediately reported in writing after unpacking the
-                consignment on the Good Consignment Note
+                The motorcar/vehicle will be repaired by ACE RELOCATIONS at their partner workshop only.
               </Text>
             </View>
           </View>
@@ -266,9 +245,8 @@ const TransitPlanFormBox = ({ transitData }) => {
             </View>
             <View style={{ width: '95%' }}>
               <Text>
-                ln case of all items especially electrical & eiectronics, we are not liable for any
-                internal malfunctioning or damages unless there is relative and visible external
-                damage which is not mentioned in the packing/inventory list.
+                In case the repair cost is more than 75% of the insured value then it will be considered as total loss and the insured value
+                will be reimbursed on transferring the motorcar's ownership to ACE RELOCATIONS.
               </Text>
             </View>
           </View>
@@ -279,8 +257,9 @@ const TransitPlanFormBox = ({ transitData }) => {
             </View>
             <View style={{ width: '95%' }}>
               <Text>
-                ln case of furniture items we are not liable for scratches, polish worn out unless
-                is relative visible damage to its outer packing and is said furniture
+                Claim if any has to be immediately reported in writing on delivering the motor car/vehicle on its Goods Consignment Note
+                4. We are not liable for the scratches on the outer body or the interior of the motorcar unless there is a relative dent/visible
+                damage and the same has not been notified in the vehicle condition report on pickup.
               </Text>
             </View>
           </View>
@@ -291,9 +270,8 @@ const TransitPlanFormBox = ({ transitData }) => {
             </View>
             <View style={{ width: '95%' }}>
               <Text>
-                Claim for the entire set is not covered incase a single item(s) have been
-                lostldmamaged. Such claim will be covered for an additional premium of 2% on
-                confirmation by Ace Relocation in writing.
+                We are not liable for any mechanical failure/damage such as engine failure, clutch failure etc unless there is a relative
+                physical damage to the outer body of the said motorcar.
               </Text>
             </View>
           </View>
@@ -304,13 +282,23 @@ const TransitPlanFormBox = ({ transitData }) => {
             </View>
             <View style={{ width: '95%' }}>
               <Text>
-                lt also does not cover loss/damage of the goods packed by owner/conignor and / or
-                jewellery/cash, deeds, traveller's cheque plants & pots, items made up of mud, clay
-                and natural stone such as marble etc, gas cylinders, alcoholic beverages, contraband
-                or other like items packed.
+                We are not liable for failure of any electronic component such as air conditioner, power window, central lock, etc unless
+                there is a relative physical damage to the outer body of the said motorcar.
               </Text>
             </View>
           </View>
+
+          <View style={{ flexDirection: 'row', fontSize: 7, lineHeight: 1.2, padding: '5 5 0 5' }}>
+            <View style={{ width: '5%' }}>
+              <Text>6.</Text>
+            </View>
+            <View style={{ width: '95%' }}>
+              <Text>
+                We are not responsible for loss/damage to any loose items kept inside the car such as pen drive, Cds, remote, etc
+              </Text>
+            </View>
+          </View>
+
         </View>
 
         <View>
@@ -399,4 +387,4 @@ const TransitPlanFormBox = ({ transitData }) => {
   );
 };
 
-export default TransitPlanFormBox;
+export default TransitPlanCarFormBox;
