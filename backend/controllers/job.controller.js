@@ -16,31 +16,22 @@ module.exports = {
     createJob: async (req, res) => {
         try {
             const {
-                gcnno, carGcnno, consignorF, consignorL, consigneeF, consigneeL, contact, email, oaddress1, oaddress2, ocity, ostate, opincode, daddress1, daddress2, dcity, dstate, dpincode, type, status, insuranceP, insuranceA, insuranceCarP, insuranceCarA, date, items, gst, item, assignedUser
+                gcnno, carGcnno, consignorF, consignorL, consigneeF, consigneeL, contact, email, oaddress1, oaddress2, ocity, 
+                ostate, opincode, daddress1, daddress2, dcity, dstate, dpincode, type, status, insuranceP, insuranceA, insuranceCarP, 
+                insuranceCarA, date, items, gst, item, assignedUser
             } = req.body;
 
-            // let gcnno = 0;
-            // let gcnnoC = 0;
 
-            // if (type.toLowerCase() == "both") {
-            //     gcnno = await service.incrementGcnno();
-            //     gcnnoC = await service.incrementGcnno();
-            // } else if (type.toLowerCase() == "household") {
-            //     gcnno = await service.incrementGcnno();
-            //     gcnnoC = 0;
-            // } else if (type.toLowerCase() == "car") {
-            //     gcnno = 0;
-            //     gcnnoC = await service.incrementGcnno();
-            // }
             let uno;
             if (!gcnno) {
                 uno = carGcnno;
             } else {
                 uno = gcnno;
             }
+
             const user = await User.findById(req.userId)
             const createdBy = user.email;
-            // const year = moment(Date.now()).format('YYYY');
+   
             let obj = new Customer();
             obj.gcnno = uno;
             obj.consignorF = consignorF;
@@ -70,8 +61,19 @@ module.exports = {
             obj.assignedUser = assignedUser;
             obj.gst = gst;
             obj.item = item;
-            obj.insuranceAInText = numberToText.convertToText(insuranceA) + " " + "only";
-            obj.insuranceCarAInText = numberToText.convertToText(insuranceCarA) + " " + "only";
+
+            if (insuranceA) {
+                obj.insuranceAInText = numberToText.convertToText(insuranceA) + " " + "only";
+            } else {
+                obj.insuranceAInText = ""
+            }
+
+            if (insuranceCarA) {
+                obj.insuranceCarAInText = numberToText.convertToText(insuranceCarA) + " " + "only";
+            } else {
+                obj.insuranceCarAInText = ""
+            }
+
             obj.createdBy = createdBy;
             obj.date = moment(date).format('DD/MM/YYYY');
             obj.save(err => {
@@ -90,7 +92,7 @@ module.exports = {
             });
 
         } catch (err) {
-            res.status(500).send({ message: err });
+            res.status(500).send({ message: "here" });
             return;
         }
     },
@@ -236,23 +238,19 @@ module.exports = {
                 obj.expense = user.expense;
                 obj.isInvoiceAdded = isInvoiceAdded || user.isInvoiceAdded;
                 obj.isExpenseAdded = isExpenseAdded || user.isExpenseAdded;
-                obj.insuranceAInText = numberToText.convertToText(obj.insuranceA) + " " + "only";
-                obj.insuranceCarAInText = numberToText.convertToText(insuranceCarA) + " " + "only";
+
+                if (insuranceA) {
+                    obj.insuranceAInText = numberToText.convertToText(insuranceA) + " " + "only";
+                } else {
+                    obj.insuranceAInText = ""
+                }
+    
+                if (insuranceCarA) {
+                    obj.insuranceCarAInText = numberToText.convertToText(insuranceCarA) + " " + "only";
+                } else {
+                    obj.insuranceCarAInText = ""
+                }
                 
-
-                // if (type) {
-                //     if (user.type.toLowerCase() == "household" && type.toLowerCase() == "both") {
-                //         obj.carGcnno = await service.incrementGcnno();
-                //     }
-                //     if (user.type.toLowerCase() == "car" && type.toLowerCase() == "both") {
-                //         obj.gcnno = await service.incrementGcnno();
-                //     }
-
-                //     if (user.type.toLowerCase() == "both" && type.toLowerCase() == "car") {
-                //         obj.carGcnno = user.gcnno;
-                //     }
-
-                // }
                 var newvalues = { $set: obj };
 
                 Customer.updateOne({ gcnno: req.query.gcnno }, newvalues, (err, user) => {

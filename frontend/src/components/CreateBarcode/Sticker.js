@@ -1,5 +1,5 @@
 import React from 'react';
-import { Document, Image, Text, View, StyleSheet } from '@react-pdf/renderer';
+import { Image, Text, View, StyleSheet } from '@react-pdf/renderer';
 import Barcode from "react-hooks-barcode";
 import Loader from '../Loader/Loader';
 import QRCode from 'qrcode';

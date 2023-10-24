@@ -1,5 +1,6 @@
 import React from 'react';
-import { Page, Document, Image, StyleSheet, Text, View } from '@react-pdf/renderer';
+import Text from '@react-pdf/renderer';
+import View from '@react-pdf/renderer';
 import Header from '../Header/Header';
 import FooterWithImage from '../FooterWithImage/FooterWithImage';
 

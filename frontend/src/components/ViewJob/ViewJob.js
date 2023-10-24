@@ -1,5 +1,5 @@
 import React from 'react';
-import { Document, PDFViewer } from '@react-pdf/renderer';
+import { PDFViewer } from '@react-pdf/renderer';
 
 import Invoice from '../../Test/Invoice';
 

@@ -3,39 +3,39 @@ import { Link } from 'react-router-dom';
 import axiosMain from '../../services';
 import { toast } from 'react-toastify';
 
-import * as am4core from "@amcharts/amcharts4/core";
-import * as am4charts from "@amcharts/amcharts4/charts";
-import am4themes_animated from "@amcharts/amcharts4/themes/animated";
+// import am4core from "@amcharts/amcharts4/core";
+// import am4charts from "@amcharts/amcharts4/charts";
+// import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 
-am4core.useTheme(am4themes_animated);
+// am4core.useTheme(am4themes_animated);
 
 const Balance = props => {
     const [data, setData] = useState({});
     const [errValue, setErrValue] = useState();
 
-    useLayoutEffect(() => {
-        let chart = am4core.create("chartdiv1", am4charts.PieChart);
+    // useLayoutEffect(() => {
+    //     let chart = am4core.create("chartdiv1", am4charts.PieChart);
 
-        chart.data = [{
-            "token": "Completed",
-            "amount": 500
-        }, {
-            "token": "Created",
-            "amount": 12
-        }, {
-            "token": "In Transit",
-            "amount": 5
-        }, {
-            "token": "Warehouse",
-            "amount": 7
-        }];
-        var pieSeries = chart.series.push(new am4charts.PieSeries());
-        pieSeries.dataFields.value = "amount";
-        pieSeries.dataFields.category = "token";
-        // return () => {
-        //     chart.dispose();
-        // };
-    }, []);
+    //     chart.data = [{
+    //         "token": "Completed",
+    //         "amount": 500
+    //     }, {
+    //         "token": "Created",
+    //         "amount": 12
+    //     }, {
+    //         "token": "In Transit",
+    //         "amount": 5
+    //     }, {
+    //         "token": "Warehouse",
+    //         "amount": 7
+    //     }];
+    //     var pieSeries = chart.series.push(new am4charts.PieSeries());
+    //     pieSeries.dataFields.value = "amount";
+    //     pieSeries.dataFields.category = "token";
+    //     // return () => {
+    //     //     chart.dispose();
+    //     // };
+    // }, []);
 
 
     return (

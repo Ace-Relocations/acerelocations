@@ -651,13 +651,11 @@ const CreateJobForm = ({
                       label='Household Insurance Percentage'
                       variant='outlined'
                       width={300}
-                      rules={{ required: true }}
                       className={classes.formControl}
                       name='insuranceP'
-                      defaultValue='3'
                       value={values.insuranceP}
                       error={errors.insuranceP}
-                      helperText={errors.insuranceP && 'Insurance is required'}
+                      helperText={errors.insuranceP && 'Insurance percentage is required'}
                       required
                     />
                   </Grid>
@@ -676,7 +674,7 @@ const CreateJobForm = ({
                         name='insuranceA'
                         value={values.insuranceA}
                         error={errors.insuranceA}
-                        helperText={errors.insuranceA && 'Insurance is required'}
+                        helperText={errors.insuranceA && 'Insurance amount is required'}
                         required
                       />
                     </Box>
@@ -688,32 +686,24 @@ const CreateJobForm = ({
                       label='Car Insurance Percentage'
                       variant='outlined'
                       width={300}
-                      rules={{ required: true }}
                       className={classes.formControl}
                       name='insuranceCarP'
-                      defaultValue='1.5'
                       value={values.insuranceCarP}
-                      error={errors.insuranceCarP}
-                      helperText={errors.insuranceCarP && 'Car Insurance Percentage'}
                     />
                   </Grid>
 
                   <Grid item lg={12} container className={classes.gridItem}>
                     <Box marginRight='10px'>
-                      <Controller
+                      <Controller     
                         as={TextField}
                         control={control}
                         id='outlined-basic'
                         label='Car Insurance Amount'
                         variant='outlined'
                         width={300}
-                        rules={{ required: true }}
                         className={classes.formControl}
                         name='insuranceCarA'
-                        defaultValue='0'
                         value={values.insuranceCarA}
-                        error={errors.insuranceCarA}
-                        helperText={errors.insuranceCarA && 'Car Insurance Amount'}
                       />
                     </Box>
 

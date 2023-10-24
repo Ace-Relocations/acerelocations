@@ -1,9 +1,8 @@
 import React from 'react';
-import { Image, Text, View, StyleSheet } from '@react-pdf/renderer';
+import { Text, View, StyleSheet } from '@react-pdf/renderer';
 import CustomerInfoBox from '../CustomerInfoBox/CustomerInfoBox';
 import RatingsForm from '../RatingsForm/RatingsForm';
 import CustomerCommnetsBox from '../CustomerCommnetsBox/CustomerCommnetsBox';
-import FooterBorder from '../FooterBorder/FooterBorder';
 import FooterWithImage from '../FooterWithImage/FooterWithImage';
 
 const styles = StyleSheet.create({

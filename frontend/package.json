@@ -1,6 +1,6 @@
 {
-  "name": "html-pdf",
-  "version": "0.1.0",
+  "name": "my-webpack-project",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@amcharts/amcharts4": "^4.10.23",
@@ -8,19 +8,21 @@
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/pickers": "^3.2.10",
-    "@nivo/core": "^0.79.0",
-    "@nivo/line": "^0.79.1",
+    "@nivo/core": "^0.83.0",
+    "@nivo/line": "^0.83.0",
     "@react-pdf/renderer": "^1.6.11",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
-    "axios": "^0.20.0",
+    "@webpack-cli/generators": "^3.0.7",
+    "axios": "^1.5.1",
     "connected-react-router": "^6.8.0",
     "date-fns": "^2.16.1",
+    "DatePicker": "^2.0.0",
     "file-saver": "^2.0.2",
     "jquery": "^3.6.0",
     "jsbarcode": "^3.11.5",
-    "material-table": "^1.69.1",
+    "material-table": "^1.63.0",
     "moment": "^2.29.3",
     "namor": "^2.0.2",
     "prettier": "^2.1.2",
@@ -37,7 +39,7 @@
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
     "react-router-redux": "^4.0.8",
-    "react-scripts": "3.4.3",
+    "react-scripts": "^5.0.1",
     "react-table": "^7.5.1",
     "react-toastify": "^6.0.8",
     "redux": "^4.0.5",
@@ -45,11 +47,15 @@
     "yup": "^0.32.11"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
     "deploy": "aws s3 sync build/ s3://acerelocations-frontend --acl public-read",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "react-app-rewired test",
+    "eject": "react-app-rewireds eject",
+    "build:dev": "webpack --mode=development",
+    "build:prod": "webpack --mode=production --node-env=production",
+    "watch": "webpack --watch",
+    "serve": "webpack serve"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -65,5 +71,28 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "description": "My webpack project",
+  "devDependencies": {
+    "@babel/core": "^7.23.2",
+    "@babel/preset-env": "^7.23.2",
+    "assert": "^2.1.0",
+    "autoprefixer": "^10.4.16",
+    "babel-loader": "^9.1.3",
+    "browser": "^0.2.6",
+    "browserify-zlib": "^0.2.0",
+    "crypto-browserify": "^3.12.0",
+    "css-loader": "^6.8.1",
+    "html-webpack-plugin": "^5.5.3",
+    "mini-css-extract-plugin": "^2.7.6",
+    "postcss": "^8.4.31",
+    "postcss-loader": "^7.3.3",
+    "react-app-rewired": "^2.2.1",
+    "stream-browserify": "^3.0.0",
+    "style-loader": "^3.3.3",
+    "util": "^0.12.5",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
   }
 }

@@ -1,6 +1,5 @@
 import React from 'react';
-import { Image, Text, View, StyleSheet } from '@react-pdf/renderer';
-import logo from '../../assets/affiliation.png';
+import { Text, View, StyleSheet } from '@react-pdf/renderer';
 
 const styles = StyleSheet.create({
   logo1: {

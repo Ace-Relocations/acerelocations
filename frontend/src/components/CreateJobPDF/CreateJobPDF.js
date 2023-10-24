@@ -411,7 +411,7 @@ const CreateJobPDF = ({ invoice }) => {
       </Page>
 
       {/* LuggageList */}
-      {invoiceDetail.items < 40 || invoiceDetail.items == 0 ?( 
+      {(isHouseHold || isBoth) && (invoiceDetail.items < 40 || invoiceDetail.items == 0) ?( 
       <><Page size='A4' style={styles.page}>
           <LuggageList luggageListDetails={invoiceDetail?.luggageListDetails} />
         </Page>
@@ -420,7 +420,7 @@ const CreateJobPDF = ({ invoice }) => {
         </Page>
         <Page size='A4' style={styles.page}>
             <LuggageList luggageListDetails={invoiceDetail?.luggageListDetails} />
-        </Page></>) :
+        </Page></>) : (isHouseHold || isBoth) &&
       (<><Page size='A4' style={styles.page}>
           <LuggageList luggageListDetails={invoiceDetail?.luggageListDetails} />
         </Page>
@@ -449,9 +449,12 @@ const CreateJobPDF = ({ invoice }) => {
         )}
 
       {/* TellySheet */}
+      {(isHouseHold || isBoth) && (
       <TellySheet tellyData={invoiceDetail ?.tellyData} />
+      )}
 
       {/* Transit Protection Plan */}
+      {(isHouseHold || isBoth) && (
       <Page size='A4' style={styles.page}>
         <View>
           <Header />
@@ -461,6 +464,7 @@ const CreateJobPDF = ({ invoice }) => {
           <FooterWithImage />
         </View>
       </Page>
+      )}
 
       {/* Car Transit Protection Plan */}
       {insuranceCarP && (isCar || isBoth) && (

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Page, Document, Image, StyleSheet, Text, View } from '@react-pdf/renderer';
+import { Page, Document, StyleSheet} from '@react-pdf/renderer';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import Sticker from './Sticker';
 import Button from '@material-ui/core/Button';

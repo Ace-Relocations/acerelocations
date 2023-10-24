@@ -2,8 +2,6 @@ import {
   LOGIN_REQUEST,
   LOGIN_FAIL,
   LOGIN_REQUEST_SUCCESS,
-  ON_HIDE_LOADER,
-  ON_SHOW_LOADER,
   LOGOUT_REQUEST,
   LOGOUT_REQUEST_SUCCESS,
 } from '../constants/actionTypes';
@@ -28,12 +26,4 @@ export const logoutRequest = (payload) => ({
 
 export const logoutRequestSuccess = () => ({
   type: LOGOUT_REQUEST_SUCCESS,
-});
-
-export const showLoader = () => ({
-  type: ON_SHOW_LOADER,
-});
-
-export const hideLoader = (payload) => ({
-  type: ON_HIDE_LOADER,
 });
